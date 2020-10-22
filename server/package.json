@@ -1,0 +1,15 @@
+{
+  "name": "CallMeServer",
+  "version": "1.0.0",
+  "author": "lislis <mail@lislis.de>",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mathjs": "^7.5.1",
+    "socket.io": "^2.3.0"
+  }
+}
