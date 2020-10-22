@@ -1,4 +1,4 @@
-let delegate
+//let delegate
 let p5
 let state
 let mouseevent
@@ -26,7 +26,7 @@ export function main(_p5) {
         if (state.players
             && Object.keys(state.players).length > 0) {
             let playersKeys = Object.keys(state.players)
-            playersKeys.forEach((x, i) => {
+            playersKeys.forEach((x) => {
                 const player = state.players[x]
                 drawPlayer(player);
             })
@@ -41,9 +41,11 @@ export function main(_p5) {
     }
 }
 
+/*
 export function setDelegate(_delegate) {
     delegate = _delegate;
 }
+*/
 
 export function setState(_state) {
     state = _state

@@ -31,7 +31,7 @@
      new P5(this.sketch.main)
      this.sketch.setState(this.players)
      this.sketch.setMouseevent(this.mouseevent)
-     this.sketch.setDelegate(this.callbackOnP5);
+     //this.sketch.setDelegate(this.callbackOnP5);
    },
    methods: {
      callbackOnP5: function(timeStr) {
@@ -39,7 +39,7 @@
      },
      mouseevent(evt) {
        if (evt.srcElement.localName == 'canvas') {
-         this.$emit('updatePlayerTarget', evt)
+         this.$emit('update-player-target', evt)
        }
 
      }

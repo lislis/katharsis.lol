@@ -3,7 +3,7 @@
     <Room1
       :players="players"
       :username="username"
-      v-on:updatePlayerTarget="updatePlayerTarget" />
+      v-on:update-player-target="updatePlayerTarget" />
     <Chat
           :messages="messages"
           :connections="connections"
@@ -19,8 +19,7 @@
  import Chat from './components/Chat.vue'
  import Room1 from './components/Room1.vue'
  import io from 'socket.io-client'
- //const socket = io('localhost:3000')
- const socket = io('0.0.0.0:49160')
+ const socket = io(`${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`)
 
  export default {
    name: 'App',
