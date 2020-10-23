@@ -1,6 +1,7 @@
 'use strict'
 
 let app = require('express')()
+let cors = require('cors')
 let http = require('http').Server(app)
 let io = require('socket.io')(http)
 
@@ -8,20 +9,16 @@ const { floor } = require('mathjs')
 const { newPlayer, updatePlayers } = require('./game')
 
 // Constants
-const PORT = 3000
-const HOST = '0.0.0.0'
+const PORT = 3001
+//const HOST = '0.0.0.0'
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 });
 
-http.listen(PORT, HOST, () => {
+http.listen(PORT, () => {
     console.log('Listening on port *: '+ PORT);
 });
 
