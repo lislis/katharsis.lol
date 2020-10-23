@@ -29,6 +29,8 @@ yarn lint
 
 There is a Dockerfile available, building the project and serving it via NGINX. PORT 80 is exposed.
 
+`cp env.production.sample .env.production` and adjust HOST and PORT
+
 Build an image
 `docker build -t lislis/foyer .`
 

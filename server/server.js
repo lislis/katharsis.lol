@@ -9,6 +9,7 @@ const { newPlayer, updatePlayers } = require('./game')
 
 // Constants
 const PORT = 3000
+const HOST = '0.0.0.0'
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 });
 
-http.listen(PORT, () => {
+http.listen(PORT, HOST, () => {
     console.log('Listening on port *: '+ PORT);
 });
 

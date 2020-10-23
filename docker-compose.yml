@@ -1,8 +1,5 @@
 version: '3'
 
-networks:
-  callmebyanyname-net:
-
 services:
   server:
     build:
@@ -10,17 +7,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    networks:
-      callmebyanyname-net:
-        aliases:
-          - server
   ui:
     build:
       context: ./foyer
       dockerfile: Dockerfile
     ports:
       - "8080:80"
-    networks:
-      callmebyanyname-net:
-        aliases:
-          - ui
+    links:
+      - server
