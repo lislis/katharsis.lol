@@ -4,6 +4,7 @@ let app = require('express')()
 let cors = require('cors')
 let http = require('http').Server(app)
 let io = require('socket.io')(http)
+require('dotenv').config()
 
 const { floor } = require('mathjs')
 const { newPlayer, updatePlayers } = require('./game')
