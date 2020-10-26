@@ -4,6 +4,10 @@ Frontend for chat and fun
 
 ## Development
 
+
+`cp env.development.sample .env.development` and adjust HOST and PORT
+
+
 ### Dependencies
 ```
 yarn install
@@ -27,12 +31,4 @@ yarn lint
 
 ## Production
 
-There is a Dockerfile available, building the project and serving it via NGINX. PORT 80 is exposed.
-
-`cp env.production.sample .env.production` and adjust HOST and PORT
-
-Build an image
-`docker build -t lislis/foyer .`
-
-and run it
-`docker run -p 8080:80 -d lislis/foyer`
+We assume a production setup with Docker and docker-compose. See the toplevel [README](../REadme.md) for more information.

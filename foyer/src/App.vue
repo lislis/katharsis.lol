@@ -19,7 +19,12 @@
  import Chat from './components/Chat.vue'
  import Room1 from './components/Room1.vue'
  import io from 'socket.io-client'
- const socket = io(`${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`)
+ if (process.env.NODE_ENV === 'production') {
+   const socket = io(`${process.env.VUE_APP_WS_HOST}`)
+ } else {
+   const socket = io(`${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`)
+ }
+
 
  export default {
    name: 'App',

@@ -9,11 +9,11 @@ const { floor } = require('mathjs')
 const { newPlayer, updatePlayers } = require('./game')
 
 // Constants
-const PORT = 3001
-//const HOST = '0.0.0.0'
+const PORT = process.env['WS_SERVER_PORT']
 
 app.use(cors())
 
+// This is to see if the server is running
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 });
