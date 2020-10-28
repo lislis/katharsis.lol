@@ -1,131 +1,91 @@
 <template>
   <div class="room-view">
-    <Room1
-      :players="players"
-      :username="username"
-      v-on:update-player-target="updatePlayerTarget" />
     <Chat
       :messages="messages"
       :connections="connections"
-      :username="username"
-      :ready="ready"
-      :info="info"
-      v-on:send-message="send"
-      v-on:add-user="addUser"/>
+      :username="$root.$data.user.nickname" />
+
+    <button @click="logout">Theater verlassen</button>
   </div>
 </template>
 <script>
  import Chat from '@/components/Chat.vue'
- import Room1 from '@/components/Room1.vue'
+ //import Room1 from '@/components/Room1.vue'
  import io from 'socket.io-client'
+ import axios from 'axios'
 
- let socket
- if (process.env.NODE_ENV === 'production') {
-   socket = io(`${process.env.VUE_APP_WS_HOST}`)
- } else {
-   socket = io(`${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`)
- }
 
  export default {
    name: "Room",
    components: {
      Chat,
-     Room1
+   //  Room1
    },
    data() {
      return {
        players: {},
-       newMessage: null,
        messages: [],
-       typing: false,
-       username: null,
-       ready: false,
-       info: [],
        connections: 0,
+       chat: {},
+       errors: [],
+       socket: io(this.$root.$data.socketServer)
      }
    },
    created() {
-     window.onbeforeunload = () => {
-       socket.emit('leave', this.username);
+     if (!this.$root.$data.user.nickname) {
+       this.$router.push({name: 'intro'})
      }
 
-     socket.emit('newPlayer');
+     // get main room and ...
+     axios.get(`http://${this.$root.$data.restServer}/api/room/main`)
+          .then(response => {
+            console.log(reponse[0])
+            this.$root.$data.mainRoom = response[0];
+            this.chat.room = response[0]._id;
+            this.chat.nickname = this.$root.$data.user._id
+            this.chat.message = `${this.$root.$data.user.nickname} ist eingetreten`
 
-     socket.on('chat-message', (data) => {
-       //debugger
-       this.messages.push({
-         message: data.message,
-         type: 1,
-         user: data.user,
-       });
-     });
+            //... join it
+            axios.post(`http://${this.$root.$data.restServer}/api/chat`, this.chat)
+                 .then(response => {
+                   this.socket.emit('save-message', {
+                     room: this.chat.room,
+                     nickname: this.chat.nickname,
+                     message: this.chat.message,
+                     created_date: new Date()
+                   })
 
-     socket.on('typing', (data) => {
-       this.typing = data;
-     });
+                   // this should probably also announce new player
+                   //this.socket.emit('newPlayer');
+                 })
+            .catch(e => { this.errors.push(e) })
+          })
+          .catch(e => { this.errors.push(e)})
 
-     socket.on('stopTyping', () => {
-       this.typing = false;
-     });
-
-     socket.on('joined', (data) => {
-       this.info.push({
-         username: data,
-         type: 'joined'
-       });
-
-       setTimeout(() => {
-         this.info = [];
-       }, 5000);
-     });
-
-     socket.on('leave', (data) => {
-       this.info.push({
-         username: data,
-         type: 'left'
-       });
-
-       setTimeout(() => {
-         this.info = [];
-       }, 5000);
-     });
-
-     socket.on('connections', (data) => {
-       this.connections = data;
-     });
-
-     socket.on('state', (data) => {
-       //console.log(data)
+     // keep for later
+     this.socket.on('state', (data) => {
        this.players = data
      })
    },
-   watch: {
-     newMessage(value) {
-       value ? socket.emit('typing', this.username) : socket.emit('stopTyping')
-     }
-   },
    methods: {
-     send(data) {
-       this.messages.push({
-         message: data,
-         type: 0,
-         user: 'Me',
-       });
-
-       socket.emit('chat-message', {
-         message: data,
-         user: this.username
-       });
-     },
-     addUser(data) {
-       this.ready = true;
-       this.username = data
-       socket.emit('joined', data)
-     },
      updatePlayerTarget(data) {
-       //debugger
        console.log(data)
-       socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
+       this.socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
+     },
+     logout() {
+       axios.delete(`http://${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
+            .then(response => {
+              this.socket.emit('save-message', {
+                room: this.$root.$data.mainRoom._id,
+                nickname: this.$root.$data.user._id,
+                message: this.$root.$data.user.nickname + ' hat das Theater verlasssen.',
+                created_date: new Date()
+              })
+              this.$root.$data.user = {}
+              this.$router.push({
+                name: 'intro'
+              })
+            })
      }
    }
  }

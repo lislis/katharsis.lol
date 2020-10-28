@@ -3,9 +3,9 @@
     <h1>Call me by any name</h1>
 
     <h4>Was ist dein Name?</h4>
-    <form @submit.prevent="addUser">
+    <form @submit.prevent="onSubmit">
       <div class="form-group row">
-        <input type="text" class="" v-model="newUsername"
+        <input type="text" class="" v-model.trim="user.nickname"
                placeholder="Dein Nutzername">
         <input type="submit" value="Eintreten" class="btn">
       </div>
@@ -13,20 +13,29 @@
   </div>
 </template>
 <script>
+ import axios from 'axios'
+
   export default {
     name: "Intro",
-    created() {
-      //debugger
-    },
+    created() {},
     data() {
       return {
-        newUsername: ''
+        user: {},
+        errors: []
       }
     },
     methods: {
-      addUser() {
-        this.$root.$data.username = this.newUsername
-        this.$router.push({path: '/room'})
+      onSubmit(evt) {
+        evt.preventDefault()
+        axios.post(`http://${this.$root.$data.restServer}/api/user`, this.user)
+           .then(response => {
+             this.$root.$data.user = response.data
+             //debugger
+             this.$router.push({ name: 'room' })
+           })
+           .catch(e => {
+             this.errors.push(e)
+           })
       }
     }
   }
