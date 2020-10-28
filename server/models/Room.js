@@ -2,9 +2,9 @@ var mongoose = require('mongoose'), Schema = mongoose.Schema;
 
 var RoomSchema = new mongoose.Schema({
     room_name: String,
-    //private: Boolean,
-    //main: Boolean,
-    //allowed_users:
+    private: Boolean,
+    main: Boolean,
+    allowed_users: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
     created_date: { type: Date, default: Date.now },
 });
 

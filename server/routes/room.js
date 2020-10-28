@@ -5,17 +5,25 @@ var Room = require('../models/Room.js');
 
 /* GET ALL ROOMS */
 router.get('/', function(req, res, next) {
-  Room.find(function (err, products) {
+  Room.find(function (err, rooms) {
     if (err) return next(err);
-    res.json(products);
+    res.json(rooms);
   });
+});
+
+/* GET MAIN ROOM aka Foyer */
+router.get('/main', function(req, res, next) {
+    Room.find({ main: true }, function (err, rooms) {
+        if (err) return next(err);
+        res.json(rooms);
+    });
 });
 
 /* GET SINGLE ROOM BY ID */
 router.get('/:id', function(req, res, next) {
-  Room.findById(req.params.id, function (err, post) {
+  Room.findById(req.params.id, function (err, room) {
     if (err) return next(err);
-    res.json(post);
+    res.json(room);
   });
 });
 

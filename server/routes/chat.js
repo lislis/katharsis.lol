@@ -5,6 +5,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var Chat = require('../models/Chat.js');
+//var Chat = require('../models/ChatNew.js');
 
 // Socket IO
 server.listen(4000);
