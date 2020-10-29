@@ -28,7 +28,7 @@
        connections: 0,
        chat: {},
        errors: [],
-       socket: io(this.$root.$data.socketServer)
+       socket: null
      }
    },
    created() {
@@ -36,36 +36,38 @@
        this.$router.push({name: 'intro'})
      }
 
-     // get main room and ...
-     axios.get(`http://${this.$root.$data.restServer}/api/room/main`)
+     this.socket = io(this.$root.$data.socketServer)
+
+     this.chat.room = this.$route.params.roomid;
+     this.chat.nickname = this.$root.$data.user._id
+     this.chat.message = `${this.$root.$data.user.nickname} ist eingetreten`
+
+     //... join it
+     axios.post(`http://${this.$root.$data.restServer}/api/chat`, this.chat)
           .then(response => {
-            console.log(reponse[0])
-            this.$root.$data.mainRoom = response[0];
-            this.chat.room = response[0]._id;
-            this.chat.nickname = this.$root.$data.user._id
-            this.chat.message = `${this.$root.$data.user.nickname} ist eingetreten`
-
-            //... join it
-            axios.post(`http://${this.$root.$data.restServer}/api/chat`, this.chat)
-                 .then(response => {
-                   this.socket.emit('save-message', {
-                     room: this.chat.room,
-                     nickname: this.chat.nickname,
-                     message: this.chat.message,
-                     created_date: new Date()
-                   })
-
-                   // this should probably also announce new player
-                   //this.socket.emit('newPlayer');
-                 })
-            .catch(e => { this.errors.push(e) })
+            this.socket.emit('save-message', {
+              room: this.chat.room,
+              nickname: this.chat.nickname,
+              message: this.chat.message,
+              created_date: new Date()
+            })
+            // this should probably also announce new player
+            //this.socket.emit('newPlayer');
           })
-          .catch(e => { this.errors.push(e)})
+          .catch(e => { this.errors.push(e) })
+
+     //... get history
+     axios.get(`http://${this.$root.$data.restServer}/api/chat/${this.$route.params.roomid}`)
+          .then(response => {
+            console.log(response)
+            this.messages = response
+          })
+          .catch(e => { console.log(e) })
 
      // keep for later
-     this.socket.on('state', (data) => {
-       this.players = data
-     })
+     //this.socket.on('state', (data) => {
+     //  this.players = data
+     //})
    },
    methods: {
      updatePlayerTarget(data) {
@@ -73,6 +75,8 @@
        this.socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
      },
      logout() {
+       window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)
+
        axios.delete(`http://${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
             .then(response => {
               this.socket.emit('save-message', {

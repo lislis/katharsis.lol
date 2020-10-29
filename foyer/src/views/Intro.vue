@@ -2,14 +2,24 @@
   <div>
     <h1>Call me by any name</h1>
 
-    <h4>Was ist dein Name?</h4>
-    <form @submit.prevent="onSubmit">
-      <div class="form-group row">
-        <input type="text" class="" v-model.trim="user.nickname"
-               placeholder="Dein Nutzername">
-        <input type="submit" value="Eintreten" class="btn">
-      </div>
-    </form>
+    <div v-if="$root.$data.user.nickname">
+      <p>Dein Name ist
+      {{$root.$data.user.nickname}}</p>
+
+      <router-link :to="{ name: 'room',
+                   params: { roomid: this.$root.$data.mainRoom._id }}">Zum Raum</router-link>
+    </div>
+
+    <template v-else>
+      <h4>Was ist dein Name?</h4>
+      <form @submit.prevent="onSubmit">
+        <div class="form-group row">
+          <input type="text" class="" v-model.trim="newUser.nickname"
+                 placeholder="Dein Nutzername">
+          <input type="submit" value="Eintreten" class="btn">
+        </div>
+      </form>
+    </template>
   </div>
 </template>
 <script>
@@ -17,24 +27,38 @@
 
   export default {
     name: "Intro",
-    created() {},
     data() {
       return {
-        user: {},
+        hasUser: false,
+        newUser: {},
         errors: []
       }
+    },
+    created() {
+      // get main room and ...
+      axios.get(`http://${this.$root.$data.restServer}/api/room/main`)
+           .then(response => {
+             //console.log(response.data[0])
+             this.$root.$data.mainRoom = response.data[0];
+           })
+           .catch(e => { console.log(e) })
+
     },
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        axios.post(`http://${this.$root.$data.restServer}/api/user`, this.user)
+        // ... create a user
+        axios.post(`http://${this.$root.$data.restServer}/api/user`, this.newUser)
            .then(response => {
+             window.localStorage.setItem(
+               `${process.env.VUE_APP_LS_PREFIX}user`,
+               JSON.stringify(response.data))
              this.$root.$data.user = response.data
-             //debugger
-             this.$router.push({ name: 'room' })
+             this.$router.push({ name: 'room',
+                                 params: { roomid: this.$root.$data.mainRoom._id }})
            })
            .catch(e => {
-             this.errors.push(e)
+             console.log(e)
            })
       }
     }

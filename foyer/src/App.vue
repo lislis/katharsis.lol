@@ -25,6 +25,9 @@
        this.socketServer = `${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`
        this.restServer = `${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
      }
+     if (window.localStorage.getItem(`${process.env.VUE_APP_LS_PREFIX}user`)) {
+       this.user = JSON.parse(window.localStorage.getItem(`${process.env.VUE_APP_LS_PREFIX}user`))
+     }
    }
  }
 </script>

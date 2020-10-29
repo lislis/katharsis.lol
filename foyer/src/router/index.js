@@ -38,7 +38,7 @@ const routes = [
     component: ChatRoom
   },
   {
-    path: '/room',
+    path: '/room/:roomid',
     name: 'room',
     component: Room
   }
