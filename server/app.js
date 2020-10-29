@@ -3,12 +3,14 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-//let cors = require('cors')
+
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 var room = require('./routes/room');
 var chat = require('./routes/chat');
-
 var user = require('./routes/user');
+
 var app = express();
 
 var mongoose = require('mongoose');
@@ -55,5 +57,23 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+// Socket IO
+server.listen(4000);
+
+io.on('connection', function (socket) {
+    socket.on('save-message', function (data) {
+        console.log(data);
+        io.emit('new-message', { message: data });
+    });
+
+    console.log('User connected', socket.id);
+    io.emit('users-increment')
+
+    socket.on('disconnect', function() {
+        console.log('User disconnected', socket.id);
+        io.emit('users-decrement')
+    });
+});
 
 module.exports = app;

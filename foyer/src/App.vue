@@ -5,6 +5,8 @@
 </template>
 
 <script>
+ import io from 'socket.io-client'
+
  export default {
    name: 'App',
    data() {
@@ -15,6 +17,7 @@
        chats: [],
        restServer: null,
        socketServer: null,
+       socket: null,
      }
    },
    created() {
@@ -28,6 +31,8 @@
      if (window.localStorage.getItem(`${process.env.VUE_APP_LS_PREFIX}user`)) {
        this.user = JSON.parse(window.localStorage.getItem(`${process.env.VUE_APP_LS_PREFIX}user`))
      }
+
+     this.socket = io(this.socketServer)
    }
  }
 </script>

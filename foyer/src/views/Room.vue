@@ -11,7 +11,6 @@
 <script>
  import Chat from '@/components/Chat.vue'
  //import Room1 from '@/components/Room1.vue'
- import io from 'socket.io-client'
  import axios from 'axios'
 
 
@@ -27,8 +26,7 @@
        messages: [],
        connections: 0,
        chat: {},
-       errors: [],
-       socket: null
+       errors: []
      }
    },
    created() {
@@ -36,33 +34,33 @@
        this.$router.push({name: 'intro'})
      }
 
-     this.socket = io(this.$root.$data.socketServer)
+     this.$root.$data.socket.on('new-message', function (data) {
+       if(data.message.room === this.$route.params.roomid) {
+         this.messages.push(data.message)
+       }
+     }.bind(this))
 
-     this.chat.room = this.$route.params.roomid;
-     this.chat.nickname = this.$root.$data.user._id
-     this.chat.message = `${this.$root.$data.user.nickname} ist eingetreten`
+     this.$root.$data.socket.on('users-increment', function (data) {
+       this.connections += 1
+     }.bind(this))
 
-     //... join it
-     axios.post(`http://${this.$root.$data.restServer}/api/chat`, this.chat)
-          .then(response => {
-            this.socket.emit('save-message', {
-              room: this.chat.room,
-              nickname: this.chat.nickname,
-              message: this.chat.message,
-              created_date: new Date()
-            })
-            // this should probably also announce new player
-            //this.socket.emit('newPlayer');
-          })
-          .catch(e => { this.errors.push(e) })
+     this.$root.$data.socket.on('users-decrement', function (data) {
+       this.connections -= 1
+     }.bind(this))
+
 
      //... get history
      axios.get(`http://${this.$root.$data.restServer}/api/chat/${this.$route.params.roomid}`)
           .then(response => {
-            console.log(response)
-            this.messages = response
+            this.messages = response.data
           })
           .catch(e => { console.log(e) })
+
+     axios.get(`http://${this.$root.$data.restServer}/api/user/`)
+         .then(response => {
+           this.connections = response.data.length
+         })
+         .catch(e => { console.log(e) })
 
      // keep for later
      //this.socket.on('state', (data) => {
@@ -72,21 +70,22 @@
    methods: {
      updatePlayerTarget(data) {
        console.log(data)
-       this.socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
+       this.$root.$data.socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
      },
      logout() {
        window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)
-
+       let self = this
        axios.delete(`http://${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
-            .then(response => {
-              this.socket.emit('save-message', {
-                room: this.$root.$data.mainRoom._id,
-                nickname: this.$root.$data.user._id,
-                message: this.$root.$data.user.nickname + ' hat das Theater verlasssen.',
+             .then(response => {
+               //debugger
+              self.$root.$data.socket.emit('save-message', {
+                room: self.$route.params.roomid,
+                nickname: self.$root.$data.user._id,
+                message: self.$root.$data.user.nickname + ' hat das Theater verlasssen.',
                 created_date: new Date()
               })
-              this.$root.$data.user = {}
-              this.$router.push({
+              self.$root.$data.user = {}
+              self.$router.push({
                 name: 'intro'
               })
             })

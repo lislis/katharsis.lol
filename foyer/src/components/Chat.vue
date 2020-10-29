@@ -1,22 +1,22 @@
 <template>
   <div id="chat">
+    <h2>{{username}}</h2>
     <div>
-      <p v-for="user in info" :key="user.username">
-        {{user.username}} {{user.type}}
-      </p>
+      <h4>Foyer chat <span>{{connections}} online</span></h4>
     </div>
-
-    <h2 >{{username}}</h2>
-    <div v-if="ready">
-      <div>
-        <h4>Foyer chat <span>{{connections}} online</span></h4>
-      </div>
-      <ul class="list-group list-group-flush text-right">
-        <small v-if="typing" class="text-white">{{typing}} is typing</small>
-        <li class="list-group-item" v-for="message in messages" :key="message.message">
-          <span :class="{'float-left':message.type === 1}">
+    <div>
+      <ul class="">
+        <li
+          :class="[{'center': !message.user}, { 'right': message.user == $root.$data.user._id}]"
+          v-for="message in messages"
+          :key="message.message">
+          <template v-if="message.user">
+            <span>{{message.user}} sagt: </span><br>
+          </template>
+          <span>
             {{message.message}}
-            <small>:{{message.user}}</small>
+            <br>
+            <small>:{{message.created_date}}</small>
           </span>
         </li>
       </ul>
@@ -24,7 +24,7 @@
       <div class="card-body">
         <form @submit.prevent="send">
           <div class="form-group">
-            <input type="text" class="form-control" v-model="newMessage"
+            <input type="text" class="form-control" v-model.trim="chat.message"
                    placeholder="Enter message here">
           </div>
         </form>
@@ -34,24 +34,33 @@
 </template>
 
 <script>
+ import io from 'socket.io-client'
+ import axios from 'axios'
 
  export default {
    name: 'Chat',
-   props: ['messages', 'username', 'ready', 'info', 'connections'],
+   props: ['messages', 'username', 'connections'],
    data() {
      return {
        newMessage: null,
-       newUsername: null,
-       typing: false
+       chat: {}
      }
    },
    created() {
-     this.$emit('add-user', this.$root.$data.username)
    },
    methods: {
-     send() {
-       this.$emit('send-message', this.newMessage)
-       this.newMessage = null
+     send(evt) {
+       evt.preventDefault()
+       this.chat.room = this.$route.params.roomid
+       this.chat.user = this.$root.$data.user._id
+       axios.post(`http://${this.$root.$data.restServer}/api/chat`, this.chat)
+                            .then(response => {
+                              this.$root.$data.socket.emit('save-message', response.data)
+                              this.chat.message = ''
+                            })
+                            .catch(e => {
+                              this.errors.push(e)
+                            })
      }
    }
  }
@@ -61,5 +70,11 @@
  #chat {
    background-color: lightgrey;
    flex: 1 0 50vw
+ }
+ .center {
+   text-align: center;
+ }
+ .right {
+   text-align: right;
  }
 </style>
