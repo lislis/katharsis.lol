@@ -1,31 +1,35 @@
 <template>
   <div id="chat">
-    <h2>{{username}}</h2>
     <div>
       <h4>Foyer chat <span>{{connections}} online</span></h4>
     </div>
     <div>
-      <ul class="">
-        <li
-          :class="[{'center': !message.user}, { 'right': message.user == $root.$data.user._id}]"
+      <ul class="messages">
+        <li class="message"
+            :class="[{'center no-bubble': !message.user}, { 'right': message.user == $root.$data.user._id}]"
           v-for="message in messages"
           :key="message.message">
-          <template v-if="message.user">
-            <span>{{message.user}} sagt: </span><br>
-          </template>
-          <span>
-            {{message.message}}
-            <br>
-            <small>:{{message.created_date}}</small>
-          </span>
+          <div class="message--bubble" >
+            <template v-if="message.user">
+              <span>{{message.user}} sagt: </span><br>
+            </template>
+            <span>
+              {{message.message}}
+              <br>
+              <small>:{{message.created_date}}</small>
+            </span>
+          </div>
         </li>
       </ul>
 
-      <div class="card-body">
+      <div>
         <form @submit.prevent="send">
-          <div class="form-group">
-            <input type="text" class="form-control" v-model.trim="chat.message"
-                   placeholder="Enter message here">
+          <div  class="message--compose">
+            <input type="text"
+                   class="form-control"
+                   v-model.trim="chat.message"
+                   placeholder="Schreibe etwas">
+            <button title="Send">🛩</button>
           </div>
         </form>
       </div>
@@ -76,5 +80,34 @@
  }
  .right {
    text-align: right;
+ }
+ .messages {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+ }
+ .message {
+   margin-bottom: 1rem;
+ }
+ .message:not(.no-bubble) .message--bubble {
+   background-color: lime;
+   display: inline-block;
+   padding: .3rem;
+   border-radius: 4px;
+ }
+
+ .no-bubble .message--bubble {
+   opacity: 0.7;
+ }
+
+ .message--compose {
+   max-width: 800px;
+   margin: auto;
+   display: flex;
+ }
+ .message--compose input {
+   display: block;
+   width: 100%;
+   padding: 1rem;
  }
 </style>

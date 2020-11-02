@@ -36,13 +36,6 @@
       }
     },
     created() {
-      // get main room and ...
-      axios.get(`http://${this.$root.$data.restServer}/api/room/main`)
-           .then(response => {
-             this.$root.$data.mainRoom = response.data[0];
-           })
-           .catch(e => { console.log(e) })
-
     },
     methods: {
       onSubmit(evt) {

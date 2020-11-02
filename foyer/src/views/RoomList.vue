@@ -1,12 +1,28 @@
 <template>
   <div>
-    <h2>
-      Room List
-      <router-link to="/addroom">(Add room)</router-link>
-    </h2>
+    <h2>Alle Räume</h2>
     <ul v-for="room in rooms">
-      <li>{{room.room_name}} <router-link :to="{name: 'JoinRoom', params: {id: room._id}}">join</router-link></li>
+      <li>
+        <h3><span v-if="room.main">👑</span> {{room.room_name}}</h3>
+        <router-link
+          v-if="room.main"
+          :to="{name: 'room', params: { roomid: room._id}}">Zu {{room.room_name}}</router-link>
+        <router-link
+          v-else
+          :to="{name: 'room', params: { roomid: room._id}}">{{ room.room_name}} beitreten</router-link>
+      </li>
     </ul>
+
+    <section>
+      <h2>Neuen Raum erstellen</h2>
+      <form @submit.prevent="onSubmit">
+        <label>
+          Raumname
+          <input id="room_name" v-model.trim="room.room_name">
+        </label>
+        <button type="submit">Erstellen und beitreten</button>
+      </form>
+    </section>
 
     <ul v-if="errors && errors.length">
       <li v-for="error of errors">
@@ -24,20 +40,14 @@
    name: 'RoomList',
    data () {
      return {
-       fields: {
-         room_name: { label: 'Room Name', sortable: true, 'class': 'text-center' },
-         created_date: { label: 'Created Date', sortable: true },
-         actions: { label: 'Action', 'class': 'text-center' }
-       },
+       room: {},
        rooms: [],
        errors: []
      }
    },
    created () {
-     //debugger
-     axios.get("http://localhost:3000/api/room")
+     axios.get(`http://${this.$root.$data.restServer}/api/room`)
           .then(response => {
-            //debugger
             this.rooms = response.data
           })
           .catch(e => {
@@ -45,11 +55,18 @@
           })
    },
    methods: {
-     join (id) {
-       this.$router.push({
-         name: 'JoinRoom',
-         params: { id: id }
-       })
+     onSubmit(evt) {
+       this.room.main = false
+       this.room.public = false
+       axios.post(`http://${this.$root.$data.restServer}/api/room`, this.room)
+            .then(response => {
+              this.$router.push({
+                name: 'roomlist'
+              })
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
      }
    }
  }

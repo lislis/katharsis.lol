@@ -4,8 +4,6 @@
       :messages="messages"
       :connections="connections"
       :username="$root.$data.user.nickname" />
-
-    <button @click="logout">Theater verlassen</button>
   </div>
 </template>
 <script>
@@ -29,6 +27,15 @@
        errors: []
      }
    },
+   watch: {
+     '$route.params.roomid': {
+       handler(roomid) {
+         if (roomid !== undefined) {
+           this.getChatHistory()
+         }
+       }
+     }
+   },
    created() {
      if (!this.$root.$data.user.nickname) {
        this.$router.push({name: 'intro'})
@@ -48,16 +55,12 @@
        this.connections -= 1
      }.bind(this))
 
-
      //... get history
-     axios.get(`http://${this.$root.$data.restServer}/api/chat/${this.$route.params.roomid}`)
-          .then(response => {
-            this.messages = response.data
-          })
-          .catch(e => { console.log(e) })
+     this.getChatHistory()
 
      axios.get(`http://${this.$root.$data.restServer}/api/user/`)
          .then(response => {
+           //debugger
            this.connections = response.data.length
          })
          .catch(e => { console.log(e) })
@@ -68,27 +71,17 @@
      //})
    },
    methods: {
+     getChatHistory() {
+       axios.get(`http://${this.$root.$data.restServer}/api/chat/${this.$route.params.roomid}`)
+            .then(response => {
+              this.messages = response.data
+            })
+            .catch(e => { console.log(e) })
+
+     },
      updatePlayerTarget(data) {
        console.log(data)
        this.$root.$data.socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
-     },
-     logout() {
-       window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)
-       let self = this
-       axios.delete(`http://${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
-             .then(response => {
-               //debugger
-              self.$root.$data.socket.emit('save-message', {
-                room: self.$route.params.roomid,
-                nickname: self.$root.$data.user._id,
-                message: self.$root.$data.user.nickname + ' hat das Theater verlasssen.',
-                created_date: new Date()
-              })
-              self.$root.$data.user = {}
-              self.$router.push({
-                name: 'intro'
-              })
-            })
      }
    }
  }
