@@ -23,17 +23,17 @@ const routes = [
     name: 'roomlist',
     component: RoomList
   },
-  {
+  { //?
     path: '/addroom',
     name: 'AddRoom',
     component: AddRoom
   },
-  {
+  { //?
     path: '/joinroom/:id',
     name: 'JoinRoom',
     component: JoinRoom
   },
-  {
+  { //?
     path: '/chatroom/:id/:nickname',
     name: 'ChatRoom',
     component: ChatRoom

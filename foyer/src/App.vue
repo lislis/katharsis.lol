@@ -5,7 +5,8 @@
       <button @click="logout">Logout</button>
     </header>
     <div class="navigation">
-      <router-link :to="{name: 'room', params: { roomid: this.mainRoom._id}}">Foyer</router-link>
+      <router-link :to="{name: 'room', params: { roomid: this.stage._id}}">{{ stage.room_name }}</router-link>
+      <router-link :to="{name: 'room', params: { roomid: this.mainRoom._id}}">{{ mainRoom.room_name }}</router-link>
       <router-link :to="{name: 'roomlist'}">Räume</router-link>
       <router-link :to="{name: 'peoplelist'}">Leute</router-link></div>
     <router-view />
@@ -24,6 +25,7 @@
        username: 'test',
        user: {},
        mainRoom: {},
+       stage: {},
        chats: [],
        restServer: null,
        socketServer: null,
@@ -41,7 +43,9 @@
      getMainRoom() {
        axios.get(`http://${this.restServer}/api/room/main`)
             .then(response => {
-              this.mainRoom = response.data[0];
+              this.stage = response.data.filter(x => x.locked)[0]
+              this.mainRoom = response.data.filter(x => !x.locked)[0]
+
             })
             .catch(e => { console.log(e) })
      },
@@ -73,6 +77,8 @@
                 message: self.$root.$data.user.nickname + ' ist ausgetreten.',
                 created_date: new Date()
               })
+              self.$root.$data.socket.emit('remove-user', self.$root.$data.user)
+
               self.$root.$data.user = {}
               self.$router.push({
                 name: 'intro'

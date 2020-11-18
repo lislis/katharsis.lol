@@ -6,10 +6,10 @@ var Chat = require('../models/Chat.js');
 
 /* GET ALL CHATS */
 router.get('/:roomid', function(req, res, next) {
-  Chat.find({ room: req.params.roomid }, function (err, products) {
-    if (err) return next(err);
-    res.json(products);
-  });
+    Chat.find({ room: req.params.roomid }).populate('user').exec(function (err, products) {
+        if (err) return next(err);
+        res.json(products);
+    });
 });
 
 /* GET SINGLE CHAT BY ID */

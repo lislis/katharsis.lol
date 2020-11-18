@@ -5,6 +5,7 @@ var RoomSchema = new mongoose.Schema({
     private: Boolean,
     main: Boolean,
     allowed_users: [ {type: Schema.Types.ObjectId, ref: 'User'} ],
+    locked: { type: Boolean, default: false },
     created_date: { type: Date, default: Date.now },
 });
 

@@ -63,9 +63,24 @@ server.listen(4000);
 
 io.on('connection', function (socket) {
     socket.on('save-message', function (data) {
-        console.log(data);
+        console.log('new-message ', data);
         io.emit('new-message', { message: data });
     });
+
+    socket.on('save-room', function(data) {
+        console.log('new-room ', data);
+        io.emit('new-room', { message: data });
+    })
+
+    socket.on('save-user', function(data) {
+        console.log('new-user ', data);
+        io.emit('new-user', { message: data });
+    })
+
+    socket.on('remove-user', function(data) {
+        console.log('delete-user ', data);
+        io.emit('delete-user', { message: data });
+    })
 
     console.log('User connected', socket.id);
     io.emit('users-increment')

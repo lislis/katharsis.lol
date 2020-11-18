@@ -48,6 +48,8 @@
                JSON.stringify(response.data))
              this.$root.$data.user = response.data
 
+             this.$root.$data.socket.emit('save-user', response.data)
+
              //... join it
              this.chat.room = this.$root.$data.mainRoom._id;
              this.chat.nickname = this.$root.$data.user._id

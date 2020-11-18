@@ -1,4 +1,4 @@
-# foyer
+x#s foyer
 
 Frontend for chat and fun
 

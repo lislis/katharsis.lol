@@ -3,7 +3,8 @@
     <Chat
       :messages="messages"
       :connections="connections"
-      :username="$root.$data.user.nickname" />
+      :username="$root.$data.user.nickname"
+      :room="room" />
   </div>
 </template>
 <script>
@@ -24,7 +25,8 @@
        messages: [],
        connections: 0,
        chat: {},
-       errors: []
+       errors: [],
+       room: {}
      }
    },
    watch: {
@@ -41,6 +43,9 @@
        this.$router.push({name: 'intro'})
      }
 
+     //... get history
+     this.getChatHistory()
+
      this.$root.$data.socket.on('new-message', function (data) {
        if(data.message.room === this.$route.params.roomid) {
          this.messages.push(data.message)
@@ -54,9 +59,6 @@
      this.$root.$data.socket.on('users-decrement', function (data) {
        this.connections -= 1
      }.bind(this))
-
-     //... get history
-     this.getChatHistory()
 
      axios.get(`http://${this.$root.$data.restServer}/api/user/`)
          .then(response => {
@@ -78,6 +80,18 @@
             })
             .catch(e => { console.log(e) })
 
+       // ideally this would be blocking
+       axios.get(`http://${this.$root.$data.restServer}/api/room/${this.$route.params.roomid}`)
+            .then(response => {
+              //debugger
+              this.room = response.data
+
+              if (this.room.private && !this.room.allowed_users.includes(this.$root.user._id)) {
+                console.log('not allowed in room')
+                this.$router.push({name: 'roomlist'})
+              }
+            })
+            .catch(e => { console.log(e) })
      },
      updatePlayerTarget(data) {
        console.log(data)

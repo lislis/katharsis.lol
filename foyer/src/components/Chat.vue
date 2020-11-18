@@ -1,17 +1,21 @@
 <template>
   <div id="chat">
     <div>
-      <h4>Foyer chat <span>{{connections}} online</span></h4>
+      <h4>
+        {{ room.room_name}} -
+        <span v-if="room.private">private</span><span v-else>öffentlich</span>
+      </h4>
     </div>
     <div>
       <ul class="messages">
         <li class="message"
-            :class="[{'center no-bubble': !message.user}, { 'right': message.user == $root.$data.user._id}]"
+            :class="[{'center no-bubble': !message.user}, { 'right': (message.user && message.user._id == $root.$data.user._id)}]"
           v-for="message in messages"
           :key="message.message">
           <div class="message--bubble" >
             <template v-if="message.user">
-              <span>{{message.user}} sagt: </span><br>
+              <span v-if="message.user.nickname">{{message.user.nickname}}</span>
+              <span v-else>{{message.user}}</span> sagt:<br>
             </template>
             <span>
               {{message.message}}
@@ -22,7 +26,7 @@
         </li>
       </ul>
 
-      <div>
+      <div v-if="!room.locked">
         <form @submit.prevent="send">
           <div  class="message--compose">
             <input type="text"
@@ -32,6 +36,9 @@
             <button title="Send">🛩</button>
           </div>
         </form>
+      </div>
+      <div v-else>
+        <p>Du bist Zuschauer</p>
       </div>
     </div>
   </div>
@@ -43,7 +50,7 @@
 
  export default {
    name: 'Chat',
-   props: ['messages', 'username', 'connections'],
+   props: ['messages', 'username', 'connections', 'room'],
    data() {
      return {
        newMessage: null,
