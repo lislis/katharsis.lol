@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>People List</h2>
-    <ul v-for="p in people">
+    <ul v-for="p in $root.$data.otherPeople">
       <li v-if="p._id != $root.user._id">
         <h3>{{p.nickname}}</h3>
         <p>joined {{p.created_date}}</p>
@@ -18,7 +18,7 @@
    name: 'PeopleList',
    data () {
      return {
-       people: [],
+       //people: [],
        errors: [],
        newPrivRoom: {}
      }
@@ -28,22 +28,18 @@
        this.$router.push({name: 'intro'})
      }
 
-     axios.get(`http://${this.$root.$data.restServer}/api/user/`)
+     axios.get(`${this.$root.$data.restServer}/api/user/`)
           .then(response => {
-            //debugger
-            this.people = response.data
+            this.$root.$data.otherPeople = response.data
           })
           .catch(e => { console.log(e) })
 
      this.$root.$data.socket.on('new-user', function (data) {
-       //debugger
-       this.people.push(data.message)
+       this.$root.$data.otherPeople.push(data.message)
      }.bind(this))
 
      this.$root.$data.socket.on('delete-user', function (data) {
-       //debugger
-       this.removeByAttr(this.people, '_id', data.message._id)
-       //this.people.remove() push(data.message)
+       this.removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id)
      }.bind(this))
 
    },
@@ -55,7 +51,7 @@
        this.newPrivRoom.allowed_users = [person._id, this.$root.user._id]
        this.newPrivRoom.room_name = `Chat ${person.nickname} - ${this.$root.user.nickname}`
        //debugger
-       axios.post(`http://${this.$root.$data.restServer}/api/room/`, this.newPrivRoom)
+       axios.post(`${this.$root.$data.restServer}/api/room/`, this.newPrivRoom)
             .then(response => {
               //debugger
               this.$root.$data.socket.emit('save-room', response.data)

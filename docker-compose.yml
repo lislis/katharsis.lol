@@ -1,14 +1,19 @@
 version: '3'
 
 services:
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    command: "--smallfiles --logpath=/dev/null"
   server:
     build:
       context: ./server
       dockerfile: Dockerfile
-  environment:
-      - WS_SERVER_PORT=3001
     ports:
-      - "3001:${WS_SERVER_PORT}"
+      - "3000:3000"
+    links:
+      - db
   ui:
     build:
       context: ./foyer

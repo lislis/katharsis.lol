@@ -14,8 +14,7 @@
           :key="message.message">
           <div class="message--bubble" >
             <template v-if="message.user">
-              <span v-if="message.user.nickname">{{message.user.nickname}}</span>
-              <span v-else>{{message.user}}</span> sagt:<br>
+              <span>{{getUserName(message.user)}}</span> sagt:<br>
             </template>
             <span>
               {{message.message}}
@@ -58,13 +57,21 @@
      }
    },
    created() {
+     this.$root.$data.socket.on('new-user', function (data) {
+       this.$root.$data.otherPeople.push(data.message)
+     }.bind(this))
+
+     this.$root.$data.socket.on('delete-user', function (data) {
+       this.removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id)
+     }.bind(this))
+
    },
    methods: {
      send(evt) {
        evt.preventDefault()
        this.chat.room = this.$route.params.roomid
        this.chat.user = this.$root.$data.user._id
-       axios.post(`http://${this.$root.$data.restServer}/api/chat`, this.chat)
+       axios.post(`${this.$root.$data.restServer}/api/chat`, this.chat)
                             .then(response => {
                               this.$root.$data.socket.emit('save-message', response.data)
                               this.chat.message = ''
@@ -72,6 +79,25 @@
                             .catch(e => {
                               this.errors.push(e)
                             })
+     },
+     getUserName(user) {
+       if (typeof user !== 'string') {
+         return user.nickname
+       } else {
+         //debugger
+         return this.$root.$data.otherPeople.filter(x => x._id === user)[0].nickname
+       }
+     },
+     removeByAttr(arr, attr, value) {
+       var i = arr.length;
+       while(i--){
+         if( arr[i]
+          && arr[i].hasOwnProperty(attr)
+          && (arguments.length > 2 && arr[i][attr] === value)) {
+           arr.splice(i,1);
+         }
+       }
+       return arr;
      }
    }
  }

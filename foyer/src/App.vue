@@ -24,6 +24,7 @@
      return {
        username: 'test',
        user: {},
+       otherPeople: [],
        mainRoom: {},
        stage: {},
        chats: [],
@@ -33,15 +34,16 @@
      }
    },
    created() {
-
      this.setSocketServer()
      this.connectToSocket()
      this.getMainRoom()
+     this.getAllPeople()
      this.loadUserFromStorage()
    },
    methods: {
      getMainRoom() {
-       axios.get(`http://${this.restServer}/api/room/main`)
+       //debugger
+       axios.get(`${this.restServer}/api/room/main`)
             .then(response => {
               this.stage = response.data.filter(x => x.locked)[0]
               this.mainRoom = response.data.filter(x => !x.locked)[0]
@@ -49,13 +51,20 @@
             })
             .catch(e => { console.log(e) })
      },
+     getAllPeople() {
+       axios.get(`${this.restServer}/api/user`)
+            .then(response => {
+              this.otherPeople = response.data
+            })
+            .catch(e => { console.log(e) })
+     },
      setSocketServer() {
        if (process.env.NODE_ENV === 'production') {
-         this.socketServer = `${process.env.VUE_APP_WS_HOST}`
-         this.restServer = `${process.env.VUE_APP_API_HOST}`
+         this.socketServer = `https://${process.env.VUE_APP_WS_HOST}`
+         this.restServer = `https://${process.env.VUE_APP_API_HOST}`
        } else {
-         this.socketServer = `${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`
-         this.restServer = `${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
+         this.socketServer = `http://${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`
+         this.restServer = `http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
        }
      },
      loadUserFromStorage() {
@@ -69,7 +78,7 @@
      logout() {
        window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)
        let self = this
-       axios.delete(`http://${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
+       axios.delete(`${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
             .then(response => {
               self.$root.$data.socket.emit('save-message', {
                 room: self.$route.params.roomid,

@@ -60,7 +60,7 @@
        this.connections -= 1
      }.bind(this))
 
-     axios.get(`http://${this.$root.$data.restServer}/api/user/`)
+     axios.get(`${this.$root.$data.restServer}/api/user/`)
          .then(response => {
            //debugger
            this.connections = response.data.length
@@ -74,14 +74,14 @@
    },
    methods: {
      getChatHistory() {
-       axios.get(`http://${this.$root.$data.restServer}/api/chat/${this.$route.params.roomid}`)
+       axios.get(`${this.$root.$data.restServer}/api/chat/${this.$route.params.roomid}`)
             .then(response => {
               this.messages = response.data
             })
             .catch(e => { console.log(e) })
 
        // ideally this would be blocking
-       axios.get(`http://${this.$root.$data.restServer}/api/room/${this.$route.params.roomid}`)
+       axios.get(`${this.$root.$data.restServer}/api/room/${this.$route.params.roomid}`)
             .then(response => {
               //debugger
               this.room = response.data

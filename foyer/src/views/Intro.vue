@@ -41,7 +41,7 @@
       onSubmit(evt) {
         evt.preventDefault()
         // ... create a user
-        axios.post(`http://${this.$root.$data.restServer}/api/user`, this.newUser)
+        axios.post(`${this.$root.$data.restServer}/api/user`, this.newUser)
            .then(response => {
              window.localStorage.setItem(
                `${process.env.VUE_APP_LS_PREFIX}user`,
@@ -55,7 +55,7 @@
              this.chat.nickname = this.$root.$data.user._id
              this.chat.message = `${this.$root.$data.user.nickname} ist eingetreten`
 
-             axios.post(`http://${this.$root.$data.restServer}/api/chat`, this.chat)
+             axios.post(`${this.$root.$data.restServer}/api/chat`, this.chat)
                   .then(response => {
                     this.$root.$data.socket.emit('save-message', {
                       room: this.chat.room,

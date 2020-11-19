@@ -1,3 +1,6 @@
+// Constants
+
+require('dotenv').config()
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,11 +14,17 @@ var room = require('./routes/room');
 var chat = require('./routes/chat');
 var user = require('./routes/user');
 
+const WS_PORT = process.env['WS_PORT']
+const MONGO_DB = process.env['MONGO_DB']
+const MONGO_PORT = process.env['MONGO_PORT']
+const MONGO_HOST = process.env['MONGO_HOST']
+
 var app = express();
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/mevn-chat2', {
+console.log(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`)
+mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`, {
   promiseLibrary: require('bluebird'),
   useNewUrlParser: true,
   useUnifiedTopology: true })
@@ -59,7 +68,7 @@ app.use(function(err, req, res, next) {
 
 
 // Socket IO
-server.listen(4000);
+server.listen(WS_PORT);
 
 io.on('connection', function (socket) {
     socket.on('save-message', function (data) {

@@ -96,7 +96,7 @@
      onSubmit(evt) {
        this.room.main = false
        this.room.private = false
-       axios.post(`http://${this.$root.$data.restServer}/api/room`, this.room)
+       axios.post(`${this.$root.$data.restServer}/api/room`, this.room)
             .then(response => {
 
               this.$root.$data.socket.emit('save-room', response.data)
