@@ -1,6 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router"
 import Intro from '@/views/Intro'
 import Room from '@/views/Room'
+import RoomList from '@/views/RoomList'
+import PeopleList from '@/views/PeopleList'
+import AddRoom from '@/views/AddRoom'
+import JoinRoom from '@/views/JoinRoom'
+import ChatRoom from '@/views/ChatRoom'
 
 const routes = [
   {
@@ -9,7 +14,32 @@ const routes = [
     component: Intro
   },
   {
-    path: '/room',
+    path: '/peoplelist/',
+    name: 'peoplelist',
+    component: PeopleList
+  },
+  {
+    path: '/roomlist',
+    name: 'roomlist',
+    component: RoomList
+  },
+  { //?
+    path: '/addroom',
+    name: 'AddRoom',
+    component: AddRoom
+  },
+  { //?
+    path: '/joinroom/:id',
+    name: 'JoinRoom',
+    component: JoinRoom
+  },
+  { //?
+    path: '/chatroom/:id/:nickname',
+    name: 'ChatRoom',
+    component: ChatRoom
+  },
+  {
+    path: '/room/:roomid',
     name: 'room',
     component: Room
   }

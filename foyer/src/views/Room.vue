@@ -1,131 +1,101 @@
 <template>
   <div class="room-view">
-    <Room1
-      :players="players"
-      :username="username"
-      v-on:update-player-target="updatePlayerTarget" />
     <Chat
       :messages="messages"
       :connections="connections"
-      :username="username"
-      :ready="ready"
-      :info="info"
-      v-on:send-message="send"
-      v-on:add-user="addUser"/>
+      :username="$root.$data.user.nickname"
+      :room="room" />
   </div>
 </template>
 <script>
  import Chat from '@/components/Chat.vue'
- import Room1 from '@/components/Room1.vue'
- import io from 'socket.io-client'
+ //import Room1 from '@/components/Room1.vue'
+ import axios from 'axios'
 
- let socket
- if (process.env.NODE_ENV === 'production') {
-   socket = io(`${process.env.VUE_APP_WS_HOST}`)
- } else {
-   socket = io(`${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`)
- }
 
  export default {
    name: "Room",
    components: {
      Chat,
-     Room1
+   //  Room1
    },
    data() {
      return {
        players: {},
-       newMessage: null,
        messages: [],
-       typing: false,
-       username: null,
-       ready: false,
-       info: [],
        connections: 0,
+       chat: {},
+       errors: [],
+       room: {}
+     }
+   },
+   watch: {
+     '$route.params.roomid': {
+       handler(roomid) {
+         if (roomid !== undefined) {
+           this.getChatHistory()
+         }
+       }
      }
    },
    created() {
-     window.onbeforeunload = () => {
-       socket.emit('leave', this.username);
+     if (!this.$root.$data.user.nickname) {
+       this.$router.push({name: 'intro'})
      }
 
-     socket.emit('newPlayer');
+     //... get history
+     this.getChatHistory()
 
-     socket.on('chat-message', (data) => {
-       //debugger
-       this.messages.push({
-         message: data.message,
-         type: 1,
-         user: data.user,
-       });
-     });
+     this.$root.$data.socket.on('new-message', function (data) {
+       if(data.message.room === this.$route.params.roomid) {
+         this.messages.push(data.message)
+       }
+     }.bind(this))
 
-     socket.on('typing', (data) => {
-       this.typing = data;
-     });
+     this.$root.$data.socket.on('users-increment', function (data) {
+       this.connections += 1
+     }.bind(this))
 
-     socket.on('stopTyping', () => {
-       this.typing = false;
-     });
+     this.$root.$data.socket.on('users-decrement', function (data) {
+       this.connections -= 1
+     }.bind(this))
 
-     socket.on('joined', (data) => {
-       this.info.push({
-         username: data,
-         type: 'joined'
-       });
+     axios.get(`${this.$root.$data.restServer}/api/user/`)
+         .then(response => {
+           //debugger
+           this.connections = response.data.length
+         })
+         .catch(e => { console.log(e) })
 
-       setTimeout(() => {
-         this.info = [];
-       }, 5000);
-     });
-
-     socket.on('leave', (data) => {
-       this.info.push({
-         username: data,
-         type: 'left'
-       });
-
-       setTimeout(() => {
-         this.info = [];
-       }, 5000);
-     });
-
-     socket.on('connections', (data) => {
-       this.connections = data;
-     });
-
-     socket.on('state', (data) => {
-       //console.log(data)
-       this.players = data
-     })
-   },
-   watch: {
-     newMessage(value) {
-       value ? socket.emit('typing', this.username) : socket.emit('stopTyping')
-     }
+     // keep for later
+     //this.socket.on('state', (data) => {
+     //  this.players = data
+     //})
    },
    methods: {
-     send(data) {
-       this.messages.push({
-         message: data,
-         type: 0,
-         user: 'Me',
-       });
+     getChatHistory() {
+       axios.get(`${this.$root.$data.restServer}/api/chat/${this.$route.params.roomid}`)
+            .then(response => {
+              this.messages = response.data
+            })
+            .catch(e => { console.log(e) })
 
-       socket.emit('chat-message', {
-         message: data,
-         user: this.username
-       });
-     },
-     addUser(data) {
-       this.ready = true;
-       this.username = data
-       socket.emit('joined', data)
+       // ideally this would be blocking
+       axios.get(`${this.$root.$data.restServer}/api/room/${this.$route.params.roomid}`)
+            .then(response => {
+              //debugger
+              this.room = response.data
+
+              if (this.room.private && !this.room.allowed_users.includes(this.$root.user._id)) {
+                console.log('not allowed in room')
+                this.$router.push({name: 'roomlist'})
+              }
+            })
+            .catch(e => { console.log(e) })
      },
      updatePlayerTarget(data) {
-       //debugger
        console.log(data)
-       socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
+       this.$root.$data.socket.emit('updatePlayerTarget', {clientX: data.x, clientY: data.y})
      }
    }
  }
