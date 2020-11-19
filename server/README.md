@@ -6,7 +6,14 @@ Node Express + Websocket server
 
 Have Node installed, and install dependencies with `yarn install`.
 Copy and adjust the PORT in the .env file `cp env.sample .env`.
-Run the server with `node server.js`.
+- `WS_PORT` is the websocket port (default 4000)
+- `PORT` is the api port (default 3000)
+- `HOST` is localhost on local development setup
+- `MONGO_DB` name of the database
+- `MONGO_PORT` port of MongoDB (default 27017)
+- `MONGO_HOST` localhost on local development setup, db in the docker setup
+
+Run the server with `yarn start`.
 
 
 ## Production
