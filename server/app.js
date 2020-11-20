@@ -23,8 +23,8 @@ var app = express();
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-console.log(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`)
-mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}`, {
+console.log(`mongodb://${MONGO_HOST}/${MONGO_DB}`)
+mongoose.connect(`mongodb://${MONGO_HOST}/${MONGO_DB}`, {
   promiseLibrary: require('bluebird'),
   useNewUrlParser: true,
   useUnifiedTopology: true })
@@ -68,6 +68,7 @@ app.use(function(err, req, res, next) {
 
 
 // Socket IO
+console.log(`websocket listen on ${WS_PORT}`)
 server.listen(WS_PORT);
 
 io.on('connection', function (socket) {

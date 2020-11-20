@@ -67,7 +67,7 @@
        this.$router.push({name: 'intro'})
      }
 
-     axios.get(`http://${this.$root.$data.restServer}/api/room`)
+     axios.get(`${this.$root.$data.restServer}/api/room`)
           .then(response => {
             this.rooms = response.data
             this.setPublicRooms()
