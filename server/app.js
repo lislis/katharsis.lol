@@ -16,7 +16,7 @@ var user = require('./routes/user');
 
 const WS_PORT = process.env['WS_PORT']
 const MONGO_DB = process.env['MONGO_DB']
-const MONGO_PORT = process.env['MONGO_PORT']
+//const MONGO_PORT = process.env['MONGO_PORT']
 const MONGO_HOST = process.env['MONGO_HOST']
 
 var app = express();
