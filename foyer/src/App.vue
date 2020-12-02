@@ -57,6 +57,7 @@
               this.otherPeople = response.data
             })
             .catch(e => { console.log(e) })
+       //setInterval(() => {}, 5000)
      },
      setSocketServer() {
        if (process.env.NODE_ENV === 'production') {

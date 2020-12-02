@@ -56,6 +56,13 @@
        chat: {}
      }
    },
+   watch: {
+     '$root.$data.otherPeople': {
+       handler() {
+
+       }
+     }
+   },
    created() {
      this.$root.$data.socket.on('new-user', function (data) {
        this.$root.$data.otherPeople.push(data.message)
@@ -81,12 +88,21 @@
                             })
      },
      getUserName(user) {
-       if (typeof user !== 'string') {
-         return user.nickname
+       if (typeof user == 'string') {
+         return user
        } else {
-         //debugger
-         return this.$root.$data.otherPeople.filter(x => x._id === user)[0].nickname
+         if (this.$root.$data.otherPeople.length) {
+           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
+           if (userInfo.length) {
+             return userInfo[0].nickname
+           } else {
+             return user.nickname
+           }
+         } else {
+           return user.nickname
+         }
        }
+       return user
      },
      removeByAttr(arr, attr, value) {
        var i = arr.length;
