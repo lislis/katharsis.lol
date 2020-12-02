@@ -21,6 +21,8 @@ Just a few words on what is happening:
 
 **Server** builds the socket.io and api server and talks to the database. Feel free to adjust the port it exposes (whatever is free on your server).
 
+**BotBrain** tbd
+
 **DB** the MongoDB service for storing stuff. What databases do.
 
 ### Prepare first run
