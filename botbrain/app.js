@@ -11,10 +11,12 @@ var server = require('http').createServer(app);
 //var io = require('socket.io')(server);
 
 var direction = require('./routes/direction');
+var word = require('./routes/word');
 
 const MONGO_DB = process.env['MONGO_DB']
 //const MONGO_PORT = process.env['MONGO_PORT']
 const MONGO_HOST = process.env['MONGO_HOST']
+
 
 var app = express();
 
@@ -41,6 +43,7 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/api/direction', direction);
+app.use('/api/word', word);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
