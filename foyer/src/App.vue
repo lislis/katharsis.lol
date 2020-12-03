@@ -4,7 +4,7 @@
       <p><strong>{{ user.nickname }}</strong></p>
       <button @click="logout">Logout</button>
     </header>
-    <div class="navigation">
+    <div class="navigation" v-if="user.nickname">
       <router-link :to="{name: 'room', params: { roomid: this.stage._id}}">{{ stage.room_name }}</router-link>
       <router-link :to="{name: 'room', params: { roomid: this.mainRoom._id}}">{{ mainRoom.room_name }}</router-link>
       <router-link :to="{name: 'roomlist'}">Räume</router-link>
@@ -43,10 +43,12 @@
    methods: {
      getMainRoom() {
        //debugger
+       console.log(`${this.restServer}/api/room/main`)
        axios.get(`${this.restServer}/api/room/main`)
-            .then(response => {
-              this.stage = response.data.filter(x => x.locked)[0]
-              this.mainRoom = response.data.filter(x => !x.locked)[0]
+              .then(response => {
+                console.log(response);
+              this.$root.$data.stage = response.data.filter(x => x.locked)[0]
+              this.$root.$data.mainRoom = response.data.filter(x => !x.locked)[0]
 
             })
             .catch(e => { console.log(e) })
@@ -61,8 +63,8 @@
      },
      setSocketServer() {
        if (process.env.NODE_ENV === 'production') {
-         this.socketServer = `https://${process.env.VUE_APP_WS_HOST}`
-         this.restServer = `https://${process.env.VUE_APP_API_HOST}`
+         this.socketServer = `http://${process.env.VUE_APP_WS_HOST}`
+         this.restServer = `http://${process.env.VUE_APP_API_HOST}`
        } else {
          this.socketServer = `http://${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`
          this.restServer = `http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
