@@ -10,4 +10,4 @@ RUN yarn install --production=true
 
 COPY . .
 
-CMD [ "node", "server.js" ]
+CMD [ "yarn", "start" ]
