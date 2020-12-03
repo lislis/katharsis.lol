@@ -63,8 +63,8 @@
      },
      setSocketServer() {
        if (process.env.NODE_ENV === 'production') {
-         this.socketServer = `http://${process.env.VUE_APP_WS_HOST}`
-         this.restServer = `http://${process.env.VUE_APP_API_HOST}`
+         this.socketServer = `https://${process.env.VUE_APP_WS_HOST}`
+         this.restServer = `https://${process.env.VUE_APP_API_HOST}`
        } else {
          this.socketServer = `http://${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`
          this.restServer = `http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
