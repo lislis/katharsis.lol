@@ -20,7 +20,7 @@ router.get('/bytype/:type', async function(req, res, next) {
                     { $sample: {size: 1}}
                 ]).exec((err, direction) => {
                     if (err) return next(err);
-                    let newDirections = utils.fillPlaceholders(direction[0], values);
+                    let newDirections = utils.fillPlaceholders(direction[0], values, req.query);
                     res.json(newDirections);
                 });
         })

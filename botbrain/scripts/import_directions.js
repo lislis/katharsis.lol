@@ -17,7 +17,7 @@ fs.createReadStream(inputFile)
         let meta = csvrow['Satzkategorie'].split(" ");
 
         let data = {
-            word_type: meta[0],
+            direction_type: meta[0],
             text: csvrow['Directions']
         };
 
