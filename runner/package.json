@@ -4,17 +4,22 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./bin/wwww"
+    "start": "node ./app.js"
   },
   "dependencies": {
+    "@ladjs/graceful": "^1.0.5",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
+    "bree": "^4.0.0",
+    "bthreads": "^0.5.1",
     "cors": "^2.8.5",
+    "dayjs": "^1.9.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
     "mathjs": "^7.5.1",
     "morgan": "^1.10.0",
+    "ms": "^2.1.2",
     "serve-favicon": "^2.5.0"
   }
 }
