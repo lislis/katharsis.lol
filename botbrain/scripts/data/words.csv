@@ -145,19 +145,19 @@ Verb,verschlingt,Essen,singular
 Verb,vernichtet,Essen,singular
 Verb,verschlingen,Essen,plural
 Verb,vernichten,Essen,plural
-Verb ,fühlt sich,Zustand,singular
+Verb,fühlt sich,Zustand,singular
 Verb,fühlen sich,Zustand,singular
 Verb,ist,Zustand,singular
-Verb ,sind,Zustand,plural
-Adjektiv ,sauer,Zustand,
-Adjektiv ,enttäuscht,Zustand,
-Adjektiv ,into it,Zustand,
-Adjektiv ,hooked,Zustand,
-Adjektiv ,benebelt,Zustand,
-Adjektiv ,glücklich,Zustand,
-Adjektiv ,hungrig,Zustand,
-Adjektiv ,traurig,Zustand,
-Adjektiv ,genervt,Zustand,
+Verb,sind,Zustand,plural
+Adjektiv,sauer,Zustand,
+Adjektiv,enttäuscht,Zustand,
+Adjektiv,into it,Zustand,
+Adjektiv,hooked,Zustand,
+Adjektiv,benebelt,Zustand,
+Adjektiv,glücklich,Zustand,
+Adjektiv,hungrig,Zustand,
+Adjektiv,traurig,Zustand,
+Adjektiv,genervt,Zustand,
 Phrase,Einbruch des Realen,,
 Wort,Stille,,
 Verb,bedankt sich bei,Relation,singular

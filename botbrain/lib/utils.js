@@ -2,20 +2,31 @@ const _ = require('lodash');
 const random = require('random');
 
 function fillPlaceholders(origObj, values, params) {
-    let obj = origObj;
+    let obj;
+    let output;
+    if (origObj.length) {
+        obj = origObj[0];
+    } else {
+        obj = origObj;
+    }
 
-    const re = /(\#.+?\#)/g;
-    const array = [...obj.text.matchAll(re)];
-    let output = obj.text;
+    try {
+        const re = /(\#.+?\#)/g;
+        if (obj.text) {
+            const array = [...obj.text.matchAll(re)];
+            output = obj.text;
 
-    array.forEach((v, k) => {
-        const re_clean = /\#(.+?)\#/;
-        const catClean = v[0].match(re_clean)[1];
+            array.forEach((v, k) => {
+                const re_clean = /\#(.+?)\#/;
+                const catClean = v[0].match(re_clean)[1];
 
-        let sub = findSub(catClean, obj, values);
-        output = replacePatternWSub(output, v[0], sub);
-    });
-
+                let sub = findSub(catClean, obj, values);
+                output = replacePatternWSub(output, v[0], sub);
+            });
+        }
+    } catch(err) {
+        console.log(err);
+    }
     return [output];
 }
 
@@ -66,9 +77,23 @@ function sampleBy(pool, category, options) {
         flavorFlave = category.split("_")[1];
     }
 
+    console.log(options);
+
     let w =  _.sample(pool
-                      .filter(x => x.flavor == flavorFlave)
-                      .filter(x => x.word_type == cattyCat)
+                      .filter(x => {
+                          if (options.flavor) {
+                              return x.flavor == flavorFlave;
+                          } else {
+                              return true;
+                          }
+                      })
+                      .filter(x => {
+                          if (options.direction_type) {
+                              return x.word_type == cattyCat;
+                          } else {
+                              return true;
+                          }
+                      })
                       .filter(x => {
                           if (cattyCat == "Verb") {
                               return x.numerus == options.numerus;
@@ -76,6 +101,7 @@ function sampleBy(pool, category, options) {
                               return x.numerus == options.numerus || !x.numerus;
                           }
                       }));
+    console.log(w);
     return w;
 }
 

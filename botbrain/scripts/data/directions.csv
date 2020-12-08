@@ -6,18 +6,18 @@ Oberkategorie,Satzkategorie,Directions
 ,Ding singular,#Objekt# #Verb#
 ,Ding plural,#Objekt# #Verb#
 ,Stimme singular,#User# #Verb# #Adverb?optional#
-,Stimme plural,#User# #Verb# #Adverb?optional#
+,Stimme plural,#User# und #User# #Verb# #Adverb?optional#
 ,Auftritt singular,#User# #Verb#
-,Auftritt plural,#User# #Verb#
+,Auftritt plural,#User# und #User# #Verb#
 ,Abgang singular,#User# #Verb#
-,Abgang plural,#User# #Verb#
+,Abgang plural,#User# und #User# #Verb#
 ,Phrase,#Phrase#
 ,Wort,#Wort#
 ,Relation plural,#User# und #User# #Verb# #User#
 ,Relation singular,#User# #Verb# #User#
 ,Essen singular,#User# #Verb# #Objekt# #Ortsbestimmung_Zustand?optional#
 ,Essen plural,#User# und #User# #Verb# #Objekt# #Ortsbestimmung_Zustand?optional#
-,Zustand plural,#User# und #User# #Verb# Adjektiv
-,Zustand singular,#User# #Verb# #Adjektiv
+,Zustand plural,#User# und #User# #Verb# #Adjektiv#
+,Zustand singular,#User# #Verb# #Adjektiv#
 ,machen singular,#User# #Tätigkeit#
-,machen plural,#User# #Tätigkeit#
+,machen plural,#User# und #User# #Tätigkeit#

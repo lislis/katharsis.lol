@@ -20,7 +20,26 @@ router.get('/bytype/:type', async function(req, res, next) {
                     { $sample: {size: 1}}
                 ]).exec((err, direction) => {
                     if (err) return next(err);
-                    let newDirections = utils.fillPlaceholders(direction[0], values, req.query);
+                    let newDirections = utils.fillPlaceholders(direction, values, req.query);
+                    res.json(newDirections);
+                });
+        })
+    } catch(e) {
+        e.stack;
+    }
+});
+
+router.get('/any', async function(req, res, next) {
+    try {
+        Promise.all([
+            Word.find().exec(),
+            User.find().exec()
+        ]).then(async values => {
+            Direction
+                .aggregate([{ $sample: {size: 1}}])
+                .exec((err, direction) => {
+                    if (err) return next(err);
+                    let newDirections = utils.fillPlaceholders(direction, values, req.query);
                     res.json(newDirections);
                 });
         })
