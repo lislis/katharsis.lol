@@ -1,0 +1,200 @@
+Wortkategorie,Wort,flavor,Numerus
+Verb ,gehen,Bewegung,plural
+Verb,geht,Bewegung,singular
+Beschreibung,",nach einer kurzen Pause, ",,
+Ortsbestimmung,in den Wald,Bewegung,
+Objekt,Waschmaschine,Technik,singular
+Objekt,Waschmaschinen,Technik,plural
+Ortsbestimmung,im Wald,Zustand,
+Verb,stolpert rein,Auftritt,singular
+Verb,stürmt raus,Abgang,singular
+Verb,geht an,Technik,singular
+Verb,fällt um,Ding,singular
+Objekt,Schukarton,Ding,singular
+Objekt,Regale,Ding,plural
+Verb,fallen um,Ding,plural
+Verb,fallen um,Technik,plural
+Verb,schreit,Stimme,singular
+Verb,schreien,Stimme,plural
+Verb,stürmen raus,Abgang,plural
+Verb,stolpern rein,Auftritt,plural
+Verb,umarmt,Relation,plural
+Verb,umarmen,Relation,singular
+Verb,isst,Essen,singular
+Verb,essen,Essen,plural
+Verb,ist,Zustand,singular
+Verb,sind,Zustand,plural
+Verb,fühlt sich,Zustand,singular
+Verb,fühlen sich,Zustand,plural
+Adjektiv ,geliebt,Zustand,
+Adverb,leise,Bewegung,
+Adverb,leise,Essen,
+Tätigkeit,liest ein Buch,,singular
+Tätigkeit,lesen ein Buch,,plural
+Verb,geht,Bewegung,singular
+Verb,läuft,Bewegung,singular
+Verb,hüpft,Bewegung,singular
+Verb,rennt,Bewegung,singular
+Verb,kriecht,Bewegung,singular
+Verb,fliegt,Bewegung,singular
+Verb,schreitet,Bewegung,singular
+Verb,schleicht,Bewegung,singular
+Verb,tanzt,Bewegung,singular
+Verb,krabbelt,Bewegung,singular
+Verb,fährt,Bewegung,singular
+Verb,trabt,Bewegung,singular
+Verb,verlässt,Bewegung,singular
+Verb,reist,Bewegung,singular
+Verb,gehen,Bewegung,plural
+Verb,laufen,Bewegung,plural
+Verb,hüpfen,Bewegung,plural
+Verb,rennen,Bewegung,plural
+Verb,kriechen,Bewegung,plural
+Verb,fliegen,Bewegung,plural
+Verb,schreiten,Bewegung,plural
+Verb,schleichen,Bewegung,plural
+Verb,tanzen,Bewegung,plural
+Verb,krabbeln,Bewegung,plural
+Verb,fahren,Bewegung,plural
+Verb,traben,Bewegung,plural
+Verb,verlassen,Bewegung,plural
+Verb,reisen,Bewegung,plural
+Verb,lacht,Stimme,singular
+Verb,schreit,Stimme,singular
+Verb,kichert,Stimme,singular
+Verb,schluchzt,Stimme,singular
+Verb,singt,Stimme,singular
+Verb,juchzt,Stimme,singular
+Verb,gähnt,Stimme,singular
+Verb,diskutiert,Stimme,singular
+Verb,summt,Stimme,singular
+Verb,quietscht,Stimme,singular
+Verb,lachen ,Stimme,plural
+Verb,schreien,Stimme,plural
+Verb,kichern,Stimme,plural
+Verb,schluchzen,Stimme,plural
+Verb,singen,Stimme,plural
+Verb,juchzen,Stimme,plural
+Verb,gähnen,Stimme,plural
+Verb,diskutieren,Stimme,plural
+Verb,summen,Stimme,plural
+Verb,quietschen,Stimme,plural
+Ortsbestimmung,in den wald,Bewegung,
+Ortsbestimmung,nach Bochum,Bewegung,
+Ortsbestimmung,nach Griechenland,Bewegung,
+Ortsbestimmung,ins Blaue hinein,Bewegung,
+Ortsbestimmung,in den Park,Bewegung,
+Ortsbestimmung,in die Küche,Bewegung,
+Ortsbestimmung,die Treppe hinunter,Bewegung,
+Ortsbestimmung,in die Innenstadt,Bewegung,
+Ortsbestimmung,ins Universum,Bewegung,
+Ortsbestimmung,zum Flughafen,Bewegung,
+Ortsbestimmung,auf die Straße,Bewegung,
+Ortsbestimmung,nach Hause,Bewegung,
+Ortsbestimmung,zum Bauernhof,Bewegung,
+Ortsbestimmung,zum Raumschiff,Bewegung,
+Ortsbestimmung,zur Besenkammer,Bewegung,
+Ortsbestimmung,ins Internet,Bewegung,
+Ortsbestimmung,in die Badewanne,Bewegung,
+Ortsbestimmung,nach draußen,Bewegung,
+Ortsbestimmung,hinein,Bewegung,
+Ortsbestimmung,zum Bus,Bewegung,
+Ortsbestimmung,hin und her,Bewegung,
+Ortsbestimmung,nach Kamtschatka,Bewegung,
+Ortsbestimmung,nach New York,Bewegung,
+Verb,läuft ,Technik,singular
+Verb,geht an,Technik,singular
+Verb,geht aus,Technik,singular
+Verb,flackert,Technik,singular
+Verb,summt,Technik,singular
+Verb,quietscht,Technik,singular
+Verb,hängt,Technik,singular
+Verb,gibt ein Geräusch von sich,Technik,singular
+Verb,gluckert,Technik,singular
+Verb,fährt weg,Technik,singular
+Verb,stürzt ab,Technik,singular
+Verb,fliegt weg,Technik,singular
+Verb,startet,Technik,singular
+Verb,schwimmt,Technik,singular
+Objekt,Die Waschmaschine,Technik,singular
+Objekt,Die Lampe,Technik,singular
+Objekt,der Computer,Technik,singular
+Objekt,der Laptop,Technik,singular
+Objekt,Das Mikrofon,Technik,singular
+Objekt,Der Plattenspieler,Technik,singular
+Objekt,Die Box,Technik,singular
+Objekt,Die E-Gitarre,Technik,singular
+Objekt,Die Kaffeemaschine,Technik,singular
+Objekt,der Milchschäumer,Technik,singular
+Objekt,der Rasenmäher,Technik,singular
+Objekt,der Trockner,Technik,singular
+Objekt,Das Auto,Technik,singular
+Objekt,Der Mixer,Technik,singular
+Objekt,die Heizung,Technik,singular
+Objekt,der Staubsauger,Technik,singular
+Objekt,das Smartphone,Technik,singular
+Objekt,das Telephon,Technik,singular
+Objekt,die Telefonzelle,Technik,singular
+Objekt,der Roboter,Technik,singular
+Objekt,Der Staubsaugerroboter,Technik,singular
+Objekt,die Motorsäge,Technik,singular
+Objekt,das Boot,Technik,singular
+Objekt,Spaghetti,Essen,
+Objekt,Nussbraten,Essen,
+Verb,verschlingt,Essen,singular
+Verb,vernichtet,Essen,singular
+Verb,verschlingen,Essen,plural
+Verb,vernichten,Essen,plural
+Verb ,fühlt sich,Zustand,singular
+Verb,fühlen sich,Zustand,singular
+Verb,ist,Zustand,singular
+Verb ,sind,Zustand,plural
+Adjektiv ,sauer,Zustand,
+Adjektiv ,enttäuscht,Zustand,
+Adjektiv ,into it,Zustand,
+Adjektiv ,hooked,Zustand,
+Adjektiv ,benebelt,Zustand,
+Adjektiv ,glücklich,Zustand,
+Adjektiv ,hungrig,Zustand,
+Adjektiv ,traurig,Zustand,
+Adjektiv ,genervt,Zustand,
+Phrase,Einbruch des Realen,,
+Wort,Stille,,
+Verb,bedankt sich bei,Relation,singular
+Verb,bedanken sich bei,Relation,plural
+Ortsbestimmung,im Wald,Zustand,
+Ortsbestimmung,in Bochum,Zustand,
+Ortsbestimmung,in Griechenland,Zustand,
+Ortsbestimmung,im Grünen,Zustand,
+Ortsbestimmung,im Park,Zustand,
+Ortsbestimmung,in der Küche,Zustand,
+Ortsbestimmung,auf der Treppe,Zustand,
+Ortsbestimmung,in der Innenstadt,Zustand,
+Ortsbestimmung,im Universum,Zustand,
+Ortsbestimmung,am Flughafen,Zustand,
+Ortsbestimmung,auf der Straße,Zustand,
+Ortsbestimmung,zu Hause,Zustand,
+Ortsbestimmung,auf dem Bauernhof,Zustand,
+Ortsbestimmung,im Raumschiff,Zustand,
+Ortsbestimmung,in der Besenkammer,Zustand,
+Ortsbestimmung,im Internet,Zustand,
+Ortsbestimmung,in der Badewanne,Zustand,
+Ortsbestimmung,draußen,Zustand,
+Ortsbestimmung,drinnen,Zustand,
+Ortsbestimmung,im Bus,Zustand,
+Verb,tippt,Tätigkeit,singular
+Verb,tippen,Tätigkeit,plural
+Beschreibung,",nach langer Überlegung,",,
+Adverb,leise,,
+Adverb,bestimmt,,
+Adverb,laut,,
+Adverb,herzzerreißend,,
+Adverb,schüchtern,,
+Adverb,fragend,,
+Objekt,Das Bett,Ding,singular
+Objekt,Die Lampe,Ding,singular
+Objekt,Die Blumenvase,Ding,singular
+Objekt,Der Flügel,Ding,singular
+Tätigkeit,spielt Klavier,,singular
+Tätigkeit,spielen Klavier,,plural
+Objekt,Eis,Essen,
