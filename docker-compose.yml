@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: mongo
+    restart: unless-stopped
     volumes:
       - './data:/data/db'
     ports:
@@ -11,6 +12,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
+    restart: unless-stopped
     environment:
       - WS_SERVER_PORT=4000
       - API_SERVER_PORT=3000
@@ -23,6 +25,7 @@ services:
     build:
       context: ./botbrain
       dockerfile: Dockerfile
+    restart: unless-stopped
     environment:
       - BOT_PORT=3003
     ports:
@@ -34,6 +37,7 @@ services:
     build:
       context: ./foyer
       dockerfile: Dockerfile
+    restart: unless-stopped
     environment:
       - VUE_APP_WS_HOST="${SOCKET_DOMAIN}"
       - VUE_APP_API_HOST="${API_DOMAIN}"
