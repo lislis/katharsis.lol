@@ -16,7 +16,7 @@ Oberkategorie,Satzkategorie,Directions
 ,Relation plural,#User# und #User# #Verb# #User#
 ,Relation singular,#User# #Verb# #User#
 ,Essen singular,#User# #Verb# #Objekt# #Ortsbestimmung_Zustand?optional#
-,Essen plural,#User# #Verb# #Objekt# #Ortsbestimmung_Zustand?optional#
+,Essen plural,#User# und #User# #Verb# #Objekt# #Ortsbestimmung_Zustand?optional#
 ,Zustand plural,#User# und #User# #Verb# Adjektiv
 ,Zustand singular,#User# #Verb# #Adjektiv
 ,machen singular,#User# #Tätigkeit#

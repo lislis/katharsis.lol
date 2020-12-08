@@ -143,8 +143,8 @@ Objekt,Spaghetti,Essen,
 Objekt,Nussbraten,Essen,
 Verb,verschlingt,Essen,singular
 Verb,vernichtet,Essen,singular
-Verb,verschlingt,Essen,plural
-Verb,vernichtet,Essen,plural
+Verb,verschlingen,Essen,plural
+Verb,vernichten,Essen,plural
 Verb ,fühlt sich,Zustand,singular
 Verb,fühlen sich,Zustand,singular
 Verb,ist,Zustand,singular
