@@ -90,6 +90,7 @@ io.on('connection', function (socket) {
     socket.on('remove-user', function(data) {
         console.log('delete-user ', data);
         io.emit('delete-user', { message: data });
+        io.emit('new-message', { message: data });
     })
 
     console.log('User connected', socket.id);
