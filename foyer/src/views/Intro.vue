@@ -58,16 +58,10 @@
              axios.post(`${this.$root.$data.restServer}/api/chat`, this.chat)
                   .then(response => {
                     this.$root.$data.socket.emit('save-message', {
-                      room: this.chat.room,
-                      nickname: this.chat.nickname,
-                      message: this.chat.message,
+                      ...this.chat,
                       created_date: new Date()
                     })
-                    // this should probably also announce new player
-                    //this.$root.$data.socket.emit('newPlayer');
-
-                    this.$router.push({ name: 'room',
-                                        params: { roomid: this.$root.$data.mainRoom._id }})
+                    this.$router.push({ name: 'main' })
                   })
                   .catch(e => { this.errors.push(e) })
            })

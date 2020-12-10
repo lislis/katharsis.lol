@@ -1,41 +1,25 @@
 <template>
   <div>
-    <h2>Alle Räume</h2>
-    <ul v-for="room in publicRooms">
-      <li>
-        <h3><span v-if="room.main">👑</span> {{room.room_name}}</h3>
-        <router-link
-          v-if="room.main"
-          :to="{name: 'room', params: { roomid: room._id}}">Zu {{room.room_name}}</router-link>
-        <router-link
-          v-else
-          :to="{name: 'room', params: { roomid: room._id}}">{{ room.room_name}} beitreten</router-link>
-      </li>
-    </ul>
+    <h2>Öffentliche Räume</h2>
+    <SmallRoomList :roomList="publicRooms">
+      Noch keine öffentliche Räume. Erstelle einen weiter unten!
+    </SmallRoomList>
 
     <section>
       <h2>Private Räume</h2>
-      <ul v-for="room in privateRooms">
-        <li>
-          <h3><span v-if="room.main">👑</span> {{room.room_name}}</h3>
-          <router-link
-            v-if="room.main"
-            :to="{name: 'room', params: { roomid: room._id}}">Zu {{room.room_name}}</router-link>
-          <router-link
-            v-else
-            :to="{name: 'room', params: { roomid: room._id}}">In den Chat</router-link>
-        </li>
-      </ul>
+      <SmallRoomList :roomList="privateRooms">
+        Noch keine privaten Räume. Finde <router-link :to="{name: 'peoplelist'}">Leute</router-link> für private Räume.
+      </SmallRoomList>
     </section>
 
-    <section>
+    <section class="border">
       <h2>Neuen öffentlichen Raum erstellen</h2>
       <form @submit.prevent="onSubmit">
         <label>
           Raumname
           <input id="room_name" v-model.trim="room.room_name">
         </label>
-        <button type="submit">Erstellen und beitreten</button>
+        <button type="submit">Erstellen</button>
       </form>
     </section>
 
@@ -48,11 +32,12 @@
 </template>
 
 <script>
-
+ import SmallRoomList from '@/components/SmallRoomList'
  import axios from 'axios'
 
  export default {
    name: 'RoomList',
+   components: { SmallRoomList },
    data () {
      return {
        room: {},
@@ -112,7 +97,9 @@
      },
      setPublicRooms() {
        //debugger
-       this.publicRooms = this.rooms.filter(x => !x.private)
+       this.publicRooms = this.rooms
+                              .filter(x => !x.private)
+                              .filter(x => !x.main)
      },
      setPrivateRooms() {
        this.privateRooms =  this.rooms
@@ -124,3 +111,13 @@
    }
  }
 </script>
+<style scoped>
+ .margin {
+  margin-left: 1.3rem;
+ }
+ .border {
+   border: 1px solid black;
+   max-width: 50vw;
+   padding: 1rem;
+ }
+</style>

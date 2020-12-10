@@ -1,43 +1,29 @@
 <template>
-  <div id="chat">
-    <div>
+  <div class="chat">
+    <div class="chat__room-header">
       <h4>
-        {{ room.room_name}} -
-        <span v-if="room.private">private</span><span v-else>öffentlich</span>
+        {{ room.room_name}}
+        <span v-if="room.private" class="chat__room-status">(private)</span>
       </h4>
+      <hr>
     </div>
-    <div>
-      <ul class="messages">
-        <li class="message"
-            :class="[{'center no-bubble': !message.user}, { 'right': (message.user && message.user._id == $root.$data.user._id)}]"
-          v-for="message in messages"
-          :key="message.message">
-          <div class="message--bubble" >
-            <template v-if="message.user">
-              <span>{{getUserName(message.user)}}</span> sagt:<br>
-            </template>
-            <span>
-              {{message.message}}
-              <br>
-              <small>:{{message.created_date}}</small>
-            </span>
-          </div>
-        </li>
+    <div class="chat__message_container">
+      <ul class="chat__messages">
+        <ChatBubble v-for="message in messages"
+                    :message="message"
+                    :key="message.message" />
       </ul>
-
-      <div v-if="!room.locked">
+      <div>
         <form @submit.prevent="send">
-          <div  class="message--compose">
+          <div class="chat__message-compose">
             <input type="text"
                    class="form-control"
                    v-model.trim="chat.message"
-                   placeholder="Schreibe etwas">
-            <button title="Send">🛩</button>
+                   placeholder="Schreibe etwas"
+                   :readonly="room.locked">
+            <button title="Send" :disabled="room.locked">🛩</button>
           </div>
         </form>
-      </div>
-      <div v-else>
-        <p>Du bist Zuschauer</p>
       </div>
     </div>
   </div>
@@ -46,10 +32,12 @@
 <script>
  import io from 'socket.io-client'
  import axios from 'axios'
+ import ChatBubble from '@/components/ChatBubble.vue'
 
  export default {
    name: 'Chat',
    props: ['messages', 'username', 'connections', 'room'],
+   components: { ChatBubble },
    data() {
      return {
        newMessage: null,
@@ -59,7 +47,6 @@
    watch: {
      '$root.$data.otherPeople': {
        handler() {
-
        }
      }
    },
@@ -76,7 +63,8 @@
    methods: {
      send(evt) {
        evt.preventDefault()
-       this.chat.room = this.$route.params.roomid
+       if (this.chat.message == "") return false;
+       this.chat.room = this.room._id
        this.chat.user = this.$root.$data.user._id
        axios.post(`${this.$root.$data.restServer}/api/chat`, this.chat)
                             .then(response => {
@@ -86,23 +74,6 @@
                             .catch(e => {
                               this.errors.push(e)
                             })
-     },
-     getUserName(user) {
-       if (typeof user == 'string') {
-         return user
-       } else {
-         if (this.$root.$data.otherPeople.length) {
-           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
-           if (userInfo.length) {
-             return userInfo[0].nickname
-           } else {
-             return user.nickname
-           }
-         } else {
-           return user.nickname
-         }
-       }
-       return user
      },
      removeByAttr(arr, attr, value) {
        var i = arr.length;
@@ -120,43 +91,29 @@
 </script>
 
 <style>
- #chat {
-   background-color: lightgrey;
-   flex: 1 0 50vw
+ .chat {
+   width: 100%;
  }
- .center {
-   text-align: center;
- }
- .right {
-   text-align: right;
- }
- .messages {
+ .chat__messages {
    list-style: none;
    margin: 0;
    padding: 0;
+   height: 70vh;
+   overflow-y: scroll;
  }
- .message {
-   margin-bottom: 1rem;
- }
- .message:not(.no-bubble) .message--bubble {
-   background-color: lime;
-   display: inline-block;
-   padding: .3rem;
-   border-radius: 4px;
- }
-
- .no-bubble .message--bubble {
-   opacity: 0.7;
- }
-
- .message--compose {
+ .chat__message-compose {
    max-width: 800px;
    margin: auto;
    display: flex;
  }
- .message--compose input {
+ .chat__message-compose input {
    display: block;
    width: 100%;
    padding: 1rem;
+ }
+ input[readonly],
+ button[disabled] {
+   opacity: 0.5;
+   cursor: not-allowed;
  }
 </style>

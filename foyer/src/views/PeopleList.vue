@@ -1,13 +1,14 @@
 <template>
   <div>
     <h2>People List</h2>
-    <ul v-for="p in $root.$data.otherPeople">
+    <ul v-for="p in $root.$data.otherPeople" v-if="$root.$data.otherPeople.length > 1">
       <li v-if="p._id != $root.user._id">
         <h3>{{p.nickname}}</h3>
         <p>joined {{p.created_date}}</p>
         <button @click="startChatWith(p)">Privaten Chat starten</button>
       </li>
     </ul>
+    <p v-else>Keine anderen Leute online.</p>
   </div>
 </template>
 

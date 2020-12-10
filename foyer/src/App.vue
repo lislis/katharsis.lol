@@ -1,15 +1,19 @@
 <template>
   <div class="app">
     <header class="header" v-if="user.nickname">
-      <p><strong>{{ user.nickname }}</strong></p>
-      <button @click="logout">Logout</button>
+      <p>Katharsis.lol</p>
+      <div>
+        <span>{{ user.nickname }}</span>
+        <button @click="logout">Logout</button>
+      </div>
     </header>
     <div class="navigation" v-if="user.nickname">
-      <router-link :to="{name: 'room', params: { roomid: this.stage._id}}">{{ stage.room_name }}</router-link>
-      <router-link :to="{name: 'room', params: { roomid: this.mainRoom._id}}">{{ mainRoom.room_name }}</router-link>
+      <router-link :to="{name: 'main'}">Main</router-link>
       <router-link :to="{name: 'roomlist'}">Räume</router-link>
       <router-link :to="{name: 'peoplelist'}">Leute</router-link></div>
-    <router-view />
+    <main>
+      <router-view />
+    </main>
     <footer><p>Call me by any name</p></footer>
   </div>
 </template>
@@ -17,12 +21,15 @@
 <script>
  import axios from 'axios'
  import io from 'socket.io-client'
+ import Loader from '@/components/Loader'
 
  export default {
    name: 'App',
+   components: {
+     Loader
+   },
    data() {
      return {
-       username: 'test',
        user: {},
        otherPeople: [],
        mainRoom: {},
@@ -30,6 +37,7 @@
        chats: [],
        restServer: null,
        socketServer: null,
+       botBrain: null,
        socket: null,
      }
    },
@@ -42,14 +50,10 @@
    },
    methods: {
      getMainRoom() {
-       //debugger
-       console.log(`${this.restServer}/api/room/main`)
        axios.get(`${this.restServer}/api/room/main`)
-              .then(response => {
-                console.log(response);
+            .then(response => {
               this.$root.$data.stage = response.data.filter(x => x.locked)[0]
               this.$root.$data.mainRoom = response.data.filter(x => !x.locked)[0]
-
             })
             .catch(e => { console.log(e) })
      },
@@ -65,10 +69,13 @@
        if (process.env.NODE_ENV === 'production') {
          this.socketServer = `https://${process.env.VUE_APP_WS_HOST}`
          this.restServer = `https://${process.env.VUE_APP_API_HOST}`
+         this.botBrain = `https://${process.env.VUE_APP_BOTBRAIN}`
        } else {
          this.socketServer = `http://${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`
          this.restServer = `http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
+         this.botBrain = `http://${process.env.VUE_APP_BOTBRAIN}:${process.env.VUE_APP_BOTBRAIN_PORT}`
        }
+
      },
      loadUserFromStorage() {
        if (window.localStorage.getItem(`${process.env.VUE_APP_LS_PREFIX}user`)) {
@@ -79,22 +86,31 @@
        this.socket = io(this.socketServer)
      },
      logout() {
-       window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)
        let self = this
        axios.delete(`${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
             .then(response => {
-              self.$root.$data.socket.emit('save-message', {
-                room: self.$route.params.roomid,
-                nickname: self.$root.$data.user._id,
-                message: self.$root.$data.user.nickname + ' ist ausgetreten.',
-                created_date: new Date()
-              })
-              self.$root.$data.socket.emit('remove-user', self.$root.$data.user)
 
-              self.$root.$data.user = {}
-              self.$router.push({
-                name: 'intro'
-              })
+              let chat = {}
+              chat.room = this.$root.$data.mainRoom._id;
+              chat.nickname = this.$root.$data.user._id
+              chat.message = `${this.$root.$data.user.nickname} ist ausgetreten`
+
+              axios.post(`${this.$root.$data.restServer}/api/chat`, chat)
+                    .then(response => {
+                      self.$root.$data.socket.emit('save-message', {
+                        ...chat,
+                        created_date: new Date()
+                      })
+                      self.$root.$data.socket.emit('remove-user', self.$root.$data.user)
+
+                      self.$root.$data.user = {}
+                      window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)
+
+                      self.$router.push({
+                        name: 'intro'
+                      })
+                    })
+                    .catch(e => { this.errors.push(e) })
             })
      }
    }
@@ -102,18 +118,37 @@
 </script>
 
 <style>
+ body {
+   overflow: hidden;
+ }
  .header {
    display: flex;
    justify-content: space-between;
+   align-items: center;
    padding: 0 1rem;
-   background-color: pink;
+   background-color: lime;
  }
  .navigation {
-   padding: 1rem
+   display: flex;
+ }
+ .navigation a:first-of-type {
+   flex-grow: 1;
  }
 
  .navigation a {
    display: inline-block;
    margin-right: 1rem;
+   padding: 1rem;
  }
+
+ .router-link-active {
+   background-color: lightgrey;
+ }
+ main {
+   background-color: lightgrey;
+ }
+ h2 {
+   margin-top: 0;
+ }
+
 </style>
