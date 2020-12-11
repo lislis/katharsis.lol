@@ -20,6 +20,7 @@ const MONGO_DB = process.env['MONGO_DB']
 const MONGO_HOST = process.env['MONGO_HOST']
 
 var app = express();
+app.io = io;
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -71,7 +72,7 @@ app.use(function(err, req, res, next) {
 console.log(`websocket listen on ${WS_PORT}`)
 server.listen(WS_PORT);
 
-io.on('connection', function (socket) {
+app.io.on('connection', function (socket) {
     socket.on('save-message', function (data) {
         console.log('new-message ', data);
         io.emit('new-message', { message: data });
