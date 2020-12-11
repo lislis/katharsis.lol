@@ -19,6 +19,7 @@
 <script>
  import Chat from '@/components/Chat.vue'
  import axios from 'axios'
+ import {saveUserToStore} from '@/lib/storage'
 
  export default {
    name: "MainRoom",
@@ -50,8 +51,6 @@
      if (!this.$root.$data.user.nickname) {
        this.$router.push({name: 'intro'})
      }
-
-     this.isOnStage = this.$root.$data.user.hasPermission
 
      this.loading = true;
      axios.get(`${this.$root.$data.restServer}/api/room/main`).then(response => {
@@ -85,11 +84,13 @@
      this.$root.$data.socket.on('user-to-stage', function (data) {
        this.isMyselfOnStage(data.message);
        this.leaveBackstageMessage(`${data.message.nickname} auf die Bühne!`);
+       saveUserToStore(this.$root.$data.user);
      }.bind(this))
 
      this.$root.$data.socket.on('user-off-stage', function (data) {
        this.isMyselfOnStage(data.message);
        this.leaveBackstageMessage(data, `${data.message.nickname} zurück von der Bühne!`);
+       saveUserToStore(this.$root.$data.user);
      }.bind(this))
 
      // should go to runner
@@ -110,7 +111,7 @@
    methods: {
      isMyselfOnStage(data) {
        if (data._id == this.$root.$data.user._id) {
-         console.log("I am on stage", !data.hasPermission);
+         //console.log("I am on stage", !data.hasPermission);
          this.$root.$data.user.hasPermission = !data.hasPermission;
        }
      },

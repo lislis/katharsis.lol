@@ -22,6 +22,9 @@
  import axios from 'axios'
  import io from 'socket.io-client'
  import Loader from '@/components/Loader'
+ import { removeByAttr } from '@/lib/utils'
+ import { loadUserFromStorage,
+          deleteUserFromStorage } from '@/lib/storage'
 
  export default {
    name: 'App',
@@ -39,6 +42,7 @@
        socketServer: null,
        botBrain: null,
        socket: null,
+       storagePrefix: null
      }
    },
    created() {
@@ -46,7 +50,7 @@
      this.connectToSocket()
      this.getMainRoom()
      this.getAllPeople()
-     this.loadUserFromStorage()
+     this.user = loadUserFromStorage()
 
      this.$root.$data.socket.on('new-user', function (data) {
        this.$root.$data.otherPeople.push(data.message)
@@ -72,7 +76,6 @@
               this.otherPeople = response.data
             })
             .catch(e => { console.log(e) })
-       //setInterval(() => {}, 5000)
      },
      setSocketServer() {
        if (process.env.NODE_ENV === 'production') {
@@ -84,12 +87,6 @@
          this.restServer = `http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
          this.botBrain = `http://${process.env.VUE_APP_BOTBRAIN}:${process.env.VUE_APP_BOTBRAIN_PORT}`
        }
-
-     },
-     loadUserFromStorage() {
-       if (window.localStorage.getItem(`${process.env.VUE_APP_LS_PREFIX}user`)) {
-         this.user = JSON.parse(window.localStorage.getItem(`${process.env.VUE_APP_LS_PREFIX}user`))
-       }
      },
      connectToSocket() {
        this.socket = io(this.socketServer)
@@ -98,7 +95,6 @@
        let self = this
        axios.delete(`${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
             .then(response => {
-
               let chat = {}
               chat.room = this.$root.$data.mainRoom._id;
               chat.nickname = this.$root.$data.user._id
@@ -113,7 +109,7 @@
                       self.$root.$data.socket.emit('remove-user', self.$root.$data.user)
 
                       self.$root.$data.user = {}
-                      window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)
+                      deleteUserFromStorage()
 
                       self.$router.push({
                         name: 'intro'

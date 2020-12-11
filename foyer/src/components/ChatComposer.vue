@@ -29,6 +29,10 @@
        console.log(this.room.room_name, this.canWrite)
      }
    },
+   created() {
+     console.log('user ', this.$root.$data.user.hasPermission)
+     console.log(this.room.room_name, this.canWrite)
+   },
    methods: {
      send(evt) {
        evt.preventDefault()

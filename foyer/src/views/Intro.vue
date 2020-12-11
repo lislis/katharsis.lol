@@ -24,6 +24,7 @@
 </template>
 <script>
  import axios from 'axios'
+ import { saveUserToStore } from '@/lib/storage'
 
   export default {
     name: "Intro",
@@ -43,11 +44,8 @@
         // ... create a user
         axios.post(`${this.$root.$data.restServer}/api/user`, this.newUser)
            .then(response => {
-             window.localStorage.setItem(
-               `${process.env.VUE_APP_LS_PREFIX}user`,
-               JSON.stringify(response.data))
+             saveUserToStore(response.data)
              this.$root.$data.user = response.data
-
              this.$root.$data.socket.emit('save-user', response.data)
 
              //... join it
