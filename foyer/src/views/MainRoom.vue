@@ -111,8 +111,11 @@
    methods: {
      isMyselfOnStage(data) {
        if (data._id == this.$root.$data.user._id) {
-         //console.log("I am on stage", !data.hasPermission);
+         console.log("I am on stage", !data.hasPermission);
          this.$root.$data.user.hasPermission = !data.hasPermission;
+         let note = !data.hasPermission ? "auf die Bühne!" : "Runter von der Bühne";
+         this.$root.$data.notifications.push(note)
+         console.log(this.$root.$data.notifications)
        }
      },
      leaveBackstageMessage(data, msg) {

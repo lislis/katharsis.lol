@@ -9,3 +9,7 @@ export function removeByAttr(arr, attr, value) {
     }
     return arr;
 }
+
+export function removeByIndex(arr, index) {
+    return arr.splice(index, 1);
+}

@@ -1,9 +1,6 @@
 <template>
   <div class="app">
-    <header class="header" v-if="user.nickname">
-      <p>Katharsis.lol</p>
-      <UserPanel />
-    </header>
+    <AppHeader :notifications="notifications" />
     <div class="navigation" v-if="user.nickname">
       <router-link :to="{name: 'main'}">Main</router-link>
       <router-link :to="{name: 'roomlist'}">Räume</router-link>
@@ -18,7 +15,7 @@
 <script>
  import axios from 'axios'
  import io from 'socket.io-client'
- import UserPanel from '@/components/UserPanel'
+ import AppHeader from '@/components/AppHeader'
  import Loader from '@/components/Loader'
  import { removeByAttr } from '@/lib/utils'
  import { loadUserFromStorage } from '@/lib/storage'
@@ -27,7 +24,7 @@
    name: 'App',
    components: {
      Loader,
-     UserPanel
+     AppHeader
    },
    data() {
      return {
@@ -40,7 +37,8 @@
        socketServer: null,
        botBrain: null,
        socket: null,
-       storagePrefix: null
+       storagePrefix: null,
+       notifications: []
      }
    },
    created() {
@@ -66,14 +64,14 @@
               this.$root.$data.stage = response.data.filter(x => x.locked)[0]
               this.$root.$data.mainRoom = response.data.filter(x => !x.locked)[0]
             })
-            .catch(e => { console.log(e) })
+            .catch(e => { this.notifications.push(e) })
      },
      getAllPeople() {
        axios.get(`${this.restServer}/api/user`)
             .then(response => {
               this.otherPeople = response.data
             })
-            .catch(e => { console.log(e) })
+            .catch(e => { this.notifications.push(e) })
      },
      setSocketServer() {
        if (process.env.NODE_ENV === 'production') {
