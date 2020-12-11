@@ -14,7 +14,7 @@
     <main>
       <router-view />
     </main>
-    <footer><p>Call me by any name</p></footer>
+    <footer><p>Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a></p></footer>
   </div>
 </template>
 
@@ -47,6 +47,15 @@
      this.getMainRoom()
      this.getAllPeople()
      this.loadUserFromStorage()
+
+     this.$root.$data.socket.on('new-user', function (data) {
+       this.$root.$data.otherPeople.push(data.message)
+     }.bind(this))
+
+     this.$root.$data.socket.on('delete-user', function (data) {
+       removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id)
+     }.bind(this))
+
    },
    methods: {
      getMainRoom() {
@@ -126,7 +135,7 @@
    justify-content: space-between;
    align-items: center;
    padding: 0 1rem;
-   background-color: lime;
+   background-color: #88b378;
  }
  .navigation {
    display: flex;

@@ -14,6 +14,7 @@
 
 <script>
  import axios from 'axios'
+ import { removeByAttr } from '@/lib/utils'
 
  export default {
    name: 'PeopleList',
@@ -40,7 +41,7 @@
      }.bind(this))
 
      this.$root.$data.socket.on('delete-user', function (data) {
-       this.removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id)
+       removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id)
      }.bind(this))
 
    },
@@ -66,17 +67,6 @@
               this.errors.push(e)
               console.log(e)
             })
-     },
-     removeByAttr(arr, attr, value) {
-       var i = arr.length;
-       while(i--){
-         if( arr[i]
-          && arr[i].hasOwnProperty(attr)
-          && (arguments.length > 2 && arr[i][attr] === value)) {
-           arr.splice(i,1);
-         }
-       }
-       return arr;
      }
    }
  }

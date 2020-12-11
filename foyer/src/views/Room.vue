@@ -52,25 +52,12 @@
        }
      }.bind(this))
 
-     this.$root.$data.socket.on('users-increment', function (data) {
-       this.connections += 1
-     }.bind(this))
-
-     this.$root.$data.socket.on('users-decrement', function (data) {
-       this.connections -= 1
-     }.bind(this))
-
      axios.get(`${this.$root.$data.restServer}/api/user/`)
          .then(response => {
            //debugger
            this.connections = response.data.length
          })
          .catch(e => { console.log(e) })
-
-     // keep for later
-     //this.socket.on('state', (data) => {
-     //  this.players = data
-     //})
    },
    methods: {
      getChatHistory() {

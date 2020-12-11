@@ -33,7 +33,8 @@
        backstageMessages: [],
        errors: [],
        messages: [],
-       loading: true
+       loading: true,
+       isOnStage: null
      }
    },
    watch: {
@@ -49,6 +50,8 @@
      if (!this.$root.$data.user.nickname) {
        this.$router.push({name: 'intro'})
      }
+
+     this.isOnStage = this.$root.$data.user.hasPermission
 
      this.loading = true;
      axios.get(`${this.$root.$data.restServer}/api/room/main`).then(response => {
@@ -79,14 +82,17 @@
        }
      }.bind(this))
 
+     this.$root.$data.socket.on('user-to-stage', function (data) {
+       this.isMyselfOnStage(data.message);
+       this.leaveBackstageMessage(`${data.message.nickname} auf die Bühne!`);
+     }.bind(this))
 
-     // this should be kicked off by runner
-     // send directly to server
-     // /api/tasks/direction
-     // /api/tasks/user_on
-     // /api/tasks/user_off
-     // etc
-     //let self = this;
+     this.$root.$data.socket.on('user-off-stage', function (data) {
+       this.isMyselfOnStage(data.message);
+       this.leaveBackstageMessage(data, `${data.message.nickname} zurück von der Bühne!`);
+     }.bind(this))
+
+     // should go to runner
      if (Math.random() > 0.5) {
        axios.get(`${this.$root.$data.botBrain}/api/direction/bytype/Technik`)
             .then(x => {
@@ -100,16 +106,19 @@
             }).catch(e => console.log(e))
 
      }
-
-     /*
-     this.$root.$data.socket.on('new-message', function (data) {
-       if(data.message.room === this.$route.params.roomid) {
-         this.messages.push(data.message)
-       }
-     }.bind(this))
-     */
    },
    methods: {
+     isMyselfOnStage(data) {
+       if (data._id == this.$root.$data.user._id) {
+         console.log("I am on stage", !data.hasPermission);
+         this.$root.$data.user.hasPermission = !data.hasPermission;
+       }
+     },
+     leaveBackstageMessage(data, msg) {
+       this.backstageMessages.push({ message: msg,
+                                     created_date: data.created_date,
+                                     room: this.backstageRoom._id })
+     }
    }
  }
 </script>

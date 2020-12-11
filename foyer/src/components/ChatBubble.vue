@@ -111,11 +111,11 @@
    opacity: 0.5;
  }
  .is-gone .chat__message-bubble {
-   background-color: lime;
+   background-color: #88b378;
  }
 
  .is-user .chat__message-bubble {
-   background-color: lime;
+   background-color: #88b378;
  }
 
  .is-me .chat__message-bubble {
