@@ -4,6 +4,7 @@
     <ul v-for="p in $root.$data.otherPeople" v-if="$root.$data.otherPeople.length > 1">
       <li v-if="p._id != $root.user._id">
         <h3>{{p.nickname}}</h3>
+        <p v-if="p.hasPermission">ist auf der Bühne</p>
         <p>joined {{p.created_date}}</p>
         <button @click="startChatWith(p)">Privaten Chat starten</button>
       </li>
@@ -52,10 +53,8 @@
        this.newPrivRoom.private = true
        this.newPrivRoom.allowed_users = [person._id, this.$root.user._id]
        this.newPrivRoom.room_name = `Chat ${person.nickname} - ${this.$root.user.nickname}`
-       //debugger
        axios.post(`${this.$root.$data.restServer}/api/room/`, this.newPrivRoom)
             .then(response => {
-              //debugger
               this.$root.$data.socket.emit('save-room', response.data)
               console.log(response)
               this.$router.push({
@@ -64,8 +63,7 @@
               })
             })
             .catch(e => {
-              this.errors.push(e)
-              console.log(e)
+              this.$root.$data.notifications.push(e)
             })
      }
    }
