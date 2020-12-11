@@ -2,10 +2,7 @@
   <div class="app">
     <header class="header" v-if="user.nickname">
       <p>Katharsis.lol</p>
-      <div>
-        <span>{{ user.nickname }}</span>
-        <button @click="logout">Logout</button>
-      </div>
+      <UserPanel />
     </header>
     <div class="navigation" v-if="user.nickname">
       <router-link :to="{name: 'main'}">Main</router-link>
@@ -21,15 +18,16 @@
 <script>
  import axios from 'axios'
  import io from 'socket.io-client'
+ import UserPanel from '@/components/UserPanel'
  import Loader from '@/components/Loader'
  import { removeByAttr } from '@/lib/utils'
- import { loadUserFromStorage,
-          deleteUserFromStorage } from '@/lib/storage'
+ import { loadUserFromStorage } from '@/lib/storage'
 
  export default {
    name: 'App',
    components: {
-     Loader
+     Loader,
+     UserPanel
    },
    data() {
      return {
@@ -90,33 +88,6 @@
      },
      connectToSocket() {
        this.socket = io(this.socketServer)
-     },
-     logout() {
-       let self = this
-       axios.delete(`${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`)
-            .then(response => {
-              let chat = {}
-              chat.room = this.$root.$data.mainRoom._id;
-              chat.nickname = this.$root.$data.user._id
-              chat.message = `${this.$root.$data.user.nickname} ist ausgetreten`
-
-              axios.post(`${this.$root.$data.restServer}/api/chat`, chat)
-                    .then(response => {
-                      self.$root.$data.socket.emit('save-message', {
-                        ...chat,
-                        created_date: new Date()
-                      })
-                      self.$root.$data.socket.emit('remove-user', self.$root.$data.user)
-
-                      self.$root.$data.user = {}
-                      deleteUserFromStorage()
-
-                      self.$router.push({
-                        name: 'intro'
-                      })
-                    })
-                    .catch(e => { this.errors.push(e) })
-            })
      }
    }
  }
