@@ -83,13 +83,11 @@
 
      this.$root.$data.socket.on('user-to-stage', function (data) {
        this.isMyselfOnStage(data.message);
-       //this.leaveBackstageMessage(data, `${data.message.nickname} auf die Bühne!`);
        saveUserToStore(this.$root.$data.user);
      }.bind(this))
 
      this.$root.$data.socket.on('user-off-stage', function (data) {
        this.isMyselfOnStage(data.message);
-      // this.leaveBackstageMessage(data, `${data.message.nickname} zurück von der Bühne!`);
        saveUserToStore(this.$root.$data.user);
      }.bind(this))
 
@@ -111,19 +109,13 @@
    methods: {
      isMyselfOnStage(data) {
        if (data._id === this.$root.$data.user._id) {
-         console.log("I am on stage", !data.hasPermission);
+         //console.log("I am on stage", !data.hasPermission);
          this.$root.$data.user.hasPermission = !data.hasPermission;
          let note = this.$root.$data.user.hasPermission ? "auf die Bühne!" : "Runter von der Bühne";
          this.$root.$data.notifications = [note]
-         console.log(this.$root.$data.notifications)
+         //console.log(this.$root.$data.notifications)
        }
-     }/* ,
-         leaveBackstageMessage(data, msg) {
-       *  console.log(data.created_date, msg)
-       *  this.backstageMessages.push({ message: msg,
-       *                                created_date: data.created_date,
-       *                                room: this.backstageRoom._id })
-         } */
+     }
    }
  }
 </script>
