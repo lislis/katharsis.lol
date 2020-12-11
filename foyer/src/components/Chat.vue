@@ -30,8 +30,21 @@
    props: ['messages', 'username', 'connections', 'room'],
    components: { ChatBubble, ChatComposer },
    created() {
+     this.updateScroll();
+
+     this.$root.$data.socket.on('new-message', function (data) {
+       this.updateScroll()
+     }.bind(this))
    },
    methods: {
+     updateScroll(){
+       //if (this.$el) {
+         setTimeout(() => {
+           var element = this.$el.querySelector('.chat__messages');
+           element.scrollTop = element.scrollHeight;
+         }, 500);
+      // }
+     }
    }
  }
 </script>

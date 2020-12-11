@@ -3,45 +3,66 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
 var Chat = require('../models/Chat.js');
+var Room = require('../models/Room.js');
 
-router.put('/on/:uid', function(req, res, next) {
-    const opt = { hasPermission: true };
-    User.findByIdAndUpdate(req.params.uid, opt, function(err, user) {
-        if (err) return next(err);
-        console.log('new-message, user on stage ', user);
+router.put('/on/:uid', async function(req, res, next) {
+  const opt = { hasPermission: true };
+  try {
+    Promise.all([
+      Room.find({ main: true, locked: false}).exec(),
+      User.findByIdAndUpdate(req.params.uid, opt).exec()
+    ]).then(async values => {
+      let room  = values[0][0];
+      let user = values[1]
 
-        Chat.create({message: `${user.nickname} auf die Bühne!`,
-                     room: '5fb5a6cca803b92aa8c9c263'}, function(err, chat) {
-            if (err) return next(err);
-            req.app.io.emit('user-to-stage', { message: user });
-            res.json(user)
-        });
+      Chat.create({ message: `${user.nickname} auf die Bühne!`,
+                    room: room._id,
+                    created_date: new Date()},
+                  function(err, chat) {
+                    if (err) return next(err);
+                    req.app.io.emit('user-to-stage', { message: user });
+                    req.app.io.emit('new-message', { message: chat });
+                    res.json(user)
+      })
     });
+  } catch(e) {
+    e.stack;
+  }
 });
 
-router.put('/off/:uid', function(req, res, next) {
-    const opt = { hasPermission: false };
-    User.findByIdAndUpdate(req.params.uid, opt, function(err, user) {
-        if (err) return next(err);
-        console.log('new-message user off stage', user);
+router.put('/off/:uid', async function(req, res, next) {
+  const opt = { hasPermission: false };
+  try {
+    Promise.all([
+      Room.find({ main: true, locked: false}).exec(),
+      User.findByIdAndUpdate(req.params.uid, opt).exec()
+    ]).then(async values => {
+      let room  = values[0][0];
+      let user = values[1]
 
-        Chat.create({message: `${user.nickname} auf die Bühne!`,
-                     room: '5fb5a6cca803b92aa8c9c263'}, function(err, chat) {
-            if (err) return next(err);
-            req.app.io.emit('user-off-stage', { message: user });
-            res.json(user)
-        });
+      Chat.create({ message: `${user.nickname} runter von der Bühne!`,
+                    room: room._id,
+                    created_date: new Date()},
+                  function(err, chat) {
+                    if (err) return next(err);
+                    req.app.io.emit('user-to-stage', { message: user });
+                    req.app.io.emit('new-message', { message: chat });
+                    res.json(user)
+      })
     });
+  } catch(e) {
+    e.stack;
+  }
 });
 
 
-/* GET ALL USERS */
+  /* GET ALL USERS */
 router.get('/', function(req, res, next) {
-  User.find(function (err, users) {
-    if (err) return next(err);
-    res.json(users);
+    User.find(function (err, users) {
+      if (err) return next(err);
+      res.json(users);
+    });
   });
-});
 
 /* GET SINGLE USER BY ID */
 router.get('/:id', function(req, res, next) {

@@ -93,7 +93,7 @@
 
 <style>
  body {
-   overflow: hidden;
+   overflow-x: hidden;
  }
  .header {
    display: flex;
