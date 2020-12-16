@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Call me by any name</h1>
+    <h1>Katharsis.lol</h1>
 
     <div v-if="$root.$data.user.nickname">
       <p>Dein Name ist

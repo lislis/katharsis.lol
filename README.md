@@ -1,4 +1,4 @@
-# Call Me By Any Name
+# Katharsis.lol
 
 App for a collaborative writing theater experience!
 
