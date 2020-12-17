@@ -1,23 +1,42 @@
 const path = require('path');
-
+const ms = require('ms');
+const dayjs = require('dayjs');
 const Bree = require('bree');
 const Graceful = require('@ladjs/graceful');
+const csv = require('csv-parser');
+const fs = require('fs');
 
-//const script = require('./data/script.js').data;
+let jobObj = [];
+let counter = 0;
 
-const bree = new Bree({
-    jobs: [{
-        name: "log",
-        interval: "1m"
-    }]
-});
+fs.createReadStream('data/schedule.csv')
+  .pipe(csv({delimiter: ',',
+               quote: '"',
+               columns: true}))
+  .on('data', (row) => {
+    let job = {}
+    job.name = `job-no-${counter}`;
+    job.path = path.join(__dirname, 'jobs', `${row['Direction']}.js`)
 
+    if (row['timeout'] === 'true') {
+      job.timeout = row['Zeit'];
+    }
+    if (row['interval'] === 'true') {
+      job.interval = row['Zeit'];
+    }
 
-//console.log(`A play for ${script.maxPeopleOnStage}, taking ${script.maxTime}`);
+    jobObj.push(job);
+    counter ++;
+  })
+  .on('end', () => {
+    console.log('CSV file successfully processed');
 
+    const bree = new Bree({
+      jobs: jobObj
+    });
 
-// handle graceful reloads, pm2 support, and events like SIGHUP, SIGINT, etc.
-const graceful = new Graceful({ brees: [bree] });
-graceful.listen();
+    const graceful = new Graceful({ brees: [bree] });
+    graceful.listen();
 
-bree.start();
+    bree.start();
+  });

@@ -23,6 +23,9 @@ fs.createReadStream(inputFile)
         if (csvrow['Numerus'] !== '') {
             data.numerus = csvrow['Numerus'];
         }
+        if (csvrow['klassich/modern'] !== '') {
+            data.other = csvrow['klassich/modern'];
+        }
         axios.post(server_endpoint, data)
             .then(resp => { csvData.push(resp.data) })
             .catch(err => { console.log(err) });

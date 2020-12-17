@@ -92,6 +92,7 @@
      }.bind(this))
 
      // should go to runner
+     /*
      if (Math.random() > 0.5) {
        axios.get(`${this.$root.$data.botBrain}/api/direction/bytype/Technik`)
             .then(x => {
@@ -105,6 +106,7 @@
             }).catch(e => console.log(e))
 
      }
+     */
    },
    methods: {
      isMyselfOnStage(data) {

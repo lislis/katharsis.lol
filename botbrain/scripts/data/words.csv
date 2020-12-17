@@ -1,200 +1,474 @@
-Wortkategorie,Wort,flavor,Numerus
-Verb ,gehen,Bewegung,plural
-Verb,geht,Bewegung,singular
-Beschreibung,",nach einer kurzen Pause, ",,
-Ortsbestimmung,in den Wald,Bewegung,
-Objekt,Waschmaschine,Technik,singular
-Objekt,Waschmaschinen,Technik,plural
-Ortsbestimmung,im Wald,Zustand,
-Verb,stolpert rein,Auftritt,singular
-Verb,stürmt raus,Abgang,singular
-Verb,geht an,Technik,singular
-Verb,fällt um,Ding,singular
-Objekt,Schukarton,Ding,singular
-Objekt,Regale,Ding,plural
-Verb,fallen um,Ding,plural
-Verb,fallen um,Technik,plural
-Verb,schreit,Stimme,singular
-Verb,schreien,Stimme,plural
-Verb,stürmen raus,Abgang,plural
-Verb,stolpern rein,Auftritt,plural
-Verb,umarmt,Relation,plural
-Verb,umarmen,Relation,singular
-Verb,isst,Essen,singular
-Verb,essen,Essen,plural
-Verb,ist,Zustand,singular
-Verb,sind,Zustand,plural
-Verb,fühlt sich,Zustand,singular
-Verb,fühlen sich,Zustand,plural
-Adjektiv ,geliebt,Zustand,
-Adverb,leise,Bewegung,
-Adverb,leise,Essen,
-Tätigkeit,liest ein Buch,,singular
-Tätigkeit,lesen ein Buch,,plural
-Verb,geht,Bewegung,singular
-Verb,läuft,Bewegung,singular
-Verb,hüpft,Bewegung,singular
-Verb,rennt,Bewegung,singular
-Verb,kriecht,Bewegung,singular
-Verb,fliegt,Bewegung,singular
-Verb,schreitet,Bewegung,singular
-Verb,schleicht,Bewegung,singular
-Verb,tanzt,Bewegung,singular
-Verb,krabbelt,Bewegung,singular
-Verb,fährt,Bewegung,singular
-Verb,trabt,Bewegung,singular
-Verb,verlässt,Bewegung,singular
-Verb,reist,Bewegung,singular
-Verb,gehen,Bewegung,plural
-Verb,laufen,Bewegung,plural
-Verb,hüpfen,Bewegung,plural
-Verb,rennen,Bewegung,plural
-Verb,kriechen,Bewegung,plural
-Verb,fliegen,Bewegung,plural
-Verb,schreiten,Bewegung,plural
-Verb,schleichen,Bewegung,plural
-Verb,tanzen,Bewegung,plural
-Verb,krabbeln,Bewegung,plural
-Verb,fahren,Bewegung,plural
-Verb,traben,Bewegung,plural
-Verb,verlassen,Bewegung,plural
-Verb,reisen,Bewegung,plural
-Verb,lacht,Stimme,singular
-Verb,schreit,Stimme,singular
-Verb,kichert,Stimme,singular
-Verb,schluchzt,Stimme,singular
-Verb,singt,Stimme,singular
-Verb,juchzt,Stimme,singular
-Verb,gähnt,Stimme,singular
-Verb,diskutiert,Stimme,singular
-Verb,summt,Stimme,singular
-Verb,quietscht,Stimme,singular
-Verb,lachen ,Stimme,plural
-Verb,schreien,Stimme,plural
-Verb,kichern,Stimme,plural
-Verb,schluchzen,Stimme,plural
-Verb,singen,Stimme,plural
-Verb,juchzen,Stimme,plural
-Verb,gähnen,Stimme,plural
-Verb,diskutieren,Stimme,plural
-Verb,summen,Stimme,plural
-Verb,quietschen,Stimme,plural
-Ortsbestimmung,in den wald,Bewegung,
-Ortsbestimmung,nach Bochum,Bewegung,
-Ortsbestimmung,nach Griechenland,Bewegung,
-Ortsbestimmung,ins Blaue hinein,Bewegung,
-Ortsbestimmung,in den Park,Bewegung,
-Ortsbestimmung,in die Küche,Bewegung,
-Ortsbestimmung,die Treppe hinunter,Bewegung,
-Ortsbestimmung,in die Innenstadt,Bewegung,
-Ortsbestimmung,ins Universum,Bewegung,
-Ortsbestimmung,zum Flughafen,Bewegung,
-Ortsbestimmung,auf die Straße,Bewegung,
-Ortsbestimmung,nach Hause,Bewegung,
-Ortsbestimmung,zum Bauernhof,Bewegung,
-Ortsbestimmung,zum Raumschiff,Bewegung,
-Ortsbestimmung,zur Besenkammer,Bewegung,
-Ortsbestimmung,ins Internet,Bewegung,
-Ortsbestimmung,in die Badewanne,Bewegung,
-Ortsbestimmung,nach draußen,Bewegung,
-Ortsbestimmung,hinein,Bewegung,
-Ortsbestimmung,zum Bus,Bewegung,
-Ortsbestimmung,hin und her,Bewegung,
-Ortsbestimmung,nach Kamtschatka,Bewegung,
-Ortsbestimmung,nach New York,Bewegung,
-Verb,läuft ,Technik,singular
-Verb,geht an,Technik,singular
-Verb,geht aus,Technik,singular
-Verb,flackert,Technik,singular
-Verb,summt,Technik,singular
-Verb,quietscht,Technik,singular
-Verb,hängt,Technik,singular
-Verb,gibt ein Geräusch von sich,Technik,singular
-Verb,gluckert,Technik,singular
-Verb,fährt weg,Technik,singular
-Verb,stürzt ab,Technik,singular
-Verb,fliegt weg,Technik,singular
-Verb,startet,Technik,singular
-Verb,schwimmt,Technik,singular
-Objekt,Die Waschmaschine,Technik,singular
-Objekt,Die Lampe,Technik,singular
-Objekt,der Computer,Technik,singular
-Objekt,der Laptop,Technik,singular
-Objekt,Das Mikrofon,Technik,singular
-Objekt,Der Plattenspieler,Technik,singular
-Objekt,Die Box,Technik,singular
-Objekt,Die E-Gitarre,Technik,singular
-Objekt,Die Kaffeemaschine,Technik,singular
-Objekt,der Milchschäumer,Technik,singular
-Objekt,der Rasenmäher,Technik,singular
-Objekt,der Trockner,Technik,singular
-Objekt,Das Auto,Technik,singular
-Objekt,Der Mixer,Technik,singular
-Objekt,die Heizung,Technik,singular
-Objekt,der Staubsauger,Technik,singular
-Objekt,das Smartphone,Technik,singular
-Objekt,das Telephon,Technik,singular
-Objekt,die Telefonzelle,Technik,singular
-Objekt,der Roboter,Technik,singular
-Objekt,Der Staubsaugerroboter,Technik,singular
-Objekt,die Motorsäge,Technik,singular
-Objekt,das Boot,Technik,singular
-Objekt,Spaghetti,Essen,
-Objekt,Nussbraten,Essen,
-Verb,verschlingt,Essen,singular
-Verb,vernichtet,Essen,singular
-Verb,verschlingen,Essen,plural
-Verb,vernichten,Essen,plural
-Verb,fühlt sich,Zustand,singular
-Verb,fühlen sich,Zustand,singular
-Verb,ist,Zustand,singular
-Verb,sind,Zustand,plural
-Adjektiv,sauer,Zustand,
-Adjektiv,enttäuscht,Zustand,
-Adjektiv,into it,Zustand,
-Adjektiv,hooked,Zustand,
-Adjektiv,benebelt,Zustand,
-Adjektiv,glücklich,Zustand,
-Adjektiv,hungrig,Zustand,
-Adjektiv,traurig,Zustand,
-Adjektiv,genervt,Zustand,
-Phrase,Einbruch des Realen,,
-Wort,Stille,,
-Verb,bedankt sich bei,Relation,singular
-Verb,bedanken sich bei,Relation,plural
-Ortsbestimmung,im Wald,Zustand,
-Ortsbestimmung,in Bochum,Zustand,
-Ortsbestimmung,in Griechenland,Zustand,
-Ortsbestimmung,im Grünen,Zustand,
-Ortsbestimmung,im Park,Zustand,
-Ortsbestimmung,in der Küche,Zustand,
-Ortsbestimmung,auf der Treppe,Zustand,
-Ortsbestimmung,in der Innenstadt,Zustand,
-Ortsbestimmung,im Universum,Zustand,
-Ortsbestimmung,am Flughafen,Zustand,
-Ortsbestimmung,auf der Straße,Zustand,
-Ortsbestimmung,zu Hause,Zustand,
-Ortsbestimmung,auf dem Bauernhof,Zustand,
-Ortsbestimmung,im Raumschiff,Zustand,
-Ortsbestimmung,in der Besenkammer,Zustand,
-Ortsbestimmung,im Internet,Zustand,
-Ortsbestimmung,in der Badewanne,Zustand,
-Ortsbestimmung,draußen,Zustand,
-Ortsbestimmung,drinnen,Zustand,
-Ortsbestimmung,im Bus,Zustand,
-Verb,tippt,Tätigkeit,singular
-Verb,tippen,Tätigkeit,plural
-Beschreibung,",nach langer Überlegung,",,
-Adverb,leise,,
-Adverb,bestimmt,,
-Adverb,laut,,
-Adverb,herzzerreißend,,
-Adverb,schüchtern,,
-Adverb,fragend,,
-Objekt,Das Bett,Ding,singular
-Objekt,Die Lampe,Ding,singular
-Objekt,Die Blumenvase,Ding,singular
-Objekt,Der Flügel,Ding,singular
-Tätigkeit,spielt Klavier,,singular
-Tätigkeit,spielen Klavier,,plural
-Objekt,Eis,Essen,
+Wortkategorie,Wort,flavor,Numerus,klassisch/modern
+Add-On,Gerne:,,,modern
+Add-On,Eine Idee:,,,modern
+Add-On,Eventuell:,,,modern
+Add-On,Ein Vorschlag:,,,modern
+Add-On,Vielleicht:,,,modern
+Add-On,Unter Umständen:,,,modern
+Add-On,Möglicherweise:,,,modern
+Add-On,Schön wäre:,,,modern
+Add-on,Angebot:,,,modern
+Adverb,leise,Bewegung,,klassisch/modern
+Adverb,konzentriert,Bewegung,,
+Adverb,ernst,Bewegung,,
+Adverb,aufgeregt,Bewegung,,klassisch/modern
+Adverb,nebenbei,Bewegung,,klassisch/modern
+Adverb,leise,Essen,,klassisch/modern
+Adverb,genußvoll,Essen,,klassisch/modern
+Adverb,beiläufig,Essen,,klassisch/modern
+Adverb,leise,Stimme,,klassisch/modern
+Adverb,bestimmt,Stimme,,klassisch/modern
+Adverb,laut,Stimme,,klassisch/modern
+Adverb,herzzerreißend,Stimme,,klassisch/modern
+Adverb,schüchtern,Stimme,,klassisch/modern
+Adverb,fragend,Stimme,,klassisch/modern
+Adverb,konzentriert,Stimme,,
+Adverb,ernst,Stimme,,
+Adverb,sehnsuchtsvoll,Stimme,,klassisch/modern
+Adverb,scherzend,Stimme,,klassisch/modern
+Adverb,erbleichend,Stimme,,klassisch/modern
+Adverb,erregt,Stimme,,klassisch/modern
+Adverb,langsam,Zeit,,
+Adverb,lange,Zeit,,
+Beschreibung,", nach einer kurzen Pause, ",,,klassisch/modern
+Beschreibung,", nach langer Überlegung,",,,klassisch/modern
+Beschreibung,", ohne mit der Wimper zu zucken,",,,klassisch/modern
+Beschreibung,", an die Zukunft denkend,",,,klassisch/modern
+Beschreibung,", zur Überraschung vieler, ",,,klassisch/modern
+Beschreibung,", voller Ärger, ",,,klassisch/modern
+Objekt,Schuhkarton,Ding,singular,klassisch/modern
+Objekt,Das Bett,Ding,singular,klassisch/modern
+Objekt,Die Lampe,Ding,singular,klassisch/modern
+Objekt,Die Blumenvase,Ding,singular,klassisch/modern
+Objekt,Der Flügel,Ding,singular,klassisch/modern
+Objekt,Spaghetti,Essen,,klassisch/modern
+Objekt,Nussbraten,Essen,,klassisch/modern
+Objekt,Eis,Essen,,klassisch/modern
+Objekt,Waschmaschine,Technik,singular,klassisch/modern
+Objekt,Die Waschmaschine,Technik,singular,klassisch/modern
+Objekt,Die Lampe,Technik,singular,klassisch/modern
+Objekt,der Computer,Technik,singular,klassisch/modern
+Objekt,der Laptop,Technik,singular,klassisch/modern
+Objekt,Das Mikrofon,Technik,singular,klassisch/modern
+Objekt,Der Plattenspieler,Technik,singular,klassisch/modern
+Objekt,Die Box,Technik,singular,klassisch/modern
+Objekt,Die E-Gitarre,Technik,singular,klassisch/modern
+Objekt,Die Kaffeemaschine,Technik,singular,klassisch/modern
+Objekt,der Milchschäumer,Technik,singular,klassisch/modern
+Objekt,der Rasenmäher,Technik,singular,klassisch/modern
+Objekt,der Trockner,Technik,singular,klassisch/modern
+Objekt,Das Auto,Technik,singular,klassisch/modern
+Objekt,Der Mixer,Technik,singular,klassisch/modern
+Objekt,die Heizung,Technik,singular,klassisch/modern
+Objekt,der Staubsauger,Technik,singular,klassisch/modern
+Objekt,das Smartphone,Technik,singular,klassisch/modern
+Objekt,das Telephon,Technik,singular,klassisch/modern
+Objekt,die Telefonzelle,Technik,singular,klassisch/modern
+Objekt,der Roboter,Technik,singular,
+Objekt,Der Staubsaugerroboter,Technik,singular,klassisch/modern
+Objekt,die Motorsäge,Technik,singular,klassisch/modern
+Objekt,das Boot,Technik,singular,klassisch/modern
+Objekt,Der Anrufbeantworter,Technik,,modern
+Objekt,Die Ansage,Technik,,modern
+Objekt,Der Anschluss,Technik,,modern
+Objekt,Die Anzeige,Technik,,modern
+Objekt,einen Apfel,Essen,,klassisch/modern
+Objekt,Der Aufzug,Technik ,,modern
+Objekt ,Alkohol,Essen,,klassisch/modern
+Ortsbestimmung,im Wald,,,klassisch/modern
+Ortsbestimmung,im Grünen,,,klassisch/modern
+Ortsbestimmung,im Park,,,klassisch/modern
+Ortsbestimmung,in der Küche,,,klassisch/modern
+Ortsbestimmung,auf der Treppe,,,klassisch/modern
+Ortsbestimmung,im Universum,,,modern
+Ortsbestimmung,auf der Straße,,,
+Ortsbestimmung,zu Hause,,,
+Ortsbestimmung,in der Besenkammer,,,
+Ortsbestimmung,in der Badewanne,,,
+Ortsbestimmung,draußen,,,
+Ortsbestimmung,drinnen,,,
+Ortsbestimmung,im Bus,,,
+Ortsbestimmung,in einer Apotheke,,,klassisch/modern
+Ortsbestimmung,in einem Appartement,,,klassisch/modern
+Phrase,Einbruch des Realen,,,
+Phrase,NO CATHARSIS,,,
+Phrase,Aber die Musik muss lauter sein.,,,
+Phrase,Perfekt funktionieren!,,,
+Phrase,Das Schicksal played uns übel und dann doch gut.,,,
+Phrase,ALLE NEHMEN EIN SAHNEBONBON UND LÄCHELN ZUFRIEDEN,,,
+Phrase,angry mob,,,
+Phrase,million dollar contract,,,
+Phrase,ABENTEUER UND GUTE LAUNE WAS WILLST DU MEHR WAS WILLST DU MEHR,,,
+Phrase,NA WÄRST DU MAL LIEBER DAHEIM GEBLIEBEN,,,
+Phrase,NOW WHO'S THE ONE IN CHARGE,,,
+Phrase,SING HALLELUJA,,,
+Phrase,Oder ganz anders.,,,
+Phrase,Oder anders.,,,
+Phrase,"Nachtigall, ick hör dir trappsen.",,,
+Phrase,Liebe,,,
+Phrase,Friede Freude Eierkuchen.,,,
+Phrase,Die Erde ist ein riesiger Haufen Stein im All.,,,
+Phrase,Fahrstuhlmusik,,,
+Phrase,DENK MAL DRÜBER NACH,,,
+Phrase,KANNST DU ES FÜHLEN?,,,
+Phrase,Autopoietische Feedbackschleife,,,
+Phrase,KATHARSIS LOL,,,
+Phrase,Langsam kommen Zweifel auf,,,
+Phrase,HAHA,,,
+Phrase,erregendes moment.,,,
+Phrase,CONTENT CONTENT CONTENT,,,
+Phrase,lol,,,
+Phrase,idk,,,
+Phrase,Es wird schlimmer.,,,
+Phrase,Ein Geheimnis wird enthüllt,,,
+Phrase,Die Maske fällt,,,
+Phrase,Jemand ist nicht wer jemand zu sein scheint,,,
+Phrase,TRAGIK,,,
+Phrase,KOMIK,,,
+Phrase,WENDEPUNKT,,,
+Phrase,früher war mehr lametta,,,
+Phrase,DEMUT VOR DEINEN TATEN,,,
+Phrase,CAT-CONTENT,,,
+Richtung,in den Wald,,,
+Phrase,Slowmotion.,,,
+Phrase,Zeitlupe,,,
+Phrase,Checker-Attitude,,,
+Phrase,We are the Champions,,,
+Phrase,COOLNESS,,,
+Phrase,Lustige Choreo.,,,
+Phrase,Chorisches Sprechen,,,
+Phrase,Random Choreo,,,
+Phrase,Schmutziger Chor,,,
+Phrase,Wer zum Fick,,,
+Phrase,MANSPLAINING ÜBER DIE ALLGEMEINE SITUATION DER WELT,,,
+Phrase,Rhetorische Fragen,,,
+Phrase,Allwissende Erzählhaltung,,,
+Phrase,SO TUN ALS OB,,,
+Phrase,Ironisches Andeuten,,,
+Phrase,Resignation,,,
+Phrase,Eine macht nicht mehr mit,,,
+Phrase,BRÜLLT LEISE!,,,
+Phrase,eine bricht aus,,,
+Phrase,Süffisant,,,
+Phrase,Nur die Geräusche der Bewegung,,,
+Phrase,Markieren von Tanz,,,
+Phrase,Stampfen,,,
+Phrase,Überforderung,,,
+Phrase,ALLE SEHEN IRGENDWIE GLEICH AUS,,,
+Phrase,Belehrend,,,
+Phrase,Loop,,,
+Phrase,Am gleichen Ort,,,
+Richtung,in den Wald,,,
+Richtung,ins Blaue hinein,,,
+Richtung,in den Park,,,
+Richtung,in die Küche,,,
+Richtung,die Treppe hinunter,,,
+Richtung,auf die Straße,,,
+Richtung,nach Hause,,,
+Richtung,zur Besenkammer,,,
+Richtung,ins Internet,,,
+Richtung,in die Badewanne,,,
+Richtung,nach draußen,,,
+Richtung,hinein,,,
+Richtung,zum Bus,,,
+Richtung,hin und her,,,
+Rolle,Ärztin,,,klassisch/modern
+Rolle,Angestellte,,,klassisch/modern
+Rolle,Arzt,,,klassisch/modern
+Tätigkeit,lesen ein Buch,,plural,
+Tätigkeit,tippen,,plural,
+Tätigkeit,liest ein Buch,,singular,
+Tätigkeit,spielt Klavier,,singular,
+Tätigkeit,putzt,,singular,
+Tätigkeit,schreibt,,singular,
+Tätigkeit,malt,,singular,
+Tätigkeit,krickelt,,singular,
+Tätigkeit,zittert,,singular,
+Tätigkeit,liest,,singular,
+Tätigkeit,tippt,,singular,
+Tätigkeit,tippt,,singular,
+Überschrift,Teil,,,
+Überschrift,Situation,,,
+Überschrift,Schritt,,,
+Überschrift ,Akt,,,
+Verb,geht,Bewegung,singular,
+Verb,geht,Bewegung,singular,
+Verb,läuft,Bewegung,singular,
+Verb,hüpft,Bewegung,singular,
+Verb,rennt,Bewegung,singular,
+Verb,kriecht,Bewegung,singular,
+Verb,fliegt,Bewegung,singular,
+Verb,schreitet,Bewegung,singular,
+Verb,schleicht,Bewegung,singular,
+Verb,tanzt,Bewegung,singular,
+Verb,krabbelt,Bewegung,singular,
+Verb,fährt,Bewegung,singular,
+Verb,trabt,Bewegung,singular,
+Verb,reist,Bewegung,singular,
+Verb,gehen,Bewegung,plural,
+Verb,laufen,Bewegung,plural,
+Verb,hüpfen,Bewegung,plural,
+Verb,rennen,Bewegung,plural,
+Verb,kriechen,Bewegung,plural,
+Verb,fliegen,Bewegung,plural,
+Verb,schreiten,Bewegung,plural,
+Verb,schleichen,Bewegung,plural,
+Verb,tanzen,Bewegung,plural,
+Verb,krabbeln,Bewegung,plural,
+Verb,fahren,Bewegung,plural,
+Verb,traben,Bewegung,plural,
+Verb,reisen,Bewegung,plural,
+Verb ,gehen,Bewegung,plural,
+Verb,fällt um,Ding,singular,
+Verb,essen,Essen,plural,
+Verb,verschlingt,Essen,plural,
+Verb,vernichtet,Essen,plural,
+Verb,isst,Essen,singular,
+Verb,verschlingt,Essen,singular,
+Verb,vernichtet,Essen,singular,
+Verb,verweilen,Ort,plural,
+Verb,sind,Ort,plural,
+Verb,stehen,Ort,plural,
+Verb,liegen,Ort,plural,
+Verb,ist,Ort,singular,
+Verb,befindet sich,Ort,singular,
+Verb,steht,Ort,singular,
+Verb,verweilt,Ort,singular,
+Verb ,liegt,Ort,singular,
+Verb,umarmt,Relation,plural,
+Verb,bedanken sich bei,Relation,plural,
+Verb,umarmen,Relation,singular,
+Verb,bedankt sich bei,Relation,singular,
+Verb,schreien,Stimme,plural,
+Verb,lachen ,Stimme,plural,
+Verb,schreien,Stimme,plural,
+Verb,kichern,Stimme,plural,
+Verb,schluchzen,Stimme,plural,
+Verb,singen,Stimme,plural,
+Verb,juchzen,Stimme,plural,
+Verb,gähnen,Stimme,plural,
+Verb,summen,Stimme,plural,
+Verb,quietschen,Stimme,plural,
+Verb,schreit,Stimme,singular,
+Verb,lacht,Stimme,singular,
+Verb,schreit,Stimme,singular,
+Verb,kichert,Stimme,singular,
+Verb,schluchzt,Stimme,singular,
+Verb,singt,Stimme,singular,
+Verb,juchzt,Stimme,singular,
+Verb,gähnt,Stimme,singular,
+Verb,summt,Stimme,singular,
+Verb,quietscht,Stimme,singular,
+Verb,geht an,Technik,singular,
+Verb,läuft ,Technik,singular,
+Verb,geht an,Technik,singular,
+Verb,geht aus,Technik,singular,
+Verb,flackert,Technik,singular,
+Verb,summt,Technik,singular,
+Verb,quietscht,Technik,singular,
+Verb,hängt,Technik,singular,
+Verb,gibt ein Geräusch von sich,Technik,singular,
+Verb,gluckert,Technik,singular,
+Verb,fährt weg,Technik,singular,
+Verb,stürzt ab,Technik,singular,
+Verb,fliegt weg,Technik,singular,
+Verb,startet,Technik,singular,
+Verb,schwimmt,Technik,singular,
+Wort,Sirenen,,,
+Wort,Verkehrslärm,,,
+Wort,Vogelgezwitscher,,,
+Wort,Anruf,,,
+Wort,Skype,,,
+Wort,SMS,,,
+Wort,Ein Knall.,,,
+Wort,Stille,,,
+Zeit,lange,,,
+Zeit,eine Stunde,,,
+Zeit,zwei Wochen,,,
+Zeit,eine gefühlte Ewigkeit,,,
+Zeit,für immer,,,
+Zeit,für eine kurze Zeit,,,
+Zeit,einen kompletten Tag,,,
+Zeit,für fünf Minuten,,,
+Zeit,zwischendurch,,,
+Zeit,währenddessen,,,
+Zeit,in der Zwischenzeit,,,
+Zeit,beinahe gleichzeitig,,,
+Zeit,kurz,,,
+Zeit,sehr lange,,,
+Zeit,eine Weile,,,
+Zeit,ein paar mal,,,
+Zeit,plötzlich,,,
+Zeit,sofort,,,
+Zeit,schnell,,,
+Zeit,langsam,,,
+Zeit,am Abend,,,klassisch/modern
+Wetter,Graupelschauer,,,
+Wetter,Die Sonne scheint,,,
+Wetter,"Es ist bewölkt, aber schwülwarm",,,
+Wetter,Ein nahezu tropischer Sommertag,,,
+Wetter,winterlich kalt und sonnig,,,
+Wetter,Es regnet Bindfäden,,,
+Wetter,Gewitter ,,,
+Ort,in einer alten Schule,,,
+Ort,Wüste irgendwo in Nevada,,,
+Ort,Unter Tage in stillgelegter Zeche im Ruhrgebiet,,,
+Ort,mitten im Nirgendwo,,,
+Ort,Berlin,,,
+Ort,eine mittelgroße Kleinstadt irgendwo in Brandenburg,,,
+Ort,in einer Kleinstadt in Mecklenburg-Vorpommern,,,
+Ort,Auf einem Schiff im Südpazifik,,,
+Ort,In New York,,,
+Ort,auf einer Finca in Italien,,,
+Ort,auf einem Fabrikgelände,,,
+Ort,im Spreewald,,,
+Objekt,Besitz,Motiv,,
+Objekt,Gerechtigkeit,Motiv,,
+Objekt,Bewunderung,Motiv,,
+Objekt,Macht,Motiv,,
+Objekt,Freiheit,Motiv,,
+Objekt,Unabhängigkeit,Motiv,,
+Objekt,Pizza,Motiv,,
+Objekt,Liebe,Motiv,,
+Objekt,Süßkram,Motiv,,
+Objekt,Katzen,Motiv,,
+Objekt,Natur,Motiv,,
+Objekt,Geld,Motiv,,
+Objekt,Wissen,Motiv,,
+Objekt,Austausch,Motiv,,
+Objekt,Politik,Thema,,
+Objekt,Popmusik,Thema,,
+Objekt,einen Film,Thema,,
+Objekt,Nihilismus,Thema,,
+Objekt,Theater,Thema,,
+Objekt,Aliens,Thema,,
+Objekt,Technik,Thema,,
+Objekt,Katzen,Thema,,
+Objekt,Arbeit,Thema,,
+Objekt,Gesundheit,Thema,,
+Objekt,Umweltschutz,Thema,,
+Objekt,soziale Netzwerke,Thema,,
+Ziel,die Weltherrschaft,,,
+Ziel,etwas revolutionieren,,,
+Ziel,Kuchen backen,,,
+Ziel,Zeit verbringen,,,
+Ziel,einen Plan aushecken,,,
+Ziel,Sport machen,,,
+Ziel,etwas kochen,,,
+Song,"""Killing me softly""",,,
+Song,"""Killing in the Name of""",,,
+Song,"""Like a virgin""",,,
+Song,"""Positions""",,,
+Song,"""Fell in love with an alien""",,,
+Song,"""Last Christmas""",,,
+Song,"""I will always love you""",,,
+Fortbewegungsmittel,Sprungfedern,,,
+Fortbewegungsmittel,Elektro Auto,,,
+Fortbewegungsmittel,Flugzeug,,,
+Fortbewegungsmittel,Space Shuttle,,,
+Fortbewegungsmittel,Pferdekutsche,,,
+Fortbewegungsmittel,Robotik-Droschke,,,
+Fortbewegungsmittel,Füße,,,
+Fortbewegungsmittel,Fahrrad,,,
+Fortbewegungsmittel,beamen,,,
+Fortbewegungsmittel,Boot,,,
+Fortbewegungsmittel,Zug,,,
+Fortbewegungsmittel,Segelyacht,,,
+Fortbewegungsmittel,Hovercraft ,,,
+Ortsbestimmung,im Büro,,,klassisch/modern
+Ortsbestimmung,im Bad,,,klassisch/modern
+Objekt,Die Bahn,Technik,,modern
+Ortsbestimmung,am Bahnhof,,,modern
+Ortsbestimmung,am Bahnsteig,,,modern
+Ortsbestimmung,auf dem Balkon,,,klassisch/modern
+Objekt,Bananenbrot,Essen,,klassisch/modern
+Ortsbestimmung,auf der Bank,,,klassisch/modern
+Objekt,Die Batterie,Technik,,modern
+Objekt,Ein Baum,Pflanzen,,klassisch/modern
+Rolle,Beamte,,,klassisch/modern
+Rolle,Beamtin,,,klassisch/modern
+Rolle,Eine Bekannte,,,klassisch/modern
+Orstbestimmung,auf einem Berg,,,klassisch/modern
+Ortsbestimmung,in der Berufsschule,,,klassisch/modern
+Richtung,zum Bett,,,klassisch/modern
+Objekt,Bier,Essen,,klassisch/modern
+Objekt,Ein Bild,,,klassisch/modern
+Objekt,Der Bildschirm,Technik,,modern
+Objekt,eine Birne,Essen,,klassisch/modern
+Objekt,Der Bleistift,,,klassisch/modern
+Objekt,eine Blume,Pflanze,,klassisch/modern
+Phrase,Blut spritzt.,,,klassisch/modern
+Objekt,ein Brötchen,Essen,,
+Objekt,Der Brief,,,klassisch/modern
+Objekt,Der Briefkasten,,,klassisch/modern
+Objekt,die Briefmarke,,,klassisch/modern
+Objekt ,die Brieftasche,,,klassisch/modern
+Objekt,Der Briefumschlag,,,klassisch/modern
+Objekt,eine Brille,,,klassisch/modern
+Objekt,ein Brot,Essen,,klassisch/modern
+Beziehung,Bruder,Rollen,,
+Objekt,Buch,,,klassisch/modern
+Objekt,viel Butter,Essen,,klassisch/modern
+Beziehung,sind BFFs,,,
+Beziehung,"haben einen ungeklärten Konflikt aus der Vergangenheit, der bis heute konsequenzen hat",,,
+Beziehung,sind Geschwister,,,
+Beziehung,"kennen sich nur flüchtig, finden sich aber sympathisch",,,
+Beziehung,"kennen sich nur flüchtig, haben schlimme Sachen übereinander gehört",,,
+Beziehung,"gehören zur gleichen Clique, fanden sich aber noch nie interessant",,,
+Beziehung,sind verknallt,,,
+Beziehung,"sind voll verknallt, aber beide schon an wen anders vergeben",,,
+Beziehung,sind gut befreundet,,,
+Beziehung,sind Arbeitskolleg*innen,,,
+Beziehung,"kennen sich noch aus der Schule, damals mochten sie sich nicht, weil beide in Petra Weißenfels verliebt waren",,,
+Beziehung,bonden weil beide gerne gemusterte Schuhe tragen,,,
+Beziehung,kennen sich gar nicht,,,
+Beziehung,"haben sich bisher einmal auf einer Party gesehen, auf dem Klo",,,
+Beziehung,wohnen zusammen,,,
+Beziehung,haben den gleichen Hausarzt,,,
+Beziehung,sehen sich jeden morgen im Bus,,,
+Beziehung,kennen sich schon eine gefühlte Ewigkeit,,,
+Beziehung,haben schonmal voneinander geträumt,,,
+Beziehung,sprechen nicht mehr miteinander,,,
+Beziehung,spüren beide das Kribbeln,,,
+Beziehung,mögen beide Pflanzen und tauschen sich regelmäßig darüber aus,,,
+Beziehung,ihre Großmütter sind beide im gleichen Pflegeheim,,,
+Beziehung,sind beide Hunde-Menschen,,,
+Beziehung,mögen sich nicht,,,
+Beziehung,sind in einer Band,,,
+Beziehung,kennen sich von Parties,,,
+Beziehung,bewegen sich in ähnlichen beruflichen Kreisen,,,
+Datum,13.12.2025,,,
+Datum,01.05.2030,,,
+Datum,17.10.2032,,,
+Datum,04.05.2050,,,
+Datum,22.02.2040,,,
+Datum,03.02.2043,,,
+Datum,03.07.2060,,,
+Rolle,wohnt im Wald,,,
+Rolle,ist vor kurzem umgezogen,,,
+Rolle,verträgt kein Gluten,,,
+Rolle,besteht zu 30% aus Metall,,,
+Rolle,kann unter Wasser atmen,,,
+Rolle,kann fliegen,,,
+Rolle,ist magisch,,,
+Rolle,spielt Bass,,,
+Rolle,hasst Gedichte,,,
+Rolle,ist verliebt,,,
+Rolle,funktioniert über eine Festplatte,,,
+Rolle,hat alles von Hegel gelesen,,,
+Rolle,liebt BTS,,,
+Rolle,trinkt jeden morgen einen Smoothie,,,
+Rolle,hasst Theater,,,
+Rolle,liebt Theater,,,
+Rolle,hat seit einem Monat einen neuen Job,,,
+Rolle,arbeitet im Gesundheitswesen,,,
+Rolle,verdient mit schreiben Geld,,,
+Rolle,glaubt an ein Leben nach dem Tod,,,
+Rolle,besitzt einen Schrebergarten,,,
+Rolle,programmiert in der Freizeit eigene Videospiele,,,
+Rolle,hat einen Soda-Stream,,,
+Rolle,hat viel Geld,,,
+Rolle,hat wenig Geld,,,
+Rolle,hat ok viel Geld,,,
+Rolle,verliebt sich zu schnell,,,
+Rolle,fragt sich was Liebe ist,,,

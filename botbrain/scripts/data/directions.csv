@@ -1,23 +1,34 @@
 Oberkategorie,Satzkategorie,Directions
-,Bewegung singular,#User# #Beschreibung?optional# #Verb#  #Ortsbestimmung#
-,Bewegung plural ,#User# und #User# #Beschreibung?optional# #Verb# #Ortsbestimmung#
-,Technik singular,#Objekt# #Verb#
-,Technik plural,#Objekt# #Verb#
-,Ding singular,#Objekt# #Verb#
-,Ding plural,#Objekt# #Verb#
-,Stimme singular,#User# #Verb# #Adverb?optional#
-,Stimme plural,#User# und #User# #Verb# #Adverb?optional#
-,Auftritt singular,#User# #Verb#
-,Auftritt plural,#User# und #User# #Verb#
-,Abgang singular,#User# #Verb#
-,Abgang plural,#User# und #User# #Verb#
+,Bewegung plural 2,#User# und #User# #Beschreibung?optional# #Verb# #Adverb?optional# #Richtung#.
+,Bewegung plural 3,"#User#, #User# und #User# #Beschreibung?optional# #Verb# #Adverb?optional# #Richtung#."
+,Bewegung singular,#User# #Beschreibung?optional# #Verb# #Adverb# #Richtung#.
+,Ding singular,#Objekt# #Verb#.
+,Essen plural,#User# #Beschreibung?optional# #Verb# #Adverb# #Objekt#.
+,Essen singular,#User# #Beschreibung?optional# #Verb# #Adverb# #Objekt#.
+,machen plural,#Add-on?optional# #User# und #User# #Tätigkeit#.
+,machen singular,#Add-on?optional# #User# #Tätigkeit#.
+,Ort plural 2,#Add-on?optional# #User# und #User# #Verb# #Ortsbestimmung#.
+,Ort plural 3,"#Add-on?optional# #User#, #User# und #User# #Verb# #Ortsbestimmung#."
+,Ort singular,#Add-on?optional# #User# #Verb# #Ortsbestimmung#.
 ,Phrase,#Phrase#
+,Relation plural 3,#Add-on?optional# #User# und #User# #Verb# #User#.
+,Relation singular ,#Add-on?optional# #User# #Verb# #User#.
+,Stimme plural,#User# und #User# #Verb# #Adverb?optional#.
+,Stimme singular,#User# #Verb# #Adverb?optional#.
+,Technik singular,#Objekt# #Verb#.
+,Unterschrift,#Unterschrift#
 ,Wort,#Wort#
-,Relation plural,#User# und #User# #Verb# #User#
-,Relation singular,#User# #Verb# #User#
-,Essen singular,#User# #Verb# #Objekt# #Ortsbestimmung_Zustand?optional#
-,Essen plural,#User# und #User# #Verb# #Objekt# #Ortsbestimmung_Zustand?optional#
-,Zustand plural,#User# und #User# #Verb# #Adjektiv#
-,Zustand singular,#User# #Verb# #Adjektiv#
-,machen singular,#User# #Tätigkeit#
-,machen plural,#User# und #User# #Tätigkeit#
+,Überschrift1,#Überschrift# 1
+,Überschrift2,#Überschrift# 2
+,Überschrift3,#Überschrift# 3
+,Eine-Idee,Eine Idee:
+,Rollenprofil,#User#: #Rolle# und #Rolle#
+,Beziehung,#User# und #User#: #Beziehung#
+,place,Ort: #Ort#
+,date,Datum: #Datum#
+,Oder-anders,Oder anders
+,Haupt-Fortbewegungsmittel,Haupt-Forbewegungsmittel: #Fortbewegungsmittel#
+,weather,Wetter: #Wetter#
+,aim,Ziel: #Ziel#
+,Lied,Song: #Song#
+,Personen,Personen

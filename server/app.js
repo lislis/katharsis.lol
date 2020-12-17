@@ -12,7 +12,8 @@ var io = require('socket.io')(server);
 
 var room = require('./routes/room');
 var chat = require('./routes/chat');
-var user = require('./routes/user');
+var user = require('./routes/user')
+var script = require('./routes/script');
 
 const WS_PORT = process.env['WS_PORT']
 const MONGO_DB = process.env['MONGO_DB']
@@ -47,6 +48,7 @@ app.use('/rooms', express.static(path.join(__dirname, 'dist')));
 app.use('/api/room', room);
 app.use('/api/user', user);
 app.use('/api/chat', chat);
+app.use('/api/script', script);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
