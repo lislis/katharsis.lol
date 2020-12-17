@@ -1,4 +1,4 @@
-# CallMeServer
+# Server
 
 Node Express + Websocket server
 
