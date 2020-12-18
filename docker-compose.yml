@@ -27,6 +27,8 @@ services:
       context: ./runner
       dockerfile: Dockerfile
     restart: unless-stopped
+    volumes:
+      - './config/schedule:/usr/src/app/data'
     environment:
       - SERVER_URL="http://localhost:3000"
     links:
@@ -36,6 +38,8 @@ services:
       context: ./botbrain
       dockerfile: Dockerfile
     restart: unless-stopped
+    volumes:
+      - './config/botinput:/usr/src/app/script'
     environment:
       - BOT_PORT=3003
     ports:
