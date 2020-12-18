@@ -33,7 +33,7 @@ router.get('/any', async function(req, res, next) {
     try {
         Promise.all([
             Word.find().exec(),
-            User.find().exec()
+            User.find({ hasPermission: true }).exec()
         ]).then(async values => {
             Direction
                 .aggregate([{ $sample: {size: 1}}])
