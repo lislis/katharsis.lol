@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "start": "node ./app.js"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@ladjs/graceful": "^1.0.5",

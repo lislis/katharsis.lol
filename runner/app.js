@@ -5,10 +5,9 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
+const app = express();
 const server = require('http').createServer(app);
 const routes = require('./routes/index.js');
-
-const app = express();
 
 /*
 const mongoose = require('mongoose');
