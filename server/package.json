@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-  "license": "MIT",
+  "license": "AGPL",
   "dependencies": {
     "axios": "^0.21.0",
     "bluebird": "^3.7.2",
