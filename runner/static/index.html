@@ -5,13 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Admin panel</title>
+    <script>
+     let CONFIG = {};
+     fetch('env.txt')
+       .then(r => r.text())
+       .then(d => {
+         d.split('\n').forEach(x => {
+           if (x !== '') {
+             let parts = x.split("=");
+             CONFIG[parts[0]] = parts[1];
+           }
+         })
+       })
+    </script>
   </head>
   <body>
     <h1>Katharsis.lol Admin panel</h1>
 
     <section>
       <h2>Vorstellung starten</h2>
-      <form id="startScheduleForm" method="POST" action="http://localhost:3006/api/runschedule">
+      <form id="startScheduleForm">
         <label>
           <span>Url zum CSV Schedule</span>
           <input type="url" name="csvUrl" id="scheduleUrl">
@@ -20,6 +33,30 @@
       </form>
     </section>
 
+
+    <section>
+      <h2>Haupträume anlegen</h2>
+      <form id="fillMainRoomForm">
+        <div>
+        <label>
+          <span>Name der "Bühne"</span>
+          <input type="text" name="mainstagename" id="mainstagename" placeholder="Bühne">
+        </label>
+        </div>
+        <div>
+        <label>
+          <span>Name des "Writers Room"</span>
+          <input type="text" name="backstagename" id="backstagename" placeholder="Writers Room">
+        </label>
+        </div>
+        <button type="submit">Räume anlegen</button>
+      </form>
+
+      <h2>Haupträume löschen</h2>
+      <form id="deleteMainRoomForm">
+        <button type="submit">Bisherige Räume löschen</button>
+      </form>
+    </section>
 
 
     <script>
@@ -30,7 +67,7 @@
        let formObj = {};
        formObj[formElem.name] = formElem.value;
 
-       let response = await fetch('http://localhost:3006/api/runschedule', {
+       let response = await fetch(`${CONFIG.RUNNER}/api/runschedule`, {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json;charset=utf-8'
@@ -42,6 +79,56 @@
        alert(result.message);
        formElem.value = "";
      };
+
+
+     document.querySelector('#fillMainRoomForm').onsubmit = async (e) => {
+       e.preventDefault();
+
+       let mainStage = document.querySelector('#mainstagename')
+       let backStage = document.querySelector('#backstagename')
+
+       Promise.all([
+         fetch(`${CONFIG.SERVER}/api/room`, {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json;charset=utf-8'
+           },
+           body: JSON.stringify({room_name: mainStage.value,
+                                 main: true,
+                                 'private': false,
+                                 locked: true})
+         }),
+         fetch(`${CONFIG.SERVER}/api/room`, {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json;charset=utf-8'
+           },
+           body: JSON.stringify({room_name: backStage.value,
+                                 main: true,
+                                 'private': false,
+                                 locked: false})
+         })
+       ]).then(blup => {
+         alert("Räume angelegt!")
+         mainStage.value = ''
+         backStage.value = ''
+       })
+     }
+
+     document.querySelector('#deleteMainRoomForm').onsubmit = async (e) => {
+       e.preventDefault();
+
+       let response = await fetch(`${CONFIG.SERVER}/api/room/main`);
+       let mainrooms = await response.json();
+
+       console.log(mainrooms)
+       mainrooms.forEach(x => {
+         fetch(`${CONFIG.SERVER}/api/room/${x._id}`, {
+           method: 'DELETE'
+         })
+       })
+       alert("Räume gelöscht!")
+     }
 
     </script>
   </body>
