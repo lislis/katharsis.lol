@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const SERVER = process.env['SERVER_URL']
 
-axios.post(`${SERVER}/api/script/cleanStage`)
+axios.post(`${SERVER}/api/script/exportPlay`)
     .then(resp => {
-        console.log("clean stage ", resp);
+        console.log("exporting play ", resp);
     }).catch(e => console.log(e))

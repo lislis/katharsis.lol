@@ -93,7 +93,7 @@ router.post('/category', function(req, res, next) {
         let botMsg = values[1].data[0];
 
         console.log("bot says, ", botMsg)
-        if (botMsg !== '') {
+        if (botMsg !== null && botMsg !== "") {
             let chatMsg = { message: botMsg,
                             room: room._id,
                             bot: true
@@ -108,7 +108,7 @@ router.post('/category', function(req, res, next) {
                 res.json(msg);
             });
         } else {
-            res.json({mesage: "Nothing matched category ${req.body.category}, skipping"})
+            res.json({mesage: `Nothing matched category ${req.body.category}, skipping`})
         }
     }).catch(e => console.log(e));
 });
