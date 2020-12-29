@@ -1,4 +1,4 @@
-# foyer
+# 🎭 Foyer
 
 Frontend for chat and fun
 

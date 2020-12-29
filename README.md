@@ -17,15 +17,15 @@ We assume a production environment with docker-compose, take a look a the [docke
 
 Just a few words on what is happening:
 
-**UI / Foyer** builds an image where all assets are served using NGINX, it exposes PORT 80 but we remap that to 8080.
+🎭 **UI / Foyer** builds an image where all assets are served using NGINX, it exposes PORT 80 but we remap that to 8080.
 
-**Server** builds the socket.io and api server and talks to the database. Feel free to adjust the port it exposes (whatever is free on your server). This is the main logic service.
+💁🏼 **Server** builds the socket.io and api server and talks to the database. Feel free to adjust the port it exposes (whatever is free on your server). This is the main logic service.
 
-**BotBrain** builds an HTTP server to serve generated text form live users and fragments from the database. Therefore also talks to the database. Feel free to adjust the port it exposes (whatever is free on your server).
+🤖🧠 **BotBrain** builds an HTTP server to serve generated text form live users and fragments from the database. Therefore also talks to the database. Feel free to adjust the port it exposes (whatever is free on your server).
 
-**Runner** runs the script and sends requests to server.
+🏃 **Runner** runs the script and sends requests to server.
 
-**DB** the MongoDB service for storing stuff. What databases do.
+🗄️ **DB** the MongoDB service for storing stuff. What databases do.
 
 
 ### Prepare first run

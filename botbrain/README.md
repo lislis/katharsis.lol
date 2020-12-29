@@ -1,4 +1,4 @@
-# BotBrain
+# 🤖🧠 BotBrain
 
 Hello, this is botbrain 🤖🧠!
 

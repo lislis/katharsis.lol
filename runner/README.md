@@ -1,4 +1,4 @@
-# Runner.lol
+# 🏃 Runner
 
 Node based scheduler.
 

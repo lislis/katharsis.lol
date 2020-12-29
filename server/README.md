@@ -1,4 +1,4 @@
-# Server
+# 💁🏼 Server
 
 Node Express + Websocket server
 
