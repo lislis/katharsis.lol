@@ -5,6 +5,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
+const app = express();
 const server = require('http').createServer(app);
 
 const direction = require('./routes/direction');
@@ -14,7 +15,6 @@ const MONGO_DB = process.env['MONGO_DB']
 //const MONGO_PORT = process.env['MONGO_PORT']
 const MONGO_HOST = process.env['MONGO_HOST']
 
-const app = express();
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');

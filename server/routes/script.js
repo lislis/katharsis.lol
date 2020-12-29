@@ -1,11 +1,11 @@
 require('dotenv').config();
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var User = require('../models/User.js');
-var Chat = require('../models/Chat.js');
-var Room = require('../models/Room.js');
-var axios = require('axios');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const User = require('../models/User.js');
+const Chat = require('../models/Chat.js');
+const Room = require('../models/Room.js');
+const axios = require('axios');
 const random = require('random');
 
 const BOTBRAIN = process.env['BOTBRAIN'];
