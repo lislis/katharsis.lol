@@ -2,7 +2,7 @@
   "name": "botbrain",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "AGPL",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "start": "node ./bin/www"
   },
