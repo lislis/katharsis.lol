@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin panel</title>
+  </head>
+  <body>
+    <h1>Katharsis.lol Admin panel</h1>
+
+    <section>
+      <h2>Vorstellung starten</h2>
+      <form id="startScheduleForm" method="POST" action="http://localhost:3006/api/runschedule">
+        <label>
+          <span>Url zum CSV Schedule</span>
+          <input type="url" name="csvUrl" id="scheduleUrl">
+        </label>
+        <button type="submit">Schedule starten</button>
+      </form>
+    </section>
+
+
+
+    <script>
+     document.querySelector('#startScheduleForm').onsubmit = async (e) => {
+       e.preventDefault();
+
+       let formElem = document.querySelector('#scheduleUrl');
+       let formObj = {};
+       formObj[formElem.name] = formElem.value;
+
+       let response = await fetch('http://localhost:3006/api/runschedule', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json;charset=utf-8'
+         },
+         body: JSON.stringify(formObj)
+       });
+       let result = await response.json();
+
+       alert(result.message);
+       formElem.value = "";
+     };
+
+    </script>
+  </body>
+</html>
