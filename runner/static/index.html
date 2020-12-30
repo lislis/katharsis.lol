@@ -5,25 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Admin panel</title>
-    <script>
-     let CONFIG = {};
-     fetch('env.txt')
-       .then(r => r.text())
-       .then(d => {
-         d.split('\n').forEach(x => {
-           if (x !== '') {
-             let parts = x.split("=");
-             CONFIG[parts[0]] = parts[1];
-           }
-         })
-       })
-    </script>
+    <style>
+     body {
+       padding: 0 0.3rem 1rem;
+       font-family: sans-serif;
+       background-color: #eee;
+     }
+     section {
+       box-shadow: 0px 0px 5px black;
+       border-radius: 5px;
+       padding: 0.2em 1em 1em;
+       margin-bottom: 2rem;
+     }
+    </style>
   </head>
   <body>
     <h1>Katharsis.lol Admin panel</h1>
 
     <section>
-      <h2>Vorstellung starten</h2>
+      <h2>Vorstellung</h2>
+      <h3>Vorstellung starten</h3>
       <form id="startScheduleForm">
         <label>
           <span>Url zum CSV Schedule</span>
@@ -31,11 +32,14 @@
         </label>
         <button type="submit">Schedule starten</button>
       </form>
+
+      <h3>Vorstellung exportieren</h3>
+
     </section>
 
-
     <section>
-      <h2>Haupträume anlegen</h2>
+      <h2>Haupträume</h2>
+      <h3>Haupträume anlegen</h3>
       <form id="fillMainRoomForm">
         <div>
         <label>
@@ -49,17 +53,69 @@
           <input type="text" name="backstagename" id="backstagename" placeholder="Writers Room">
         </label>
         </div>
-        <button type="submit">Räume anlegen</button>
+        <button type="submit">Haupträume anlegen</button>
       </form>
 
-      <h2>Haupträume löschen</h2>
+      <h3>Haupträume löschen</h3>
       <form id="deleteMainRoomForm">
-        <button type="submit">Bisherige Räume löschen</button>
+        <button type="submit">Bisherige Haupträume löschen</button>
       </form>
     </section>
 
+    <section>
+      <h2>Wörter und Anweisungen</h2>
+      <h3>Wörter importieren</h3>
+      <h3>Wort löschen</h3>
+      <h3>Alle Wörter löschen</h3>
+      <h3>Anweisungen importieren</h3>
+      <h3>Anweisung löschen</h3>
+      <h3>Alle Anweisungen löschen</h3>
+    </section>
+
+    <section>
+      <h2>Räume und Chats</h2>
+      <h3>Raum löschen</h3>
+      <p><a href="/api/room" class="js-servername" target="_blank">Liste aller Räume</a></p>
+      <form id="deleteRoomForm">
+        <label>
+          <span>Raum id</span>
+          <input type="text" name="deleteroomid" id="deleteroomid" placeholder="">
+          <button type="submit">Raum löschen</button>
+        </label>
+      </form>
+      <h3>Alle Räume löschen (inkl Haupträume)</h3>
+      <form id="deleteAllRoomsForm">
+        <button type="submit">Alle Räume löschen</button>
+      </form>
+      <h3>Chat löschen</h3>
+      <h3>Alle Chats löschen (inkl "Bühne")</h3>
+    </section>
+
+    <section>
+      <h2>User</h2>
+      <h3>User löschen</h3>
+      <h3></h3>
+      <h3>Chat löschen</h3>
+      <h3>Alle Chats löschen (inkl "Bühne")</h3>
+    </section>
 
     <script>
+     let CONFIG = {};
+     fetch('env.txt')
+       .then(r => r.text())
+       .then(d => {
+         d.split('\n').forEach(x => {
+           if (x !== '') {
+             let parts = x.split("=");
+             CONFIG[parts[0]] = parts[1];
+           }
+         });
+
+         [...document.querySelectorAll('.js-servername')].map(x => {
+           x.href = CONFIG.SERVER + "/" + x.href.replace(window.location, "");
+         });
+       })
+
      document.querySelector('#startScheduleForm').onsubmit = async (e) => {
        e.preventDefault();
 
@@ -121,13 +177,40 @@
        let response = await fetch(`${CONFIG.SERVER}/api/room/main`);
        let mainrooms = await response.json();
 
-       console.log(mainrooms)
        mainrooms.forEach(x => {
          fetch(`${CONFIG.SERVER}/api/room/${x._id}`, {
            method: 'DELETE'
          })
        })
        alert("Räume gelöscht!")
+     }
+
+     document.querySelector('#deleteRoomForm').onsubmit = async (e) => {
+       e.preventDefault();
+       let inputElem = document.querySelector('#deleteroomid');
+       let response = await fetch(`${CONFIG.SERVER}/api/room/${inputElem.value}`, {
+         method: 'DELETE',
+       })
+       let room = await response.json();
+       alert(`Raum ${room.room_name} gelöscht!`);
+       inputElem.value = "";
+     }
+
+     document.querySelector('#deleteAllRoomsForm').onsubmit = async (e) => {
+       e.preventDefault();
+         fetch(`${CONFIG.SERVER}/api/room`)
+           .then(r => r.json())
+           .then(values =>  {
+             Promise.all(
+               values.map(x => {
+                 fetch(`${CONFIG.SERVER}/api/room/${x._id}`, {
+                   method: 'DELETE'
+                 }).then(resp => resp.json())
+               })
+             ).then(_ => {
+               alert("Alle Räume gelöscht!")
+             })
+           })
      }
 
     </script>
