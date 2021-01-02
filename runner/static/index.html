@@ -88,15 +88,34 @@
         <button type="submit">Alle Räume löschen</button>
       </form>
       <h3>Chat löschen</h3>
+      <p><a href="/api/chat" class="js-servername" target="_blank">Liste aller Chats</a></p>
+      <form id="deleteChatForm">
+        <label>
+          <span>Chat id</span>
+          <input type="text" name="deletechatid" id="deletechatid" placeholder="">
+          <button type="submit">Chat löschen</button>
+        </label>
+      </form>
+      <h3>Chats eines Raumes löschen</h3>
+      <form id="deleteChatsForRoomForm">
+        <label>
+          <span>Raum id</span>
+          <input type="text" name="deletechatforroomid" id="deletechatforroomid" placeholder="">
+          <button type="submit">Chats für diesen Raum löschen</button>
+        </label>
+      </form>
       <h3>Alle Chats löschen (inkl "Bühne")</h3>
+      <form id="deleteAllChatsForm">
+        <button type="submit">Alle Chats löschen</button>
+      </form>
     </section>
 
     <section>
       <h2>User</h2>
       <h3>User löschen</h3>
-      <h3></h3>
-      <h3>Chat löschen</h3>
-      <h3>Alle Chats löschen (inkl "Bühne")</h3>
+      <h3>User zu Moderator machen</h3>
+      <h3>Moderator zu User machen</h3>
+      <h3>Alle User löschen</h3>
     </section>
 
     <script>
@@ -112,7 +131,8 @@
          });
 
          [...document.querySelectorAll('.js-servername')].map(x => {
-           x.href = CONFIG.SERVER + "/" + x.href.replace(window.location, "");
+           console.log(CONFIG.SERVER, window.location )
+           x.href = CONFIG.SERVER + x.href.replace(window.location.origin, "");
          });
        })
 
@@ -185,16 +205,26 @@
        alert("Räume gelöscht!")
      }
 
-     document.querySelector('#deleteRoomForm').onsubmit = async (e) => {
-       e.preventDefault();
-       let inputElem = document.querySelector('#deleteroomid');
-       let response = await fetch(`${CONFIG.SERVER}/api/room/${inputElem.value}`, {
+     async function deleteSingle(input, url, message) {
+       let inputElem = document.querySelector(input);
+
+       let response = await fetch(CONFIG.SERVER + url + inputElem.value, {
          method: 'DELETE',
        })
-       let room = await response.json();
-       alert(`Raum ${room.room_name} gelöscht!`);
+       let obj = await response.json();
+       alert(message);
        inputElem.value = "";
      }
+
+     function buildDeleteFunction(formid, inputid, url, message) {
+       document.querySelector(formid).onsubmit = async (e) => {
+         e.preventDefault();
+         deleteSingle(inputid, url, message);
+       }
+     }
+
+     buildDeleteFunction('#deleteRoomForm', '#deleteroomid', `/api/room/`, 'Raum gelöscht!');
+     buildDeleteFunction('#deleteChatForm', '#deletechatid', `/api/chat/`, 'Chat gelöscht!');
 
      document.querySelector('#deleteAllRoomsForm').onsubmit = async (e) => {
        e.preventDefault();

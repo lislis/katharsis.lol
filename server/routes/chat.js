@@ -1,44 +1,47 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Chat = require('../models/Chat.js');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const Chat = require('../models/Chat.js');
 
+router.get('/', (req, res, next) => {
+  Chat.find((err, chats) => {
+    if (err) return next(err);
+    res.json(chats);
+  });
+});
 
-/* GET ALL CHATS */
-router.get('/:roomid', function(req, res, next) {
-    Chat.find({ room: req.params.roomid }).populate('user').exec(function (err, products) {
+router.get('/:roomid', (req, res, next) => {
+  Chat.find({ room: req.params.roomid })
+      .populate('user')
+      .exec((err, chats) => {
         if (err) return next(err);
-        res.json(products);
-    });
+        res.json(chats);
+      });
 });
 
-/* GET SINGLE CHAT BY ID */
-router.get('/:id', function(req, res, next) {
-  Chat.findById(req.params.id, function (err, post) {
+router.get('/:id', (req, res, next) => {
+  Chat.findById(req.params.id, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* SAVE CHAT */
-router.post('/', function(req, res, next) {
-  Chat.create(req.body, function (err, post) {
+router.post('/', (req, res, next) => {
+  Chat.create(req.body, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* UPDATE CHAT */
-router.put('/:id', function(req, res, next) {
-  Chat.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.put('/:id', (req, res, next) => {
+  Chat.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* DELETE CHAT */
-router.delete('/:id', function(req, res, next) {
-  Chat.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+router.delete('/:id', (req, res, next) => {
+  Chat.findByIdAndRemove(req.params.id, req.body, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });
