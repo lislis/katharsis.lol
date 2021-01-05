@@ -34,7 +34,10 @@
       </form>
 
       <h3>Vorstellung exportieren</h3>
-
+      <p>Alle Chats der "Bühne" exportieren, die gerade existieren.</p>
+      <form id="exportStageForm">
+        <button type="submit">Vorstellung exportieren</button>
+      </form>
     </section>
 
     <section>
@@ -181,6 +184,33 @@
        alert(result.message);
        formElem.value = "";
      };
+
+     document.querySelector('#exportStageForm').onsubmit = async (e) => {
+       e.preventDefault();
+
+       let response = await fetch(`${CONFIG.SERVER}/api/room/main`);
+       let rooms = await response.json();
+       let mainstage = rooms.filter(x => x.locked == true);
+       console.log(mainstage)
+
+       let chatResponse = await fetch(`${CONFIG.SERVER}/api/chat/${mainstage[0]._id}`);
+       let blob = await chatResponse.blob();
+       const url = URL.createObjectURL(blob);
+
+       const a = document.createElement('a');
+       a.href = url;
+       const d = new Date();
+       a.download = `katharsislol-download-${ d.getTime() }`;
+
+       const clickHandler = () => {
+         setTimeout(() => {
+           URL.revokeObjectURL(url);
+           this.removeEventListener('click', clickHandler);
+         }, 150);
+       };
+       a.addEventListener('click', clickHandler, false);
+       a.click();
+     }
 
 
      document.querySelector('#fillMainRoomForm').onsubmit = async (e) => {
