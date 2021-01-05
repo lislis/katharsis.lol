@@ -13,7 +13,7 @@ const BOTBRAIN = process.env['BOTBRAIN'];
 router.post('/onstage', function(req, res, next) {
     Promise.all([
         Room.find({ main: true, locked: false}).exec(),
-        User.find({ hasPermission: false }).exec()
+        User.find({ hasPermission: false, isMod: false }).exec()
     ]).then(async values => {
         let room  = values[0][0];
         if (values[1].length > 0) {
@@ -44,7 +44,7 @@ router.post('/onstage', function(req, res, next) {
 router.post('/offstage', function(req, res, next) {
     Promise.all([
         Room.find({ main: true, locked: false}).exec(),
-        User.find({ hasPermission: true }).exec()
+        User.find({ hasPermission: true, isMod: false }).exec()
     ]).then(async values => {
         let room  = values[0][0];
 

@@ -126,8 +126,21 @@
         <button type="submit">Alle User löschen</button>
       </form>
       <h3>User zu Moderator machen</h3>
+      <form id="user2ModForm">
+        <label>
+          <span>User id</span>
+          <input type="text" name="user2modid" id="user2modid" placeholder="">
+          <button type="submit">User zu Moderator machen</button>
+        </label>
+      </form>
       <h3>Moderator zu User machen</h3>
-
+      <form id="mod2UserForm">
+        <label>
+          <span>User id</span>
+          <input type="text" name="mod2userid" id="mod2userid" placeholder="">
+          <button type="submit">Moderator zu machen</button>
+        </label>
+      </form>
     </section>
 
     <script src="js/functions.js"></script>
@@ -244,8 +257,10 @@
              elem.value = '';
            })
          })
-
      }
+
+     changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:');
+     changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:');
 
 
     </script>

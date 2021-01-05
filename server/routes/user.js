@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var User = require('../models/User.js');
-var Chat = require('../models/Chat.js');
-var Room = require('../models/Room.js');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const User = require('../models/User.js');
+const Chat = require('../models/Chat.js');
+const Room = require('../models/Room.js');
 
 router.put('/on/:uid', async function(req, res, next) {
   const opt = { hasPermission: true };
@@ -52,6 +52,23 @@ router.put('/off/:uid', async function(req, res, next) {
   }
 });
 
+router.post('/user2mod/:uid', async (req, res, next) => {
+    const opt = { isMod: true };
+    console.log(req.body);
+    console.log(req.params);
+    let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
+        if (err) return next(err);
+        res.json(user);
+    });
+});
+
+router.post('/mod2user/:uid', async (req, res, next) => {
+    const opt = { isMod: false };
+    let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
+        if (err) return next(err);
+        res.json(user);
+    });
+});
 
 /* GET ALL USERS */
 router.get('/', function(req, res, next) {
