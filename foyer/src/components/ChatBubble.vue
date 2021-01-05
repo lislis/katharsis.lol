@@ -5,6 +5,9 @@
     <div class="chat__message-inner">
       <header v-if="message.user">
         <span>{{getUserName(message.user)}}</span>
+        <span v-if="message.user.isMod"
+              title="Moderator"
+              aria-label="Moderator"> (🦮)</span>
       </header>
       <p class="chat__message-bubble" >
         <span>
