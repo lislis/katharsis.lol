@@ -52,3 +52,23 @@ async function changeUserProperty(formId, inputId, endpoint, message) {
     inputElem.value = "";
   }
 }
+
+
+async function buildImportFunction(formId, inputId, endpoint) {
+  document.querySelector(formId).onsubmit = async (e) => {
+    e.preventDefault();
+    const inputElem = document.querySelector(inputId);
+
+    let response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({ csvUrl: inputElem.value })
+    });
+    let result = await response.json();
+
+    alert(result.message);
+    inputElem.value = "";
+  };
+}

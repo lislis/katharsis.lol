@@ -4,6 +4,7 @@ const random = require('random');
 function fillPlaceholders(origObj, values, params) {
     let obj;
     let output;
+
     if (origObj.length) {
         obj = origObj[0];
     } else {

@@ -1,7 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Word = require('../models/Word.js');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+
+const { runWordParser } = require('../lib/csvparser.js');
+const Word = require('../models/Word.js');
 
 router.get('/bytype/:type', function(req, res, next) {
     Word
@@ -16,10 +18,20 @@ router.get('/bytype/:type', function(req, res, next) {
         });
 });
 
+router.post('/bulkimport', (req, res, next) => {
+    if (req.body.hasOwnProperty('csvUrl') && req.body.csvUrl !== '') {
+        runWordParser(req.body.csvUrl).then(datas => {
+            Promise.all(
+                datas.map(data => Word.create(data))
+            ).then(_ => {
+                res.json({ message: "Word import finished!" });
+            });
+        });
+    } else {
+        res.json({ message: "No url to csv given" });
+    }
+});
 
-
-
-// all the
 router.get('/', function(req, res, next) {
     Word.find(function (err, post) {
         if (err) return next(err);
@@ -27,7 +39,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/* GET SINGLE CHAT BY ID */
 router.get('/:id', function(req, res, next) {
     Word.findById(req.params.id, function (err, post) {
         if (err) return next(err);
@@ -35,7 +46,6 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-/* SAVE CHAT */
 router.post('/', function(req, res, next) {
     Word.create(req.body, function (err, post) {
         if (err) return next(err);
@@ -43,7 +53,6 @@ router.post('/', function(req, res, next) {
     });
 });
 
-/* UPDATE CHAT */
 router.put('/:id', function(req, res, next) {
     Word.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
@@ -51,7 +60,6 @@ router.put('/:id', function(req, res, next) {
     });
 });
 
-/* DELETE CHAT */
 router.delete('/:id', function(req, res, next) {
     Word.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);

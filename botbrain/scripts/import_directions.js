@@ -18,7 +18,7 @@ fs.createReadStream(inputFile)
 
         let data = {
             direction_type: meta[0],
-            text: csvrow['Directions']
+            text: csvrow['Anweisung']
         };
 
         if (meta[1]) {

@@ -68,6 +68,13 @@
     <section>
       <h2>Wörter und Anweisungen</h2>
       <h3>Wörter importieren</h3>
+      <form id="importWordsForm">
+        <label>
+          <span>Url zum Wörter CSV</span>
+          <input type="url" name="wordcsvurl" id="wordcsvurl">
+        </label>
+        <button type="submit">Wörter importieren</button>
+      </form>
       <h3>Wort löschen</h3>
       <p><a href="/api/word" class="js-botname" target="_blank">Liste aller Wörter</a></p>
       <form id="deleteWordForm">
@@ -82,6 +89,13 @@
         <button type="submit">Alle Wörter löschen</button>
       </form>
       <h3>Anweisungen importieren</h3>
+      <form id="importDirectionsForm">
+        <label>
+          <span>Url zum Anweisung CSV</span>
+          <input type="url" name="directioncsvurl" id="directioncsvurl">
+        </label>
+        <button type="submit">Anweisungen importieren</button>
+      </form>
       <h3>Anweisung löschen</h3>
       <p><a href="/api/direction" class="js-botname" target="_blank">Liste aller Anweisungen</a></p>
       <form id="deleteDirectionForm">
@@ -187,7 +201,6 @@
        });
 
        [...document.querySelectorAll('.js-botname')].map(x => {
-         console.log(x.href, window.location.origin, CONFIG.BOTBRAIN)
          x.href = CONFIG.BOTBRAIN + x.href.replace(window.location.origin, "");
        });
 
@@ -206,11 +219,11 @@
        changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:');
        changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:');
 
-     }
+       buildImportFunction('#importWordsForm', '#wordcsvurl', `${CONFIG.BOTBRAIN}/api/word/bulkimport`);
+       buildImportFunction('#importDirectionsForm', '#directioncsvurl', `${CONFIG.BOTBRAIN}/api/direction/bulkimport`);
 
-     init();
 
-     document.querySelector('#startScheduleForm').onsubmit = async (e) => {
+       document.querySelector('#startScheduleForm').onsubmit = async (e) => {
        e.preventDefault();
 
        let formElem = document.querySelector('#scheduleUrl');
@@ -326,6 +339,9 @@
          })
      }
 
+     }
+
+     init();
     </script>
   </body>
 </html>
