@@ -69,10 +69,32 @@
       <h2>Wörter und Anweisungen</h2>
       <h3>Wörter importieren</h3>
       <h3>Wort löschen</h3>
+      <p><a href="/api/word" class="js-botname" target="_blank">Liste aller Wörter</a></p>
+      <form id="deleteWordForm">
+        <label>
+          <span>Wort id</span>
+          <input type="text" name="deletewordid" id="deletewordid" placeholder="">
+          <button type="submit">Wort löschen</button>
+        </label>
+      </form>
       <h3>Alle Wörter löschen</h3>
+      <form id="deleteAllWordsForm">
+        <button type="submit">Alle Wörter löschen</button>
+      </form>
       <h3>Anweisungen importieren</h3>
       <h3>Anweisung löschen</h3>
+      <p><a href="/api/direction" class="js-botname" target="_blank">Liste aller Anweisungen</a></p>
+      <form id="deleteDirectionForm">
+        <label>
+          <span>Anweisung id</span>
+          <input type="text" name="deletedirectionid" id="deletedirectionid" placeholder="">
+          <button type="submit">Anweisung löschen</button>
+        </label>
+      </form>
       <h3>Alle Anweisungen löschen</h3>
+      <form id="deleteAllDirectionsForm">
+        <button type="submit">Alle Anweisungen löschen</button>
+      </form>
     </section>
 
     <section>
@@ -149,21 +171,44 @@
     <script src="js/functions.js"></script>
     <script>
      let CONFIG = {};
-     fetch('env.txt')
-       .then(r => r.text())
-       .then(d => {
-         d.split('\n').forEach(x => {
-           if (x !== '') {
-             let parts = x.split("=");
-             CONFIG[parts[0]] = parts[1];
-           }
-         });
+     async function init() {
+       let resp = await fetch('env.txt');
+       let text = await resp.text();
+       text.split('\n').forEach(x => {
+         if (x !== '') {
+           let parts = x.split("=");
+           CONFIG[parts[0]] = parts[1];
+         }
+       });
 
-         [...document.querySelectorAll('.js-servername')].map(x => {
-           console.log(CONFIG.SERVER, window.location )
-           x.href = CONFIG.SERVER + x.href.replace(window.location.origin, "");
-         });
-       })
+
+       [...document.querySelectorAll('.js-servername')].map(x => {
+         x.href = CONFIG.SERVER + x.href.replace(window.location.origin, "");
+       });
+
+       [...document.querySelectorAll('.js-botname')].map(x => {
+         console.log(x.href, window.location.origin, CONFIG.BOTBRAIN)
+         x.href = CONFIG.BOTBRAIN + x.href.replace(window.location.origin, "");
+       });
+
+       buildDeleteFunction('#deleteRoomForm', '#deleteroomid', `${CONFIG.SERVER}/api/room/`, 'Raum gelöscht:');
+       buildDeleteFunction('#deleteChatForm', '#deletechatid', `${CONFIG.SERVER}/api/chat/`, 'Chat gelöscht:');
+       buildDeleteFunction('#deleteUserForm', '#deleteuserid', `${CONFIG.SERVER}/api/user/`, 'User gelöscht:');
+       buildDeleteFunction('#deleteWordForm', '#deletewordid', `${CONFIG.BOTBRAIN}/api/word/`, 'Wort gelöscht:');
+       buildDeleteFunction('#deleteDirectionForm', '#deletedirectionid', `${CONFIG.BOTBRAIN}/api/direction/`, 'Anweisung gelöscht:');
+
+       buildDeleteAllFunction('#deleteAllRoomsForm', `${CONFIG.SERVER}/api/room/`, 'Alle Räume gelöscht!');
+       buildDeleteAllFunction('#deleteAllChatsForm', `${CONFIG.SERVER}/api/chat/`, 'Alle Chats gelöscht!');
+       buildDeleteAllFunction('#deleteAllUsersForm', `${CONFIG.SERVER}/api/user/`, 'Alle User gelöscht!');
+       buildDeleteAllFunction('#deleteAllWordsForm', `${CONFIG.BOTBRAIN}/api/word/`, 'Alle Wörter gelöscht!');
+       buildDeleteAllFunction('#deleteAllDirectionsForm', `${CONFIG.BOTBRAIN}/api/direction/`, 'Alle Anweisungen gelöscht!');
+
+       changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:');
+       changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:');
+
+     }
+
+     init();
 
      document.querySelector('#startScheduleForm').onsubmit = async (e) => {
        e.preventDefault();
@@ -262,14 +307,6 @@
      }
 
 
-     buildDeleteFunction('#deleteRoomForm', '#deleteroomid', `/api/room/`, 'Raum gelöscht!');
-     buildDeleteFunction('#deleteChatForm', '#deletechatid', `/api/chat/`, 'Chat gelöscht!');
-     buildDeleteFunction('#deleteUserForm', '#deleteuserid', '/api/user/', 'User gelöscht!');
-
-     buildDeleteAllFunction('#deleteAllRoomsForm', '/api/room', 'Alle Räume gelöscht!');
-     buildDeleteAllFunction('#deleteAllChatsForm', '/api/chat', 'Alle Chats gelöscht!');
-     buildDeleteAllFunction('#deleteAllUsersForm', '/api/user', 'Alle User gelöscht!');
-
      document.querySelector('#deleteChatsForRoomForm').onsubmit = async (e) => {
        e.preventDefault();
        let elem = document.querySelector('#deletechatforroomid');
@@ -288,10 +325,6 @@
            })
          })
      }
-
-     changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:');
-     changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:');
-
 
     </script>
   </body>
