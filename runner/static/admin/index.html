@@ -226,22 +226,28 @@
      buildDeleteFunction('#deleteRoomForm', '#deleteroomid', `/api/room/`, 'Raum gelöscht!');
      buildDeleteFunction('#deleteChatForm', '#deletechatid', `/api/chat/`, 'Chat gelöscht!');
 
-     document.querySelector('#deleteAllRoomsForm').onsubmit = async (e) => {
-       e.preventDefault();
-         fetch(`${CONFIG.SERVER}/api/room`)
+     async function buildDeleteAllFunction(formId, apiEndpoint, message) {
+       document.querySelector(formId).onsubmit = async (e) => {
+         e.preventDefault();
+         fetch(`${CONFIG.SERVER}${apiEndpoint}`)
            .then(r => r.json())
            .then(values =>  {
              Promise.all(
                values.map(x => {
-                 fetch(`${CONFIG.SERVER}/api/room/${x._id}`, {
+                 fetch(`${CONFIG.SERVER}${apiEndpoint}/${x._id}`, {
                    method: 'DELETE'
                  }).then(resp => resp.json())
                })
              ).then(_ => {
-               alert("Alle Räume gelöscht!")
+               alert(message)
              })
            })
+       }
      }
+
+     buildDeleteAllFunction('#deleteAllRoomsForm', '/api/room', 'Alle Räume gelöscht!');
+     buildDeleteAllFunction('#deleteAllChatsForm', '/api/chat', 'Alle Chats gelöscht!');
+
 
     </script>
   </body>
