@@ -112,10 +112,22 @@
 
     <section>
       <h2>User</h2>
+      <p><a href="/api/user" class="js-servername" target="_blank">Liste aller User</a></p>
       <h3>User löschen</h3>
+      <form id="deleteUserForm">
+        <label>
+          <span>User id</span>
+          <input type="text" name="deleteuserid" id="deleteuserid" placeholder="">
+          <button type="submit">User löschen</button>
+        </label>
+      </form>
+      <h3>Alle User löschen (inkl Moderatoren)</h3>
+      <form id="deleteAllUsersForm">
+        <button type="submit">Alle User löschen</button>
+      </form>
       <h3>User zu Moderator machen</h3>
       <h3>Moderator zu User machen</h3>
-      <h3>Alle User löschen</h3>
+
     </section>
 
     <script src="js/functions.js"></script>
@@ -209,9 +221,11 @@
 
      buildDeleteFunction('#deleteRoomForm', '#deleteroomid', `/api/room/`, 'Raum gelöscht!');
      buildDeleteFunction('#deleteChatForm', '#deletechatid', `/api/chat/`, 'Chat gelöscht!');
+     buildDeleteFunction('#deleteUserForm', '#deleteuserid', '/api/user/', 'User gelöscht!');
 
      buildDeleteAllFunction('#deleteAllRoomsForm', '/api/room', 'Alle Räume gelöscht!');
      buildDeleteAllFunction('#deleteAllChatsForm', '/api/chat', 'Alle Chats gelöscht!');
+     buildDeleteAllFunction('#deleteAllUsersForm', '/api/user', 'Alle User gelöscht!');
 
      document.querySelector('#deleteChatsForRoomForm').onsubmit = async (e) => {
        e.preventDefault();
