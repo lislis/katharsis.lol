@@ -5,7 +5,7 @@ const User = require('../models/User.js');
 const Chat = require('../models/Chat.js');
 const Room = require('../models/Room.js');
 
-router.put('/on/:uid', async function(req, res, next) {
+router.post('/on/:uid', async function(req, res, next) {
   const opt = { hasPermission: true };
 
   Promise.all([
@@ -27,7 +27,7 @@ router.put('/on/:uid', async function(req, res, next) {
   }).catch(e => e.stack);
 });
 
-router.put('/off/:uid', async function(req, res, next) {
+router.post('/off/:uid', async function(req, res, next) {
   const opt = { hasPermission: false };
   try {
     Promise.all([

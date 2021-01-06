@@ -92,7 +92,7 @@ router.post('/category', function(req, res, next) {
         let room = values[0][0];
         let botMsg = values[1].data[0];
 
-        console.log("bot says, ", botMsg)
+        //console.log("bot says, ", botMsg)
         if (botMsg !== null && botMsg !== "") {
             let chatMsg = { message: botMsg,
                             room: room._id,
@@ -110,6 +110,23 @@ router.post('/category', function(req, res, next) {
         } else {
             res.json({mesage: `Nothing matched category ${req.body.category}, skipping`})
         }
+    }).catch(e => console.log(e));
+});
+
+router.post('/theend', (req, res, next) => {
+    Promise.all([
+        Room.find({main: true, locked: true}).exec()
+    ]).then(values => {
+        let room = values[0][0];
+        let chatMsg = { message: "KATHARSIS.LOL - The end",
+                        room: room._id,
+                        bot: true
+                      };
+        Chat.create(chatMsg, (err, msg) => {
+            if (err) return next(err);
+            req.app.io.emit('new-message', { message: msg });
+            res.json(msg);
+        });
     }).catch(e => console.log(e));
 });
 

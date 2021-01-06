@@ -180,6 +180,22 @@
           <button type="submit">Moderator zu machen</button>
         </label>
       </form>
+      <h3>User auf die "Bühne" holen</h3>
+      <form id="user2stageForm">
+        <label>
+          <span>User id</span>
+          <input type="text" name="user2stageid" id="user2stageid" placeholder="">
+          <button type="submit">User onstage</button>
+        </label>
+      </form>
+      <h3>User von der "Bühne" holen</h3>
+      <form id="userOffstageForm">
+        <label>
+          <span>User id</span>
+          <input type="text" name="useroffstageid" id="useroffstageid" placeholder="">
+          <button type="submit">User offstage</button>
+        </label>
+      </form>
     </section>
 
     <script src="js/functions.js"></script>
@@ -216,8 +232,10 @@
        buildDeleteAllFunction('#deleteAllWordsForm', `${CONFIG.BOTBRAIN}/api/word/`, 'Alle Wörter gelöscht!');
        buildDeleteAllFunction('#deleteAllDirectionsForm', `${CONFIG.BOTBRAIN}/api/direction/`, 'Alle Anweisungen gelöscht!');
 
-       changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:');
-       changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:');
+       changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:', 'POST');
+       changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:', 'POST');
+       changeUserProperty('#user2stageForm', '#user2stageid', '/api/user/on/', 'Auf die Bühne:', 'POST');
+       changeUserProperty('#userOffstageForm', '#useroffstageid', '/api/user/off/', 'Runter von der Bühne:', 'POST');
 
        buildImportFunction('#importWordsForm', '#wordcsvurl', `${CONFIG.BOTBRAIN}/api/word/bulkimport`);
        buildImportFunction('#importDirectionsForm', '#directioncsvurl', `${CONFIG.BOTBRAIN}/api/direction/bulkimport`);

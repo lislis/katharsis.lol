@@ -24,6 +24,9 @@ function createJobFromRow(row, jobNumber, otherPath) {
     case 'cleanEverything':
       job.path = path.join(otherPath, 'jobs', `cleanEverything.js`);
       break;
+    case 'theEnd':
+      job.path = path.join(otherPath, 'jobs', `endOfSchedule.js`);
+      break;
     case 'exportPlay':
       job.path = path.join(otherPath, 'jobs', `exportPlay.js`);
       break;
@@ -37,13 +40,8 @@ function createJobFromRow(row, jobNumber, otherPath) {
       job.path = path.join(otherPath, 'jobs', `getCat.js`);
   }
 
-  if (row['timeout'] === 'TRUE') {
-    timeCounter = timeCounter + parseInt(row['time'], 10);
-    job.timeout = timeCounter + 's';
-  }
-  if (row['interval'] === 'TRUE') {
-    job.interval = parseInt(row['time']) + 's';
-  }
+  timeCounter = timeCounter + parseInt(row['time'], 10);
+  job.timeout = timeCounter + 's';
 
   return job;
 }

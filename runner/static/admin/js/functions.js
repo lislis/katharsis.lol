@@ -35,13 +35,13 @@ async function buildDeleteAllFunction(formId, apiEndpoint, message) {
   }
 }
 
-async function changeUserProperty(formId, inputId, endpoint, message) {
+async function changeUserProperty(formId, inputId, endpoint, message, method) {
   document.querySelector(formId).onsubmit = async (e) => {
     e.preventDefault();
     let inputElem = document.querySelector(inputId);
 
     let response = await fetch(CONFIG.SERVER + endpoint + inputElem.value, {
-      method: 'POST',
+      method: method,
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },

@@ -9,18 +9,6 @@ const app = express();
 const server = require('http').createServer(app);
 const routes = require('./routes/index.js');
 
-/*
-const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-console.log(`mongodb://${MONGO_HOST}/${MONGO_DB}`)
-mongoose.connect(`mongodb://${MONGO_HOST}/${MONGO_DB}`, {
-  promiseLibrary: require('bluebird'),
-  useNewUrlParser: true,
-  useUnifiedTopology: true })
-       .then(() =>  console.log('connection succesful'))
-       .catch((err) => console.error(err));
-*/
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");

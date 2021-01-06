@@ -11,6 +11,8 @@ async function run(url) {
     return createJobFromRow(v, k, __dirname);
   });
 
+  jobList.push(createJobFromRow({direction: 'theEnd', time: 10}, parsedData.length, __dirname));
+
   startBreeScheduler(jobList);
 }
 
