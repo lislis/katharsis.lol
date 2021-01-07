@@ -20,11 +20,13 @@
  import Chat from '@/components/Chat.vue'
  import axios from 'axios'
  import {saveUserToStore} from '@/lib/storage'
+ import Loader from '@/components/Loader'
 
  export default {
    name: "MainRoom",
    components: {
      Chat,
+     Loader
    },
    data() {
      return {

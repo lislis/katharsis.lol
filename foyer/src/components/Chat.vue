@@ -32,32 +32,20 @@
    created() {
      this.updateScroll();
 
-     this.$root.$data.socket.on('new-message', function (data) {
-       this.updateScroll()
-     }.bind(this))
+     this.$root.$data.socket.on('new-message', (data) => {
+       this.updateScroll();
+     })
    },
    methods: {
      updateScroll(){
-       //if (this.$el) {
          setTimeout(() => {
            var element = this.$el.querySelector('.chat__messages');
            element.scrollTop = element.scrollHeight;
          }, 500);
-      // }
      }
    }
  }
 </script>
 
 <style>
- .chat {
-   width: 100%;
- }
- .chat__messages {
-   list-style: none;
-   margin: 0;
-   padding: 0;
-   height: 70vh;
-   overflow-y: scroll;
- }
 </style>

@@ -1,12 +1,15 @@
 <template>
-  <div class="lds-ripple"><div></div><div></div></div>
+  <div aria-label="loading" class="loader__container"><div class="lds-ripple"><div></div><div></div></div></div>
 </template>
 <script>
-  export default {
-    name: "Loader"
-  }
+ export default {
+   name: "Loader"
+ }
 </script>
-<style>
+<style scoped>
+ .loader__container {
+   text-align: center
+ }
  .lds-ripple {
    display: inline-block;
    position: relative;

@@ -4,6 +4,9 @@ export const messages = {
             claim: "Untertitel oder claim",
             watch: "Zusehen",
             participate: "Teilnehmen"
+        },
+        spec: {
+            title: "Zuschauerraum"
         }
     },
     en: {
@@ -11,6 +14,9 @@ export const messages = {
             claim: "Subtitle or claim",
             watch: "Watch",
             participate: "Participate"
+        },
+        spec: {
+            title: "Spectator room"
         }
     }
 }

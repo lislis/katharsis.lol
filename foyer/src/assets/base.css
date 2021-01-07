@@ -1,7 +1,11 @@
 :root {
   --bg-main: #ddd;
   --bg-footer: #eee;
+  --bg-shade: #bbb;
   --bg-document: #a200a7;
+  --a-main: #840388;
+  scrollbar-color: var(--bg-document) var(--bg-main);
+  scrollbar-width: thin;
 }
 
 html {
@@ -31,8 +35,8 @@ footer {
 
 .inner {
   max-width: 65rem;
-  margin: 2rem auto;
-  padding: 2rem 1rem;
+  margin: 1rem auto;
+  padding: 1rem 1rem;
 }
 
 .btn {
@@ -54,6 +58,10 @@ footer {
   margin-left: 2rem;
 }
 
+a {
+  color: var(--a-main);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -61,6 +69,31 @@ footer {
   padding: 0 1rem;
   background-color: #88b378;
 }
+
+.nav {
+}
+
+.nav a {
+  display: inline-block;
+  padding: .7rem .7rem .4rem;
+  margin-right: 1rem;
+  margin-left: -0.7rem;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 200ms ease;
+}
+
+.nav a:hover,
+.nav a:active {
+  background-color: var(--bg-shade);
+}
+
+.nav__title {
+  text-transform: uppercase;
+}
+
+
 .navigation {
   display: flex;
 }
@@ -76,4 +109,35 @@ footer {
 
 h2 {
   margin-top: 0;
+}
+
+
+.chat {
+  width: 100%;
+}
+.chat__messages {
+  background-color: var(--bg-footer);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 70vh;
+  overflow-y: scroll;
+  scrollbar-color: var(--bg-document) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar
+{
+  width: 8px;  /* for vertical scrollbars */
+  height: 8px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: var(--bg-document);
 }
