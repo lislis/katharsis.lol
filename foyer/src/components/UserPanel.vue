@@ -34,7 +34,7 @@
                      deleteUserFromStorage()
 
                      self.$router.push({
-                       name: 'intro'
+                       name: 'index'
                      })
                    })
                    .catch(e => { console.log(e) })

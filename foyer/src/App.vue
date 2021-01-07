@@ -1,14 +1,19 @@
 <template>
   <div class="app">
     <AppHeader :notifications="notifications" />
-    <div class="navigation" v-if="user.nickname">
-      <router-link :to="{name: 'main'}">Main</router-link>
-      <router-link :to="{name: 'roomlist'}">Räume</router-link>
-      <router-link :to="{name: 'peoplelist'}">Leute</router-link></div>
     <main>
       <router-view />
     </main>
-    <footer><p>Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a></p></footer>
+    <footer>
+      <div class="inner">
+        <p>Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a></p>
+        <div class="locale-changer">
+          <select v-model="$i18n.locale">
+            <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
+          </select>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -92,37 +97,7 @@
 </script>
 
 <style>
- body {
-   overflow-x: hidden;
- }
- .header {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 0 1rem;
-   background-color: #88b378;
- }
- .navigation {
-   display: flex;
- }
- .navigation a:first-of-type {
-   flex-grow: 1;
- }
-
- .navigation a {
-   display: inline-block;
-   margin-right: 1rem;
-   padding: 1rem;
- }
-
- .router-link-active {
-   background-color: lightgrey;
- }
- main {
-   background-color: lightgrey;
- }
- h2 {
-   margin-top: 0;
- }
+ @import './assets/reboot.css';
+ @import './assets/base.css';
 
 </style>

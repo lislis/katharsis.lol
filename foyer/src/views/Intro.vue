@@ -71,16 +71,5 @@
   }
 </script>
 <style>
- .btn {
-   display: inline-block;
-   background-color: hotpink;
-   color: black;
-   padding: 0.5rem 1rem;
-   text-decoration: none;
-   border-radius: 4px;
- }
- .btn:hover,
- .btn:active {
-   background-color: pink;
- }
+
 </style>

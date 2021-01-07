@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router"
+import Index from '@/views/Index'
 import Intro from '@/views/Intro'
 import Main from '@/views/MainRoom'
 import Room from '@/views/Room'
@@ -8,6 +9,11 @@ import PeopleList from '@/views/PeopleList'
 const routes = [
   {
     path: '/',
+    name: 'index',
+    component: Index
+  },
+  {
+    path: '/signin',
     name: 'intro',
     component: Intro
   },

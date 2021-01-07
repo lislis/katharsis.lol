@@ -10,6 +10,11 @@
         <button @click.prevent="removeNotification(id)"
                 type="button">x</button></div>
     </div>
+    <nav class="navigation" v-if="$root.$data.user.nickname">
+      <router-link :to="{name: 'main'}">Main</router-link>
+      <router-link :to="{name: 'roomlist'}">Räume</router-link>
+      <router-link :to="{name: 'peoplelist'}">Leute</router-link>
+    </nav>
   </div>
 </template>
 <script>
