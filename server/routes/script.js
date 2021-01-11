@@ -10,7 +10,7 @@ const random = require('random');
 
 const BOTBRAIN = process.env['BOTBRAIN'];
 
-router.post('/onstage', function(req, res, next) {
+router.post('/onstage', (req, res, next) => {
     Promise.all([
         Room.find({ main: true, locked: false}).exec(),
         User.find({ hasPermission: false, isMod: false }).exec()
@@ -26,12 +26,13 @@ router.post('/onstage', function(req, res, next) {
                                 room: room._id,
                                 created_date: new Date()
                               };
-                Chat.create(chatMsg, function(err, chat) {
+                Chat.create(chatMsg, (err, chat) => {
                     if (err) return next(err);
+                    req.log.info(chat);
                     req.app.io.emit('user-to-stage', { message: user });
                     req.app.io.emit('new-message', { message: chat });
                     res.json(user);
-                });
+                })
             } else {
                 res.json({message: 'user not actually valid'});
             }
@@ -41,7 +42,7 @@ router.post('/onstage', function(req, res, next) {
     }).catch(e => e.stack);
 });
 
-router.post('/offstage', function(req, res, next) {
+router.post('/offstage', (req, res, next) => {
     Promise.all([
         Room.find({ main: true, locked: false}).exec(),
         User.find({ hasPermission: true, isMod: false }).exec()
@@ -58,52 +59,55 @@ router.post('/offstage', function(req, res, next) {
                                 room: room._id,
                                 created_date: new Date()
                               };
-                Chat.create(chatMsg, function(err, chat) {
+                Chat.create(chatMsg, (err, chat) => {
                     if (err) return next(err);
+                    req.log.info(chat);
                     req.app.io.emit('user-to-stage', { message: user });
                     req.app.io.emit('new-message', { message: chat });
                     res.json(user);
                 });
             }
         } else {
+            req.log.info('No user available to put on stage');
             res.json({message: 'could not find valid users'});
         }
     }).catch(e => e.stack);
 });
 
-router.post('/cleanStage', function(req, res, next) {
+router.post('/cleanStage', (req, res, next) => {
     Promise.all([
         Room.find({main: true, locked: true}).exec()
     ]).then(values => {
         let room = values[0][0];
-
-        Chat.deleteMany({room: room._id}, function(err, msg) {
-
+        Chat.deleteMany({room: room._id}, (err, msg) => {
+            req.log.info('Stage cleared');
             res.json({message: "Cleared stage"})
         })
     }).catch(e => e.stack);
 })
 
-router.post('/category', function(req, res, next) {
+router.post('/category', (req, res, next) => {
+    let param = '';
+    if (req.body.numerus && req.body.numerus !== '') {
+        param = `?numerus=${req.body.numerus}`;
+    }
+
     Promise.all([
         Room.find({main: true, locked: true}).exec(),
-        axios.get(`${BOTBRAIN}/api/direction/bytype/${req.body.category}`)
+        axios.get(`${BOTBRAIN}/api/direction/bytype/${req.body.category}${param}`)
     ]).then(values => {
         let room = values[0][0];
         let botMsg = values[1].data[0];
 
-        //console.log("bot says, ", botMsg)
         if (botMsg !== null && botMsg !== "") {
             let chatMsg = { message: botMsg,
                             room: room._id,
                             bot: true
                           };
 
-            console.log("chat message is:  ", chatMsg);
-
-            Chat.create(chatMsg, function (err, msg) {
+            Chat.create(chatMsg, (err, msg) => {
                 if (err) return next(err);
-                console.log('new-message', msg);
+                req.log.info('new-message', msg);
                 req.app.io.emit('new-message', { message: msg });
                 res.json(msg);
             });
@@ -124,6 +128,7 @@ router.post('/theend', (req, res, next) => {
                       };
         Chat.create(chatMsg, (err, msg) => {
             if (err) return next(err);
+            req.log.info('new-message', msg);
             req.app.io.emit('new-message', { message: msg });
             res.json(msg);
         });
