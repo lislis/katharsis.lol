@@ -1,74 +1,84 @@
 <template>
-  <div>
-    <h1>Katharsis.lol</h1>
+  <article>
+    <OutSideNav />
+    <header class="inner">
+      <h1 class="part__title">{{ $t('part.title') }}</h1>
+    </header>
+    <section class="inner">
+      <div v-if="$root.$data.user.nickname">
+        <p>Dein Name ist
+          {{$root.$data.user.nickname}}</p>
 
-    <div v-if="$root.$data.user.nickname">
-      <p>Dein Name ist
-      {{$root.$data.user.nickname}}</p>
+        <router-link :to="{ name: 'room',
+                     params: { roomid: this.$root.$data.mainRoom._id }}">Zum Raum</router-link>
+      </div>
 
-      <router-link :to="{ name: 'room',
-                   params: { roomid: this.$root.$data.mainRoom._id }}">Zum Raum</router-link>
-    </div>
-
-    <template v-else>
-      <h4>Was ist dein Name?</h4>
-      <form @submit.prevent="onSubmit">
-        <div class="form-group row">
-          <input type="text" class="" v-model.trim="newUser.nickname"
-                 placeholder="Dein Nutzername">
-          <input type="submit" value="Eintreten" class="btn">
-        </div>
-      </form>
-    </template>
-  </div>
+      <template v-else>
+        <form @submit.prevent="onSubmit">
+          <div class="form-group row">
+            <label>
+              <span>{{$t('part.label')}}</span>
+              <input type="text" class="" v-model.trim="newUser.nickname"
+                     placeholder="nickname">
+            </label>
+            <input type="submit" value="Eintreten" class="btn">
+          </div>
+        </form>
+      </template>
+    </section>
+  </article>
 </template>
 <script>
  import axios from 'axios'
  import { saveUserToStore } from '@/lib/storage'
+ import OutSideNav from '@/components/OutSideNav'
 
-  export default {
-    name: "Intro",
-    data() {
-      return {
-        hasUser: false,
-        newUser: {},
-        errors: [],
-        chat: {}
-      }
-    },
-    created() {
-    },
-    methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        // ... create a user
-        axios.post(`${this.$root.$data.restServer}/api/user`, this.newUser)
-           .then(response => {
-             saveUserToStore(response.data)
-             this.$root.$data.user = response.data
-             this.$root.$data.socket.emit('save-user', response.data)
+ export default {
+   name: "Intro",
+   components: {
+     OutSideNav
+   },
+   data() {
+     return {
+       hasUser: false,
+       newUser: {},
+       errors: [],
+       chat: {}
+     }
+   },
+   created() {
+   },
+   methods: {
+     onSubmit(evt) {
+       evt.preventDefault()
+       // ... create a user
+       axios.post(`${this.$root.$data.restServer}/api/user`, this.newUser)
+          .then(response => {
+            saveUserToStore(response.data)
+            this.$root.$data.user = response.data
+            this.$root.$data.socket.emit('save-user', response.data)
 
-             //... join it
-             this.chat.room = this.$root.$data.mainRoom._id;
-             this.chat.nickname = this.$root.$data.user._id
-             this.chat.message = `${this.$root.$data.user.nickname} ist eingetreten`
+            //... join it
+            this.chat.room = this.$root.$data.mainRoom._id;
+            this.chat.nickname = this.$root.$data.user._id
+            this.chat.message = `${this.$root.$data.user.nickname} ist eingetreten`
 
-             axios.post(`${this.$root.$data.restServer}/api/chat`, this.chat)
-                  .then(response => {
-                    this.$root.$data.socket.emit('save-message', {
-                      ...this.chat,
-                      created_date: new Date()
-                    })
-                    this.$router.push({ name: 'main' })
-                  })
-                  .catch(e => { this.errors.push(e) })
-           })
-           .catch(e => {
-             console.log(e)
-           })
-      }
-    }
-  }
+            axios.post(`${this.$root.$data.restServer}/api/chat`, this.chat)
+                 .then(response => {
+                   this.$root.$data.socket.emit('save-message', {
+                     ...this.chat,
+                     created_date: new Date()
+                   })
+                   this.$router.push({ name: 'main' })
+                 })
+                 .catch(e => { this.errors.push(e) })
+          })
+          .catch(e => {
+            console.log(e)
+          })
+     }
+   }
+ }
 </script>
 <style>
 

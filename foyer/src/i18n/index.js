@@ -7,6 +7,10 @@ export const messages = {
         },
         spec: {
             title: "Zuschauerraum"
+        },
+        part: {
+            title: "Teilnehmen",
+            label: "Wer willst du sein?"
         }
     },
     en: {
@@ -17,6 +21,10 @@ export const messages = {
         },
         spec: {
             title: "Spectator room"
+        },
+        part: {
+            title: "Participate",
+            label: "Who do you want to be?"
         }
     }
 }

@@ -1,5 +1,8 @@
 <template>
+  <div>
+    <AppHeader />
   <div class="mainroom-view">
+
     <div class="mainroom-split">
       <Loader v-if="loading" />
       <template v-else>
@@ -15,18 +18,21 @@
       </template>
     </div>
   </div>
+  </div>
 </template>
 <script>
  import Chat from '@/components/Chat.vue'
  import axios from 'axios'
  import {saveUserToStore} from '@/lib/storage'
  import Loader from '@/components/Loader'
+ import AppHeader from '@/components/AppHeader'
 
  export default {
    name: "MainRoom",
    components: {
      Chat,
-     Loader
+     Loader,
+     AppHeader
    },
    data() {
      return {

@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <AppHeader :notifications="notifications" />
     <main>
       <router-view />
     </main>
@@ -20,7 +19,6 @@
 <script>
  import axios from 'axios'
  import io from 'socket.io-client'
- import AppHeader from '@/components/AppHeader'
  import Loader from '@/components/Loader'
  import { removeByAttr } from '@/lib/utils'
  import { loadUserFromStorage } from '@/lib/storage'
@@ -29,7 +27,6 @@
    name: 'App',
    components: {
      Loader,
-     AppHeader
    },
    data() {
      return {
