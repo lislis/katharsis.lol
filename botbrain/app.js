@@ -2,7 +2,8 @@ require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
+const pino = require('pino');
+const pinoHttp = require('pino-http');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -15,25 +16,26 @@ const MONGO_DB = process.env['MONGO_DB']
 //const MONGO_PORT = process.env['MONGO_PORT']
 const MONGO_HOST = process.env['MONGO_HOST']
 
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-console.log(`mongodb://${MONGO_HOST}/${MONGO_DB}`)
+logger.info(`[mongodb] mongodb://${MONGO_HOST}/${MONGO_DB}`);
 mongoose.connect(`mongodb://${MONGO_HOST}/${MONGO_DB}`, {
   promiseLibrary: require('bluebird'),
   useNewUrlParser: true,
   useUnifiedTopology: true })
-       .then(() =>  console.log('connection succesful'))
-       .catch((err) => console.error(err));
+      .then(() =>  logger.info('[mongodb] connection succesful'))
+      .catch((err) => logger.error(err));
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
-app.use(logger('dev'));
+app.use(pinoHttp);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -41,13 +43,13 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/api/direction', direction);
 app.use('/api/word', word);
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
