@@ -4,7 +4,7 @@ const SERVER = process.env['SERVER_URL']
 
 if (process.argv.length > 2) {
     const args = JSON.parse(process.argv[2]);
-    let postObj = {}
+    let postObj = {};
 
     if (args.category) {
         postObj.category = args.category;

@@ -35,12 +35,15 @@ function createJobFromRow(row, jobNumber, otherPath) {
       break;
     default:
       job.worker = {
-        argv: [JSON.stringify({ category: row['direction'] })]
+          argv: [JSON.stringify({
+              category: row['direction'].trim(),
+              numerus: row['numerus'].trim()
+          })]
       };
       job.path = path.join(otherPath, 'jobs', `getCat.js`);
   }
 
-  timeCounter = timeCounter + parseInt(row['time'], 10);
+    timeCounter = timeCounter + parseInt(row['time'], 10);
   job.timeout = timeCounter + 's';
 
   return job;
