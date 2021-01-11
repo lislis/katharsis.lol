@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const pino = require('pino');
-const pinoHttp = require('pino-http');
+const pinoHttp = require('pino-http')();
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -16,7 +16,11 @@ const MONGO_DB = process.env['MONGO_DB']
 //const MONGO_PORT = process.env['MONGO_PORT']
 const MONGO_HOST = process.env['MONGO_HOST']
 
-const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  mixin() {
+    return { app: '[botbrain]' }
+}});
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');

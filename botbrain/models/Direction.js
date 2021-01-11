@@ -1,6 +1,7 @@
-var mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var DirectionSchema = new mongoose.Schema({
+const DirectionSchema = new mongoose.Schema({
     text: { type: String },
     direction_type: { type: String },
     numerus: { type: String, enum: ['singular', 'plural']},

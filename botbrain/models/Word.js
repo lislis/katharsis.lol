@@ -1,6 +1,7 @@
-var mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var WordSchema = new mongoose.Schema({
+const WordSchema = new mongoose.Schema({
     text: { type: String },
     word_type: { type: String },
     flavor: { type: String },
