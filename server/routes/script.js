@@ -61,14 +61,14 @@ router.post('/offstage', (req, res, next) => {
                               };
                 Chat.create(chatMsg, (err, chat) => {
                     if (err) return next(err);
-                    req.log.info(chat);
+                    //req.log.info(chat);
                     req.app.io.emit('user-to-stage', { message: user });
                     req.app.io.emit('new-message', { message: chat });
                     res.json(user);
                 });
             }
         } else {
-            req.log.info('No user available to put on stage');
+            //req.log.info('No user available to put on stage');
             res.json({message: 'could not find valid users'});
         }
     }).catch(e => req.log.error(e));
@@ -80,11 +80,16 @@ router.post('/cleanStage', (req, res, next) => {
     ]).then(values => {
         let room = values[0][0];
         Chat.deleteMany({room: room._id}, (err, msg) => {
-            req.log.info('Stage cleared');
             res.json({message: "Cleared stage"})
         })
     }).catch(e => req.log.error(e));
-})
+});
+
+router.post('/cleanEverything', (req, res, next) => {
+    Chat.deleteMany((err, msg) => {
+        res.json({message: "Cleared chats"})
+    });
+});
 
 router.post('/category', (req, res, next) => {
     let param = '';

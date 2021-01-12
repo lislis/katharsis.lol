@@ -9,7 +9,7 @@ router.post('/runschedule', function(req, res, next) {
     if (req.body.hasOwnProperty('csvUrl') && req.body.csvUrl !== '') {
         run(req.body.csvUrl).then(r => {
             console.log("Schedule stated");
-            console.log(r);
+//            console.log(r);
             //res.json({ message: "Schedule started!" });
             //res.redirect('/');
         });

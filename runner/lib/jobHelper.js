@@ -5,9 +5,22 @@ const Bree = require('bree');
 const Graceful = require('@ladjs/graceful');
 const fs = require('fs');
 
-let timeCounter = 0;
 
-function createJobFromRow(row, jobNumber, otherPath) {
+function createJobListFromCSV(data, path) {
+    let timeCounter = 0;
+
+    let jobList = data.map((v, k) => {
+        return createJobFromRow(v, k, path, timeCounter);
+    });
+    jobList.push(createJobFromRow({direction: 'theEnd', time: 10}, data.length, path, timeCounter));
+
+    //
+    jobList.map(x => console.log(x.timeout))
+
+    return jobList;
+}
+
+function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
   let job = {};
   job.name = `job-no-${jobNumber}`;
 
@@ -60,4 +73,4 @@ function startBreeScheduler(jobList) {
   bree.start();
 }
 
-module.exports = { createJobFromRow, startBreeScheduler };
+module.exports = { createJobListFromCSV, startBreeScheduler };
