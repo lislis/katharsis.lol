@@ -5,106 +5,95 @@ const User = require('../models/User.js');
 const Chat = require('../models/Chat.js');
 const Room = require('../models/Room.js');
 
-router.post('/on/:uid', async function(req, res, next) {
+router.post('/on/:uid', (req, res, next) => {
   const opt = { hasPermission: true };
 
   Promise.all([
     Room.find({ main: true, locked: false}).exec(),
     User.findByIdAndUpdate(req.params.uid, opt).exec()
-  ]).then(async values => {
+  ]).then(values => {
     let room  = values[0][0];
     let user = values[1]
 
     Chat.create({ message: `${user.nickname} auf die Bühne!`,
                   room: room._id,
                   created_date: new Date()},
-                function(err, chat) {
+                (err, chat) => {
                   if (err) return next(err);
                   req.app.io.emit('user-to-stage', { message: user });
                   req.app.io.emit('new-message', { message: chat });
                   res.json(user)
     })
-  }).catch(e => e.stack);
+  }).catch(e => req.log.error(e));
 });
 
-router.post('/off/:uid', async function(req, res, next) {
+router.post('/off/:uid', (req, res, next) => {
   const opt = { hasPermission: false };
-  try {
-    Promise.all([
-      Room.find({ main: true, locked: false}).exec(),
-      User.findByIdAndUpdate(req.params.uid, opt).exec()
-    ]).then(async values => {
-      let room  = values[0][0];
-      let user = values[1]
+  Promise.all([
+    Room.find({ main: true, locked: false}).exec(),
+    User.findByIdAndUpdate(req.params.uid, opt).exec()
+  ]).then(values => {
+    let room  = values[0][0];
+    let user = values[1]
 
-      Chat.create({ message: `${user.nickname} runter von der Bühne!`,
-                    room: room._id,
-                    created_date: new Date()},
-                  function(err, chat) {
-                    if (err) return next(err);
-                    req.app.io.emit('user-to-stage', { message: user });
-                    req.app.io.emit('new-message', { message: chat });
-                    res.json(user)
-      })
-    });
-  } catch(e) {
-    e.stack;
-  }
-});
-
-router.post('/user2mod/:uid', async (req, res, next) => {
-    const opt = { isMod: true };
-    console.log(req.body);
-    console.log(req.params);
-    let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
-        if (err) return next(err);
-        res.json(user);
-    });
-});
-
-router.post('/mod2user/:uid', async (req, res, next) => {
-    const opt = { isMod: false };
-    let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
-        if (err) return next(err);
-        res.json(user);
-    });
-});
-
-/* GET ALL USERS */
-router.get('/', function(req, res, next) {
-  User.find(function (err, users) {
-    if (err) return next(err);
-    res.json(users);
+    Chat.create({ message: `${user.nickname} runter von der Bühne!`,
+                  room: room._id,
+                  created_date: new Date()},
+                (err, chat) => {
+                  if (err) return next(err);
+                  req.app.io.emit('user-to-stage', { message: user });
+                  req.app.io.emit('new-message', { message: chat });
+                  res.json(user)
+    }).catch(e => req.log.error(e));
   });
 });
 
-/* GET SINGLE USER BY ID */
-router.get('/:id', function(req, res, next) {
-  User.findById(req.params.id, function (err, user) {
+router.post('/user2mod/:uid', (req, res, next) => {
+  const opt = { isMod: true };
+  let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
     if (err) return next(err);
     res.json(user);
   });
 });
 
-/* SAVE USER */
-router.post('/', function(req, res, next) {
-  User.create(req.body, function (err, post) {
+router.post('/mod2user/:uid', (req, res, next) => {
+  const opt = { isMod: false };
+  let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
+    if (err) return next(err);
+    res.json(user);
+  });
+});
+
+router.get('/', (req, res, next) => {
+  User.find((err, users) => {
+    if (err) return next(err);
+    res.json(users);
+  });
+});
+
+router.get('/:id', (req, res, next) => {
+  User.findById(req.params.id, (err, user) => {
+    if (err) return next(err);
+    res.json(user);
+  });
+});
+
+router.post('/', (req, res, next) => {
+  User.create(req.body, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* UPDATE USER */
-router.put('/:id', function(req, res, next) {
-  User.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.put('/:id', (req, res, next) => {
+  User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* DELETE USER */
-router.delete('/:id', function(req, res, next) {
-  User.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+router.delete('/:id', (req, res, next) => {
+  User.findByIdAndRemove(req.params.id, req.body, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });

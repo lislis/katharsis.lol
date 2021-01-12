@@ -1,6 +1,7 @@
-var mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     nickname: String,
     hasPermission: { type: Boolean, default: false },
     isMod: { type: Boolean, default: false },

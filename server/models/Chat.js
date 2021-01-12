@@ -1,6 +1,7 @@
-var mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var ChatSchema = new mongoose.Schema({
+const ChatSchema = new mongoose.Schema({
     room: { type: Schema.Types.ObjectId, ref: 'Room' },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     bot: { type: Boolean, default: false },

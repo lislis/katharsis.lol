@@ -39,7 +39,7 @@ router.post('/onstage', (req, res, next) => {
         } else {
             res.json({message: 'could not find valid users'});
         }
-    }).catch(e => e.stack);
+    }).catch(e => req.log.error(e));
 });
 
 router.post('/offstage', (req, res, next) => {
@@ -71,7 +71,7 @@ router.post('/offstage', (req, res, next) => {
             req.log.info('No user available to put on stage');
             res.json({message: 'could not find valid users'});
         }
-    }).catch(e => e.stack);
+    }).catch(e => req.log.error(e));
 });
 
 router.post('/cleanStage', (req, res, next) => {
@@ -83,7 +83,7 @@ router.post('/cleanStage', (req, res, next) => {
             req.log.info('Stage cleared');
             res.json({message: "Cleared stage"})
         })
-    }).catch(e => e.stack);
+    }).catch(e => req.log.error(e));
 })
 
 router.post('/category', (req, res, next) => {
@@ -112,9 +112,9 @@ router.post('/category', (req, res, next) => {
                 res.json(msg);
             });
         } else {
-            res.json({mesage: `Nothing matched category ${req.body.category}, skipping`})
+            res.json({mesage: `Nothing matched category ${req.body.category}, skipping`});
         }
-    }).catch(e => console.log(e));
+    }).catch(e => req.log.error(e));
 });
 
 router.post('/theend', (req, res, next) => {
@@ -132,7 +132,7 @@ router.post('/theend', (req, res, next) => {
             req.app.io.emit('new-message', { message: msg });
             res.json(msg);
         });
-    }).catch(e => console.log(e));
+    }).catch(e => req.log.error(e));;
 });
 
 module.exports = router;
