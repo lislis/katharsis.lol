@@ -4,20 +4,17 @@ const dayjs = require('dayjs');
 const Bree = require('bree');
 const Graceful = require('@ladjs/graceful');
 const fs = require('fs');
-
+//const logger = require)
 
 function createJobListFromCSV(data, path) {
-    let timeCounter = 0;
+  let timeCounter = 0;
 
-    let jobList = data.map((v, k) => {
-        return createJobFromRow(v, k, path, timeCounter);
-    });
-    jobList.push(createJobFromRow({direction: 'theEnd', time: 10}, data.length, path, timeCounter));
+  let jobList = data.map((v, k) => {
+    return createJobFromRow(v, k, path, timeCounter);
+  });
+  jobList.push(createJobFromRow({direction: 'theEnd', time: 10}, data.length, path, timeCounter));
 
-    //
-    jobList.map(x => console.log(x.timeout))
-
-    return jobList;
+  return jobList;
 }
 
 function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
@@ -48,15 +45,15 @@ function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
       break;
     default:
       job.worker = {
-          argv: [JSON.stringify({
-              category: row['direction'].trim(),
-              numerus: row['numerus'].trim()
-          })]
+        argv: [JSON.stringify({
+          category: row['direction'].trim(),
+          numerus: row['numerus'].trim()
+        })]
       };
       job.path = path.join(otherPath, 'jobs', `getCat.js`);
   }
 
-    timeCounter = timeCounter + parseInt(row['time'], 10);
+  timeCounter = timeCounter + parseInt(row['time'], 10);
   job.timeout = timeCounter + 's';
 
   return job;
@@ -64,8 +61,31 @@ function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
 
 function startBreeScheduler(jobList) {
   const bree = new Bree({
-    jobs: jobList
+    jobs: jobList,
+    errorHandler: (error, workerMetadata) => {
+      if (workerMetadata.threadId) {
+        //logger.info(`There was an error while running a worker ${workerMetadata.name} with thread ID: ${workerMetadata.threadId}`)
+        console.log(`[bree] There was an error while running a worker ${workerMetadata.name} with thread ID: ${workerMetadata.threadId}`);
+      } else {
+        //logger.info(`There was an error while running a worker ${workerMetadata.name}`)
+        console.log(`[bree] There was an error while running a worker ${workerMetadata.name}`);
+      }
+
+      //logger.error(error);
+      errorService.captureException(error);
+    }
   });
+
+  bree.on('worker created', (name) => {
+    console.log('[bree] worker created', name);
+    console.log(bree.workers[name]);
+  });
+
+  bree.on('worker deleted', (name) => {
+    console.log('[bree] worker deleted', name);
+    console.log(typeof bree.workers[name] === 'undefined');
+  });
+
 
   const graceful = new Graceful({ brees: [bree] });
   graceful.listen();
