@@ -21,7 +21,7 @@ router.get('/bytype/:type', (req, res, next) => {
       ]).exec((err, direction) => {
         if (err) return next(err);
         let newDirections = utils.fillPlaceholders(direction, values, req.query);
-        req.log.info(newDirections.text)
+        //req.log.info(newDirections.text)
         res.json(newDirections);
       });
   }).catch(e => req.log.error(e));

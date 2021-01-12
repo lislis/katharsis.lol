@@ -46,7 +46,7 @@ router.post('/offstage', (req, res, next) => {
     Promise.all([
         Room.find({ main: true, locked: false}).exec(),
         User.find({ hasPermission: true, isMod: false }).exec()
-    ]).then(async values => {
+    ]).then(values => {
         let room  = values[0][0];
 
         if (values[1].length > 0) {

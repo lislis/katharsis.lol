@@ -21,7 +21,12 @@ const MONGO_DB = process.env['MONGO_DB'];
 const MONGO_HOST = process.env['MONGO_HOST'];
 
 app.io = io;
-const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  mixin() {
+    return { app: '[server]' }
+  }
+});
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -71,7 +76,7 @@ app.use((err, req, res, next) => {
 
 
 // Socket IO
-logger.info(`websocket listen on ${WS_PORT}`)
+logger.info(`[socket.io] websocket listen on ${WS_PORT}`)
 server.listen(WS_PORT);
 
 app.io.on('connection', (socket) => {
