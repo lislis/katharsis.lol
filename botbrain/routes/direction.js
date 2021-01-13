@@ -3,16 +3,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const { runDirectionParser } = require('../lib/csvparser.js');
-const utils = require('../lib/utils.js');
+const utils = require('../lib/brain.js');
 
 const Direction = require('../models/Direction.js');
 const Word = require('../models/Word.js');
-//const User = require('../models/User.js');
 
 router.get('/bytype/:type', (req, res, next) => {
   Promise.all([
     Word.find().exec(),
-    //User.find({ hasPermission: true }).exec()
   ]).then(values => {
     Direction
       .aggregate([
@@ -21,7 +19,6 @@ router.get('/bytype/:type', (req, res, next) => {
       ]).exec((err, direction) => {
         if (err) return next(err);
         let newDirections = utils.fillPlaceholders(direction, values, req.query);
-        //req.log.info(newDirections.text)
         res.json(newDirections);
       });
   }).catch(e => req.log.error(e));

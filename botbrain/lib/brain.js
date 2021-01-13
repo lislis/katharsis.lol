@@ -28,6 +28,9 @@ function fillPlaceholders(origObj, values, params) {
     } catch(err) {
         console.log(err);
     }
+
+    output = output.replace(" ,", ",");
+    output = output.replace("  ", " ");
     return [output];
 }
 
@@ -79,38 +82,26 @@ function sampleBy(pool, category, options) {
         flavorFlave = category.split("_")[1];
     }
 
-    //console.log(options);
-
     let w =  _.sample(pool
+                      .filter(x => x.word_type == cattyCat)
                       .filter(x => {
-                          if (options.flavor) {
-                              return x.flavor == flavorFlave;
-                          } else {
-                              return true;
-                          }
+                          return (isValidProperty(x.flavor)) ? (x.flavor == flavorFlave) : true;
                       })
                       .filter(x => {
-                          if (options.direction_type) {
-                              return x.word_type == cattyCat;
-                          } else {
-                              return true;
-                          }
-                      })
-                      .filter(x => {
-                          if (cattyCat == "Verb") {
+                          if(isValidProperty(x.numerus)) {
                               return x.numerus == options.numerus;
                           } else {
-                              return x.numerus == options.numerus || !x.numerus;
+                              return true;
                           }
                       }));
-    //console.log(w);
     return w;
 }
 
-/*
-function sampleUser(pool) {
-    return _.sample(pool);
+function isValidProperty(prop) {
+    return prop
+        && prop !== undefined
+        && prop !== null
+        && prop !== '';
 }
-*/
 
 exports.fillPlaceholders = fillPlaceholders;
