@@ -6,6 +6,7 @@
     <footer>
       <div class="inner">
         <p>Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a></p>
+        <p><a href="#">{{ $t('legal.imprint') }}</a> | <a href="#">{{ $t('legal.gdpa') }}</a></p>
         <div class="locale-changer">
           <select v-model="$i18n.locale">
             <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>

@@ -3,25 +3,30 @@
     <OutSideNav />
     <header class="inner">
       <h1 class="part__title">{{ $t('part.title') }}</h1>
+      <p>Lorem ipsum</p>
     </header>
     <section class="inner">
       <div v-if="$root.$data.user.nickname">
-        <p>Dein Name ist
-          {{$root.$data.user.nickname}}</p>
+        <p>{{ $t('intro.yourNameIs') }}
+          <strong>{{$root.$data.user.nickname}}</strong>.<br>
+          <router-link :to="{ name: 'main' }" class="btn">{{ $t('intro.toRoom') }}</router-link>
+        </p>
 
-        <router-link :to="{ name: 'room',
-                     params: { roomid: this.$root.$data.mainRoom._id }}">Zum Raum</router-link>
+        <p>
+          {{ $t('intro.noMore') }}
+          <router-link :to="{ name: 'main' }">{{ $t('intro.leave') }}</router-link>.
+        </p>
       </div>
 
       <template v-else>
         <form @submit.prevent="onSubmit">
           <div class="form-group row">
-            <label>
+            <label class="form-elem">
               <span>{{$t('part.label')}}</span>
               <input type="text" class="" v-model.trim="newUser.nickname"
                      placeholder="nickname">
             </label>
-            <input type="submit" value="Eintreten" class="btn">
+            <input type="submit" :value="$t('intro.enter')" class="btn">
           </div>
         </form>
       </template>

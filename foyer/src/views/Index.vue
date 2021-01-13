@@ -6,10 +6,10 @@
     </header>
     <section class="inner">
       <p class="">Lorem ipsum</p>
-      <router-link :to="{ name: 'intro'}"
-      class="btn">{{ $t('index.participate') }}</router-link>
       <router-link :to="{ name: 'spectator'}"
       class="btn">{{ $t('index.watch') }}</router-link>
+      <router-link :to="{ name: 'intro'}"
+      class="btn">{{ $t('index.participate') }}</router-link>
     </section>
     <section class="inner">
       <p class="">Lorem ipsum</p>
