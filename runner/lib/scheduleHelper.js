@@ -4,15 +4,16 @@ const dayjs = require('dayjs');
 const Bree = require('bree');
 const Graceful = require('@ladjs/graceful');
 const fs = require('fs');
-//const logger = require)
 
 function createJobListFromCSV(data, path) {
   let timeCounter = 0;
+  let cutPath = [...path.split('/').slice(0,-1)].join("/");
 
   let jobList = data.map((v, k) => {
-    return createJobFromRow(v, k, path, timeCounter);
+    return createJobFromRow(v, k, cutPath, timeCounter);
   });
-  jobList.push(createJobFromRow({direction: 'theEnd', time: 10}, data.length, path, timeCounter));
+  jobList.push(createJobFromRow({direction: 'theEnd', time: 60}, data.length, cutPath, timeCounter));
+  jobList.map(x => console.log(x.timeout));
 
   return jobList;
 }
@@ -77,13 +78,13 @@ function startBreeScheduler(jobList) {
   });
 
   bree.on('worker created', (name) => {
-    console.log('[bree] worker created', name);
-    console.log(bree.workers[name]);
+    //console.log('[bree] worker created', name);
+    //console.log(bree.workers[name]);
   });
 
   bree.on('worker deleted', (name) => {
-    console.log('[bree] worker deleted', name);
-    console.log(typeof bree.workers[name] === 'undefined');
+    //console.log('[bree] worker deleted', name);
+    //console.log(typeof bree.workers[name] === 'undefined');
   });
 
 
