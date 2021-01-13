@@ -8,6 +8,7 @@ const Room = require('../models/Room.js');
 const axios = require('axios');
 const random = require('random');
 
+const { replacePatternWUsers } = require('../lib/brain.js');
 const BOTBRAIN = process.env['BOTBRAIN'];
 
 router.post('/onstage', (req, res, next) => {
@@ -99,13 +100,17 @@ router.post('/category', (req, res, next) => {
 
     Promise.all([
         Room.find({main: true, locked: true}).exec(),
-        axios.get(`${BOTBRAIN}/api/direction/bytype/${req.body.category}${param}`)
+        axios.get(`${BOTBRAIN}/api/direction/bytype/${req.body.category}${param}`),
+        User.find({ hasPermission: true, isMod: false }).exec()
     ]).then(values => {
         let room = values[0][0];
         let botMsg = values[1].data[0];
+        let userPool = values[2];
+
+        let msgWUsers = replacePatternWUsers(botMsg, userPool);
 
         if (botMsg !== null && botMsg !== "") {
-            let chatMsg = { message: botMsg,
+            let chatMsg = { message: msgWUsers,
                             room: room._id,
                             bot: true
                           };
