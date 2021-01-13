@@ -1,18 +1,13 @@
 const _ = require('lodash');
-const random = require('random');
-
 
 function replacePatternWUsers(string, userPool) {
-    let usersUsed = [];
-    let output = '';
-
     const re = /(\#.+?\#)/g;
     const matches = [...string.matchAll(re)];
-    output = string;
+    let output = string;
 
     matches.forEach((v, k) => {
-        const re_clean = /\#(.+?)\#/;
-        const catClean = v[0].match(re_clean)[1];
+        const reClean = /\#(.+?)\#/;
+        const catClean = v[0].match(reClean)[1];
 
         if (catClean === 'User') {
             if (userPool.length >= 1) {
@@ -22,10 +17,13 @@ function replacePatternWUsers(string, userPool) {
                 });
                 output = output.replace(v[0], u.nickname);
             } else {
+                // tbd also abort with empty string?
                 output = output.replace(v[0], "ein Geist");
             }
         } else {
-            //console.log('Something other than #User# needs replacement, check botbrain');
+            // meaning: there are other placeholders than #User# that we can't replace here
+            // we basically abort with an empty string, that will be ignored later on
+            output = "";
         }
     });
 
