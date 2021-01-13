@@ -36,7 +36,8 @@ function findSub(category, options, pools) {
     let sub = {};
 
     if (category == 'User') {
-        sub = sampleUser(users);
+        // we'll leave #Users# to be replaced in _server_, it has more context
+        sub.text = '#User#';
     } else {
         const isOptional = category.match(/\?.+/);
 
@@ -78,7 +79,7 @@ function sampleBy(pool, category, options) {
         flavorFlave = category.split("_")[1];
     }
 
-    console.log(options);
+    //console.log(options);
 
     let w =  _.sample(pool
                       .filter(x => {
@@ -102,12 +103,14 @@ function sampleBy(pool, category, options) {
                               return x.numerus == options.numerus || !x.numerus;
                           }
                       }));
-    console.log(w);
+    //console.log(w);
     return w;
 }
 
+/*
 function sampleUser(pool) {
     return _.sample(pool);
 }
+*/
 
 exports.fillPlaceholders = fillPlaceholders;

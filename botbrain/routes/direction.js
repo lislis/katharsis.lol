@@ -7,12 +7,12 @@ const utils = require('../lib/utils.js');
 
 const Direction = require('../models/Direction.js');
 const Word = require('../models/Word.js');
-const User = require('../models/User.js');
+//const User = require('../models/User.js');
 
 router.get('/bytype/:type', (req, res, next) => {
   Promise.all([
     Word.find().exec(),
-    User.find({ hasPermission: true }).exec()
+    //User.find({ hasPermission: true }).exec()
   ]).then(values => {
     Direction
       .aggregate([
