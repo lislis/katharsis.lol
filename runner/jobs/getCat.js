@@ -1,6 +1,8 @@
 require('dotenv').config();
 const axios = require('axios');
-const SERVER = process.env['SERVER_URL']
+const { parentPort } = require('worker_threads');
+
+const SERVER = process.env['SERVER_URL'];
 
 if (process.argv.length > 2) {
     const args = JSON.parse(process.argv[2]);
@@ -15,10 +17,12 @@ if (process.argv.length > 2) {
 
     axios.post(`${SERVER}/api/script/category`, postObj)
         .then(resp => {
-            console.log("Posting ");
-            process.exit(0);
+            console.log("/script/category/ " + postObj.category + " " + postObj.numerus);
+
+            if (parentPort) parentPort.postMessage('done');
+            else process.exit(0);
         }).catch(e => {
-            console.log(e);
+            console.log("POST error");
             process.exit(1);
         });
 

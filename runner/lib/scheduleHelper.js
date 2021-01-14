@@ -10,10 +10,11 @@ function createJobListFromCSV(data, path) {
   let cutPath = [...path.split('/').slice(0,-1)].join("/");
 
   let jobList = data.map((v, k) => {
+    timeCounter = timeCounter + parseInt(v['time'], 10);
     return createJobFromRow(v, k, cutPath, timeCounter);
   });
   jobList.push(createJobFromRow({direction: 'theEnd', time: 60}, data.length, cutPath, timeCounter));
-  jobList.map(x => console.log(x.timeout));
+  //jobList.map(x => console.log(x.timeout));
 
   return jobList;
 }
@@ -54,14 +55,15 @@ function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
       job.path = path.join(otherPath, 'jobs', `getCat.js`);
   }
 
-  timeCounter = timeCounter + parseInt(row['time'], 10);
   job.timeout = timeCounter + 's';
+  console.log(job.timeout + " : " + timeCounter);
 
   return job;
 }
 
 function startBreeScheduler(jobList) {
   const bree = new Bree({
+    closeWorkerAfterMs: ms('5s'),
     jobs: jobList,
     errorHandler: (error, workerMetadata) => {
       if (workerMetadata.threadId) {

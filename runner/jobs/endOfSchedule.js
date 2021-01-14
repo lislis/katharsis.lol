@@ -1,12 +1,14 @@
 require('dotenv').config();
 const axios = require('axios');
-const SERVER = process.env['SERVER_URL']
+const { parentPort } = require('worker_threads');
 
+const SERVER = process.env['SERVER_URL']
 
 axios.post(`${SERVER}/api/script/theend`)
     .then(resp => {
-        console.log("Posting ", resp);
-        process.exit(0);
+        console.log("The end ");
+        if (parentPort) parentPort.postMessage('done');
+        else process.exit(0);
     }).catch(e => {
         console.log(e);
         process.exit(1);

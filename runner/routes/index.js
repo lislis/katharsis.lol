@@ -5,12 +5,14 @@ const { run } = require('../lib/scheduler.js')
 
 router.post('/runschedule', function(req, res, next) {
     if (req.body.hasOwnProperty('csvUrl') && req.body.csvUrl !== '') {
-        run(req.body.csvUrl).then(r => {
-            console.log("Schedule stated");
-        }).catch(e => console.log(e));
-        res.json({ message: "Schedule started" });
+        run(req.body.csvUrl)
+            .then(r => {
+                console.log("Schedule stated");
+                return res.json({ message: "Schedule started" });
+            })
+            .catch(e => console.log(e));
     } else {
-        res.json({ message: "No url to csv given" });
+        return next("No url given");
     }
 });
 
