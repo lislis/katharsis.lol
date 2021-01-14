@@ -29,7 +29,7 @@ router.post('/onstage', (req, res, next) => {
                               };
                 Chat.create(chatMsg, (err, chat) => {
                     if (err) return next(err);
-                    req.log.info(chat);
+                    //req.log.info(chat);
                     req.app.io.emit('user-to-stage', { message: user });
                     req.app.io.emit('new-message', { message: chat });
                     res.json(user);
@@ -81,14 +81,16 @@ router.post('/cleanStage', (req, res, next) => {
     ]).then(values => {
         let room = values[0][0];
         Chat.deleteMany({room: room._id}, (err, msg) => {
-            res.json({message: "Cleared stage"})
+            if (err) return next(err);
+            res.json({message: "Cleared stage"});
         })
     }).catch(e => req.log.error(e));
 });
 
 router.post('/cleanEverything', (req, res, next) => {
     Chat.deleteMany((err, msg) => {
-        res.json({message: "Cleared chats"})
+        if (err) return next(err);
+        res.json({message: "Cleared chats"});
     });
 });
 
@@ -117,7 +119,7 @@ router.post('/category', (req, res, next) => {
 
             Chat.create(chatMsg, (err, msg) => {
                 if (err) return next(err);
-                req.log.info('new-message', msg);
+                //req.log.info('new-message', msg);
                 req.app.io.emit('new-message', { message: msg });
                 res.json(msg);
             });
@@ -129,7 +131,8 @@ router.post('/category', (req, res, next) => {
 
 router.post('/theend', (req, res, next) => {
     Promise.all([
-        Room.find({main: true, locked: true}).exec()
+        Room.find({main: true, locked: true}).exec(),
+        User.updateMany({ hasPermission: true }, { hasPermission: false }).exec()
     ]).then(values => {
         let room = values[0][0];
         let chatMsg = { message: "KATHARSIS.LOL - The end",
@@ -138,7 +141,7 @@ router.post('/theend', (req, res, next) => {
                       };
         Chat.create(chatMsg, (err, msg) => {
             if (err) return next(err);
-            req.log.info('new-message', msg);
+            //req.log.info('new-message', msg);
             req.app.io.emit('new-message', { message: msg });
             res.json(msg);
         });
