@@ -15,6 +15,8 @@ const chat = require('./routes/chat');
 const user = require('./routes/user');
 const script = require('./routes/script');
 
+const Chat = require('./models/Chat.js');
+
 const WS_PORT = process.env['WS_PORT'];
 const MONGO_DB = process.env['MONGO_DB'];
 //const MONGO_PORT = process.env['MONGO_PORT'];
@@ -81,8 +83,10 @@ server.listen(WS_PORT);
 
 app.io.on('connection', (socket) => {
   socket.on('save-message', (data) => {
-    logger.info('[socket.io] new-message ', data);
-    io.emit('new-message', { message: data });
+    Chat.findById(data._id).populate('user').exec((err, chat) => {
+      logger.info('[socket.io] new-message ', chat);
+      io.emit('new-message', { message: chat });
+    });
   });
 
   socket.on('save-room', (data) => {
