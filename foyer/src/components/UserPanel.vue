@@ -3,18 +3,17 @@
     <span class="upanel__uname">{{ $root.$data.user.nickname }}</span>
     <span class="upanel__permission"
           v-if="$root.$data.user.hasPermission">auf der Bühne</span>
-    <button class="upanel__logout" @click="logout">Logout</button>
+
+    <UserLogout class="btn">{{ $t('intro.leave') }}</UserLogout>
   </div>
 </template>
 <script>
- import { logout } from '@/lib/user';
+ import UserLogout from '@/components/UserLogout'
 
  export default {
    name: "UserPanel",
+   components: { UserLogout },
    methods: {
-     logout() {
-       logout(this);
-     }
    }
  }
 

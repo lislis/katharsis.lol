@@ -14,7 +14,7 @@
 
         <p>
           {{ $t('intro.noMore') }}
-          <button class="link" @click="logout">{{ $t('intro.leave') }}</button>.
+          <UserLogout class="link">{{ $t('intro.leave') }}</UserLogout>.
         </p>
       </div>
 
@@ -37,12 +37,14 @@
  import axios from 'axios'
  import { saveUserToStore } from '@/lib/storage'
  import OutSideNav from '@/components/OutSideNav'
+ import UserLogout from '@/components/UserLogout'
  import { logout } from '@/lib/user'
 
  export default {
    name: "Intro",
    components: {
-     OutSideNav
+     OutSideNav,
+     UserLogout,
    },
    data() {
      return {

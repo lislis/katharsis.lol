@@ -10,7 +10,7 @@ export const messages = {
             yourNameIs: "Du nimmst Teil als",
             toRoom: "Gehe weiter",
             noMore: "Du willst nicht mehr?",
-            leave: "Austreten"
+            leave: "Austreten",
         },
         spec: {
             title: "Zuschauerraum"

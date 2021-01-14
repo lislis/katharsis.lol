@@ -60,6 +60,18 @@ footer {
   margin-left: 2rem;
 }
 
+.link {
+  display: inline-block;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: transparent;
+  border: none;
+  font: inherit;
+  color: var(--bg-document);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 a {
   color: var(--a-main);
 }
