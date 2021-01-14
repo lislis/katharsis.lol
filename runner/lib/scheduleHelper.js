@@ -47,8 +47,8 @@ function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
     default:
       job.worker = {
         argv: [JSON.stringify({
-          category: row['direction'].trim(),
-          numerus: row['numerus'].trim()
+          category: row['direction'],
+          numerus: row['numerus']
         })]
       };
       job.path = path.join(otherPath, 'jobs', `getCat.js`);
