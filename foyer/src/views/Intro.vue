@@ -14,7 +14,7 @@
 
         <p>
           {{ $t('intro.noMore') }}
-          <router-link :to="{ name: 'main' }">{{ $t('intro.leave') }}</router-link>.
+          <button class="link" @click="logout">{{ $t('intro.leave') }}</button>.
         </p>
       </div>
 
@@ -37,6 +37,7 @@
  import axios from 'axios'
  import { saveUserToStore } from '@/lib/storage'
  import OutSideNav from '@/components/OutSideNav'
+ import { logout } from '@/lib/user'
 
  export default {
    name: "Intro",
