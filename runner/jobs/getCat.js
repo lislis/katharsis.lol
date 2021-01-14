@@ -16,11 +16,12 @@ if (process.argv.length > 2) {
     axios.post(`${SERVER}/api/script/category`, postObj)
         .then(resp => {
             console.log("Posting ");
+            process.exit(0);
         }).catch(e => {
             console.log(e);
-            //process.exit(1);
+            process.exit(1);
         });
-    process.exit(0);
+
 } else {
     console.log("no arg given, not doing anything");
     process.exit(1);
