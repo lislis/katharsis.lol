@@ -38,7 +38,6 @@
  import { saveUserToStore } from '@/lib/storage'
  import OutSideNav from '@/components/OutSideNav'
  import UserLogout from '@/components/UserLogout'
- import { logout } from '@/lib/user'
 
  export default {
    name: "Intro",
