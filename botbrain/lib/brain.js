@@ -3,7 +3,7 @@ const random = require('random');
 
 function fillPlaceholders(origObj, values, params) {
     let obj;
-    let output;
+    let output = '';
 
     if (origObj.length) {
         obj = origObj[0];
