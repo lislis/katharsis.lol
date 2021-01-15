@@ -41,7 +41,6 @@
        this.date = d.toLocaleString('de-DE');
      }
 
-
      if (this.message.bot == true) {
        this.allTheClasses = 'is-bot';
        this.hasPosition = 'center';
@@ -49,7 +48,8 @@
        if (this.message.user == null) {
          this.allTheClasses = 'is-gone';
          this.hasPosition = 'left';
-       } else if (this.message.user._id == this.$root.$data.user._id) {
+       } else if ((this.message.user._id == this.$root.$data.user._id)
+                  || (this.message.user == this.$root.$data.user._id)) {
          this.allTheClasses = 'is-me';
          this.hasPosition = 'right';
        } else {
@@ -63,21 +63,20 @@
    },
    methods: {
      getUserName(user) {
-       if (typeof user == 'string') {
-         return user
+       if (typeof user !== 'string') {
+         return user.nickname;
        } else {
          if (this.$root.$data.otherPeople.length) {
            let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
            if (userInfo.length) {
              return userInfo[0].nickname
            } else {
-             return user.nickname
+             return user
            }
          } else {
-           return user.nickname
+           return user
          }
        }
-       return user
      }
    }
  }

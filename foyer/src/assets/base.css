@@ -165,3 +165,12 @@ h2 {
   display: block;
   margin-top: 0.5em;
 }
+
+
+.mainroom-split {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.chat {
+  border: 2px solid black;
+}

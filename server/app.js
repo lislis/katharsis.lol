@@ -82,35 +82,15 @@ logger.info(`[socket.io] websocket listen on ${WS_PORT}`)
 server.listen(WS_PORT);
 
 app.io.on('connection', (socket) => {
-  socket.on('save-message', (data) => {
-    Chat.findById(data._id).populate('user').exec((err, chat) => {
-      logger.info('[socket.io] new-message ', chat);
-      io.emit('new-message', { message: chat });
-    });
-  });
-
   socket.on('save-room', (data) => {
     logger.info('[socket.io] new-room ', data);
     io.emit('new-room', { message: data });
   })
 
-  socket.on('save-user', (data) => {
-    logger.info('[socket.io] new-user ', data);
-    io.emit('new-user', { message: data });
-  })
-
-  socket.on('remove-user', (data) => {
-    logger.info('[socket.io] delete-user ', data);
-    io.emit('delete-user', { message: data });
-    io.emit('new-message', { message: data });
-  })
-
-  logger.info(`[socket.io] User connected socketID:${socket.id}`);
-  io.emit('users-increment')
+  logger.info(`[socket.io] User connected socketID: ${socket.id}`);
 
   socket.on('disconnect', () => {
     logger.info('[socket.io] User disconnected', socket.id);
-    io.emit('users-decrement')
   });
 });
 

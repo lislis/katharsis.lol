@@ -29,6 +29,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Chat.create(req.body, (err, post) => {
     if (err) return next(err);
+    req.app.io.emit('new-message', { message: post });
     res.json(post);
   });
 });
@@ -43,6 +44,7 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   Chat.findByIdAndRemove(req.params.id, req.body, (err, post) => {
     if (err) return next(err);
+    req.app.io.emit('delete-message', { message: post });
     res.json(post);
   });
 });

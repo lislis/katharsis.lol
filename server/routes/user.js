@@ -79,9 +79,10 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  User.create(req.body, (err, post) => {
+  User.create(req.body, (err, user) => {
     if (err) return next(err);
-    res.json(post);
+    req.app.io.emit('new-user', { message: user });
+    res.json(user);
   });
 });
 
@@ -93,9 +94,10 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  User.findByIdAndRemove(req.params.id, req.body, (err, post) => {
+  User.findByIdAndRemove(req.params.id, req.body, (err, user) => {
     if (err) return next(err);
-    res.json(post);
+    req.app.io.emit('delete-user', { message: user });
+    res.json(user);
   });
 });
 
