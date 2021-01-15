@@ -4,6 +4,7 @@
       <p><router-link :to="{ name: 'index'}" class="nav__title">Katharsis.lol</router-link></p>
       <UserPanel />
     </div>
+
     <div class="notifications">
       <div v-for="(note, id) in notifications" :key="id"  class="note">
         {{note}}

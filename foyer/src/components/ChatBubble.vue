@@ -4,10 +4,12 @@
       :class="allTheClasses">
     <div class="chat__message-inner">
       <header v-if="message.user">
-        <span>{{getUserName(message.user)}}</span>
-        <span v-if="message.user.isMod"
-              title="Moderator"
-              aria-label="Moderator"> (🦮)</span>
+        <span class="chat__status"
+          v-if="$root.$data.user.isMod"
+          :aria-label="$t('user.status.mod')"
+          :title="$t('user.status.mod')">👑</span>
+        <strong>{{getUserName(message.user)}}</strong>
+
       </header>
       <p class="chat__message-bubble" >
         <span>
@@ -97,6 +99,10 @@
    border-radius: 4px;
  }
 
+ .chat__status {
+   margin-right: .3rem;
+ }
+
  .no-bubble .chat__message-bubble {
    opacity: 0.7;
  }
@@ -113,15 +119,15 @@
    opacity: 0.5;
  }
  .is-gone .chat__message-bubble {
-   background-color: #88b378;
+   background-color: var(--bg-bubble);;
  }
 
  .is-user .chat__message-bubble {
-   background-color: #88b378;
+   background-color: var(--bg-bubble);
  }
 
  .is-me .chat__message-bubble {
-   background-color: cornflowerblue;
+   background-color:  var(--bg-bubble);;
  }
 
  time {

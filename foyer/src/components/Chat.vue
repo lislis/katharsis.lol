@@ -1,11 +1,10 @@
 <template>
-  <div class="chat">
+  <section class="chat">
     <div class="chat__room-header">
-      <h4>
+      <h3>
         {{ room.room_name}}
         <span v-if="room.private" class="chat__room-status">(private)</span>
-      </h4>
-      <hr>
+      </h3>
     </div>
     <div class="chat__message_container">
       <ul class="chat__messages">
@@ -15,7 +14,7 @@
       </ul>
       <ChatComposer :room="room" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -38,14 +37,12 @@
    },
    methods: {
      updateScroll(){
-         setTimeout(() => {
-           var element = this.$el.querySelector('.chat__messages');
-           element.scrollTop = element.scrollHeight;
-         }, 500);
+       setTimeout(() => {
+         const element = this.$el.querySelector('.chat__messages');
+         if (!element) return false;
+         element.scrollTop = element.scrollHeight;
+       }, 500);
      }
    }
  }
 </script>
-
-<style>
-</style>

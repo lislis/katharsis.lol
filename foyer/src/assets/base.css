@@ -4,6 +4,8 @@
   --bg-shade: #bbb;
   --bg-document: #a200a7;
   --a-main: #840388;
+  --bg-dark: #666;
+  --bg-bubble: #c78ac8;
   scrollbar-color: var(--bg-document) var(--bg-main);
   scrollbar-width: thin;
 }
@@ -26,7 +28,7 @@ body {
 
 main {
   flex-grow: 1;
-  background-color: var(--bg-main);
+  background-color: var(--bg-footer);
 }
 
 footer {
@@ -125,21 +127,6 @@ h2 {
   margin-top: 0;
 }
 
-
-.chat {
-  width: 100%;
-}
-.chat__messages {
-  background-color: var(--bg-footer);
-  list-style: none;
-  margin: 0;
-  padding: 1rem 0;
-  height: 70vh;
-  overflow-y: scroll;
-  scrollbar-color: var(--bg-document) transparent;
-  scrollbar-width: thin;
-}
-
 ::-webkit-scrollbar
 {
   width: 8px;  /* for vertical scrollbars */
@@ -170,9 +157,33 @@ h2 {
 .mainroom-split {
   display: flex;
   flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 0 1rem;
 }
 .chat {
-  border: 2px solid black;
+  width: 100%;
+  padding: 1rem 1.4rem;
+  border-radius: 4px;
+  background-color: var(--bg-main);
+}
+
+.chat + .chat {
+  margin-left: 1rem;
+}
+
+.chat__messages {
+  background-color: var(--bg-footer);
+  list-style: none;
+  margin: .7rem 0 1rem;
+  padding: 1rem 0;
+  height: 70vh;
+  overflow-y: scroll;
+  scrollbar-color: var(--bg-document) transparent;
+  scrollbar-width: thin;
+}
+
+.chat__room-header h3 {
+  margin: 0;
 }
 
 .spec__title {

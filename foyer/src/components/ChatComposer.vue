@@ -23,8 +23,7 @@
    props: ['room'],
    data() {
      return {
-       chat: {},
-       error: [],
+       chat: {}
      }
    },
    methods: {
@@ -41,8 +40,7 @@
            this.chat.message = ''
          })
          .catch(e => {
-           console.log(e)
-           this.errors.push(e)
+           this.$root.$data.notifications.push(e)
          })
      },
    },
@@ -66,12 +64,26 @@
    max-width: 800px;
    margin: auto;
    display: flex;
+   border: 2px solid var(--bg-footer);
+   border-radius: 4px;
+   background-color: var(--bg-footer);
  }
  .chat__message-compose input {
    display: block;
    width: 100%;
-   padding: 1rem;
+   padding: .5rem 0.8rem 0.3rem;
+   background-color: var(--bg-footer);
+   border: none;
  }
+
+ .chat__message-compose input:focus {
+   outline: none;
+ }
+
+ .chat__message-compose:focus-within {
+   outline: 2px solid var(--bg-document);
+ }
+
  input[readonly],
  button[disabled] {
    opacity: 0.5;
@@ -80,5 +92,6 @@
  .btn {
    font-size: 2em;
    line-height: 1;
+   border: 2px solid var(--bg-footer);
  }
 </style>
