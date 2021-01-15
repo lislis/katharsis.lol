@@ -34,37 +34,15 @@
        loading: true
      }
    },
-   created() {
-     this.fetchMainRoom();
-
-     this.$root.$data.socket.on('new-message', (data) => {
-       if(data.message.room === this.stage._id) {
-         this.messages.push(data.message)
-       }
-
-       this.updateScroll()
-     })
+   mounted() {
+     this.loading = false;
    },
-   methods: {
-     fetchMainRoom() {
-       this.loading = true;
-       axios.get(`${this.$root.$data.restServer}/api/room/main`)
-            .then(response => {
-              this.stage = response.data.filter(x => x.locked)[0];
-
-              axios.get(`${this.$root.$data.restServer}/api/chat/${this.stage._id}`)
-                   .then(x => {
-                     this.loading = false;
-                     this.messages = x.data
-                   })
-            }).catch(e => { console.log(e) })
-
-     },
-     updateScroll(){
-       setTimeout(() => {
-         var element = this.$el.querySelector('.chat__messages');
-         element.scrollTop = element.scrollHeight;
-       }, 500);
+   computed: {
+     messages() {
+       return this.$root.$data.chats
+                  .filter(x => {
+                    return x.room === this.$root.$data.stage._id
+                  });
      }
    }
  }

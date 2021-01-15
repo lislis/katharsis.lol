@@ -30,7 +30,7 @@
    name: 'App',
    components: {
      Loader,
-     SocketWrapper
+     SocketWrapper,
    },
    data() {
      return {

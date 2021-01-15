@@ -1,23 +1,22 @@
 <template>
   <div>
-    <AppHeader />
-  <div class="mainroom-view">
+    <AppHeader :notifications="$root.$data.notifications" />
+    <div class="mainroom-view">
+      <div class="mainroom-split">
+        <Loader v-if="loading" />
+        <template v-else>
+          <Chat
+            :messages="stageMessages"
+            :username="$root.$data.user.nickname"
+            :room="$root.$data.stage" />
 
-    <div class="mainroom-split">
-      <Loader v-if="loading" />
-      <template v-else>
-        <Chat
-          :messages="stageMessages"
-          :username="$root.$data.user.nickname"
-          :room="$root.$data.stage" />
-
-        <Chat
-          :messages="backstageMessages"
-          :username="$root.$data.user.nickname"
-          :room="$root.$data.mainRoom" />
-      </template>
+          <Chat
+            :messages="backstageMessages"
+            :username="$root.$data.user.nickname"
+            :room="$root.$data.mainRoom" />
+        </template>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 <script>
@@ -26,12 +25,14 @@
  import Loader from '@/components/Loader'
  import AppHeader from '@/components/AppHeader'
 
+
  export default {
    name: "MainRoom",
    components: {
      Chat,
      Loader,
-     AppHeader
+     AppHeader,
+
    },
    data() {
      return {

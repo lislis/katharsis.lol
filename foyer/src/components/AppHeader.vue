@@ -1,20 +1,17 @@
 <template>
-  <div class="appheader">
-    <header class="header" v-if="$root.$data.user.nickname">
-      <p>Katharsis.lol</p>
+  <div class="">
+    <div class="aheader">
+      <p><router-link :to="{ name: 'index'}" class="nav__title">Katharsis.lol</router-link></p>
       <UserPanel />
-    </header>
+    </div>
     <div class="notifications">
       <div v-for="(note, id) in notifications" :key="id"  class="note">
         {{note}}
         <button @click.prevent="removeNotification(id)"
-                type="button">x</button></div>
+                type="button"
+                class="btn"
+                :aria-label="$t('ui.button.close')">❌</button></div>
     </div>
-    <nav class="navigation" v-if="$root.$data.user.nickname">
-      <router-link :to="{name: 'main'}">Main</router-link>
-      <router-link :to="{name: 'roomlist'}">Räume</router-link>
-      <router-link :to="{name: 'peoplelist'}">Leute</router-link>
-    </nav>
   </div>
 </template>
 <script>
@@ -27,20 +24,21 @@
    components: {
      UserPanel
    },
-   watch: {
-     '$root.$data.notifications'(newOnes) {
-       console.log('node', newOnes)
-     }
-   },
    methods: {
      removeNotification(ev, id) {
-       console.log("rm ", ev)
        removeByIndex(this.$root.$data.notifications, id)
      }
    }
  }
 </script>
-<style>
+<style scoped>
+ .aheader {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 1rem;
+ }
  .notifications {
    text-align: center
  }

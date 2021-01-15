@@ -15,7 +15,24 @@ export const messages = {
     user: {
       notice: {
         enter: "ist eingetreten",
-        leave: "ist ausgetreten"
+        leave: "ist ausgetreten",
+      },
+      notification: {
+        onstage: "Auf die Bühne!",
+        offstage: "Runter von der Bühne!"
+      },
+      status: {
+        stage: "Auf der Bühne",
+        mod: "Moderator:in"
+      }
+    },
+    ui: {
+      button: {
+        close: "schließen",
+        send: "Schreiben",
+      },
+      form: {
+        chat: "Schreibe etwas"
       }
     },
     spec: {
@@ -47,6 +64,19 @@ export const messages = {
       notice: {
         enter: "has entered",
         leave: "has left"
+      },
+      notification: {
+        onstage: "You're on stage!",
+        offstage: "You're off stage!"
+      }
+    },
+    ui: {
+      button: {
+        close: "close",
+        send: "Write",
+      },
+      form: {
+        chat: "Write something"
       }
     },
     spec: {

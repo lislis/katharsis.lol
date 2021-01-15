@@ -44,7 +44,7 @@
      isMyselfOnStage(data) {
        if (data._id === this.$root.$data.user._id) {
          this.$root.$data.user.hasPermission = !data.hasPermission;
-         let note = this.$root.$data.user.hasPermission ? "auf die Bühne!" : "Runter von der Bühne";
+         let note = this.$root.$data.user.hasPermission ? this.$t('user.notification.onstage') : this.$t('user.notification.offstage');
          this.$root.$data.notifications = [note];
        }
      }
