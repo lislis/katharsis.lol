@@ -1,13 +1,13 @@
 require('dotenv').config();
 const axios = require('axios');
-
-const SERVER = process.env['SERVER_URL']
+const logger = require('../lib/logger').logger;
+const SERVER = process.env['SERVER_URL'];
 
 axios.post(`${SERVER}/api/script/onstage`)
     .then(resp => {
-        console.log("To the stage");
-        //process.exit(0);
+        logger.info("[job] To the stage");
+        process.exit(0);
     }).catch(e => {
-        console.log(e);
-        //process.exit(1);
+        logger.error(e);
+        process.exit(1);
     });

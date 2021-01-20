@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
+const pinoHttp = require('pino-http')();
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(logger('dev'));
+app.use(pinoHttp);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'static')));

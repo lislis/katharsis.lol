@@ -4,6 +4,7 @@ const dayjs = require('dayjs');
 const Bree = require('bree');
 const Graceful = require('@ladjs/graceful');
 const fs = require('fs');
+const logger = require('./logger').logger;
 
 function createJobListFromCSV(data, path) {
   let timeCounter = 0;
@@ -13,8 +14,8 @@ function createJobListFromCSV(data, path) {
     timeCounter = timeCounter + parseInt(v['time'], 10);
     return createJobFromRow(v, k, cutPath, timeCounter);
   });
-  jobList.push(createJobFromRow({direction: 'theEnd', time: 60}, data.length, cutPath, timeCounter));
-  //jobList.map(x => console.log(x.timeout));
+  timeCounter = timeCounter + 60;
+  jobList.push(createJobFromRow({direction: 'theEnd'}, data.length, cutPath, timeCounter));
 
   return jobList;
 }
@@ -56,7 +57,7 @@ function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
   }
 
   job.timeout = timeCounter + 's';
-  console.log(job.timeout + " : " + timeCounter);
+  logger.info(`${job.name} after ${job.timeout} (${job.path})`);
 
   return job;
 }
@@ -67,26 +68,21 @@ function startBreeScheduler(jobList) {
     jobs: jobList,
     errorHandler: (error, workerMetadata) => {
       if (workerMetadata.threadId) {
-        //logger.info(`There was an error while running a worker ${workerMetadata.name} with thread ID: ${workerMetadata.threadId}`)
-        console.log(`[bree] There was an error while running a worker ${workerMetadata.name} with thread ID: ${workerMetadata.threadId}`);
+        logger.info(`[bree] There was an error while running a worker ${workerMetadata.name} with thread ID: ${workerMetadata.threadId}`);
       } else {
-        //logger.info(`There was an error while running a worker ${workerMetadata.name}`)
-        console.log(`[bree] There was an error while running a worker ${workerMetadata.name}`);
+        logger.info(`[bree] There was an error while running a worker ${workerMetadata.name}`)
       }
-
-      //logger.error(error);
+      logger.error(error);
       errorService.captureException(error);
     }
   });
 
   bree.on('worker created', (name) => {
-    //console.log('[bree] worker created', name);
-    //console.log(bree.workers[name]);
+    logger.info(`[bree] worker created ${name}`);
   });
 
   bree.on('worker deleted', (name) => {
-    //console.log('[bree] worker deleted', name);
-    //console.log(typeof bree.workers[name] === 'undefined');
+    logger.info(`[bree] worker deleted ${name}`);
   });
 
 

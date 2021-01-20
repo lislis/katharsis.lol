@@ -1,13 +1,13 @@
 require('dotenv').config();
 const axios = require('axios');
+const logger = require('../lib/logger').logger;
 
-const SERVER = process.env['SERVER_URL']
+const SERVER = process.env['SERVER_URL'];
 
-axios.post(`${SERVER}/api/script/exportPlay`)
-    .then(resp => {
-        console.log("exporting play ", resp);
-        //process.exit(0);
-    }).catch(e => {
-        console.log(e);
-        //process.exit(1);
-    });
+axios.post(`${SERVER}/api/script/exportPlay`).then(resp => {
+  logger.info("[job] Export play");
+  process.exit(0);
+}).catch(e => {
+  logger.error(e);
+  process.exit(1);
+});
