@@ -5,7 +5,7 @@
     <div class="chat__message-inner">
       <header v-if="message.user">
         <span class="chat__status"
-          v-if="$root.$data.user.isMod"
+          v-if="user.isMod"
           :aria-label="$t('user.status.mod')"
           :title="$t('user.status.mod')">👑</span>
         <strong>{{getUserName(message.user)}}</strong>
