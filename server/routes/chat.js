@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const Chat = require('../models/Chat.js');
 
 router.get('/', (req, res, next) => {

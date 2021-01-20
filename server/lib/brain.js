@@ -1,12 +1,12 @@
 const _ = require('lodash');
 
 function replacePatternWUsers(string, userPool) {
-    const re = /(\#.+?\#)/g;
+    const re = /(#.+?#)/g;
     const matches = [...string.matchAll(re)];
     let output = string;
 
-    matches.forEach((v, k) => {
-        const reClean = /\#(.+?)\#/;
+    matches.forEach(v => {
+        const reClean = /#(.+?)#/;
         const catClean = v[0].match(reClean)[1];
 
         if (catClean === 'User') {

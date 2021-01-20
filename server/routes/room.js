@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const Room = require('../models/Room.js');
 
 router.get('/', (req, res, next) => {

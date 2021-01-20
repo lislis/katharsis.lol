@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const pino = require('pino');
 const pinoHttp = require('pino-http')();
@@ -14,8 +13,6 @@ const room = require('./routes/room');
 const chat = require('./routes/chat');
 const user = require('./routes/user');
 const script = require('./routes/script');
-
-const Chat = require('./models/Chat.js');
 
 const WS_PORT = process.env['WS_PORT'];
 const MONGO_DB = process.env['MONGO_DB'];
@@ -65,7 +62,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

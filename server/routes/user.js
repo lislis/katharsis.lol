@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const User = require('../models/User.js');
 const Chat = require('../models/Chat.js');
 const Room = require('../models/Room.js');
@@ -50,7 +49,7 @@ router.post('/off/:uid', (req, res, next) => {
 
 router.post('/user2mod/:uid', (req, res, next) => {
   const opt = { isMod: true };
-  let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
+  User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
     if (err) return next(err);
     res.json(user);
   });
@@ -58,7 +57,7 @@ router.post('/user2mod/:uid', (req, res, next) => {
 
 router.post('/mod2user/:uid', (req, res, next) => {
   const opt = { isMod: false };
-  let user = User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
+  User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
     if (err) return next(err);
     res.json(user);
   });
