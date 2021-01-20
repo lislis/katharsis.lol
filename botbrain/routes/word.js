@@ -32,6 +32,13 @@ router.post('/bulkimport', (req, res, next) => {
   }
 });
 
+router.post('/bulkdelete', (req, res, next) => {
+  Word.deleteMany((err, post) => {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 router.get('/', (req, res, next) => {
   Word.find((err, post) => {
     if (err) return next(err);

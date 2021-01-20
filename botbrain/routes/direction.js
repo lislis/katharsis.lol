@@ -54,6 +54,13 @@ router.post('/bulkimport', (req, res, next) => {
   }
 });
 
+router.post('/bulkdelete', (req, res, next) => {
+  Direction.deleteMany((err, post) => {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 router.get('/', (req, res, next) => {
   Direction.find((err, post) => {
     if (err) return next(err);
