@@ -43,11 +43,7 @@
        chat.nickname = this.$root.$data.user._id
        chat.message = `${this.$root.$data.user.nickname} ${this.$t('user.notice.enter')}`
 
-       const chatResp = await axios.post(`${this.$root.$data.restServer}/api/chat`, chat);
-       /* this.$root.$data.socket.emit('save-message', {
-        *   ...chat,
-        *   created_date: new Date()
-        * }); */
+       await axios.post(`${this.$root.$data.restServer}/api/chat`, chat);
        this.loader = false;
        this.$router.push({ name: 'main' });
      }

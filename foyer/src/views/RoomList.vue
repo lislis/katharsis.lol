@@ -24,7 +24,7 @@
     </section>
 
     <ul v-if="errors && errors.length">
-      <li v-for="error of errors">
+      <li v-for="(error, key) of errors" :key="key">
         {{error.message}}
       </li>
     </ul>
@@ -63,8 +63,6 @@
           })
 
      this.$root.$data.socket.on('new-room', function (data) {
-       console.log(data.message)
-       //debugger
        if (!data.message.private) {
          this.publicRooms.push(data.message)
        } else if (data.message.private
@@ -72,13 +70,12 @@
          this.privateRooms.push(data.message)
 
        }
-       //debugger
 
      }.bind(this))
 
    },
    methods: {
-     onSubmit(evt) {
+     onSubmit() {
        this.room.main = false
        this.room.private = false
        axios.post(`${this.$root.$data.restServer}/api/room`, this.room)
@@ -96,15 +93,14 @@
             })
      },
      setPublicRooms() {
-       //debugger
        this.publicRooms = this.rooms
                               .filter(x => !x.private)
                               .filter(x => !x.main)
      },
      setPrivateRooms() {
        this.privateRooms =  this.rooms
-                  .filter(x => x.private)
-                  .filter(x => x.allowed_users.includes(this.$root.user._id))
+                                .filter(x => x.private)
+                                .filter(x => x.allowed_users.includes(this.$root.user._id))
      }
    },
    computed: {
@@ -113,7 +109,7 @@
 </script>
 <style scoped>
  .margin {
-  margin-left: 1.3rem;
+   margin-left: 1.3rem;
  }
  .border {
    border: 1px solid black;

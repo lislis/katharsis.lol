@@ -21,7 +21,6 @@
 </template>
 <script>
  import Chat from '@/components/Chat.vue'
- import axios from 'axios'
  import Loader from '@/components/Loader'
  import AppHeader from '@/components/AppHeader'
 

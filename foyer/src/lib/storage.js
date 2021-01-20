@@ -3,7 +3,7 @@ export function saveUserToStore(user) {
         `${process.env.VUE_APP_LS_PREFIX}user`,
         JSON.stringify(user));
     return true;
-};
+}
 
 export function loadUserFromStorage() {
     let storageKey = `${process.env.VUE_APP_LS_PREFIX}user`;
@@ -12,7 +12,7 @@ export function loadUserFromStorage() {
     } else {
         return false
     }
-};
+}
 
 export function deleteUserFromStorage() {
     return window.localStorage.removeItem(`${process.env.VUE_APP_LS_PREFIX}user`)

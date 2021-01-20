@@ -18,9 +18,6 @@
 </template>
 
 <script>
- import io from 'socket.io-client'
- import axios from 'axios'
- import {removeByAttr} from '@/lib/utils'
  import ChatBubble from '@/components/ChatBubble.vue'
  import ChatComposer from '@/components/ChatComposer.vue'
 
@@ -31,7 +28,7 @@
    created() {
      this.updateScroll();
 
-     this.$root.$data.socket.on('new-message', (data) => {
+     this.$root.$data.socket.on('new-message', () => {
        this.updateScroll();
      })
    },

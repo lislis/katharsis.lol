@@ -22,14 +22,12 @@
 <script>
  import axios from 'axios'
  import io from 'socket.io-client';
- import Loader from '@/components/Loader'
  import SocketWrapper from '@/components/SocketWrapper'
  import { loadUserFromStorage } from '@/lib/storage'
 
  export default {
    name: 'App',
    components: {
-     Loader,
      SocketWrapper,
    },
    data() {

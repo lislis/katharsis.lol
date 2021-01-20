@@ -36,7 +36,7 @@
        this.chat.user = this.$root.$data.user._id;
        axios
          .post(`${this.$root.$data.restServer}/api/chat`, this.chat)
-         .then(response => {
+         .then(() => {
            this.chat.message = ''
          })
          .catch(e => {

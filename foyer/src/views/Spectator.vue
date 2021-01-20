@@ -15,7 +15,6 @@
   </article>
 </template>
 <script>
- import axios from 'axios'
  import Loader from '@/components/Loader'
  import ChatBubble from '@/components/ChatBubble'
  import OutSideNav from '@/components/OutSideNav'
@@ -30,7 +29,6 @@
    data() {
      return {
        stage: {},
-       messages: [],
        loading: true
      }
    },

@@ -14,7 +14,7 @@
         </p>
         <p>
           {{ $t('intro.noMore') }}
-          <UserLogout class="link">{{ $t('intro.leave') }}</UserLogout>.
+          <UserLogout :extClass="link">{{ $t('intro.leave') }}</UserLogout>.
         </p>
       </div>
       <template v-else>

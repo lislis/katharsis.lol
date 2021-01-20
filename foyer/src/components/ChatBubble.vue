@@ -46,7 +46,7 @@
      if (this.message.bot == true) {
        this.allTheClasses = 'is-bot';
        this.hasPosition = 'center';
-     } else if (this.message.hasOwnProperty('user')) {
+     } else if (Object.prototype.hasOwnProperty.call(this.message, 'user')) {
        if (this.message.user == null) {
          this.allTheClasses = 'is-gone';
          this.hasPosition = 'left';
