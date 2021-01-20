@@ -229,8 +229,9 @@
        buildDeleteAllFunction('#deleteAllRoomsForm', `${CONFIG.SERVER}/api/room/`, 'Alle Räume gelöscht!');
        buildDeleteAllFunction('#deleteAllChatsForm', `${CONFIG.SERVER}/api/chat/`, 'Alle Chats gelöscht!');
        buildDeleteAllFunction('#deleteAllUsersForm', `${CONFIG.SERVER}/api/user/`, 'Alle User gelöscht!');
-       buildDeleteAllFunction('#deleteAllWordsForm', `${CONFIG.BOTBRAIN}/api/word/`, 'Alle Wörter gelöscht!');
-       buildDeleteAllFunction('#deleteAllDirectionsForm', `${CONFIG.BOTBRAIN}/api/direction/`, 'Alle Anweisungen gelöscht!');
+
+       buildBulkDeleteFunction('#deleteAllWordsForm', `${CONFIG.BOTBRAIN}/api/word/bulkdelete`, 'Alle Wörter gelöscht!');
+       buildBulkDeleteFunction('#deleteAllDirectionsForm', `${CONFIG.BOTBRAIN}/api/direction/bulkdelete`, 'Alle Anweisungen gelöscht!');
 
        changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:', 'POST');
        changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:', 'POST');

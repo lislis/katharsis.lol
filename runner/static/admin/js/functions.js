@@ -35,6 +35,16 @@ async function buildDeleteAllFunction(formId, apiEndpoint, message) {
   }
 }
 
+async function buildBulkDeleteFunction(formId, apiEndpoint, message) {
+  document.querySelector(formId).onsubmit = async (e) => {
+    e.preventDefault();
+
+    fetch(`${apiEndpoint}`, {
+      method: 'POST'
+    }).then(resp => alert(message))
+  }
+}
+
 async function changeUserProperty(formId, inputId, endpoint, message, method) {
   document.querySelector(formId).onsubmit = async (e) => {
     e.preventDefault();
