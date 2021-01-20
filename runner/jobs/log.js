@@ -1,5 +1,6 @@
+/*eslint no-process-exit: "off"*/
 const { parentPort } = require('worker_threads');
-const logger = require('./logger').logger;
+const logger = require('../lib/logger').logger;
 
 logger.info("Hey log job");
 

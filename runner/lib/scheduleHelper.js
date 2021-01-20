@@ -1,9 +1,8 @@
 const path = require('path');
 const ms = require('ms');
-const dayjs = require('dayjs');
+//const dayjs = require('dayjs');
 const Bree = require('bree');
 const Graceful = require('@ladjs/graceful');
-const fs = require('fs');
 const logger = require('./logger').logger;
 
 function createJobListFromCSV(data, path) {
@@ -73,7 +72,6 @@ function startBreeScheduler(jobList) {
         logger.info(`[bree] There was an error while running a worker ${workerMetadata.name}`)
       }
       logger.error(error);
-      errorService.captureException(error);
     }
   });
 

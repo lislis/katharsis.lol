@@ -3,7 +3,7 @@ const neatCsv = require('neat-csv');
 
 const { startBreeScheduler, createJobListFromCSV } = require('./scheduleHelper.js');
 
-async function run(url, path) {
+async function run(url) {
   let csvData = await axios.get(url);
   let parsedData = await neatCsv(csvData.data);
 

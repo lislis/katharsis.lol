@@ -1,12 +1,11 @@
 require('dotenv').config()
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
 const pinoHttp = require('pino-http')();
 const bodyParser = require('body-parser');
 
 const app = express();
-const server = require('http').createServer(app);
+require('http').createServer(app);
 const routes = require('./routes/index.js');
 
 app.use(function(req, res, next) {
@@ -29,7 +28,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
