@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-
 const { runWordParser } = require('../lib/csvparser.js');
 const Word = require('../models/Word.js');
 
@@ -18,14 +16,14 @@ router.get('/bytype/:type', (req, res, next) => {
     });
 });
 
-router.post('/bulkimport', (req, res, next) => {
-  if (req.body.hasOwnProperty('csvUrl') && req.body.csvUrl !== '') {
+router.post('/bulkimport', (req, res) => {
+  if ((Object.prototype.hasOwnProperty.call(req.body, 'csvUrl')) && req.body.csvUrl !== '') {
     runWordParser(req.body.csvUrl).then(datas => {
       Promise.all(
         datas.map(data => Word.create(data))
-      ).then(_ => {
+      ).then(() => {
         res.json({ message: "Word import finished!" });
-      });
+      }).catch(e => req.log.error(e));
     });
   } else {
     res.json({ message: "No url to csv given" });

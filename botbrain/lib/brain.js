@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const random = require('random');
 
-function fillPlaceholders(origObj, values, params) {
+function fillPlaceholders(origObj, values) {
     let obj;
     let output = '';
 
@@ -12,13 +12,13 @@ function fillPlaceholders(origObj, values, params) {
     }
 
     try {
-        const re = /(\#.+?\#)/g;
+        const re = /(#.+?#)/g;
         if (obj.text) {
             const array = [...obj.text.matchAll(re)];
             output = obj.text;
 
-            array.forEach((v, k) => {
-                const re_clean = /\#(.+?)\#/;
+            array.forEach(v => {
+                const re_clean = /#(.+?)#/;
                 const catClean = v[0].match(re_clean)[1];
 
                 let sub = findSub(catClean, obj, values);
@@ -35,7 +35,7 @@ function fillPlaceholders(origObj, values, params) {
 }
 
 function findSub(category, options, pools) {
-    let [word, users] = pools;
+    let word = pools[0];
     let sub = {};
 
     if (category == 'User') {

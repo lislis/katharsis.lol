@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-
 const { runDirectionParser } = require('../lib/csvparser.js');
 const utils = require('../lib/brain.js');
-
 const Direction = require('../models/Direction.js');
 const Word = require('../models/Word.js');
 
@@ -27,26 +24,24 @@ router.get('/bytype/:type', (req, res, next) => {
 router.get('/any', (req, res, next) => {
   Promise.all([
     Word.find().exec(),
-    User.find({ hasPermission: true }).exec()
   ]).then(values => {
     Direction
       .aggregate([{ $sample: {size: 1}}])
       .exec((err, direction) => {
         if (err) return next(err);
-        let newDirections = utils.fillPlaceholders(direction, values, req.query);
+        let newDirections = utils.fillPlaceholders(direction, values);
         res.json(newDirections);
       });
   }).catch(e => req.log.error(e));
 });
 
-router.post('/bulkimport', (req, res, next) => {
-  if (req.body.hasOwnProperty('csvUrl') && req.body.csvUrl !== '') {
+router.post('/bulkimport', (req, res) => {
+  if ((Object.prototype.hasOwnProperty.call(req.body, 'csvUrl')) && req.body.csvUrl !== '') {
     runDirectionParser(req.body.csvUrl).then(datas => {
       Promise.all(
         datas.map(data => Direction.create(data))
-      ).then(_ => {
-        res.json({ message: "Direction import finished!" });
-      });
+      ).then(() => res.json({ message: "Direction import finished!" })
+      ).catch(e => req.log.error(e));
     });
   } else {
     req.log.error("[/bulkimport] no url given");

@@ -5,7 +5,7 @@ async function runWordParser(url) {
     let csvData = await axios.get(url);
     let parsedData = await neatCsv(csvData.data);
 
-    let dataOut = parsedData.map((row, index) => {
+    let dataOut = parsedData.map(row => {
         let data = {
             word_type: row['Wortkategorie'],
             text: row['Wort']
@@ -29,7 +29,7 @@ async function runDirectionParser(url) {
     let csvData = await axios.get(url);
     let parsedData = await neatCsv(csvData.data);
 
-    let dataOut = parsedData.map((row, index) => {
+    let dataOut = parsedData.map(row => {
         let meta = row['Satzkategorie'].split(" ");
         let data = {
             direction_type: meta[0],
