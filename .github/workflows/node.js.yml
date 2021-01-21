@@ -7,22 +7,42 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  lint:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd foyer && yarn install && yarn lint 
-    - run: cd server && yarn install && yarn lint
-    - run: cd botbrain && yarn install && yarn lint
-    - run: cd runner && yarn install && yarn lint
+    - name: UI lint
+      run: |
+        cd foyer
+        yarn install
+        yarn lint
+    - name: Server lint
+      run: |
+        cd server
+        yarn install
+        yarn lint
+    - name: Botbrain lint
+      run: |
+        cd botbrain
+        yarn install
+        yarn lint
+    - name: Runner lint
+      run: |
+        cd runner
+        yarn install
+        yarn lint
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - run: echo "tbd"
