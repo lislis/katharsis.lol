@@ -11,7 +11,7 @@
 
     <strong class="upanel__uname">{{ $root.$data.user.nickname }}</strong>
 
-    <UserLogout :extClass="btn">{{ $t('intro.leave') }}</UserLogout>
+    <UserLogout class="btn">{{ $t('intro.leave') }}</UserLogout>
   </div>
 </template>
 <script>

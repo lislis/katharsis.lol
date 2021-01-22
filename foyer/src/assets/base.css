@@ -18,6 +18,7 @@ html {
 body {
   overflow-x: hidden;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  line-height: 1.55;
 }
 
 .app {
@@ -186,6 +187,7 @@ h2 {
   margin: 0;
 }
 
-.spec__title {
+.spec__title,
+.part__title {
   margin: 0
 }

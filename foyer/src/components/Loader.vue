@@ -1,5 +1,8 @@
 <template>
-  <div aria-label="loading" class="loader__container"><div class="lds-ripple"><div></div><div></div></div></div>
+<div aria-label="loading" class="loader__container">
+  <div class="lds-ripple"><div></div><div></div></div>
+  <slot></slot>
+</div>
 </template>
 <script>
  export default {

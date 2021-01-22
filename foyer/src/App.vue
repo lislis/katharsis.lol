@@ -34,8 +34,8 @@
      return {
        user: {},
        otherPeople: [],
-       mainRoom: {},
-       stage: {},
+       mainRoom: null,
+       stage: null,
        chats: [],
        restServer: null,
        socketServer: null,
@@ -70,8 +70,17 @@
      },
      async getMainRoom() {
        let response = await axios.get(`${this.restServer}/api/room/main`);
-       this.$root.$data.stage = response.data.filter(x => x.locked)[0];
-       this.$root.$data.mainRoom = response.data.filter(x => !x.locked)[0];
+       if (response.data.length !== 0) {
+         this.$root.$data.stage = response.data.filter(x => x.locked)[0];
+         this.$root.$data.mainRoom = response.data.filter(x => !x.locked)[0];
+       } else {
+         this.$root.$data.stage = null;
+         this.$root.$data.mainRoom = null;
+         setTimeout(() => {
+           this.getMainRoom();
+         }, 1000);
+       }
+
      },
      async getAllPeople() {
        let response = await axios.get(`${this.restServer}/api/user`);
@@ -88,5 +97,5 @@
 <style>
  @import './assets/reboot.css';
  @import './assets/base.css';
-
+ @import './assets/index.css';
 </style>

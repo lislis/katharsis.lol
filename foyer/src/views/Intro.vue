@@ -3,7 +3,6 @@
     <OutSideNav />
     <header class="inner">
       <h1 class="part__title">{{ $t('part.title') }}</h1>
-      <p>Lorem ipsum</p>
     </header>
     <section class="inner">
       <div v-if="$root.$data.user.nickname">
@@ -14,7 +13,7 @@
         </p>
         <p>
           {{ $t('intro.noMore') }}
-          <UserLogout :extClass="link">{{ $t('intro.leave') }}</UserLogout>.
+          <UserLogout class="link">{{ $t('intro.leave') }}</UserLogout>.
         </p>
       </div>
       <template v-else>
@@ -37,6 +36,3 @@
    }
  }
 </script>
-<style>
-
-</style>

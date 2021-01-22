@@ -2,7 +2,12 @@
   <div>
     <AppHeader :notifications="$root.$data.notifications" />
     <div class="mainroom-view">
-      <div class="mainroom-split">
+      <fragment v-if="!$root.$data.stage">
+        <div class="inner">
+          <Loader><p style="">{{ $t('main.pleaseWait') }}</p></Loader>
+        </div>
+      </fragment>
+      <div v-else class="mainroom-split">
         <Loader v-if="loading" />
         <template v-else>
           <Chat
@@ -36,6 +41,7 @@
    data() {
      return {
        loading: true,
+       notReady: false
      }
    },
    created() {

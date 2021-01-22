@@ -1,6 +1,5 @@
 <template>
-  <button @click.prevent="logout"
-          :class="extClass">
+  <button @click.prevent="logout">
     <slot></slot>
   </button>
 </template>
@@ -10,7 +9,6 @@
 
  export default {
    name: 'UserLogout',
-   props: ['extClass'],
    methods: {
      async logout() {
        await axios.delete(`${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`);

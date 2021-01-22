@@ -5,7 +5,7 @@
     <div class="chat__message-inner">
       <header v-if="message.user">
         <span class="chat__status"
-          v-if="user.isMod"
+              v-if="isMod(message.user)"
           :aria-label="$t('user.status.mod')"
           :title="$t('user.status.mod')">👑</span>
         <strong>{{getUserName(message.user)}}</strong>
@@ -42,6 +42,10 @@
        this.date_ago = timeago.format(d);
        this.date = d.toLocaleString('de-DE');
      }
+     setInterval(() => {
+       let d = new Date(this.message.created_date);
+       this.date_ago = timeago.format(d);
+     }, 60000);
 
      if (this.message.bot == true) {
        this.allTheClasses = 'is-bot';
@@ -77,6 +81,22 @@
            }
          } else {
            return user
+         }
+       }
+     },
+     isMod(user) {
+       if (typeof user !== 'string') {
+         return false
+       } else {
+         if (this.$root.$data.otherPeople.length) {
+           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
+           if (userInfo.length) {
+             return userInfo[0].isMod
+           } else {
+             return false
+           }
+         } else {
+           return false
          }
        }
      }
