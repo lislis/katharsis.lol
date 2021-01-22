@@ -10,7 +10,10 @@
         <button class="btn"
           :title="$t('ui.button.send')"
           :aria-label="$t('ui.button.send')"
-                :disabled="!canWrite">→</button>
+                :disabled="!canWrite">
+          <fragment v-if="sending">↺</fragment>
+          <fragment v-else>→</fragment>
+        </button>
       </div>
     </form>
   </div>
@@ -23,7 +26,8 @@
    props: ['room'],
    data() {
      return {
-       chat: {}
+       chat: {},
+       sending: false,
      }
    },
    methods: {
@@ -33,12 +37,14 @@
            || this.chat.message === ""
            || this.chat.message === " ") return false;
 
+       this.sending = true;
        this.chat.room = this.room._id;
        this.chat.user = this.$root.$data.user._id;
        axios
          .post(`${this.$root.$data.restServer}/api/chat`, this.chat)
          .then(() => {
-           this.chat.message = ''
+           this.chat = {};
+           this.sending = false;
          })
          .catch(e => {
            this.$root.$data.notifications.push(e)
