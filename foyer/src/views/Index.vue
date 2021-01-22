@@ -7,18 +7,19 @@
         <p class="index__claim">{{ $t('index.claim')}}</p>
       </header>
       <section class="inner">
-        <p class="">Lorem ipsum</p>
+        <div class="index__inner">
+        <p class="">{{ $t('index.p1') }}</p>
+        <p class="">{{ $t('index.p2') }}</p>
+        <p class="">{{ $t('index.p3') }}</p>
+        <p class="">{{ $t('index.p4') }}</p>
+        <p class="">{{ $t('index.p5') }}</p>
+        <p class="">{{ $t('index.haveFun') }}</p>
         <router-link :to="{ name: 'spectator'}"
                  class="btn">{{ $t('index.watch') }}</router-link>
         <router-link :to="{ name: 'intro'}"
-                 class="btn">{{ $t('index.participate') }}</router-link>
+                     class="btn">{{ $t('index.participate') }}</router-link>
+        </div>
       </section>
-      <section class="inner">
-        <p class="">Lorem ipsum</p>
-        <p class="">Lorem ipsum</p>
-        <p class="">Lorem ipsum</p>
-      </section>
-
     </article>
   </div>
 </template>
@@ -32,3 +33,6 @@
    }
  }
 </script>
+<style>
+
+</style>
