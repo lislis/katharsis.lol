@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="socketwrapper">
     <slot />
   </div>
 </template>
@@ -52,6 +52,16 @@
        this.updateModInPersonStorage(data.message);
        this.isMyselfAMod(data.message);
        saveUserToStore(this.$root.$data.user);
+     });
+
+     this.$root.$data.socket.on('clear-stage', (data) => {
+       this.$root.$data.chats = this.$root.$data.chats.filter(m => {
+         return m.room !== data.message._id;
+       })
+     });
+
+     this.$root.$data.socket.on('clear-everything', () => {
+       this.$root.$data.chats = [];
      });
    },
    methods: {

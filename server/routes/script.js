@@ -81,6 +81,7 @@ router.post('/cleanStage', (req, res, next) => {
     let room = values[0][0];
     Chat.deleteMany({room: room._id}, (err, msg) => {
       if (err) return next(err);
+      req.app.io.emit('clear-stage', { message: room });
       res.json({message: "Cleared stage " + msg});
     })
   }).catch(e => req.log.error(e));
@@ -89,6 +90,7 @@ router.post('/cleanStage', (req, res, next) => {
 router.post('/cleanEverything', (req, res, next) => {
   Chat.deleteMany((err, msg) => {
     if (err) return next(err);
+    req.app.io.emit('clear-everything', { message: ""});
     res.json({message: "Cleared chats " + msg});
   });
 });
