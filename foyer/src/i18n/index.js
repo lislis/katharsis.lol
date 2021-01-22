@@ -28,7 +28,9 @@ export const messages = {
       },
       notification: {
         onstage: "Auf die Bühne!",
-        offstage: "Runter von der Bühne!"
+        offstage: "Runter von der Bühne!",
+        isMod: "Du bist jetzt Moderator:in",
+        isUser: "Du bist jetzt Teilnehmer:in"
       },
       status: {
         stage: "Auf der Bühne",
