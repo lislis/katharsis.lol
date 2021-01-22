@@ -13,12 +13,16 @@
           <Chat
             :messages="stageMessages"
             :username="$root.$data.user.nickname"
-            :room="$root.$data.stage" />
+            :room="$root.$data.stage"
+            :showComposer="true"
+            :showTitle="true" />
 
           <Chat
             :messages="backstageMessages"
             :username="$root.$data.user.nickname"
-            :room="$root.$data.mainRoom" />
+            :room="$root.$data.mainRoom"
+            :showComposer="true"
+            :showTitle="true" />
         </template>
       </div>
     </div>

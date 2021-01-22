@@ -5,27 +5,26 @@
       <h1 class="spec__title">{{ $t('spec.title') }}</h1>
     </header>
     <section class="inner">
-      <Loader v-if="loading"/>
-      <div v-else class="chat">
-      <ul class="chat__messages">
-        <ChatBubble v-for="message in messages"
-                    :message="message"
-                    :key="message._id" />
-      </ul>
-      </div>
+      <Loader v-if="!$root.$data.stage"/>
+      <Chat v-else
+            :messages="messages"
+            :username="$root.$data.user.nickname"
+            :room="$root.$data.stage"
+            :showComposer="false"
+            :showTitle="false" />
     </section>
   </article>
 </template>
 <script>
  import Loader from '@/components/Loader'
- import ChatBubble from '@/components/ChatBubble'
+ import Chat from '@/components/Chat'
  import OutSideNav from '@/components/OutSideNav'
 
  export default {
    name: "Index",
    components: {
      Loader,
-     ChatBubble,
+     Chat,
      OutSideNav
    },
    data() {

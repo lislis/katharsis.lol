@@ -1,6 +1,6 @@
 <template>
   <section class="chat">
-    <div class="chat__room-header">
+    <div v-if="showTitle" class="chat__room-header">
       <h3>
         {{ room.room_name}}
         <span v-if="room.private" class="chat__room-status">(private)</span>
@@ -12,7 +12,7 @@
                     :message="message"
                     :key="message.message" />
       </ul>
-      <ChatComposer :room="room" />
+      <ChatComposer v-if="showComposer" :room="room" />
     </div>
   </section>
 </template>
@@ -23,14 +23,26 @@
 
  export default {
    name: 'Chat',
-   props: ['messages', 'username', 'connections', 'room'],
-   components: { ChatBubble, ChatComposer },
+   props: ['messages',
+           'username',
+           'connections',
+           'room',
+           'showComposer',
+           'showTitle'
+   ],
+   components: {
+     ChatBubble,
+     ChatComposer
+   },
+   data() {
+     return {}
+   },
    created() {
      this.updateScroll();
 
      this.$root.$data.socket.on('new-message', () => {
        this.updateScroll();
-     })
+     });
    },
    methods: {
      updateScroll(){
@@ -39,7 +51,8 @@
          if (!element) return false;
          element.scrollTop = element.scrollHeight;
        }, 500);
-     }
+     },
+
    }
  }
 </script>
