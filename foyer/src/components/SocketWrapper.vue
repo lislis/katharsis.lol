@@ -31,37 +31,28 @@
      });
 
      this.$root.$data.socket.on('user-to-stage', (data) => {
+       this.updatePermissionInPersonStorage(data.message);
        this.isMyselfOnStage(data.message);
        saveUserToStore(this.$root.$data.user);
-     })
+     });
 
      this.$root.$data.socket.on('user-off-stage', (data) => {
+       this.updatePermissionInPersonStorage(data.message);
        this.isMyselfOnStage(data.message);
        saveUserToStore(this.$root.$data.user);
-     })
+     });
 
      this.$root.$data.socket.on('user-2-mod', (data) => {
-       //console.log(data)
-       this.$root.$data.otherPeople = this.$root.$data.otherPeople.map(p => {
-         if (p._id == data.message._id) {
-           p.isMod = !data.message.isMod;
-         }
-         return p;
-       });
+       this.updateModInPersonStorage(data.message);
        this.isMyselfAMod(data.message);
        saveUserToStore(this.$root.$data.user);
-     })
+     });
+
      this.$root.$data.socket.on('mod-2-user', (data) => {
-       //console.log(data)
-       this.$root.$data.otherPeople = this.$root.$data.otherPeople.map(p => {
-         if (p._id == data.message._id) {
-           p.isMod = !data.message.isMod;
-         }
-         return p;
-       });
+       this.updateModInPersonStorage(data.message);
        this.isMyselfAMod(data.message);
        saveUserToStore(this.$root.$data.user);
-     })
+     });
    },
    methods: {
      isMyselfOnStage(data) {
@@ -72,12 +63,27 @@
        }
      },
      isMyselfAMod(data) {
-       //console.log(data)
        if (data._id === this.$root.$data.user._id) {
          this.$root.$data.user.isMod = !data.isMod;
          let note = this.$root.$data.user.isMod ? this.$t('user.notification.isMod') : this.$t('user.notification.isUser');
          this.$root.$data.notifications = [note];
        }
+     },
+     updatePermissionInPersonStorage(updatedUser) {
+       this.$root.$data.otherPeople = this.$root.$data.otherPeople.map(p => {
+         if (p._id == updatedUser._id) {
+           p.hasPermission = !updatedUser.hasPermission;
+         }
+         return p;
+       });
+     },
+     updateModInPersonStorage(updatedUser) {
+       this.$root.$data.otherPeople = this.$root.$data.otherPeople.map(p => {
+         if (p._id == updatedUser._id) {
+           p.isMod = !updatedUser.isMod;
+         }
+         return p;
+       });
      }
    }
  }

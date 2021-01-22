@@ -10,6 +10,7 @@
       <ul class="chat__messages">
         <ChatBubble v-for="message in messages"
                     :message="message"
+                    :room="room"
                     :key="message.message" />
       </ul>
       <ChatComposer v-if="showComposer" :room="room" />
