@@ -6,11 +6,13 @@
     </header>
     <section class="inner">
       <Loader v-if="loading"/>
-      <ul v-else class="chat__messages">
+      <div v-else class="chat">
+      <ul class="chat__messages">
         <ChatBubble v-for="message in messages"
                     :message="message"
                     :key="message._id" />
       </ul>
+      </div>
     </section>
   </article>
 </template>
