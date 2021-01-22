@@ -27,10 +27,11 @@
      }
    },
    methods: {
-     send(evt) {
-       evt.preventDefault()
+     send() {
        if (!this.canWrite) return false;
-       if (this.chat.message === "" || this.chat.message === " ") return false;
+       if (!this.chat.message
+           || this.chat.message === ""
+           || this.chat.message === " ") return false;
 
        this.chat.room = this.room._id;
        this.chat.user = this.$root.$data.user._id;
