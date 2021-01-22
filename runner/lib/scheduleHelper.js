@@ -13,8 +13,8 @@ function createJobListFromCSV(data, path) {
     timeCounter = timeCounter + parseInt(v['time'], 10);
     return createJobFromRow(v, k, cutPath, timeCounter);
   });
-  timeCounter = timeCounter + 60;
-  jobList.push(createJobFromRow({direction: 'theEnd'}, data.length, cutPath, timeCounter));
+  //timeCounter = timeCounter + 60;
+  //jobList.push(createJobFromRow({direction: 'theEnd'}, data.length, cutPath, timeCounter));
 
   return jobList;
 }
