@@ -51,6 +51,7 @@ router.post('/user2mod/:uid', (req, res, next) => {
   const opt = { isMod: true };
   User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
     if (err) return next(err);
+    req.app.io.emit('user-2-mod', { message: user });
     res.json(user);
   });
 });
@@ -59,6 +60,7 @@ router.post('/mod2user/:uid', (req, res, next) => {
   const opt = { isMod: false };
   User.findByIdAndUpdate(req.body.userid, opt, (err, user) => {
     if (err) return next(err);
+    req.app.io.emit('mod-2-user', { message: user });
     res.json(user);
   });
 });
