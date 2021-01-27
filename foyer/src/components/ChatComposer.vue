@@ -4,12 +4,13 @@
       <div class="chat__message-compose">
         <input type="text"
                class="form-control"
-               v-model.trim="chat.message"
+               v-model="chat.message"
                :placeholder="$t('ui.form.chat')"
                :readonly="!canWrite">
+        <EmojiPicker v-on:pick-emoji="pickUpEmoji" />
         <button class="btn"
-          :title="$t('ui.button.send')"
-          :aria-label="$t('ui.button.send')"
+                :title="$t('ui.button.send')"
+                :aria-label="$t('ui.button.send')"
                 :disabled="!canWrite">
           <fragment v-if="sending">↺</fragment>
           <fragment v-else>→</fragment>
@@ -19,15 +20,21 @@
   </div>
 </template>
 <script>
- import axios from 'axios'
+ import axios from 'axios';
+ import EmojiPicker from '@/components/EmojiPicker'
 
  export default {
    name: 'ChatComposer',
    props: ['room'],
+   components: {
+     EmojiPicker
+   },
    data() {
      return {
-       chat: {},
-       sending: false,
+       chat: {
+         message: ''
+       },
+       sending: false
      }
    },
    methods: {
@@ -50,6 +57,9 @@
            this.$root.$data.notifications.push(e)
          })
      },
+     pickUpEmoji(emoji) {
+       this.chat.message = this.chat.message + emoji;
+     }
    },
    computed: {
      canWrite() {
