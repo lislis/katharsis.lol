@@ -191,3 +191,7 @@ h2 {
 .part__title {
   margin: 0
 }
+
+.subtle-spacing > * + * {
+  margin-left: 1rem;
+}

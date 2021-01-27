@@ -55,7 +55,7 @@ export const messages = {
     },
     legal: {
       imprint: "Impressum",
-      gdpa: "Datenschutz"
+      gdpa: "Datenschutzhinweise"
     }
   },
   en: {
@@ -99,7 +99,7 @@ export const messages = {
     },
     legal: {
       imprint: "Imprint",
-      gdpa: "Data protection"
+      gdpa: "Data protection notice"
     }
   }
 }

@@ -6,13 +6,15 @@
       </main>
       <footer>
         <div class="inner">
-          <p>Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a></p>
-          <p><a href="#">{{ $t('legal.imprint') }}</a> | <a href="#">{{ $t('legal.gdpa') }}</a></p>
-          <div class="locale-changer">
+          <p class="subtle-spacing">
+            Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a>
+            <a v-if="imprintLink"
+                :href="imprintLink">{{ $t('legal.imprint') }}</a>
+            <a href="#">{{ $t('legal.gdpa') }}</a>
             <select v-model="$i18n.locale">
               <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
             </select>
-          </div>
+          </p>
         </div>
       </footer>
     </SocketWrapper>
@@ -32,6 +34,7 @@
    },
    data() {
      return {
+       imprintLink: null,
        user: {},
        otherPeople: [],
        mainRoom: null,
@@ -64,6 +67,10 @@
          this.$root.$data.restServer = `http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
          this.$root.$data.botBrain = `http://${process.env.VUE_APP_BOTBRAIN}:${process.env.VUE_APP_BOTBRAIN_PORT}`
        }
+       if (process.env.VUE_APP_LINK_IMPRINT && process.env.VUE_APP_LINK_IMPRINT !== "") {
+         this.$root.$data.imprintLink = `${process.env.VUE_APP_LINK_IMPRINT}`;
+       }
+
      },
      connectToSocket() {
        this.$root.$data.socket = io(this.$root.$data.socketServer)
