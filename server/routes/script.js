@@ -28,7 +28,6 @@ router.post('/onstage', (req, res, next) => {
         };
         Chat.create(chatMsg, (err, chat) => {
           if (err) return next(err);
-          //req.log.info(chat);
           req.app.io.emit('user-to-stage', { message: user });
           req.app.io.emit('new-message', { message: chat });
           res.json(user);
@@ -61,14 +60,12 @@ router.post('/offstage', (req, res, next) => {
         };
         Chat.create(chatMsg, (err, chat) => {
           if (err) return next(err);
-          //req.log.info(chat);
           req.app.io.emit('user-to-stage', { message: user });
           req.app.io.emit('new-message', { message: chat });
           res.json(user);
         });
       }
     } else {
-      //req.log.info('No user available to put on stage');
       res.json({message: 'could not find valid users'});
     }
   }).catch(e => req.log.error(e));
