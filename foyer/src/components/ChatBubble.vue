@@ -17,7 +17,7 @@
         <strong>{{getUserName(message.user)}}</strong>
 
       </header>
-      <p class="chat__message-bubble" >
+      <p class="chat__message-bubble">
         <span>
           {{message.message}}
         </span>

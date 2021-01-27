@@ -181,7 +181,13 @@ h2 {
   overflow-y: scroll;
   scrollbar-color: var(--bg-document) transparent;
   scrollbar-width: thin;
+  white-space: pre-line;
 }
+
+.chat__message-bubble {
+  white-space: pre-line;
+}
+
 
 .chat__room-header h3 {
   margin: 0;

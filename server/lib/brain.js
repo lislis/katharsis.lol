@@ -18,7 +18,7 @@ function replacePatternWUsers(string, userPool) {
                 output = output.replace(v[0], u.nickname);
             } else {
                 // tbd also abort with empty string?
-                output = output.replace(v[0], "ein Geist");
+                output = output.replace(v[0], "1 Geist");
             }
         } else {
             // meaning: there are other placeholders than #User# that we can't replace here
