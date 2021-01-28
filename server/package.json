@@ -1,6 +1,6 @@
 {
-  "name": "CallMeServer",
-  "version": "1.0.0",
+  "name": "server.lol",
+  "version": "0.2.2",
   "author": "lislis <mail@lislis.de>",
   "main": "main.js",
   "scripts": {
