@@ -4,19 +4,7 @@
       <main>
         <router-view />
       </main>
-      <footer>
-        <div class="inner">
-          <p class="subtle-spacing">
-            Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a>
-            <a v-if="imprintLink"
-                :href="imprintLink">{{ $t('legal.imprint') }}</a>
-            <a href="#">{{ $t('legal.gdpa') }}</a>
-            <select v-model="$i18n.locale">
-              <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
-            </select>
-          </p>
-        </div>
-      </footer>
+      <AppMeta />
     </SocketWrapper>
   </div>
 </template>
@@ -25,12 +13,14 @@
  import axios from 'axios'
  import io from 'socket.io-client';
  import SocketWrapper from '@/components/SocketWrapper'
+ import AppMeta from '@/components/AppMeta';
  import { loadUserFromStorage } from '@/lib/storage'
 
  export default {
    name: 'App',
    components: {
      SocketWrapper,
+     AppMeta
    },
    data() {
      return {
