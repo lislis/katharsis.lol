@@ -6,7 +6,8 @@
                class="form-control"
                v-model="chat.message"
                :placeholder="$t('ui.form.chat')"
-               :readonly="!canWrite">
+               :readonly="!canWrite"
+               @input="typing">
         <EmojiPicker v-on:pick-emoji="pickUpEmoji" />
         <button class="btn"
                 :title="$t('ui.button.send')"
@@ -34,7 +35,9 @@
        chat: {
          message: ''
        },
-       sending: false
+       sending: false,
+       isTyping: false,
+       typingTimeout: null
      }
    },
    methods: {
@@ -59,6 +62,26 @@
      },
      pickUpEmoji(emoji) {
        this.chat.message = this.chat.message + emoji;
+     },
+     typingTimeoutFn() {
+       console.log('no tippy')
+       this.isTyping = false;
+       this.$root.$data.socket.emit('is-not-typing',
+                                    { user: this.$root.$data.user._id,
+                                      room: this.room._id });
+     },
+     typing() {
+       if (this.isTyping) {
+         clearTimeout(this.typingTimeout);
+         this.typingTimeout = setTimeout(this.typingTimeoutFn, 1000);
+       } else {
+         this.isTyping = true;
+         console.log('tippy')
+         this.$root.$data.socket.emit('is-typing',
+                                      { user: this.$root.$data.user._id,
+                                        room: this.room._id });
+         this.typingTimeout = setTimeout(this.typingTimeoutFn, 1000);
+       }
      }
    },
    computed: {

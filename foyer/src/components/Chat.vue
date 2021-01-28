@@ -13,14 +13,16 @@
                     :room="room"
                     :key="message.message" />
       </ul>
+      <TypingIndicator :room="room" />
       <ChatComposer v-if="showComposer" :room="room" />
     </div>
   </section>
 </template>
 
 <script>
- import ChatBubble from '@/components/ChatBubble.vue'
- import ChatComposer from '@/components/ChatComposer.vue'
+import ChatBubble from '@/components/ChatBubble.vue'
+import ChatComposer from '@/components/ChatComposer.vue'
+import TypingIndicator from '@/components/TypingIndicator.vue'
 
  export default {
    name: 'Chat',
@@ -33,7 +35,8 @@
    ],
    components: {
      ChatBubble,
-     ChatComposer
+     ChatComposer,
+     TypingIndicator
    },
    data() {
      return {}

@@ -26,7 +26,7 @@
      });
 
      this.$root.$data.socket.on('delete-message', (data) => {
-       console.log(data)
+       //console.log(data)
        this.$root.$data.chats = removeByAttr(this.$root.$data.chats, '_id', data.message._id);
      });
 
@@ -63,6 +63,14 @@
      this.$root.$data.socket.on('clear-everything', () => {
        this.$root.$data.chats = [];
      });
+
+     this.$root.$data.socket.on('started-typing', (data) => {
+       this.updateRoomIsTyping(data, true);
+     });
+
+     this.$root.$data.socket.on('stopped-typing', (data) => {
+       this.updateRoomIsTyping(data, false);
+     });
    },
    methods: {
      isMyselfOnStage(data) {
@@ -94,6 +102,22 @@
          }
          return p;
        });
+     },
+     updateRoomIsTyping(data, bool) {
+       if (data.user != this.$root.$data.user._id) {
+         if (this.$root.$data.mainRoom._id == data.room) {
+           this.$root.$data.mainRoom.typing = bool;
+         }
+         if (this.$root.$data.stage._id == data.room) {
+           this.$root.$data.stage.typing = bool;
+         }
+         this.$root.$data.rooms = this.$root.$data.rooms.map(r => {
+           if (r._id == data.room) {
+             r.typing = bool;
+           }
+           return r;
+         });
+       }
      }
    }
  }

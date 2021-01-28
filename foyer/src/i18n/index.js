@@ -43,7 +43,8 @@ export const messages = {
         send: "Schreiben",
       },
       form: {
-        chat: "Schreibe etwas"
+        chat: "Schreibe etwas",
+        thereIsTyping: "Es wird getippt"
       }
     },
     spec: {
@@ -87,7 +88,8 @@ export const messages = {
         send: "Write",
       },
       form: {
-        chat: "Write something"
+        chat: "Write something",
+        thereIsTyping: "There is typing"
       }
     },
     spec: {
