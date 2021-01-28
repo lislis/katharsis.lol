@@ -40,6 +40,7 @@
        mainRoom: null,
        stage: null,
        chats: [],
+       rooms: [],
        restServer: null,
        socketServer: null,
        botBrain: null,
@@ -51,10 +52,11 @@
    created() {
      this.setSocketServer();
      this.connectToSocket();
-     this.getMainRoom()
-     this.getAllPeople()
-     this.getAllChats()
-     this.user = loadUserFromStorage()
+     this.getMainRoom();
+     this.getAllRooms();
+     this.getAllPeople();
+     this.getAllChats();
+     this.user = loadUserFromStorage();
    },
    methods: {
      setSocketServer() {
@@ -80,6 +82,8 @@
        if (response.data.length !== 0) {
          this.$root.$data.stage = response.data.filter(x => x.locked)[0];
          this.$root.$data.mainRoom = response.data.filter(x => !x.locked)[0];
+         this.$root.$data.stage.typing = false;
+         this.$root.$data.mainRoom.typing = false;
        } else {
          this.$root.$data.stage = null;
          this.$root.$data.mainRoom = null;
@@ -88,6 +92,12 @@
          }, 1000);
        }
 
+     },
+     async getAllRooms() {
+       let response = await axios.get(`${this.restServer}/api/room`);
+       this.rooms = response.data
+                            .map(x => {x.typing = true; return x})
+                            .filter(x => !x.main);
      },
      async getAllPeople() {
        let response = await axios.get(`${this.restServer}/api/user`);
