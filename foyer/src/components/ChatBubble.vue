@@ -17,7 +17,7 @@
         <strong>{{getUserName(message.user)}}</strong>
 
       </header>
-      <p class="chat__message-bubble">
+      <p class="chat__message-bubble" :style="styleObject">
         <span>
           {{message.message}}
         </span>
@@ -39,7 +39,9 @@
        hasPosition: 'left',
        allTheClasses: '',
        date: null,
-       date_ago: null
+       date_ago: null,
+       styleObject: {
+       }
      }
    },
    created() {
@@ -48,10 +50,13 @@
        this.date_ago = timeago.format(d);
        this.date = d.toLocaleString('de-DE');
      }
-     setInterval(() => {
+     window.setInterval(() => {
        let d = new Date(this.message.created_date);
        this.date_ago = timeago.format(d);
      }, 60000);
+
+     this.styleObject.backgroundColor = this.getUserColor(this.message.user);
+
 
      if (this.message.bot == true) {
        this.allTheClasses = 'is-bot';
@@ -74,6 +79,22 @@
      }
    },
    methods: {
+     getUserColor(user) {
+       if (typeof user !== 'string') {
+         return 'transparent'
+       } else {
+         if (this.$root.$data.otherPeople.length) {
+           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
+           if (userInfo.length) {
+             return userInfo[0].colorCode
+           } else {
+             return '#ffffff'
+           }
+         } else {
+           return '#ffffff'
+         }
+       }
+     },
      getUserName(user) {
        if (typeof user !== 'string') {
          return user.nickname;
@@ -159,17 +180,6 @@
 
  .is-gone {
    opacity: 0.5;
- }
- .is-gone .chat__message-bubble {
-   background-color: var(--bg-bubble);;
- }
-
- .is-user .chat__message-bubble {
-   background-color: var(--bg-bubble);
- }
-
- .is-me .chat__message-bubble {
-   background-color:  var(--bg-bubble);;
  }
 
  time {
