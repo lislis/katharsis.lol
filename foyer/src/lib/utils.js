@@ -13,3 +13,8 @@ export function removeByAttr(arr, attr, value) {
 export function removeByIndex(arr, index) {
     return arr.splice(index, 1);
 }
+
+export function sample(arr) {
+  const rand = Math.floor(Math.random()*(arr.length));
+  return arr[rand];
+}
