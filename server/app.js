@@ -89,6 +89,14 @@ app.io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     logger.info('[socket.io] User disconnected', socket.id);
   });
+
+  socket.on('is-typing', (data) => {
+    io.emit('started-typing', data);
+  });
+
+  socket.on('is-not-typing', (data) => {
+    io.emit('stopped-typing', data);
+  });
 });
 
 module.exports = app;
