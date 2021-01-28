@@ -1,6 +1,7 @@
 <template>
   <div class="emojipicker">
     <button class="emojibtn"
+            type="button"
             @click.prevent="toggleDisplay">😀</button>
 
     <div class="dialog" v-if="isopen">
