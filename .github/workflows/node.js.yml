@@ -20,7 +20,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: UI lint
       run: |
-        cd foyer
+        cd ui
         yarn install
         yarn lint
     - name: Server lint
