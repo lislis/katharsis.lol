@@ -10,12 +10,6 @@
       <div v-else class="mainroom-split">
         <Loader v-if="loading" />
         <template v-else>
-          <Chat
-            :messages="stageMessages"
-            :username="$root.$data.user.nickname"
-            :room="$root.$data.stage"
-            :showComposer="true"
-            :showTitle="true" />
 
           <Chat
             :messages="backstageMessages"

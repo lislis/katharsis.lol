@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import ChatBubble from '@/components/ChatBubble.vue'
-import ChatComposer from '@/components/ChatComposer.vue'
-import TypingIndicator from '@/components/TypingIndicator.vue'
+ import ChatBubble from '@/components/ChatBubble.vue'
+ import ChatComposer from '@/components/ChatComposer.vue'
+ import TypingIndicator from '@/components/TypingIndicator.vue'
 
  export default {
    name: 'Chat',
@@ -39,22 +39,39 @@ import TypingIndicator from '@/components/TypingIndicator.vue'
      TypingIndicator
    },
    data() {
-     return {}
+     return {
+       firstScroll: true
+     }
    },
    created() {
-     this.updateScroll();
+     this.firstScroll = true;
+     setTimeout(() => {this.updateScroll()}, 200);
 
      this.$root.$data.socket.on('new-message', () => {
        this.updateScroll();
      });
    },
    methods: {
-     updateScroll(){
+     updateScroll() {
        setTimeout(() => {
          const element = this.$el.querySelector('.chat__messages');
-         if (!element) return false;
-         element.scrollTop = element.scrollHeight;
-       }, 500);
+         if (element) {
+           const eHeight = Math.floor(element.getBoundingClientRect().height);
+           const eScrollTop = element.scrollTop;
+           const eScrollHeight = element.scrollHeight;
+           const maxScroll = Math.floor(eScrollHeight - eHeight);
+           let lastMsgHeight = 200; // could be calculated
+
+           if (this.firstScroll) {
+             element.scrollTop = eScrollHeight;
+             this.firstScroll = false;
+           }
+
+           if (eScrollTop + lastMsgHeight > maxScroll) {
+             element.scrollTop = eScrollHeight;
+           }
+         }
+       }, 200);
      },
 
    }

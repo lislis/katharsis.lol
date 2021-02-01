@@ -64,7 +64,6 @@
        this.chat.message = this.chat.message + emoji;
      },
      typingTimeoutFn() {
-       console.log('no tippy')
        this.isTyping = false;
        this.$root.$data.socket.emit('is-not-typing',
                                     { user: this.$root.$data.user._id,
@@ -76,7 +75,6 @@
          this.typingTimeout = setTimeout(this.typingTimeoutFn, 1000);
        } else {
          this.isTyping = true;
-         console.log('tippy')
          this.$root.$data.socket.emit('is-typing',
                                       { user: this.$root.$data.user._id,
                                         room: this.room._id });
