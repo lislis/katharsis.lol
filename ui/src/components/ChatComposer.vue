@@ -8,7 +8,7 @@
                :placeholder="$t('ui.form.chat')"
                :readonly="!canWrite"
                @input="typing">
-        <EmojiPicker v-on:pick-emoji="pickUpEmoji" />
+        <EmojiPicker v-if="canWrite" v-on:pick-emoji="pickUpEmoji" />
         <button class="btn"
                 :title="$t('ui.button.send')"
                 :aria-label="$t('ui.button.send')"

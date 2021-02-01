@@ -1,5 +1,5 @@
 <template>
-  <section class="chat">
+  <section class="chat" :class="{ 'is-onit': mainStageHighlight }">
     <div v-if="showTitle" class="chat__room-header">
       <h3>
         {{ room.room_name}}
@@ -93,6 +93,14 @@
          this.element.scrollTop = this.element.scrollHeight;
          this.hasNewMessage = false;
        }
+     }
+   },
+   computed: {
+     mainStageHighlight() {
+       if (!this.room.locked) return false;
+       if (!this.$root.$data.user.hasPermission) return false;
+       return true;
+
      }
    }
  }

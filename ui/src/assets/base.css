@@ -168,6 +168,19 @@ h2 {
   background-color: var(--bg-main);
 }
 
+.chat.is-onit {
+  animation: bg-rotate infinite 2s ease-in-out alternate;
+}
+
+@keyframes bg-rotate {
+  0% {
+    background-color: hsl(302,100%,25%);
+  }
+  100% {
+    background-color: hsl(302,100%,35%);
+  }
+}
+
 .chat + .chat {
   margin-left: 1rem;
 }
