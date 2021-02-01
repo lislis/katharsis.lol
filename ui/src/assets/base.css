@@ -184,6 +184,10 @@ h2 {
   white-space: pre-line;
 }
 
+.chat__message_container {
+  position: relative;
+}
+
 .chat__message-bubble {
   white-space: pre-line;
 }
@@ -191,6 +195,49 @@ h2 {
 
 .chat__room-header h3 {
   margin: 0;
+}
+
+.chat__scrolldown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  min-width: 2rem;
+  height: 2rem;
+  margin: auto;
+  padding: .7em 0.5em 0.4em;
+  transform: translateY(-180%);
+  border: none;
+  border-radius: 50%;
+  background-color: var(--bg-document);
+  color: var(--bg-footer);
+  cursor: pointer;
+  animation: jumping infinite 0.7s alternate ease-in-out;
+}
+.chat__scrolldown:after {
+  content: "";
+  position: absolute;
+  display: block;
+  background-color: var(--bg-document);
+  width: 1rem;
+  height: 1rem;
+  transform: rotate(45deg);
+  bottom: -0.1rem;
+}
+
+.chat__scrolldown span {
+  display: block;
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@keyframes jumping {
+  0% {
+    transform: translateY(-200%);
+  };
+  100% {
+    transform: translateY(-260%);
+  }
 }
 
 .spec__title,

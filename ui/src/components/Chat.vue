@@ -13,6 +13,10 @@
                     :room="room"
                     :key="message.message" />
       </ul>
+      <button class="chat__scrolldown"
+              type="button"
+              v-if="hasNewMessage"
+              @click="scrollDown"><span>{{ $t('ui.chat.scrollDown')}}</span></button>
       <TypingIndicator :room="room" />
       <ChatComposer v-if="showComposer" :room="room" />
     </div>
@@ -40,40 +44,56 @@
    },
    data() {
      return {
-       firstScroll: true
+       element: undefined,
+       firstScroll: true,
+       hasNewMessage: false
      }
    },
    created() {
      this.firstScroll = true;
-     setTimeout(() => {this.updateScroll()}, 200);
+     this.hasNewMessage = false;
+
+     setTimeout(() => {
+       this.element = this.$el.querySelector('.chat__messages');
+       this.updateScroll();
+     }, 200);
 
      this.$root.$data.socket.on('new-message', () => {
+       const maxScroll = Math.floor(this.element.scrollHeight - this.element.getBoundingClientRect().height);
+       if (this.element.scrollTop < maxScroll) {
+         this.hasNewMessage = true;
+       }
        this.updateScroll();
      });
    },
    methods: {
      updateScroll() {
        setTimeout(() => {
-         const element = this.$el.querySelector('.chat__messages');
-         if (element) {
-           const eHeight = Math.floor(element.getBoundingClientRect().height);
-           const eScrollTop = element.scrollTop;
-           const eScrollHeight = element.scrollHeight;
+         if (this.element) {
+           const eHeight = Math.floor(this.element.getBoundingClientRect().height);
+           const eScrollTop = this.element.scrollTop;
+           const eScrollHeight = this.element.scrollHeight;
            const maxScroll = Math.floor(eScrollHeight - eHeight);
            let lastMsgHeight = 200; // could be calculated
 
            if (this.firstScroll) {
-             element.scrollTop = eScrollHeight;
+             this.element.scrollTop = eScrollHeight;
              this.firstScroll = false;
            }
 
            if (eScrollTop + lastMsgHeight > maxScroll) {
-             element.scrollTop = eScrollHeight;
+             this.element.scrollTop = eScrollHeight;
+             this.hasNewMessage = false;
            }
          }
        }, 200);
      },
-
+     scrollDown() {
+       if (this.element) {
+         this.element.scrollTop = this.element.scrollHeight;
+         this.hasNewMessage = false;
+       }
+     }
    }
  }
 </script>

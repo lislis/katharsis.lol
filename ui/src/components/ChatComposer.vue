@@ -32,13 +32,14 @@
    },
    data() {
      return {
-       chat: {
-         message: ''
-       },
+       chat: {},
        sending: false,
        isTyping: false,
        typingTimeout: null
      }
+   },
+   created() {
+     this.chat.message = '';
    },
    methods: {
      send() {

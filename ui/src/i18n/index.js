@@ -45,6 +45,9 @@ export const messages = {
       form: {
         chat: "Schreibe etwas",
         thereIsTyping: "Es wird getippt"
+      },
+      chat: {
+        scrollDown: "Neue Nachricht, scrolle runter"
       }
     },
     spec: {
@@ -90,6 +93,9 @@ export const messages = {
       form: {
         chat: "Write something",
         thereIsTyping: "There is typing"
+      },
+      chat: {
+        scrollDown: "Neue Nachricht, scrolle runter"
       }
     },
     spec: {
