@@ -205,6 +205,11 @@ h2 {
   white-space: pre-line;
 }
 
+.chat__room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .chat__room-header h3 {
   margin: 0;

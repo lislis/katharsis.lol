@@ -117,13 +117,14 @@
    justify-content: space-between;
    padding-bottom: 4px;
    margin-bottom: 4px;
-   border-bottom: 1px solid lightgrey;
+   border-bottom: solid 2px var(--bg-footer);
  }
 
  .groupnav__item {
    padding: 5px;
    line-height: 1;
    border-radius: 4px;
+   cursor: pointer;
  }
 
  .groupnav__item:hover,

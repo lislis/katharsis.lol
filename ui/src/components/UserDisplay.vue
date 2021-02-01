@@ -1,5 +1,7 @@
 <template>
-  <p class="userdisplay" v-if="userObj">
+  <p class="userdisplay"
+     v-if="userObj"
+     :class="{'is-you': isYou()}">
     <span class="userdisplay__permission"
           v-if="userObj.hasPermission"
           :aria-label="$t('user.status.stage')"
@@ -35,6 +37,9 @@
        } else {
          this.userObj = this.user;
        }
+     },
+     isYou() {
+       return this.userObj._id == this.$root.$data.user._id;
      }
    }
  }
