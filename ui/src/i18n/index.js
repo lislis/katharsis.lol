@@ -48,7 +48,8 @@ export const messages = {
       },
       chat: {
         scrollDown: "Neue Nachricht, scrolle runter",
-        peopleList: "Darsteller im Raum"
+        peopleList: "Darsteller im Raum",
+        emojiPicker: "Emoji auswählen"
       }
     },
     spec: {
@@ -97,7 +98,8 @@ export const messages = {
       },
       chat: {
         scrollDown: "New message, scroll down",
-        peopleList: "Performers in the room"
+        peopleList: "Performers in the room",
+        emojiPicker: "Select emoji"
       }
     },
     spec: {
