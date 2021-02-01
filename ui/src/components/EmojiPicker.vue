@@ -2,6 +2,8 @@
   <div class="emojipicker">
     <button class="emojibtn"
             type="button"
+            :title="$t('ui.chat.emojiPicker')"
+            :aria-label="$t('ui.chat.emojiPicker')"
             @click.prevent="toggleDisplay">😀</button>
 
     <div class="dialog" v-if="isopen">
