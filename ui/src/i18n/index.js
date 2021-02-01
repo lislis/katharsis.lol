@@ -47,7 +47,8 @@ export const messages = {
         thereIsTyping: "Es wird getippt"
       },
       chat: {
-        scrollDown: "Neue Nachricht, scrolle runter"
+        scrollDown: "Neue Nachricht, scrolle runter",
+        peopleList: "Darsteller im Raum"
       }
     },
     spec: {
@@ -95,7 +96,8 @@ export const messages = {
         thereIsTyping: "There is typing"
       },
       chat: {
-        scrollDown: "Neue Nachricht, scrolle runter"
+        scrollDown: "New message, scroll down",
+        peopleList: "Performers in the room"
       }
     },
     spec: {
