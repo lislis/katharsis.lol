@@ -4,18 +4,7 @@
       :class="allTheClasses">
     <div class="chat__message-inner">
       <header v-if="message.user">
-        <fragment v-if="!room.locked">
-          <span class="chat__status"
-                v-if="isMod(message.user)"
-                :aria-label="$t('user.status.mod')"
-                :title="$t('user.status.mod')">👑</span>
-          <span class="chat__status"
-                v-if="isOnStage(message.user)"
-                :aria-label="$t('user.status.stage')"
-                :title="$t('user.status.stage')">🎭</span>
-        </fragment>
-        <strong>{{getUserName(message.user)}}</strong>
-
+        <UserDisplay :user="message.user" />
       </header>
       <p class="chat__message-bubble" :style="styleObject">
         <span>
@@ -29,19 +18,22 @@
   </li>
 </template>
 <script>
+ import UserDisplay from '@/components/UserDisplay'
  import * as timeago from 'timeago.js'
 
  export default {
    name: "ChatBubble",
    props: ['message', 'room'],
+   components: {
+     UserDisplay
+   },
    data() {
      return {
        hasPosition: 'left',
        allTheClasses: '',
        date: null,
        date_ago: null,
-       styleObject: {
-       }
+       styleObject: {}
      }
    },
    created() {
@@ -56,27 +48,7 @@
      }, 60000);
 
      this.styleObject.backgroundColor = this.getUserColor(this.message.user);
-
-
-     if (this.message.bot == true) {
-       this.allTheClasses = 'is-bot';
-       this.hasPosition = 'center';
-     } else if (Object.prototype.hasOwnProperty.call(this.message, 'user')) {
-       if (this.message.user == null) {
-         this.allTheClasses = 'is-gone';
-         this.hasPosition = 'left';
-       } else if ((this.message.user._id == this.$root.$data.user._id)
-                  || (this.message.user == this.$root.$data.user._id)) {
-         this.allTheClasses = 'is-me';
-         this.hasPosition = 'right';
-       } else {
-         this.allTheClasses = 'is-user';
-         this.hasPosition = 'left';
-       }
-     } else {
-       this.allTheClasses = 'is-note';
-       this.hasPosition = 'center';
-     }
+     this.assignClasses();
    },
    methods: {
      getUserColor(user) {
@@ -95,52 +67,25 @@
          }
        }
      },
-     getUserName(user) {
-       if (typeof user !== 'string') {
-         return user.nickname;
-       } else {
-         if (this.$root.$data.otherPeople.length) {
-           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
-           if (userInfo.length) {
-             return userInfo[0].nickname
-           } else {
-             return user
-           }
+     assignClasses() {
+       if (this.message.bot == true) {
+         this.allTheClasses = 'is-bot';
+         this.hasPosition = 'center';
+       } else if (Object.prototype.hasOwnProperty.call(this.message, 'user')) {
+         if (this.message.user == null) {
+           this.allTheClasses = 'is-gone';
+           this.hasPosition = 'left';
+         } else if ((this.message.user._id == this.$root.$data.user._id)
+                    || (this.message.user == this.$root.$data.user._id)) {
+           this.allTheClasses = 'is-me';
+           this.hasPosition = 'right';
          } else {
-           return user
+           this.allTheClasses = 'is-user';
+           this.hasPosition = 'left';
          }
-       }
-     },
-     isMod(user) {
-       if (typeof user !== 'string') {
-         return false
        } else {
-         if (this.$root.$data.otherPeople.length) {
-           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
-           if (userInfo.length) {
-             return userInfo[0].isMod
-           } else {
-             return false
-           }
-         } else {
-           return false
-         }
-       }
-     },
-     isOnStage(user) {
-       if (typeof user !== 'string') {
-         return false
-       } else {
-         if (this.$root.$data.otherPeople.length) {
-           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
-           if (userInfo.length) {
-             return userInfo[0].hasPermission
-           } else {
-             return false
-           }
-         } else {
-           return false
-         }
+         this.allTheClasses = 'is-note';
+         this.hasPosition = 'center';
        }
      }
    }
