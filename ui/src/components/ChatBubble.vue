@@ -52,19 +52,15 @@
    },
    methods: {
      getUserColor(user) {
-       if (typeof user !== 'string') {
-         return 'transparent'
-       } else {
-         if (this.$root.$data.otherPeople.length) {
-           let userInfo = this.$root.$data.otherPeople.filter(x => x._id === user)
-           if (userInfo.length) {
-             return userInfo[0].colorCode
-           } else {
-             return '#ffffff'
-           }
+       if (typeof user === 'string')  {
+         if (user === this.$root.$data.user._id) {
+           return this.$root.$data.user.colorCode;
          } else {
-           return '#ffffff'
+           const potUser =  this.$root.$data.otherPeople.filter(x => x._id === user);
+           return (potUser.length == 1) ? potUser[0].colorCode : '#ffffff';
          }
+       } else {
+         return 'transparent';
        }
      },
      assignClasses() {

@@ -21,22 +21,21 @@
      }
    },
    created() {
-     console.log(typeof this.user)
-
-     if (typeof this.user === 'string')  {
-       if (this.user === this.$root.$data.user._id) {
-         this.userObj = this.$root.$data.user;
-       } else {
-         const potUser =  this.$root.$data.otherPeople.filter(x => x._id === this.user);
-         this.userObj = (potUser.length == 1) ? potUser[0] : { _id : this.user };
-       }
-     } else {
-       this.userObj = this.user;
-     }
-
+     this.getUserObj();
    },
    methods: {
-
+     getUserObj() {
+       if (typeof this.user === 'string')  {
+         if (this.user === this.$root.$data.user._id) {
+           this.userObj = this.$root.$data.user;
+         } else {
+           const potUser =  this.$root.$data.otherPeople.filter(x => x._id === this.user);
+           this.userObj = (potUser.length == 1) ? potUser[0] : { _id : this.user };
+         }
+       } else {
+         this.userObj = this.user;
+       }
+     }
    }
  }
 </script>
