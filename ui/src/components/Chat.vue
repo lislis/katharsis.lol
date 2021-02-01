@@ -5,6 +5,7 @@
         {{ room.room_name}}
         <span v-if="room.private" class="chat__room-status">(private)</span>
       </h3>
+      <PeopleList :people="$root.$data.otherPeople" />
     </div>
     <div class="chat__message_container">
       <ul class="chat__messages">
@@ -27,6 +28,7 @@
  import ChatBubble from '@/components/ChatBubble.vue'
  import ChatComposer from '@/components/ChatComposer.vue'
  import TypingIndicator from '@/components/TypingIndicator.vue'
+ import PeopleList from '@/components/PeopleList.vue'
 
  export default {
    name: 'Chat',
@@ -40,7 +42,8 @@
    components: {
      ChatBubble,
      ChatComposer,
-     TypingIndicator
+     TypingIndicator,
+     PeopleList
    },
    data() {
      return {
