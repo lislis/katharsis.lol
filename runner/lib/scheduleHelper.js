@@ -39,6 +39,16 @@ function createJobFromRow(row, jobNumber, otherPath, timeCounter) {
     case 'theEnd':
       job.path = path.join(otherPath, 'jobs', `endOfSchedule.js`);
       break;
+    case 'embed':
+      job.path = path.join(otherPath, 'jobs', `embed.js`);
+      logger.info(`[job] ${row['platform']} ${row['id']}`);
+      job.worker = {
+          argv: [JSON.stringify({
+              platform: row['platform'],
+              id: row['id']
+          })]
+      };
+      break;
     case 'exportPlay':
       job.path = path.join(otherPath, 'jobs', `exportPlay.js`);
       break;

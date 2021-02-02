@@ -6,10 +6,8 @@
       <header v-if="message.user">
         <UserDisplay :user="message.user" />
       </header>
-      <p class="chat__message-bubble" :style="styleObject">
-        <span>
-          {{message.message}}
-        </span>
+      <p class="chat__message-bubble" :style="styleObject" v-html="message.message">
+
       </p>
       <aside>
         <time datetime="this.message.created_date" :title="date">{{ date_ago }}</time>

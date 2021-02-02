@@ -8,6 +8,7 @@ const axios = require('axios');
 const random = require('random');
 
 const { replacePatternWUsers } = require('../lib/brain.js');
+const { returnEmbedWId } = require('../lib/platform_embeds.js');
 const BOTBRAIN = process.env['BOTBRAIN'];
 
 router.post('/onstage', (req, res, next) => {
@@ -124,6 +125,25 @@ router.post('/category', (req, res, next) => {
     } else {
       res.json({mesage: `Nothing matched category ${req.body.category}, skipping`});
     }
+  }).catch(e => req.log.error(e));
+});
+
+router.post('/embed', (req, res, next) => {
+  Promise.all([
+    Room.find({main: true, locked: true}).exec()
+  ]).then(values => {
+    const room = values[0][0];
+    const embedCode = returnEmbedWId(req.body.platform, req.body.id);
+    const chatMsg = { message: embedCode,
+                      room: room._id,
+                      bot: true
+    };
+
+    Chat.create(chatMsg, (err, msg) => {
+      if (err) return next(err);
+      req.app.io.emit('new-message', { message: msg });
+      res.json(msg);
+    });
   }).catch(e => req.log.error(e));
 });
 
