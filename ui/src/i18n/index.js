@@ -41,6 +41,7 @@ export const messages = {
       button: {
         close: "schließen",
         send: "Schreiben",
+        accept: "Okay!"
       },
       form: {
         chat: "Schreibe etwas",
@@ -91,6 +92,7 @@ export const messages = {
       button: {
         close: "close",
         send: "Write",
+        accept: "Okay!"
       },
       form: {
         chat: "Write something",
