@@ -1,5 +1,27 @@
 # Changelog
 
+## [Unreleased](https://github.com/lislis/katharsis.lol/tree/HEAD)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.2.2...HEAD)
+
+**Implemented enhancements:**
+
+- \[ui\] people list who is online, who is on stage? [\#45](https://github.com/lislis/katharsis.lol/issues/45)
+- \[ui\] rework notifications as modal [\#44](https://github.com/lislis/katharsis.lol/issues/44)
+- \[ui\] multimedia [\#34](https://github.com/lislis/katharsis.lol/issues/34)
+- \[ui\] fix scroll when user manually scrolls up [\#30](https://github.com/lislis/katharsis.lol/issues/30)
+- \[ui\] unify notifications in ui [\#20](https://github.com/lislis/katharsis.lol/issues/20)
+
+**Closed issues:**
+
+- \[ui\] better highlight stage when you're on it  [\#43](https://github.com/lislis/katharsis.lol/issues/43)
+
+**Merged pull requests:**
+
+- feat\(ui, runner, server\) implement embed endpoint [\#55](https://github.com/lislis/katharsis.lol/pull/55) ([lislis](https://github.com/lislis))
+- Add people list on who is on stage [\#54](https://github.com/lislis/katharsis.lol/pull/54) ([lislis](https://github.com/lislis))
+- feat\(ui\) hightlight main stage when on it [\#53](https://github.com/lislis/katharsis.lol/pull/53) ([lislis](https://github.com/lislis))
+
 ## [v0.2.2](https://github.com/lislis/katharsis.lol/tree/v0.2.2) (2021-01-28)
 
 [Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.2.1...v0.2.2)
