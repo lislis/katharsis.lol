@@ -51,7 +51,7 @@ services:
       - server
   ui:
     build:
-      context: ./foyer
+      context: ./ui
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
