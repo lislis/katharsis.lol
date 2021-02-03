@@ -2,10 +2,22 @@
   <div>
     <form @submit.prevent="send">
       <div class="chat__message-compose">
+        <div v-if="canWrite" class="chat__message-type">
+          <label class="chat__message-type-option">
+            <input type="radio" v-model="messageType" id="say" value="say" checked  class="a11y-hidden">
+            <span :title="$t('ui.form.directSpeech')"
+                 :aria-label="$t('ui.form.directSpeech')">🗣</span>
+          </label>
+          <label class="chat__message-type-option">
+            <input type="radio" v-model="messageType" id="do" value="do" class="a11y-hidden">
+            <span :title="$t('ui.form.stageInstruction')"
+                 :aria-label="$t('ui.form.stageInstruction')">📝</span>
+          </label>
+        </div>
         <input type="text"
                class="form-control"
                v-model="chat.message"
-               :placeholder="$t('ui.form.chat')"
+               :placeholder="fittingPlaceholder"
                :readonly="!canWrite"
                @input="typing">
         <EmojiPicker v-if="canWrite" v-on:pick-emoji="pickUpEmoji" />
@@ -33,6 +45,7 @@
    data() {
      return {
        chat: {},
+       messageType: 'say',
        sending: false,
        isTyping: false,
        typingTimeout: null
@@ -51,6 +64,8 @@
        this.sending = true;
        this.chat.room = this.room._id;
        this.chat.user = this.$root.$data.user._id;
+       this.chat.type = this.messageType;
+
        axios
          .post(`${this.$root.$data.restServer}/api/chat`, this.chat)
          .then(() => {
@@ -94,6 +109,13 @@
        } else {
          return true
        }
+     },
+     fittingPlaceholder() {
+       if (this.messageType == 'do') {
+         return this.$t('ui.form.placeholderInstruction');
+       } else {
+         return this.$t('ui.form.placeholderSpeech');
+       }
      }
    }
  }
@@ -103,6 +125,7 @@
    max-width: 800px;
    margin: auto;
    display: flex;
+   align-items: center;
    border: 2px solid var(--bg-footer);
    border-radius: 4px;
    background-color: var(--bg-footer);
@@ -121,6 +144,37 @@
 
  .chat__message-compose:focus-within {
    outline: 2px solid var(--bg-document);
+ }
+
+ .is-onit .chat__message-compose:focus-within {
+   outline: 2px solid var(--bg-shade);
+ }
+
+ .chat__message-type-option {
+   display: block;
+   cursor: pointer;
+ }
+
+ .chat__message-type-option span {
+   display: block;
+   padding: 0.3em 0.3em 0em;
+   text-align: center;
+   border-radius: 2px;
+ }
+
+ .chat__message-type-option input[type="radio"]:checked + span {
+   background-color: var(--bg-shade)
+ }
+
+ .a11y-hidden {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   margin: -1px;
+   border: 0;
+   padding: 0;
+   clip: rect(0 0 0 0);
+   overflow: hidden;
  }
 
  input[readonly],

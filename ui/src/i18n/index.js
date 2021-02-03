@@ -45,7 +45,11 @@ export const messages = {
       },
       form: {
         chat: "Schreibe etwas",
-        thereIsTyping: "Es wird getippt"
+        placeholderSpeech: "Was sagst du?",
+        placeholderInstruction: "Was soll passieren?",
+        thereIsTyping: "Es wird getippt",
+        directSpeech: "Direkte Rede",
+        stageInstruction: "Bühnenanweisung"
       },
       chat: {
         scrollDown: "Neue Nachricht, scrolle runter",
@@ -96,7 +100,11 @@ export const messages = {
       },
       form: {
         chat: "Write something",
-        thereIsTyping: "There is typing"
+        placeholderSpeech: "What do you say?",
+        placeholderInstruction: "What should happen?",
+        thereIsTyping: "There is typing",
+        directSpeech: "Direct speech",
+        stageInstruction: "Stage instruction"
       },
       chat: {
         scrollDown: "New message, scroll down",

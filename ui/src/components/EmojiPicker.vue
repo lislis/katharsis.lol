@@ -84,13 +84,12 @@
    font-size: 1.5rem;
    cursor: pointer;
    border-radius: 2px;
-   margin-top: 2px;
  }
 
  .emojibtn:hover,
  .emojibtn:active,
  .emojibtn:focus {
-   background-color: lightgrey;
+   background-color: var(--bg-shade);
  }
 
  .emoji {
@@ -105,7 +104,7 @@
  .emoji:hover,
  .emoji:active,
  .emoji:focus {
-   background-color: lightgrey;
+   background-color: var(--bg-shade);
  }
 
  .emoji-group {
@@ -132,6 +131,6 @@
  .groupnav__item:hover,
  .groupnav__item:active,
  .groupnav__item:focus  {
-   background-color: lightgrey;
+   background-color: var(--bg-shade);
  }
 </style>
