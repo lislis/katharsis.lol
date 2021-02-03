@@ -1,8 +1,20 @@
 # Changelog
 
-## [Unreleased](https://github.com/lislis/katharsis.lol/tree/HEAD)
+## [v0.3.0](https://github.com/lislis/katharsis.lol/tree/v0.3.0) (2021-02-03)
 
-[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.2.2...HEAD)
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.2.3...v0.3.0)
+
+**Implemented enhancements:**
+
+- \[ui\]\[server\] distinguish between direct speech and descriptive text [\#41](https://github.com/lislis/katharsis.lol/issues/41)
+
+**Merged pull requests:**
+
+- feat\(ui\) Add switch direct speech \<-\> text to stage [\#56](https://github.com/lislis/katharsis.lol/pull/56) ([lislis](https://github.com/lislis))
+
+## [v0.2.3](https://github.com/lislis/katharsis.lol/tree/v0.2.3) (2021-02-02)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.2.2...v0.2.3)
 
 **Implemented enhancements:**
 
