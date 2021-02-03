@@ -61,12 +61,14 @@
        this.updateScroll();
      }, 200);
 
-     this.$root.$data.socket.on('new-message', () => {
-       const maxScroll = Math.floor(this.element.scrollHeight - this.element.getBoundingClientRect().height);
-       if (this.element.scrollTop < maxScroll) {
-         this.hasNewMessage = true;
+     this.$root.$data.socket.on('new-message', (data) => {
+       if (data.message.room == this.room._id) {
+         const maxScroll = Math.floor(this.element.scrollHeight - this.element.getBoundingClientRect().height);
+         if (this.element.scrollTop < maxScroll) {
+           this.hasNewMessage = true;
+         }
+         this.updateScroll();
        }
-       this.updateScroll();
      });
    },
    methods: {
