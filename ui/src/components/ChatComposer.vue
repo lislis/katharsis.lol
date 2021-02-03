@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent="send">
       <div class="chat__message-compose">
-        <div v-if="canWrite" class="chat__message-type">
+        <div v-if="isStage" class="chat__message-type">
           <label class="chat__message-type-option">
             <input type="radio" v-model="messageType" id="say" value="say" checked  class="a11y-hidden">
             <span :title="$t('ui.form.directSpeech')"
@@ -63,8 +63,11 @@
 
        this.sending = true;
        this.chat.room = this.room._id;
-       this.chat.user = this.$root.$data.user._id;
-       this.chat.type = this.messageType;
+       if (this.messageType === 'say') {
+         this.chat.user = this.$root.$data.user._id;
+       } else {
+         this.chat.bot = true;
+       }
 
        axios
          .post(`${this.$root.$data.restServer}/api/chat`, this.chat)
@@ -109,6 +112,9 @@
        } else {
          return true
        }
+     },
+     isStage() {
+       return this.room.locked;
      },
      fittingPlaceholder() {
        if (this.messageType == 'do') {
