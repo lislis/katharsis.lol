@@ -54,10 +54,6 @@ services:
       context: ./ui
       dockerfile: Dockerfile
     restart: unless-stopped
-    environment:
-      - VUE_APP_WS_HOST="${SOCKET_DOMAIN}"
-      - VUE_APP_API_HOST="${API_DOMAIN}"
-      - VUE_APP_LS_PREFIX="CMBAN_"
     ports:
       - "8080:80"
     links:
