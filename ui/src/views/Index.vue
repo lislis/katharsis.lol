@@ -13,6 +13,7 @@
         <p class="">{{ $t('index.p3') }}</p>
         <p class="">{{ $t('index.p4') }}</p>
         <p class="">{{ $t('index.p5') }}</p>
+        <p class="">{{ $t('index.p6') }}</p>
         <p class="">{{ $t('index.haveFun') }}</p>
         <router-link :to="{ name: 'spectator'}"
                  class="btn">{{ $t('index.watch') }}</router-link>
