@@ -1,0 +1,13 @@
+title: Katharsis.lol
+description: Collaborative drama writing app with bot. Or table-top-role-playing via chat. You choose.
+remote_theme: carlosperate/jekyll-theme-rtd
+
+# Theme settings:
+site_author: lislis
+repo_url: "https://github.com/lislis/katharsis.lol"
+edit_on_github: true
+github_docs_folder: true
+sticky_navigation: true
+prev_next_buttons_location: bottom
+search_enabled: true
+hljs_style: github-gist
