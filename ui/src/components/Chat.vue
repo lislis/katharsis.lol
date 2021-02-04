@@ -5,7 +5,7 @@
         {{ room.room_name}}
         <span v-if="room.private" class="chat__room-status">(private)</span>
       </h3>
-      <PeopleList :people="$root.$data.otherPeople" />
+      <PeopleList :people="$root.$data.otherPeople" v-if="isBackstage"  />
     </div>
     <div class="chat__message_container">
       <ul class="chat__messages">
@@ -105,7 +105,9 @@
        if (!this.room.locked) return false;
        if (!this.$root.$data.user.hasPermission) return false;
        return true;
-
+     },
+     isBackstage() {
+       return this.room.main && !this.room.locked;
      }
    }
  }
