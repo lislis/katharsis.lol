@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.3.1](https://github.com/lislis/katharsis.lol/tree/v0.3.1) (2021-02-04)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.3.0...v0.3.1)
+
 ## [v0.3.0](https://github.com/lislis/katharsis.lol/tree/v0.3.0) (2021-02-03)
 
 [Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.2.3...v0.3.0)
