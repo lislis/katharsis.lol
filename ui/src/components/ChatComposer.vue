@@ -4,12 +4,23 @@
       <div class="chat__message-compose">
         <div v-if="isStage" class="chat__message-type">
           <label class="chat__message-type-option">
-            <input type="radio" v-model="messageType" id="say" value="say" checked  class="a11y-hidden">
+            <input type="radio"
+                   v-model="messageType"
+                   id="say"
+                   value="say"
+                   checked
+                   :disabled="!canWrite"
+                   class="a11y-hidden">
             <span :title="$t('ui.form.directSpeech')"
                  :aria-label="$t('ui.form.directSpeech')">🗣</span>
           </label>
           <label class="chat__message-type-option">
-            <input type="radio" v-model="messageType" id="do" value="do" class="a11y-hidden">
+            <input type="radio"
+                   v-model="messageType"
+                   id="do"
+                   value="do"
+                   :disabled="!canWrite"
+                   class="a11y-hidden">
             <span :title="$t('ui.form.stageInstruction')"
                  :aria-label="$t('ui.form.stageInstruction')">📝</span>
           </label>
@@ -184,6 +195,7 @@
  }
 
  input[readonly],
+ input[disabled] + span,
  button[disabled] {
    opacity: 0.5;
    cursor: not-allowed;
