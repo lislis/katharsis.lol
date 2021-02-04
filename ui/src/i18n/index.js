@@ -18,6 +18,7 @@ export const messages = {
       toRoom: "Gehe weiter",
       noMore: "Du willst nicht mehr?",
       leave: "Austreten",
+      callMeByAnyName: "Bitte gib hier deinen Usernamen ein.<br>Der ist dann auch gleichzeitig der Name eurer Figur."
     },
     main: {
       pleaseWait: "Bitte warten"
@@ -81,7 +82,8 @@ export const messages = {
       yourNameIs: "You're participating as",
       toRoom: "Go on",
       noMore: "You no longer want to?",
-      leave: "Leave"
+      leave: "Leave",
+      callMeByAnyName: "Please enter your user name here.<br>It will act as your character's name as well."
     },
     user: {
       notice: {
