@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User.js');
 const Chat = require('../models/Chat.js');
 const Room = require('../models/Room.js');
+const TicketCode = require('../models/TicketCode.js');
 
 router.post('/on/:uid', (req, res, next) => {
   const opt = { hasPermission: true };
@@ -80,11 +81,31 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  User.create(req.body, (err, user) => {
-    if (err) return next(err);
-    req.app.io.emit('new-user', { message: user });
-    res.json(user);
-  });
+  console.log('\n\n', req.body)
+
+
+  if (!req.body.providedTicketCode || req.body.providedTicketCode === "") {
+    return res.json({ message: `Empty code`});
+  } else {
+    Promise.all([
+      TicketCode.find({ code: req.body.providedTicketCode}).exec()
+    ]).then(values => {
+      const codes = values[0];
+      if (codes.length === 0) return res.json({ message: `Invalid code`});
+      if (codes[0].used) return res.json({ message: `Code expired`});
+
+      let fullUser = req.body;
+      fullUser.ticketCodeId = codes[0]._id;
+      User.create(fullUser, (err, user) => {
+        if (err) return next(err);
+        TicketCode.findByIdAndUpdate(codes[0]._id, {used: true, usedBy: user._id}).exec();
+        req.app.io.emit('new-user', { message: user });
+        res.json(user);
+      });
+    }).catch(e => {
+      req.log.error(e);
+    })
+  }
 });
 
 router.put('/:id', (req, res, next) => {
