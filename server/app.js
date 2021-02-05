@@ -13,6 +13,7 @@ const room = require('./routes/room');
 const chat = require('./routes/chat');
 const user = require('./routes/user');
 const script = require('./routes/script');
+const ticketcode = require('./routes/ticketcode');
 
 const WS_PORT = process.env['WS_PORT'];
 const MONGO_DB = process.env['MONGO_DB'];
@@ -53,6 +54,7 @@ app.use('/api/room', room);
 app.use('/api/user', user);
 app.use('/api/chat', chat);
 app.use('/api/script', script);
+app.use('/api/ticketcode', ticketcode);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
