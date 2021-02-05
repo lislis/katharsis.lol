@@ -17,6 +17,13 @@
        padding: 0.2em 1em 1em;
        margin-bottom: 2rem;
      }
+     #numCodeOutput {
+       border-radius: 5px;
+       box-shadow: 0px 0px 5px black;
+       padding: 1rem;
+       margin: 1em 0;
+       display: none;
+     }
     </style>
   </head>
   <body>
@@ -38,6 +45,44 @@
       <form id="exportStageForm">
         <button type="submit">Vorstellung exportieren</button>
       </form>
+    </section>
+
+    <section>
+      <h2>Ticketcodes</h2>
+      <p><a href="/api/ticketcode" class="js-servername" target="_blank">Liste aller Codes</a></p>
+      <h3>Einzelnen (Wunsch-) Code generieren</h3>
+      <form id="gen1CodeForm">
+        <label>
+          <span>Was ist der Code? (keine Leerzeichen erlaubt)</span>
+          <input type="text" name="gencode" id="gencode">
+        </label>
+        <button type="submit">1 Code generieren</button>
+      </form>
+
+      <h3>Random Codes generieren</h3>
+      <form id="genMultCodeForm">
+        <label>
+          <span>Wieviele Codes?</span>
+          <input type="number" name="numcode" id="numcode">
+        </label>
+        <button type="submit">Codes generieren</button>
+      </form>
+      <div id="numCodeOutput"></div>
+
+      <h3>1 Code löschen</h3>
+      <form id="deleteCodeForm">
+        <label>
+          <span>Code ID</span>
+          <input type="text" name="deletecodeid" id="deletecodeid">
+        </label>
+        <button type="submit">Codes löschen</button>
+      </form>
+
+      <h3>1 Code löschen</h3>
+      <form id="deleteAllCodesForm">
+        <button type="submit">Alle Codes löschen</button>
+      </form>
+
     </section>
 
     <section>
