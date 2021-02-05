@@ -108,11 +108,13 @@ async function init() {
   buildDeleteFunction('#deleteChatForm', '#deletechatid', `${CONFIG.SERVER}/api/chat/`, 'Chat gelöscht:');
   buildDeleteFunction('#deleteUserForm', '#deleteuserid', `${CONFIG.SERVER}/api/user/`, 'User gelöscht:');
   buildDeleteFunction('#deleteWordForm', '#deletewordid', `${CONFIG.BOTBRAIN}/api/word/`, 'Wort gelöscht:');
-  buildDeleteFunction('#deleteDirectionForm', '#deletedirectionid', `${CONFIG.BOTBRAIN}/api/direction/`, 'Anweisung gelöscht:');
+  buildDeleteFunction('#deleteDirectionForm', '#deletedirectionid', `${CONFIG.BOTBRAIN}/api/direction/`, 'Ticketcode gelöscht:');
+  buildDeleteFunction('#deleteCodeForm', '#deletecodeid', `${CONFIG.SERVER}/api/ticketcode/`, 'Anweisung gelöscht:');
 
   buildDeleteAllFunction('#deleteAllRoomsForm', `${CONFIG.SERVER}/api/room/`, 'Alle Räume gelöscht!');
   buildDeleteAllFunction('#deleteAllChatsForm', `${CONFIG.SERVER}/api/chat/`, 'Alle Chats gelöscht!');
   buildDeleteAllFunction('#deleteAllUsersForm', `${CONFIG.SERVER}/api/user/`, 'Alle User gelöscht!');
+  buildDeleteAllFunction('#deleteAllCodesForm', `${CONFIG.SERVER}/api/ticketcode/`, 'Alle Ticketcodes gelöscht!');
 
   buildBulkDeleteFunction('#deleteAllWordsForm', `${CONFIG.BOTBRAIN}/api/word/bulkdelete`, 'Alle Wörter gelöscht!');
   buildBulkDeleteFunction('#deleteAllDirectionsForm', `${CONFIG.BOTBRAIN}/api/direction/bulkdelete`, 'Alle Anweisungen gelöscht!');
@@ -173,6 +175,49 @@ async function init() {
     a.click();
   }
 
+  document.querySelector('#gen1CodeForm').onsubmit = async (e) => {
+    e.preventDefault();
+
+    let formElem = document.querySelector('#gencode');
+    let formObj = {};
+    formObj.code = formElem.value;
+
+    let response = await fetch(`${CONFIG.SERVER}/api/ticketcode`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(formObj)
+    });
+    let result = await response.json();
+
+    alert(`Code erstellt!`);
+    formElem.value = "";
+
+  };
+
+  document.querySelector('#genMultCodeForm').onsubmit = async (e) => {
+    e.preventDefault();
+
+    let formElem = document.querySelector('#numcode');
+    let formObj = {};
+    formObj.num = formElem.value;
+
+    let response = await fetch(`${CONFIG.SERVER}/api/ticketcode/bulkcreate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(formObj)
+    });
+    let result = await response.json();
+
+    alert(`Codes erstellt! Siehe Outputfenster`);
+    formElem.value = "";
+    let outElem = document.querySelector('#numCodeOutput');
+    outElem.innerHTML = `${Array.from(result, x => x.code).join('<br>')}`;
+    outElem.style.display = 'block';
+  };
 
   document.querySelector('#fillMainRoomForm').onsubmit = async (e) => {
     e.preventDefault();
