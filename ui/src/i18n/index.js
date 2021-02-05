@@ -64,7 +64,10 @@ export const messages = {
     },
     part: {
       title: "Teilnehmen",
-      label: "Wer willst du sein?"
+      label: "Wer willst du sein?",
+      ticket: "Ticketcode",
+      invalidTicket: "Kein oder invalider Ticketcode!",
+      usedTicket: "Ticketcode bereits genutzt!",
     },
     legal: {
       imprint: "Impressum",
@@ -120,7 +123,10 @@ export const messages = {
     },
     part: {
       title: "Participate",
-      label: "Who do you want to be?"
+      label: "Who do you want to be?",
+      ticket: "Ticket code",
+      invalidTicket: "No or invalid ticket code!",
+      usedTicket: "Ticket code has been used!",
     },
     legal: {
       imprint: "Imprint",

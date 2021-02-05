@@ -1,10 +1,13 @@
 <template>
   <article>
     <OutSideNav />
+
     <header class="inner">
       <h1 class="part__title">{{ $t('part.title') }}</h1>
     </header>
     <section class="inner">
+      <Notifications :notifications="$root.$data.notifications" />
+      henlo
       <div v-if="$root.$data.user.nickname">
         <p>
           {{ $t('intro.yourNameIs') }}
@@ -26,13 +29,15 @@
  import OutSideNav from '@/components/OutSideNav'
  import UserLogout from '@/components/UserLogout'
  import UserLogin from '@/components/UserLogin'
+ import Notifications from '@/components/Notifications'
 
  export default {
    name: "Intro",
    components: {
      OutSideNav,
      UserLogout,
-     UserLogin
+     UserLogin,
+     Notifications
    }
  }
 </script>
