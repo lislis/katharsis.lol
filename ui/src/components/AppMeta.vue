@@ -3,11 +3,12 @@
     <div class="inner">
       <p class="subtle-spacing">
         Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a>
-        <small>(<a :href="versionLink" target="_blank">Version {{version}}</a>)</small>
+        <small>(<a :href="versionLink" target="_blank" class="appmeta__version">Version {{version}}</a>)</small>
         <a v-if="imprintLink"
-           :href="imprintLink">{{ $t('legal.imprint') }}</a>
-        <a href="#">{{ $t('legal.gdpa') }}</a>
-
+           :href="imprintLink"
+           class="appmeta__imprint">{{ $t('legal.imprint') }}</a>
+        <a href="#"
+           class="appmeta__gdpa">{{ $t('legal.gdpa') }}</a>
 
         <select v-model="$i18n.locale">
           <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
@@ -25,6 +26,9 @@
    computed: {
      version() {
        return version;
+     },
+     imprintLink() {
+       return this.$root.$data.imprintLink;
      },
      versionLink() {
        return `${homepage}/releases/tag/v${this.version}`
