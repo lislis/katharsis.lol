@@ -1,4 +1,4 @@
-export const messages = {
+export default {
   de: {
     index: {
       claim: "Eine kollektive Schreib-Übung mit Bot",

@@ -6,13 +6,12 @@
     "email": "mail@lislis.de",
     "url": "https://lislis.de"
   },
-  "homepage": "https://github.com/lislis/katharsis.lol",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
-  "license": "AGPL-3.0-or-later",
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
@@ -23,13 +22,18 @@
     "vue-router": "^4.0.0-rc.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-0"
+    "eslint-plugin-vue": "^7.0.0-0",
+    "typescript": "~3.9.3",
+    "vue-jest": "^5.0.0-0"
   },
   "eslintConfig": {
     "root": true,
@@ -43,11 +47,24 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "homepage": "https://github.com/lislis/katharsis.lol",
+  "license": "AGPL-3.0-or-later"
 }
