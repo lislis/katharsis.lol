@@ -5,7 +5,8 @@
 </template>
 <script>
  import { removeByAttr } from '@/lib/utils';
- import { saveUserToStore } from '@/lib/storage';
+ import { saveUserToStore,
+          deleteUserFromStorage } from '@/lib/storage';
 
  export default {
    name: "SocketWrapper",
@@ -18,6 +19,7 @@
 
      this.$root.$data.socket.on('delete-user', (data) => {
        console.log('delete-user', data.message)
+       this.removeMyselfFromStorage(data.message);
        removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id);
      });
 
@@ -26,7 +28,6 @@
      });
 
      this.$root.$data.socket.on('delete-message', (data) => {
-       //console.log(data)
        this.$root.$data.chats = removeByAttr(this.$root.$data.chats, '_id', data.message._id);
      });
 
@@ -116,6 +117,17 @@
              r.typing = bool;
            }
            return r;
+         });
+       }
+     },
+     removeMyselfFromStorage(user) {
+       if (user._id == this.$root.$data.user._id) {
+         this.$root.$data.user = {};
+         deleteUserFromStorage();
+         this.$root.$data.notifications.push(this.$t('user.notification.wasRemoved'));
+         console.log(this.$root.$data.notifications)
+         this.$router.push({
+           name: 'index'
          });
        }
      }
