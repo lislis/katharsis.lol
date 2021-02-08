@@ -32,7 +32,8 @@ export const messages = {
         onstage: "Auf die Bühne!",
         offstage: "Runter von der Bühne!",
         isMod: "Du bist jetzt Moderator:in",
-        isUser: "Du bist jetzt Teilnehmer:in"
+        isUser: "Du bist jetzt Teilnehmer:in",
+        wasRemoved: "Du wurdest gebeten zu gehen."
       },
       status: {
         stage: "Auf der Bühne",
@@ -95,7 +96,10 @@ export const messages = {
       },
       notification: {
         onstage: "You're on stage!",
-        offstage: "You're off stage!"
+        offstage: "You're off stage!",
+        isMod: "You're a moderator now!",
+        isUser: "You're a participant now!",
+        wasRemoved: "You have been asked to leave."
       }
     },
     ui: {
