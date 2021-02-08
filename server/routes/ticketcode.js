@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router()
 const TicketCode = require('../models/TicketCode.js');
-const User = require('../models/User.js');
 const { genCodesArray } = require('../lib/ticketcodehelper.js');
 
 router.post('/bulkcreate', (req, res, next) => {
