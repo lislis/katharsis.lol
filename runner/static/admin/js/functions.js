@@ -189,7 +189,7 @@ async function init() {
       },
       body: JSON.stringify(formObj)
     });
-    let result = await response.json();
+    await response.json();
 
     alert(`Code erstellt!`);
     formElem.value = "";
