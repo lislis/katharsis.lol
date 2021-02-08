@@ -9,20 +9,12 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - name: UI lint
-      run: |
-        cd ui
-        yarn install
-        yarn lint
+        node-version: 14.x
     - name: Server lint
       run: |
         cd server
@@ -38,16 +30,21 @@ jobs:
         cd runner
         yarn install
         yarn lint
-  test:
-    needs: lint
+  ui:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: echo "tbd"
+          node-version: 14.x
+      - name: Lint
+        run: |
+          cd ui
+          yarn install
+          yarn lint
+      - name: Test
+        run: |
+          cd ui
+          yarn install
+          yarn test:unit
