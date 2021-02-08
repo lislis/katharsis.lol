@@ -1,6 +1,7 @@
 <template>
   <div>
     <OutSideNav />
+    <Notifications :notifications="$root.$data.notifications" />
     <article>
       <header class="inner">
         <h1 class="index__title">Katharsis.lol</h1>
@@ -26,11 +27,13 @@
 </template>
 <script>
  import OutSideNav from '@/components/OutSideNav'
+ import Notifications from '@/components/Notifications'
 
  export default {
    name: "Index",
    components: {
-     OutSideNav
+     OutSideNav,
+     Notifications
    }
  }
 </script>
