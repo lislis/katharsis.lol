@@ -61,7 +61,7 @@ router.post('/offstage', (req, res, next) => {
         };
         Chat.create(chatMsg, (err, chat) => {
           if (err) return next(err);
-          req.app.io.emit('user-to-stage', { message: user });
+          req.app.io.emit('user-off-stage', { message: user });
           req.app.io.emit('new-message', { message: chat });
           res.json(user);
         });
@@ -71,6 +71,36 @@ router.post('/offstage', (req, res, next) => {
     }
   }).catch(e => req.log.error(e));
 });
+
+router.post('/bulkOffStage', (req, res, next) => {
+    Promise.all([
+        Room.find({ main: true, locked: false}).exec(),
+        User.find({ hasPermission: true }).exec()
+    ]).then(values => {
+        let room  = values[0][0];
+        if (values[1].length > 0) {
+            let users = values[1];
+            Promise.all(
+                users.map((user) => {
+                    user.update({ hasPermission: false }).exec();
+                })).then(userValues => {
+                    let chatMsg = { message: `Alle runter von der Bühne!`,
+                                    room: room._id,
+                                    created_date: new Date()
+                                  };
+                    Chat.create(chatMsg, (err, chat) => {
+                        if (err) return next(err);
+                        req.app.io.emit('user-all-off-stage');
+                        req.app.io.emit('new-message', { message: chat });
+                        res.json(userValues);
+                    });
+                }).catch(e => req.log.error(e));
+        }  else {
+            res.json({message: 'Nobody to kick'});
+        }
+    }).catch(e => req.log.error(e));
+});
+
 
 router.post('/cleanStage', (req, res, next) => {
   Promise.all([
