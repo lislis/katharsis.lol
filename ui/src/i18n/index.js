@@ -1,14 +1,8 @@
 export default {
   de: {
     index: {
-      claim: "Eine kollektive Schreib-Übung mit Bot",
-      p1: "In katharsis.lol sollen neue Theaterstücke entstehen, die mit dem alten Theaterkanon brechen und neuen Perspektiven, Ideen und Geschichten Raum geben.",
-      p2: "Eine Übung ist es deshalb, weil wir damit auch das gemeinsame Imaginieren von alternativen Geschichten und Welten trainieren wollen.",
-      p3: "Dabei assistiert diese Web-App, die es mehreren Personen ermöglicht, miteinander innerhalb kürzester Zeit eine gemeinsame Geschichte oder Textfragmente zu entwickeln; inklusive eines Bots, der den Rahmen vorgibt und effektiv als Mittel gegen Horror Vacui wirkt.",
-      p4: "Ihr könnt entweder auch “Zuschauen” oder auf “Teilnehmen” klicken. Als Zuschauer*in könnt ihr nur den eigentlichen Stücktext sehen, der von den Teilnehmer*innen produziert wird.",
-      p5: "Ihr könnt nicht selbst mitschreiben, und manchmal kann es eine Weile dauern, bis neuer Text entsteht. Andererseits, wenn ihr euch heute nicht so kreativ fühlt, ist diese Funktion vielleicht die Richtige für euch.",
-      p6: "Katharsis.lol soll ein sicherer Ort für alle sein. Diskriminierende Sprache und Narrative sind hier nicht erwünscht. Als Moderatorinnen behalten wir uns vor, User*innen aus der Session zu entfernen.",
-      haveFun: "Viel Spaß beim Fabulieren und Fantasieren!",
+      claim: "Ein Onlinewerkzeug für das gemeinsame Verfassen<br> der Theatertexte von morgen",
+      defaultText: "Be excellent to each other!",
       watch: "Zusehen",
       participate: "Teilnehmen",
     },
@@ -77,7 +71,8 @@ export default {
   },
   en: {
     index: {
-      claim: "Subtitle or claim",
+      claim: "An online tool for working together<br> on the drama scripts of tomorrow",
+      defaultText: "Be excellent to each other!",
       watch: "Watch",
       participate: "Participate"
     },

@@ -7,7 +7,6 @@
     </header>
     <section class="inner">
       <Notifications :notifications="$root.$data.notifications" />
-      henlo
       <div v-if="$root.$data.user.nickname">
         <p>
           {{ $t('intro.yourNameIs') }}
