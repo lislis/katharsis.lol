@@ -43,6 +43,18 @@
        saveUserToStore(this.$root.$data.user);
      });
 
+     this.$root.$data.socket.on('user-all-off-stage', () => {
+       if (this.$root.$data.user.hasPermission) {
+         this.$root.$data.user.hasPermission = false;
+         this.$root.$data.notifications.push(this.$t('user.notification.offstage'));
+       }
+       this.$root.$data.otherPeople = this.$root.$data.otherPeople.map(p => {
+         p.hasPermission = false;
+         return p;
+       });
+       saveUserToStore(this.$root.$data.user);
+     });
+
      this.$root.$data.socket.on('user-2-mod', (data) => {
        this.updateModInPersonStorage(data.message);
        this.isMyselfAMod(data.message);
