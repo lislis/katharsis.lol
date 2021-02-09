@@ -1,5 +1,24 @@
 # Changelog
 
+## [Unreleased](https://github.com/lislis/katharsis.lol/tree/HEAD)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.3.1...HEAD)
+
+**Implemented enhancements:**
+
+- \[ui\]\[admin\] add option to load introduction text from spreadsheet [\#57](https://github.com/lislis/katharsis.lol/issues/57)
+- \[ui\] better indicate how the nickname is used [\#33](https://github.com/lislis/katharsis.lol/issues/33)
+- \[ui\] add explanation view [\#19](https://github.com/lislis/katharsis.lol/issues/19)
+- Logout user when user is deleted by mods [\#11](https://github.com/lislis/katharsis.lol/issues/11)
+
+**Merged pull requests:**
+
+- introtext from spreadsheet [\#69](https://github.com/lislis/katharsis.lol/pull/69) ([lislis](https://github.com/lislis))
+- Add UI tests [\#68](https://github.com/lislis/katharsis.lol/pull/68) ([lislis](https://github.com/lislis))
+- feat\(ui\) rm localstorage if user is deleted by admins [\#66](https://github.com/lislis/katharsis.lol/pull/66) ([lislis](https://github.com/lislis))
+- Ticket codes [\#65](https://github.com/lislis/katharsis.lol/pull/65) ([lislis](https://github.com/lislis))
+- add docs scaffold [\#58](https://github.com/lislis/katharsis.lol/pull/58) ([lislis](https://github.com/lislis))
+
 ## [v0.3.1](https://github.com/lislis/katharsis.lol/tree/v0.3.1) (2021-02-04)
 
 [Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.3.0...v0.3.1)
