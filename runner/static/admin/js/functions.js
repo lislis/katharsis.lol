@@ -287,6 +287,39 @@ async function init() {
       })
   }
 
+
+  document.querySelector('#deleteIntroTextForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const settingsKey = 'introTextUrl';
+    const resp = await fetch(`${CONFIG.SERVER}/api/setting/bykey/${settingsKey}`);
+    const setting = await resp.json();
+
+    if (setting.length == 0) { alert('Nichts gesetzt!'); return false  }
+
+    const resp2 = await fetch(`${CONFIG.SERVER}/api/setting/${setting[0]._id}`, {
+      method: 'DELETE'
+    });
+    const data = await resp2.json();
+    alert(`Gelöscht ${data}`);
+  }
+
+  document.querySelector('#setIntroTextForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const key = 'introTextUrl';
+    const value = document.querySelector('#introTextUrl').value;
+
+    const re = await fetch(`${CONFIG.SERVER}/api/setting`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({key, value})
+    });
+    const data = await re.json();
+    alert(`Introtext ${data}`);
+    document.querySelector('#introTextUrl').value = "";
+  }
+
 }
 
 init();
