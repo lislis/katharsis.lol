@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express');
+const favicon = require('serve-favicon');
 const path = require('path');
 const pinoHttp = require('pino-http')();
 const bodyParser = require('body-parser');
@@ -15,6 +16,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 app.use(pinoHttp);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
