@@ -50,7 +50,8 @@ export default {
       placeholderInstruction: "Was soll passieren?",
       thereIsTyping: "Es wird getippt",
       directSpeech: "Direkte Rede",
-      stageInstruction: "Bühnenanweisung"
+      stageInstruction: "Bühnenanweisung",
+      langSwitch: "Sprache ändern"
     },
     chat: {
       scrollDown: "Neue Nachricht, scrolle runter",
