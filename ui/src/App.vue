@@ -26,6 +26,7 @@
      return {
        imprintLink: null,
        user: {},
+       loggedMyselfOut: false,
        otherPeople: [],
        mainRoom: null,
        stage: null,
