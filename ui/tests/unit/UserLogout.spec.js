@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils'
 import '@testing-library/jest-dom'
 import UserLogout from '@/components/UserLogout'
-import { version } from '../../package.json'
 
 describe('UserLogout.vue', () => {
     const wrapper = mount(UserLogout);
