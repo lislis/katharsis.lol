@@ -12,7 +12,10 @@
           <div>
             <h2 id="data-hoster">{{ $t('legal.gdprFurther') }}</h2>
             <p v-if="gdprLink">
-              <a :href="gdprLink" target="_blank">{{ $t('legal.gpdrLink') }}</a>
+              <a
+                :href="gdprLink"
+                rel="noreferrer"
+                target="_blank">{{ $t('legal.gpdrLink') }}</a>
             </p>
             <p v-else>{{ $t('legal.gpdrNoLink') }}</p>
           </div>

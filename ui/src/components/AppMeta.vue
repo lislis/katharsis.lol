@@ -2,10 +2,17 @@
   <footer>
     <div class="inner">
       <p class="subtle-spacing">
-        Katharsis.lol by <a href="http://www.sternapau.de/" target="_blank">sterna | pau</a>
-        <small>(<a :href="versionLink" target="_blank" class="appmeta__version">Version {{version}}</a>)</small>
+        Katharsis.lol by
+        <a href="http://www.sternapau.de/"
+           rel="noreferrer"
+           target="_blank">sterna | pau</a>
+        <small>(<a :href="versionLink"
+                   rel="noreferrer"
+                   target="_blank"
+                   class="appmeta__version">Version {{version}}</a>)</small>
         <a v-if="imprintLink"
            :href="imprintLink"
+           rel="noreferrer"
            class="appmeta__imprint">{{ $t('legal.imprint') }}</a>
         <router-link :to="{ name: 'datapage'}" class="appmeta__gdpa">{{ $t('legal.gdpr') }}</router-link>
         <label for="lang-switch" class="a11y-hidden">{{ $t('ui.form.langSwitch') }}</label>
