@@ -13,12 +13,10 @@
    created() {
 
      this.$root.$data.socket.on('new-user', (data) => {
-       console.log('new-user', data.message)
        this.$root.$data.otherPeople.push(data.message);
      });
 
      this.$root.$data.socket.on('delete-user', (data) => {
-       console.log('delete-user', data.message)
        this.removeMyselfFromStorage(data.message);
        removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id);
      });
@@ -136,8 +134,9 @@
        if (user._id == this.$root.$data.user._id) {
          this.$root.$data.user = {};
          deleteUserFromStorage();
-         this.$root.$data.notifications.push(this.$t('user.notification.wasRemoved'));
-         console.log(this.$root.$data.notifications)
+         if (!this.$root.$data.loggedMyselfOut) {
+           this.$root.$data.notifications.push(this.$t('user.notification.wasRemoved'));
+         }
          this.$router.push({
            name: 'index'
          });

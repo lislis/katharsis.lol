@@ -20,14 +20,17 @@ export default {
     user: {
       notice: {
         enter: "ist eingetreten",
-        leave: "ist ausgetreten",
+        leave: "ist ausgetreten"
       },
       notification: {
         onstage: "Auf die Bühne!",
         offstage: "Runter von der Bühne!",
         isMod: "Du bist jetzt Moderator:in",
         isUser: "Du bist jetzt Teilnehmer:in",
-        wasRemoved: "Du wurdest gebeten zu gehen."
+        wasRemoved: "Du wurdest gebeten zu gehen.",
+        reallyLeave: "Willst du wirklich austreten?<br>Ohne einen weiteren Ticketcode kannst du nicht mehr eintreten.",
+        reallyLeaveBtn: "Wirklich austreten",
+        back: "Zurück"
       },
       status: {
         stage: "Auf der Bühne",
@@ -94,7 +97,10 @@ export default {
         offstage: "You're off stage!",
         isMod: "You're a moderator now!",
         isUser: "You're a participant now!",
-        wasRemoved: "You have been asked to leave."
+        wasRemoved: "You have been asked to leave.",
+        reallyLeave: "Do you really want to leave?<br>Without another ticket code you won't be able to join again.",
+        reallyLeaveBtn: "Really leave",
+        back: "Back"
       }
     },
     ui: {
