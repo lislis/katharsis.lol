@@ -24,7 +24,6 @@
    },
    data() {
      return {
-       imprintLink: null,
        user: {},
        loggedMyselfOut: false,
        otherPeople: [],
@@ -37,6 +36,8 @@
        botBrain: null,
        socket: null,
        storagePrefix: null,
+       imprintLink: null,
+       gdprLink: null,
        notifications: []
      }
    },
@@ -62,6 +63,9 @@
        }
        if (process.env.VUE_APP_LINK_IMPRINT && process.env.VUE_APP_LINK_IMPRINT !== "") {
          this.$root.$data.imprintLink = `${process.env.VUE_APP_LINK_IMPRINT}`;
+       }
+       if (process.env.VUE_APP_LINK_GDPR && process.env.VUE_APP_LINK_GDPR !== "") {
+         this.$root.$data.gdprLink = `${process.env.VUE_APP_LINK_GDPR}`;
        }
 
      },
