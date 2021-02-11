@@ -1,3 +1,5 @@
+import gdprCopy from './gdpr_de'
+
 export default {
   index: {
     claim: "Ein Onlinewerkzeug für das gemeinsame Verfassen<br> der Theatertexte von morgen",
@@ -68,6 +70,10 @@ export default {
   },
   legal: {
     imprint: "Impressum",
-    gdpa: "Datenschutzhinweise"
+    gdpr: "Datenschutzhinweise",
+    gdprCopy: gdprCopy,
+    gdprFurther: "Weitere Datenschutzhinweise der Administrierenden",
+    gpdrLink: "Weitere Datenschutzhinweise der Administrierenden.",
+    gpdrNoLink: "Keine weiteren Datenschutzhinweise der Administrierenden."
   }
 }

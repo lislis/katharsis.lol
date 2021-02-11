@@ -1,3 +1,5 @@
+import gdprCopy from './gdpr_en'
+
 export default {
   index: {
     claim: "An online tool for working together<br> on the drama scripts of tomorrow",
@@ -61,6 +63,10 @@ export default {
   },
   legal: {
     imprint: "Imprint",
-    gdpa: "Data protection notice"
+    gdpr: "Data protection notice",
+    gdprCopy,
+    gdprFurther: "Further notes on data protection by the adminstrators",
+    gpdrLink: "Further notes on data protection by the adminstrators.",
+    gpdrNoLink: "No further notes on data protection by the adminstrators."
   }
 }

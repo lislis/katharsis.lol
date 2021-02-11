@@ -7,9 +7,7 @@
         <a v-if="imprintLink"
            :href="imprintLink"
            class="appmeta__imprint">{{ $t('legal.imprint') }}</a>
-        <a href="#"
-           class="appmeta__gdpa">{{ $t('legal.gdpa') }}</a>
-
+        <router-link :to="{ name: 'datapage'}" class="appmeta__gdpa">{{ $t('legal.gdpr') }}</router-link>
         <select v-model="$i18n.locale">
           <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
         </select>

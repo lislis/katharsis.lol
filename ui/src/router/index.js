@@ -3,9 +3,10 @@ import Index from '@/views/Index'
 import Spectator from '@/views/Spectator'
 import Intro from '@/views/Intro'
 import Main from '@/views/MainRoom'
-import Room from '@/views/Room'
-import RoomList from '@/views/RoomList'
-import PeopleList from '@/views/PeopleList'
+import DataPage from '@/views/DataPage'
+//import Room from '@/views/Room'
+//import RoomList from '@/views/RoomList'
+//import PeopleList from '@/views/PeopleList'
 
 const routes = [
   {
@@ -29,20 +30,25 @@ const routes = [
     component: Main
   },
   {
-    path: '/peoplelist/',
-    name: 'peoplelist',
-    component: PeopleList
-  },
-  {
-    path: '/roomlist',
-    name: 'roomlist',
-    component: RoomList
-  },
-  {
-    path: '/room/:roomid',
-    name: 'room',
-    component: Room
+    path: '/dataprotectionnotice',
+    name: 'datapage',
+    component: DataPage
   }
+  // {
+  //   path: '/peoplelist/',
+  //   name: 'peoplelist',
+  //   component: PeopleList
+  // },
+  // {
+  //   path: '/roomlist',
+  //   name: 'roomlist',
+  //   component: RoomList
+  // },
+  // {
+  //   path: '/room/:roomid',
+  //   name: 'room',
+  //   component: Room
+  // }
 ]
 
 const router = createRouter({
