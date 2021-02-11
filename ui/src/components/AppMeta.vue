@@ -8,7 +8,8 @@
            :href="imprintLink"
            class="appmeta__imprint">{{ $t('legal.imprint') }}</a>
         <router-link :to="{ name: 'datapage'}" class="appmeta__gdpa">{{ $t('legal.gdpr') }}</router-link>
-        <select v-model="$i18n.locale">
+        <label for="lang-switch" class="a11y-hidden">{{ $t('ui.form.langSwitch') }}</label>
+        <select id="lang-switch" v-model="$i18n.locale">
           <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
         </select>
       </p>

@@ -43,7 +43,8 @@ export default {
       placeholderInstruction: "What should happen?",
       thereIsTyping: "There is typing",
       directSpeech: "Direct speech",
-      stageInstruction: "Stage instruction"
+      stageInstruction: "Stage instruction",
+      langSwitch: "Change language"
     },
     chat: {
       scrollDown: "New message, scroll down",
