@@ -2,7 +2,7 @@ export default `<h2>General notes</h2>
             <p>The following notes refer to the Katharsis.lol software only.</p>
             <p>Katharsis.lol is Free Software and can be hosted by any person.<br>Hosting also encompasses further components (e.g. a web server) that are in the care of the hoster or the administrator (used interchangably here) and that at this point we cannot make any statements about. Further notes on data protection specific to the hoster <a href="#data-hoster">are linked further down</a>.<br>It's worth checking them out!</p>
             <h2>Usage as spectator</h2>
-            <p>There is no data being collected while watching and reading a performance from the spectator's room. Watching happens anonymously.</p>
+            <p>There is no data being collected while watching and reading a performance from the spectator's room.</p>
 
             <h2>Usage as participant</h2>
             <p>To participate in a performance of Katharsis.lol you need a nickname and a ticket code.</p>

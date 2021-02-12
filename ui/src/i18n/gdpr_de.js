@@ -2,7 +2,7 @@ export default `<h2>Allgemein</h2>
             <p>Die folgenden Hinweise beziehen sich auf die Software Katharsis.lol.</p>
             <p>Katharsis.lol ist Freie Software kann von beliebigen Menschen gehostet werden.<br>Zum Hosten gehören weitere Komponenten (z.B. Webserver etc) die der Obhut der Hoster bzw Administrierenden (im Folgenden synomym verwendet) unterliegen und über die hier keine Auskunft gemacht werden kann. Weitere, hosterspezifische <a href="#data-hoster">Datenschutzhinweise werden unten verlinkt</a>.<br>Es lohnt sich, sich damit auseinanderzusetzen!</p>
             <h2>Nutzung von Daten als Zuschauende</h2>
-            <p>Beim zusehen und mitlesen einer Vorstellung im Zuschauerraum werden keinerlei Daten gesammelt. Zusehen erfolgt anonym.</p>
+            <p>Beim zusehen und mitlesen einer Vorstellung im Zuschauerraum werden keinerlei Daten gesammelt.</p>
 
             <h2>Nutzung von Daten als Teilnehmende</h2>
             <p>Zur Teilnahme an einer Vorstellung in Katharsis.lol wird  selbstgewählter Nickname und ein Ticketcode verwendet.</p>
