@@ -12,7 +12,7 @@
                    :disabled="!canWrite"
                    class="a11y-hidden">
             <span :title="$t('ui.form.directSpeech')"
-                 :aria-label="$t('ui.form.directSpeech')">🗣</span>
+                 :aria-label="$t('ui.form.directSpeech')">💬</span>
           </label>
           <label class="chat__message-type-option">
             <input type="radio"
@@ -22,7 +22,7 @@
                    :disabled="!canWrite"
                    class="a11y-hidden">
             <span :title="$t('ui.form.stageInstruction')"
-                 :aria-label="$t('ui.form.stageInstruction')">📝</span>
+               :aria-label="$t('ui.form.stageInstruction')">🖋</span>
           </label>
         </div>
         <input type="text"
@@ -32,12 +32,12 @@
                :readonly="!canWrite"
                @input="typing">
         <EmojiPicker v-if="canWrite" v-on:pick-emoji="pickUpEmoji" />
-        <button class="btn"
+        <button class="btn btn--compose"
                 :title="$t('ui.button.send')"
                 :aria-label="$t('ui.button.send')"
                 :disabled="!canWrite">
-          <fragment v-if="sending">↺</fragment>
-          <fragment v-else>→</fragment>
+          <span v-if="sending">↺</span>
+          <span v-else>&#10132;</span>
         </button>
       </div>
     </form>
@@ -137,61 +137,3 @@
    }
  }
 </script>
-<style scoped >
- .chat__message-compose {
-   max-width: 800px;
-   margin: auto;
-   display: flex;
-   align-items: center;
-   border: 2px solid var(--bg-footer);
-   border-radius: 4px;
-   background-color: var(--bg-footer);
- }
- .chat__message-compose input {
-   display: block;
-   width: 100%;
-   padding: .5rem 0.8rem 0.3rem;
-   background-color: var(--bg-footer);
-   border: none;
- }
-
- .chat__message-compose input:focus {
-   outline: none;
- }
-
- .chat__message-compose:focus-within {
-   outline: 2px solid var(--bg-document);
- }
-
- .is-onit .chat__message-compose:focus-within {
-   outline: 2px solid var(--bg-shade);
- }
-
- .chat__message-type-option {
-   display: block;
-   cursor: pointer;
- }
-
- .chat__message-type-option span {
-   display: block;
-   padding: 0.3em 0.3em 0em;
-   text-align: center;
-   border-radius: 2px;
- }
-
- .chat__message-type-option input[type="radio"]:checked + span {
-   background-color: var(--bg-shade)
- }
-
- input[readonly],
- input[disabled] + span,
- button[disabled] {
-   opacity: 0.5;
-   cursor: not-allowed;
- }
- .btn {
-   font-size: 2em;
-   line-height: 1;
-   border: 2px solid var(--bg-footer);
- }
-</style>

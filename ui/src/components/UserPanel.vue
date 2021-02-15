@@ -1,7 +1,10 @@
 <template>
   <div class="upanel">
-    <UserDisplay :user="$root.$data.user" />
-    <UserLogout class="btn">{{ $t('intro.leave') }}</UserLogout>
+    <div class="upanel__user">
+      <span>bei als</span><br>
+      <UserDisplay :user="$root.$data.user" />
+    </div>
+    <UserLogout>{{ $t('intro.leave') }}</UserLogout>
   </div>
 </template>
 <script>
@@ -13,10 +16,6 @@
    components: {
      UserLogout,
      UserDisplay
-   },
-   methods: {
    }
  }
 </script>
-<style scoped>
-</style>

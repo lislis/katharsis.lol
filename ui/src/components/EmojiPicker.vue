@@ -62,11 +62,12 @@
 <style scoped>
  .emojipicker {
    position: relative;
+   margin-right: 0.3em;
    z-index: 1;
  }
  .dialog {
    position: absolute;
-   bottom: 3.4rem;
+   bottom: 5.4rem;
    right: 0;
    min-height: 20rem;
    width: 20rem;
@@ -75,15 +76,17 @@
    border-radius: 4px;
    padding: 1rem;
    white-space: wrap;
+
+   box-shadow: 0px 0px 5px var(--bg-shade)
  }
 
  .emojibtn {
    border: none;
    background-color: transparent;
    line-height: 1.7;
-   font-size: 1.5rem;
+   font-size: 2.5rem;
    cursor: pointer;
-   border-radius: 2px;
+   border-radius: 18px;
  }
 
  .emojibtn:hover,

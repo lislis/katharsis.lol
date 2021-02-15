@@ -33,6 +33,7 @@ export default {
   },
   ui: {
     button: {
+      toIndex: "To the start",
       close: "close",
       send: "Write",
       accept: "Okay!"

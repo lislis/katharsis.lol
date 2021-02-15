@@ -107,7 +107,5 @@
 </script>
 
 <style>
- @import './assets/reboot.css';
- @import './assets/base.css';
- @import './assets/index.css';
+ @import './assets/main.css';
 </style>

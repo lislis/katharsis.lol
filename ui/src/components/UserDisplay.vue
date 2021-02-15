@@ -10,7 +10,8 @@
           v-if="userObj.isMod"
           :aria-label="$t('user.status.mod')"
           :title="$t('user.status.mod')">👑</span>
-    <strong class="userdisplay__uname">{{ userObj.nickname }}</strong>
+    <strong class="userdisplay__uname" v-if="userObj.nickname">{{ userObj.nickname }}</strong>
+    <strong class="userdisplay__uname" v-else>{{ user }}</strong>
   </p>
 </template>
 <script>

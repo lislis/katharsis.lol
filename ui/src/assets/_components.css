@@ -1,0 +1,16 @@
+.upanel {
+  display: flex;
+  align-items: center;
+}
+
+.upanel__user {
+  margin-right: 1rem;
+  line-height: 1.1;
+  font-size: 1.2rem;
+  text-align: right;
+  font-weight: 600;
+}
+
+.upanel__user > span{
+  margin: 0 0.3rem;
+}

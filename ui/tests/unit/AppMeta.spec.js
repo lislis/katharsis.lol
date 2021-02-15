@@ -4,7 +4,7 @@ import AppMeta from '@/components/AppMeta'
 import { version } from '../../package.json'
 
 describe('AppMeta.vue', () => {
-    const wrapper = mount(AppMeta);
+    const wrapper = mount(AppMeta, { stubs: ['router-link', 'router-view'] });
     it('renders the app name', () => {
         expect(wrapper.text()).toMatch('Katharsis.lol');
     });

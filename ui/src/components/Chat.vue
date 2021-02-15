@@ -1,25 +1,22 @@
 <template>
   <section class="chat" :class="{ 'is-onit': mainStageHighlight }">
-    <div v-if="showTitle" class="chat__room-header">
-      <h3>
-        {{ room.room_name}}
-        <span v-if="room.private" class="chat__room-status">(private)</span>
-      </h3>
-      <PeopleList :people="$root.$data.otherPeople" v-if="isBackstage"  />
-    </div>
+    <h2 v-if="showTitle" class="centerstage__title">{{ room.room_name}}</h2>
     <div class="chat__message_container">
-      <ul class="chat__messages">
+      <ul class="chat__messages monospace">
         <ChatBubble v-for="message in messages"
                     :message="message"
                     :room="room"
                     :key="message.message" />
       </ul>
+      <PeopleList :people="$root.$data.otherPeople" v-if="isBackstage"  />
       <button class="chat__scrolldown"
               type="button"
               v-if="hasNewMessage"
               @click="scrollDown"><span>{{ $t('ui.chat.scrollDown')}}</span></button>
-      <TypingIndicator :room="room" />
-      <ChatComposer v-if="showComposer" :room="room" />
+      <div>
+        <TypingIndicator :room="room" />
+        <ChatComposer v-if="showComposer" :room="room" />
+      </div>
     </div>
   </section>
 </template>
