@@ -1,7 +1,7 @@
 <template>
   <div class="upanel">
     <div class="upanel__user">
-      <span>bei als</span><br>
+      <span>{{ $t('user.status.joinedAs')}}</span><br>
       <UserDisplay :user="$root.$data.user" />
     </div>
     <UserLogout>{{ $t('intro.leave') }}</UserLogout>

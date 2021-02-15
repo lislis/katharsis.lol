@@ -1,11 +1,6 @@
 <template>
   <aside class="peoplelist">
-    <button type="button"
-            class="peoplelist__button"
-            :title="$t('ui.chat.peopleList')"
-            :aria-label="$t('ui.chat.peopleList')"
-            @click="toggle">👯</button>
-    <div v-if="isOpen" class="peoplelist__dialog">
+    <div  class="peoplelist__dialog">
       <div class="dialog__header">
         <h4>{{$t('ui.chat.peopleList')}}</h4>
       </div>
@@ -42,34 +37,28 @@
 </script>
 <style>
  .peoplelist {
-   position: relative;
-   z-index: 1;
+   position: absolute;
+   top: 1rem;
+   right: 3rem;
  }
  .peoplelist__dialog {
-   position: absolute;
-   top: 3rem;
-   right: 0;
    min-height: 20rem;
-   width: 20rem;
-
+   min-width: 10rem;
+   font-size: 1rem;
+   font-family: Courier, monospace;
    background-color: white;
    border-radius: 4px;
    padding: 1rem;
    white-space: wrap;
  }
  .peoplelist__list {
+   font-weight: 300;
    list-style: none;
    padding: 0;
    margin: 0;
  }
- .peoplelist__list li {
-   padding: 0.4em 0.3em 0.2em 0.3em;
- }
  .peoplelist__list li .is-you {
-   color: var(--bg-document);
- }
- .peoplelist__list li:nth-child(even) {
-   background-color: var(--bg-footer);
+   color: var(--primary-color);
  }
  .peoplelist__button {
    border: none;
@@ -87,10 +76,8 @@
    background-color: var(--bg-main);
  }
 
- .dialog__header {
-   border-bottom: solid 2px var(--bg-footer);
- }
  .dialog__header h4 {
+   font-weight: 600;
    margin: 0;
  }
 </style>
