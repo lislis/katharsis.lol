@@ -2,7 +2,7 @@
   <section class="chat" :class="{ 'is-onit': mainStageHighlight }">
     <h2 v-if="showTitle" class="centerstage__title">{{ room.room_name}}</h2>
     <div class="chat__message_container">
-      <ul class="chat__messages monospace">
+      <ul class="chat__messages monospace" :class="{'more-space': isBackstage}">
         <ChatBubble v-for="message in messages"
                     :message="message"
                     :room="room"

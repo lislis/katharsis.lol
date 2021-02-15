@@ -1,7 +1,7 @@
 .app .socketwrapper {
   height: 100vh;
   padding: 1.4rem;
-  overflow: hidden;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   background-image: url(/BG-12.jpg);

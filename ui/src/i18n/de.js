@@ -34,6 +34,7 @@ export default {
       back: "Zurück"
     },
     status: {
+      joinedAs: "dabei als",
       stage: "Auf der Bühne",
       mod: "Moderator:in"
     }
@@ -56,7 +57,7 @@ export default {
     },
     chat: {
       scrollDown: "Neue Nachricht, scrolle runter",
-      peopleList: "Darsteller im Raum",
+      peopleList: "anwesend",
       emojiPicker: "Emoji auswählen"
     }
   },

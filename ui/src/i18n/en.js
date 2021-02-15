@@ -29,6 +29,11 @@ export default {
       reallyLeave: "Do you really want to leave?<br>Without another ticket code you won't be able to join again.",
       reallyLeaveBtn: "Really leave",
       back: "Back"
+    },
+    status: {
+      joinedAs: "joined as",
+      stage: "On the stage",
+      mod: "Moderator"
     }
   },
   ui: {
@@ -49,7 +54,7 @@ export default {
     },
     chat: {
       scrollDown: "New message, scroll down",
-      peopleList: "Performers in the room",
+      peopleList: "present",
       emojiPicker: "Select emoji"
     }
   },
