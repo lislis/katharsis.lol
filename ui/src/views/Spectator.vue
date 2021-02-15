@@ -1,10 +1,8 @@
 <template>
-  <article>
+  <div class="spectator">
     <OutSideNav />
-    <header class="inner">
-      <h1 class="spec__title">{{ $t('spec.title') }}</h1>
-    </header>
-    <section class="inner">
+    <section class="centerstage">
+      <h1 class="centerstage__title">{{ $t('spec.title') }}</h1>
       <Loader v-if="!$root.$data.stage"/>
       <Chat v-else
             :messages="messages"
@@ -13,7 +11,7 @@
             :showComposer="false"
             :showTitle="false" />
     </section>
-  </article>
+  </div>
 </template>
 <script>
  import Loader from '@/components/Loader'
@@ -26,14 +24,6 @@
      Loader,
      Chat,
      OutSideNav
-   },
-   data() {
-     return {
-       loading: true
-     }
-   },
-   mounted() {
-     this.loading = false;
    },
    computed: {
      messages() {

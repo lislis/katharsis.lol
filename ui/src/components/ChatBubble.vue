@@ -1,17 +1,22 @@
 <template>
   <li class="chat__message"
-      :style="{textAlign: hasPosition}"
       :class="allTheClasses">
     <div class="chat__message-inner">
-      <header v-if="message.user">
-        <UserDisplay :user="message.user" />
-      </header>
-      <p class="chat__message-bubble" :style="styleObject" v-html="message.message">
-
-      </p>
-      <aside>
-        <time datetime="this.message.created_date" :title="date">{{ date_ago }}</time>
-      </aside>
+      <fragment v-if="room.locked">
+        <div class="chat__message__user-inline" v-if="message.user" :style="styleObject">
+          <UserDisplay :user="message.user" />:
+        </div>
+        <p class="chat__message-bubble chat__message-bubble--inline" v-html="message.message"></p>
+      </fragment>
+      <fragment v-else>
+        <header v-if="message.user">
+          <UserDisplay :user="message.user" />
+        </header>
+        <p class="chat__message-bubble" :style="styleObject" v-html="message.message"></p>
+        <aside>
+          <time datetime="this.message.created_date" :title="date">{{ date_ago }}</time>
+        </aside>
+      </fragment>
     </div>
   </li>
 </template>
@@ -27,7 +32,6 @@
    },
    data() {
      return {
-       hasPosition: 'left',
        allTheClasses: '',
        date: null,
        date_ago: null,
@@ -55,7 +59,7 @@
            return this.$root.$data.user.colorCode;
          } else {
            const potUser =  this.$root.$data.otherPeople.filter(x => x._id === user);
-           return (potUser.length == 1) ? potUser[0].colorCode : '#ffffff';
+           return (potUser.length == 1) ? potUser[0].colorCode : '#e5e5e5';
          }
        } else {
          return 'transparent';
@@ -64,66 +68,19 @@
      assignClasses() {
        if (this.message.bot == true) {
          this.allTheClasses = 'is-bot';
-         this.hasPosition = 'center';
        } else if (Object.prototype.hasOwnProperty.call(this.message, 'user')) {
          if (this.message.user == null) {
            this.allTheClasses = 'is-gone';
-           this.hasPosition = 'left';
          } else if ((this.message.user._id == this.$root.$data.user._id)
                     || (this.message.user == this.$root.$data.user._id)) {
            this.allTheClasses = 'is-me';
-           this.hasPosition = 'right';
          } else {
            this.allTheClasses = 'is-user';
-           this.hasPosition = 'left';
          }
        } else {
          this.allTheClasses = 'is-note';
-         this.hasPosition = 'center';
        }
      }
    }
  }
 </script>
-<style>
-
- .chat__message {
-   margin: 0 1rem 1.5em 1rem;
- }
- .chat__message-inner {
-   display: inline-block;
- }
-
- .chat__message-bubble {
-   display: inline-block;
-   padding: 1rem;
-   margin: 0;
-   border-radius: 4px;
- }
-
- .chat__status {
-   margin-right: .3rem;
- }
-
- .no-bubble .chat__message-bubble {
-   opacity: 0.7;
- }
-
- .is-note {
-   opacity: 0.5;
- }
-
- .is-note .chat__message-bubble {
-   padding: 0;
- }
-
- .is-gone {
-   opacity: 0.5;
- }
-
- time {
-   opacity: 0.5;
-   font-size: 0.8em;
- }
-
-</style>

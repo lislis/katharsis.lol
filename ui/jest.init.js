@@ -1,5 +1,5 @@
 import { config } from "@vue/test-utils"; //2.0.0-beta.5
-import translations from "./src/i18n";
+import translations from "./src/i18n/index";
 
 const locale = "de";
 

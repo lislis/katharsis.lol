@@ -40,6 +40,7 @@ export default {
   },
   ui: {
     button: {
+      toIndex: "Zum Start",
       close: "schließen",
       send: "Schreiben",
       accept: "Okay!"

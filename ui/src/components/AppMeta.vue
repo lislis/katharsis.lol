@@ -1,26 +1,29 @@
 <template>
-  <footer>
-    <div class="inner">
-      <p class="subtle-spacing">
-        Katharsis.lol by
+  <footer class="footer subtle-spacing monospace">
+    <p class="subtle-spacing">
+      <span>Katharsis.lol by
         <a href="http://www.sternapau.de/"
            rel="noreferrer"
-           target="_blank">sterna | pau</a>
-        <small>(<a :href="versionLink"
-                   rel="noreferrer"
-                   target="_blank"
-                   class="appmeta__version">Version {{version}}</a>)</small>
-        <a v-if="imprintLink"
-           :href="imprintLink"
-           rel="noreferrer"
-           class="appmeta__imprint">{{ $t('legal.imprint') }}</a>
-        <router-link :to="{ name: 'datapage'}" class="appmeta__gdpa">{{ $t('legal.gdpr') }}</router-link>
-        <label for="lang-switch" class="a11y-hidden">{{ $t('ui.form.langSwitch') }}</label>
-        <select id="lang-switch" v-model="$i18n.locale">
-          <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
-        </select>
-      </p>
-
+           target="_blank">sterna | pau</a></span>
+      <small>(
+        <a :href="versionLink"
+             rel="noreferrer"
+             target="_blank"
+             class="appmeta__version">Version {{version}}</a>)</small>
+    </p>
+    <nav class="subtle-spacing">
+      <a v-if="imprintLink"
+         :href="imprintLink"
+         rel="noreferrer"
+         class="appmeta__imprint">{{ $t('legal.imprint') }}</a>
+      <router-link :to="{ name: 'datapage'}" class="appmeta__gdpa">{{ $t('legal.gdpr') }}</router-link>
+    </nav>
+    <div>
+      <label for="lang-switch" class="a11y-hidden">{{ $t('ui.form.langSwitch') }}</label>
+      <select id="lang-switch" v-model="$i18n.locale">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+      </select>
     </div>
   </footer>
 </template>
@@ -29,6 +32,9 @@
 
  export default {
    name: 'AppMeta',
+   created() {
+     console.log(this.$i18n)
+   },
    computed: {
      version() {
        return version;
@@ -40,5 +46,5 @@
        return `${homepage}/releases/tag/v${this.version}`
      }
    }
-  }
+ }
 </script>

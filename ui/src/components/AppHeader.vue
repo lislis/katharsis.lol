@@ -1,14 +1,12 @@
 <template>
-  <div class="">
-    <div class="aheader">
-      <p><router-link :to="{ name: 'index'}" class="nav__title">Katharsis.lol</router-link></p>
-      <UserPanel />
-    </div>
-
+  <div class="appheader outsidenav">
+    <router-link :to="{ name: 'index'}" class="outsidenav__logo"><Logo /></router-link>
+    <UserPanel />
     <Notifications :notifications="notifications" />
   </div>
 </template>
 <script>
+ import Logo from '@/components/Logo'
  import Notifications from '@/components/Notifications'
  import UserPanel from '@/components/UserPanel'
 
@@ -16,6 +14,7 @@
    name: "AppHeader",
    props: ['notifications'],
    components: {
+     Logo,
      UserPanel,
      Notifications
    }

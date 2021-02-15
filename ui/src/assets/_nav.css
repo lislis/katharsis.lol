@@ -1,0 +1,40 @@
+.outsidenav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 5rem;
+}
+
+.nav a {
+  display: inline-block;
+  padding: .7rem .7rem .4rem;
+  margin-right: 1rem;
+  margin-left: -0.7rem;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 200ms ease;
+}
+
+.nav a:hover,
+.nav a:active {
+  background-color: var(--bg-shade);
+}
+
+.nav__title {
+  text-transform: uppercase;
+}
+
+
+.navigation {
+  display: flex;
+}
+.navigation a:first-of-type {
+  flex-grow: 1;
+}
+
+.navigation a {
+  display: inline-block;
+  margin-right: 1rem;
+  padding: 1rem;
+}
