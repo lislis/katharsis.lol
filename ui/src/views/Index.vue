@@ -13,7 +13,7 @@
           </fragment>
           <fragment v-else>
             <fragment v-if="defaultText">
-              <p>{{ $t('index.defaultText')}}</p>
+              <p class="default-text">{{ $t('index.defaultText')}}</p>
             </fragment>
             <fragment v-else>
               <p v-for="p in introText" :key="p._id">{{p}}</p>

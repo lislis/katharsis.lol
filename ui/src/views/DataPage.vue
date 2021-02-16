@@ -20,7 +20,7 @@
             <p v-else>{{ $t('legal.gpdrNoLink') }}</p>
           </div>
         </div>
-      </section>
+      </section>v
     </article>
   </div>
 </template>
