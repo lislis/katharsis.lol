@@ -1,23 +1,27 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="form-group row">
-      <p v-html="$t('intro.callMeByAnyName')"></p>
+      <p class="form-group__desc" v-html="$t('intro.callMeByAnyName')"></p>
       <label class="form-elem">
         <span class="a11y-hidden">{{$t('part.label')}}</span>
         <input type="text"
                class=""
                v-model.trim="newUser.nickname"
+               required="true"
                :placeholder="$t('part.label')">
       </label>
       <label class="form-elem">
-        <span class="">{{$t('part.ticket')}}</span>
+        <span class="a11y-hidden">{{$t('part.ticket')}}</span>
         <input type="text"
                class=""
+               required=""
                v-model.trim="ticketCode"
                :placeholder="$t('part.ticket')">
       </label>
-      <Loader v-if="loading" />
-      <input v-else type="submit" :value="$t('intro.enter')" class="btn">
+      <div class="center-helper spacing-helper">
+        <Loader v-if="loading" />
+        <input v-else type="submit" :value="$t('intro.enter')" class="btn">
+      </div>
     </div>
   </form>
 </template>

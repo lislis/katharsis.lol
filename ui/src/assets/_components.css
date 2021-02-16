@@ -15,28 +15,30 @@
   margin: 0 0.3rem;
 }
 
-
-
-.index__title {
-  font-size: 2rem;
-  margin: 0;
-}
-
 .index__claim {
-  margin: 0;
-  font-size: 1.26rem;
+  margin: 2rem 0 2rem;
+  font-size: 1.6rem;
 }
 
-.index__inner {
-  max-width: 40rem;
+.index .inner {
+  font-size: 1.4rem;
 }
 
+.index__overflow {
+
+}
 
 @media (min-width: 800px) {
   .peoplelist {
     position: absolute;
     top: 1rem;
     right: 3rem;
+  }
+  .index__overflow {
+    max-height: 50vh;
+    padding: 0 2rem;
+    overflow-y: scroll;
+    scrollbar-width: thin;
   }
 }
 
@@ -68,4 +70,26 @@
 .dialog__header {
   font-weight: 600;
   margin: 0;
+}
+
+
+
+.part__title {
+  text-transform: uppercase;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.inner {
+  max-width: 40rem;
+  margin: auto;
+}
+
+.center-helper {
+  text-align: center;
+}
+
+.spacing-helper {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
 }

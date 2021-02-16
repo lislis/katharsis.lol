@@ -2,13 +2,12 @@
   <div>
     <OutSideNav />
     <Notifications :notifications="$root.$data.notifications" />
-    <article>
+    <article class="index">
       <header class="inner">
-        <h1 class="index__title">Katharsis.lol</h1>
-        <p class="index__claim" v-html="$t('index.claim')"></p>
+        <h2 class="index__claim center-helper" v-html="$t('index.claim')"></h2>
       </header>
       <section class="inner">
-        <div class="index__inner">
+        <div class="index__overflow">
           <fragment v-if="loading">
             <Loader />
           </fragment>
@@ -19,11 +18,13 @@
             <fragment v-else>
               <p v-for="p in introText" :key="p._id">{{p}}</p>
             </fragment>
-            <router-link :to="{ name: 'spectator'}"
-                 class="btn">{{ $t('index.watch') }}</router-link>
-            <router-link :to="{ name: 'intro'}"
-                     class="btn">{{ $t('index.participate') }}</router-link>
           </fragment>
+        </div>
+        <div class="center-helper spacing-helper">
+          <router-link :to="{ name: 'spectator'}"
+                       class="btn">{{ $t('index.watch') }}</router-link>
+          <router-link :to="{ name: 'intro'}"
+                       class="btn">{{ $t('index.participate') }}</router-link>
         </div>
       </section>
     </article>

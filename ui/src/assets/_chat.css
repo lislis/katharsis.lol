@@ -18,26 +18,6 @@
   padding: 0 13rem 0 1rem;
 }
 
-
-@media (min-width: 800px) {
-  .chat__messages {
-    padding: 0 5rem;
-  }
-
-  .chat__messages.more-space {
-    padding: 0 13rem 0 5rem;
-  }
-
-  .chat {
-    min-width: 40rem;
-  }
-
-  .chat + .chat {
-    margin-left: 3rem;
-  }
-}
-
-
 .chat__message_container {
   position: relative;
   padding: 2rem 1.4rem 1.6rem;
@@ -73,7 +53,7 @@
   transform: translateY(-180%);
   border: none;
   border-radius: 50%;
-  background-color: var(--bg-document);
+  background-color: var(--primary-color);
   color: var(--bg-footer);
   cursor: pointer;
   animation: jumping infinite 0.7s alternate ease-in-out;
@@ -82,7 +62,7 @@
   content: "";
   position: absolute;
   display: block;
-  background-color: var(--bg-document);
+  background-color: var(--primary-color);
   width: 1rem;
   height: 1rem;
   transform: rotate(45deg);
@@ -222,4 +202,28 @@ input[disabled] + span:hover,
 button[disabled]:hover {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+
+
+@media (min-width: 800px) {
+  .chat__messages {
+    padding: 0 5rem;
+  }
+
+  .chat__messages.more-space {
+    padding: 0 13rem 0 5rem;
+  }
+
+  .chat {
+    min-width: 40rem;
+  }
+
+  .chat + .chat {
+    margin-left: 3rem;
+  }
+
+  .chat__message-compose {
+    flex-wrap: nowrap;
+  }
 }

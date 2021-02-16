@@ -1,16 +1,16 @@
 :root {
-  --bg-main: #ddd;
+  --bg-main: #fff;
   --bg-footer: #f5f5f5;
-  --bg-shade: #bbb;
-  --bg-document: #a200a7;
-  --a-main: #840388;
-  --bg-dark: #666;
-  --bg-bubble: #c78ac8;
+  --bg-shade: #ccc;
+  --bg-document: #ff6b00;
+  --a-main: #ff6b00;
+  --bg-dark: #000;
+  --bg-bubble: #ff6b00;
 
   --primary-color: #ff6b00;
   --light-color: #ffffff;
   --dark-color: #000000;
-  scrollbar-color: var(--primary-color) var(--bg-main);
+  scrollbar-color: var(--primary-color) transparent;
   scrollbar-width: thin;
 
   --break-l: (min-width: 800px);
@@ -18,12 +18,12 @@
 
 
 ::-webkit-scrollbar {
-  width: 8px;  /* for vertical scrollbars */
-  height: 8px; /* for horizontal scrollbars */
+  width: 6px;  /* for vertical scrollbars */
+  height: 6px; /* for horizontal scrollbars */
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-main);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -109,9 +109,22 @@ h2 {
 }
 
 
+input[type=text] {
+  font-family: Courier, monospace;
+  font-size: 1.6rem;
+  padding: 0.8em 1.5em;
+  border: none;
+  border-radius: 30px;
+  width: 100%;
+}
+
 .form-elem {
   display: block;
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 1rem;
+}
+
+.form-group__desc {
+  font-size: 1.6rem;
 }
 
 .form-elem > span + input {

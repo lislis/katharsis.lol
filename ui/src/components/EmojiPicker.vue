@@ -70,7 +70,7 @@
    bottom: 5.4rem;
    right: 0;
    min-height: 20rem;
-   width: 20rem;
+   min-width: 20rem;
 
    background-color: white;
    border-radius: 4px;
@@ -79,7 +79,6 @@
 
    box-shadow: 0px 0px 5px var(--bg-shade)
  }
-
  .emojibtn {
    border: none;
    background-color: transparent;
@@ -89,10 +88,12 @@
    border-radius: 18px;
  }
 
+
  .emojibtn:hover,
  .emojibtn:active,
  .emojibtn:focus {
    background-color: var(--bg-shade);
+   outline: none;
  }
 
  .emoji {
@@ -115,6 +116,11 @@
    overflow-y: scroll;
    scrollbar-width: none;
  }
+
+ .emoji-group::-webkit-scrollbar{
+   width: 0;
+ }
+
 
  .groupnav {
    display: flex;

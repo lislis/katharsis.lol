@@ -63,7 +63,7 @@ main {
   .app .socketwrapper {
     height: 100vh;
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     overflow: hidden;
   }
   .footer {
@@ -74,7 +74,7 @@ main {
 
 @media (min-width: 1480px) {
   .mainroom-split {
-    //overflow-x: hidden;
+    justify-content: center;
     scrollbar-width: none;
   }
 }
