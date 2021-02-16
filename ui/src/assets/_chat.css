@@ -1,24 +1,42 @@
 .chat {
   width: 100%;
-}
-
-.chat + .chat {
-  margin-left: 2rem;
+  max-width: 65rem;
 }
 
 .chat__messages {
   list-style: none;
-  padding: 0 5rem;
+  padding: 0 1rem;
   height: 50vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   scrollbar-color: var(--primary-color) transparent;
   scrollbar-width: thin;
   white-space: pre-line;
 }
 
 .chat__messages.more-space {
-  padding: 0 15rem 0 5rem;
+  padding: 0 13rem 0 1rem;
 }
+
+
+@media (min-width: 800px) {
+  .chat__messages {
+    padding: 0 5rem;
+  }
+
+  .chat__messages.more-space {
+    padding: 0 13rem 0 5rem;
+  }
+
+  .chat {
+    min-width: 40rem;
+  }
+
+  .chat + .chat {
+    margin-left: 3rem;
+  }
+}
+
 
 .chat__message_container {
   position: relative;
@@ -28,7 +46,6 @@
 }
 
 .chat.is-onit .chat__message_container {
-  //box-shadow: 0 0 5px var(--bg-shade);
 }
 
 .chat__message-bubble {
@@ -135,6 +152,7 @@ time {
 .chat__message-compose {
   margin: auto;
   display: flex;
+  flex-wrap: wrap;
   padding: 0.3em;
   min-height: 90px;
   align-items: center;
@@ -145,14 +163,14 @@ time {
 .chat__message-compose input {
   display: block;
   flex-grow: 1;
-  padding: .5rem 1.4rem 0.3rem;
+  padding: 1.5rem 1.4rem 1.3rem;
   font-family: Courier, monospace;
   font-size: 1.6rem;
   background-color: var(--bg-footer);
   border: none;
 }
 
-.chat__message-compose input:focus {
+input.chat__message-compose input:focus {
   outline: none;
 }
 

@@ -14,3 +14,58 @@
 .upanel__user > span{
   margin: 0 0.3rem;
 }
+
+
+
+.index__title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.index__claim {
+  margin: 0;
+  font-size: 1.26rem;
+}
+
+.index__inner {
+  max-width: 40rem;
+}
+
+
+@media (min-width: 800px) {
+  .peoplelist {
+    position: absolute;
+    top: 1rem;
+    right: 3rem;
+  }
+}
+
+.peoplelist__dialog {
+  min-height: 10rem;
+  width: 10rem;
+  font-size: 1rem;
+  font-family: Courier, monospace;
+  background-color: white;
+  border-radius: 4px;
+  padding: 1rem;
+  white-space: wrap;
+}
+.peoplelist__list {
+  font-weight: 300;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.peoplelist__color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+
+.dialog__header {
+  font-weight: 600;
+  margin: 0;
+}

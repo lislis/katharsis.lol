@@ -30,8 +30,8 @@ export default {
       isUser: "Du bist jetzt Teilnehmer:in",
       wasRemoved: "Du wurdest gebeten zu gehen.",
       reallyLeave: "Willst du wirklich austreten?<br>Ohne einen weiteren Ticketcode kannst du nicht mehr eintreten.",
-      reallyLeaveBtn: "Wirklich austreten",
-      back: "Zurück"
+      reallyLeaveBtn: "Austreten",
+      back: "Hier bleiben"
     },
     status: {
       joinedAs: "dabei als",
@@ -57,7 +57,11 @@ export default {
     },
     chat: {
       scrollDown: "Neue Nachricht, scrolle runter",
-      peopleList: "anwesend",
+      peopleList: {
+        mod: "moderierend",
+        backstage: "auf der Bühne",
+        stage: "Backstage"
+      },
       emojiPicker: "Emoji auswählen"
     }
   },

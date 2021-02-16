@@ -1,9 +1,6 @@
 .app .socketwrapper {
-  height: 100vh;
+  min-height: 100vh;
   padding: 1.4rem;
-  overflow-y: hidden;
-  display: flex;
-  flex-direction: column;
   background-image: url(/BG-12.jpg);
   background-repeat: no-repeat;
   background-position: center center;
@@ -15,7 +12,6 @@ main {
 }
 
 .footer {
-  height: 3vh;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -47,4 +43,38 @@ main {
   font-size: 36px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.mainroom-split {
+  padding: 0 1rem;
+}
+
+
+@media (min-width: 800px) {
+  .mainroom-split {
+    display: flex;
+    flex-wrap: nowrap;
+
+    padding: 0 0 2rem 0;
+    width: 95vw;
+    overflow-x: scroll;
+    scrollbar-width: thin;
+  }
+  .app .socketwrapper {
+    height: 100vh;
+    display: flex;
+    flex-flow: column wrap;
+    overflow: hidden;
+  }
+  .footer {
+    height: 3vh;
+  }
+}
+
+
+@media (min-width: 1480px) {
+  .mainroom-split {
+    //overflow-x: hidden;
+    scrollbar-width: none;
+  }
 }

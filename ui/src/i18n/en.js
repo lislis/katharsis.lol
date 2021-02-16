@@ -54,7 +54,11 @@ export default {
     },
     chat: {
       scrollDown: "New message, scroll down",
-      peopleList: "present",
+      peopleList: {
+        mod: "moderating",
+        backstage: "on stage",
+        stage: "backstage"
+      },
       emojiPicker: "Select emoji"
     }
   },

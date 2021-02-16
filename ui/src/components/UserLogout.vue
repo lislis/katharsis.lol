@@ -1,12 +1,12 @@
 <template>
-  <button class="userlogout__button btn" @click.prevent="toggleDialog">
+  <button class="userlogout__button btn btn--pill" @click.prevent="toggleDialog">
     <slot></slot>
   </button>
   <div class="notifications" v-if="isOpen">
     <div class="note">
       <p v-html="$t('user.notification.reallyLeave')"></p>
-      <button class="btn" @click.prevent="logout">{{ $t('user.notification.reallyLeaveBtn') }}</button>
-      <button class="link" @click.prevent="toggleDialog">{{ $t('user.notification.back') }}</button>
+      <button class="btn" @click.prevent="toggleDialog">{{ $t('user.notification.back') }}</button>
+      <button class="btn btn--inverted2" @click.prevent="logout">{{ $t('user.notification.reallyLeaveBtn') }}</button>
     </div>
   </div>
 </template>

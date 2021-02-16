@@ -1,9 +1,21 @@
 .outsidenav {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: 5vh;
 }
+.outsidenav__logo svg {
+  width: 100%;
+  height: auto;
+}
+
+
+@media (min-width: 800px) {
+  .outsidenav {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 7vh;
+  }
+}
+
 
 .nav a {
   display: inline-block;
