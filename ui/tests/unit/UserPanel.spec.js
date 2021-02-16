@@ -1,9 +1,9 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import '@testing-library/jest-dom';
 import UserPanel from '@/components/UserPanel';
 
 describe('UserPanel.vue', () => {
-    const wrapper = shallowMount(UserPanel);
+    const wrapper = mount(UserPanel);
     it('renders logout button', () => {
         expect(wrapper.find('.btn').element).toBeVisible();
     });

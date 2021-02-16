@@ -5,8 +5,8 @@
   <div class="notifications" v-if="isOpen">
     <div class="note">
       <p v-html="$t('user.notification.reallyLeave')"></p>
-      <button class="btn" @click.prevent="toggleDialog">{{ $t('user.notification.back') }}</button>
-      <button class="btn btn--inverted2" @click.prevent="logout">{{ $t('user.notification.reallyLeaveBtn') }}</button>
+      <button class="btn userlogout__stay" @click.prevent="toggleDialog">{{ $t('user.notification.back') }}</button>
+      <button class="btn btn--inverted2 userlogout__leave" @click.prevent="logout">{{ $t('user.notification.reallyLeaveBtn') }}</button>
     </div>
   </div>
 </template>
