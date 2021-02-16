@@ -29,12 +29,12 @@
        this.isOpen = !this.isOpen;
      },
      async logout() {
+       this.$root.$data.loggedMyselfOut = true;
        await axios.delete(`${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`);
        let chat = {}
        chat.room = this.$root.$data.mainRoom._id;
        chat.nickname = this.$root.$data.user._id;
        chat.message = `${this.$root.$data.user.nickname} ${this.$t('user.notice.leave')}`;
-       this.$root.$data.loggedMyselfOut = true;
        await axios.post(`${this.$root.$data.restServer}/api/chat`, chat);
 
        this.$root.$data.user = {};
