@@ -16,7 +16,7 @@
               <p class="default-text">{{ $t('index.defaultText')}}</p>
             </fragment>
             <fragment v-else>
-              <p v-for="p in introText" :key="p._id">{{p}}</p>
+              <p v-for="p in introText" :key="p._id" v-html="p"></p>
             </fragment>
           </fragment>
         </div>
