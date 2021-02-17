@@ -76,6 +76,7 @@
        this.chat.room = this.room._id;
        if (this.messageType === 'say') {
          this.chat.user = this.$root.$data.user._id;
+         this.chat.nickname = this.$root.$data.user.nickname;
        } else {
          this.chat.bot = true;
        }

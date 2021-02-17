@@ -99,7 +99,7 @@
   display: inline-block;
   padding: 0.6rem 0.8em 0.5em;
   margin: 0;
-  width: 100%;
+  width: auto;
   word-break: break-word;
   border-radius: 8px;
 }
@@ -107,8 +107,7 @@
 .chat__message__user-inline {
   display: inline-block;
   border-radius: 8px;
-
-  .padding: 0.1em 0.2em;
+  padding: 0.1em 0.2em 0;
 }
 .chat__message-bubble--inline {
   display: inline;

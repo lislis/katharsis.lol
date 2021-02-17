@@ -4,7 +4,7 @@
     <div class="chat__message-inner">
       <fragment v-if="room.locked">
         <div class="chat__message__user-inline" v-if="message.user" :style="styleObject">
-          <UserDisplay :user="message.user" />:
+          <strong>{{message.nickname}}</strong>:
         </div>
         <p class="chat__message-bubble chat__message-bubble--inline" v-html="message.message"></p>
       </fragment>
