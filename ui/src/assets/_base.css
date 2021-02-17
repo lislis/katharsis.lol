@@ -42,7 +42,7 @@ html {
 body {
   font-family: Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
   line-height: 1.55;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   text-rendering: optimizeLegibility !important;
@@ -56,6 +56,13 @@ body {
   hyphenate-limit-lines: 2;
   scroll-behavior: smooth;
 }
+
+@media (min-width: 800px) {
+  body {
+    overflow: hidden;
+  }
+}
+
 
 a {
   color: var(--a-main);

@@ -91,13 +91,15 @@
   margin: 0 0 2em;
 }
 .chat__message-inner {
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .chat__message-bubble {
   display: inline-block;
   padding: 0.6rem 0.8em 0.5em;
   margin: 0;
+  width: 100%;
+  word-break: break-word;
   border-radius: 8px;
 }
 
@@ -109,6 +111,7 @@
 }
 .chat__message-bubble--inline {
   display: inline;
+  width: 100%;
 }
 
 .chat__status {
@@ -134,7 +137,7 @@ time {
   display: flex;
   flex-wrap: wrap;
   padding: 0.3em;
-  min-height: 90px;
+  min-height: 80px;
   align-items: center;
   border: 2px solid var(--bg-footer);
   border-radius: 20px;
@@ -143,11 +146,12 @@ time {
 .chat__message-compose input {
   display: block;
   flex-grow: 1;
-  padding: 1.5rem 1.4rem 1.3rem;
+  padding: 1.3rem 1.4rem 1.1rem;
   font-family: Courier, monospace;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   background-color: var(--bg-footer);
   border: none;
+  outline: none;
 }
 
 input.chat__message-compose input:focus {
@@ -174,7 +178,7 @@ input.chat__message-compose input:focus {
   display: block;
   padding: 0.3em 0.3em 0em;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   background-color: var(--bg-shade)
 }
 .chat__message-type-option:first-of-type span {
@@ -208,19 +212,19 @@ button[disabled]:hover {
 
 @media (min-width: 800px) {
   .chat__messages {
-    padding: 0 5rem;
+    padding: 0 3rem;
   }
 
   .chat__messages.more-space {
-    padding: 0 13rem 0 5rem;
+    padding: 0 13rem 0 3rem;
   }
 
   .chat {
-    min-width: 40rem;
+    min-width: 35rem;
   }
 
   .chat + .chat {
-    margin-left: 3rem;
+    margin-left: 2rem;
   }
 
   .chat__message-compose {

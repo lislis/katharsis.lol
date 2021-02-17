@@ -6,7 +6,7 @@
 .upanel__user {
   margin-right: 1rem;
   line-height: 1.1;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: right;
   font-weight: 600;
 }
@@ -16,7 +16,7 @@
 }
 
 .index__claim {
-  margin: 2rem 0 2rem;
+  margin: 4rem 0 1rem;
   font-size: 1.6rem;
 }
 
@@ -31,7 +31,7 @@
 @media (min-width: 800px) {
   .peoplelist {
     position: absolute;
-    top: 1rem;
+    top: 2rem;
     right: 3rem;
   }
   .index__overflow {
@@ -45,7 +45,7 @@
 .peoplelist__dialog {
   min-height: 10rem;
   width: 10rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: Courier, monospace;
   background-color: white;
   border-radius: 4px;
@@ -91,5 +91,5 @@
 
 .spacing-helper {
   margin-top: 3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }

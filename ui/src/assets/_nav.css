@@ -1,11 +1,14 @@
 .outsidenav {
   margin-bottom: 5vh;
 }
+
+.outsidenav__logo {
+  width: 25vw;
+}
 .outsidenav__logo svg {
   width: 100%;
   height: auto;
 }
-
 
 @media (min-width: 800px) {
   .outsidenav {
@@ -16,6 +19,11 @@
   }
 }
 
+@media (min-width: 1440px) {
+  .outsidenav__logo {
+    width: auto;
+  }
+}
 
 .nav a {
   display: inline-block;

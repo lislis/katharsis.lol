@@ -1,12 +1,12 @@
 <template>
   <div>
     <OutSideNav />
-    <article>
+    <article class="index">
       <header class="inner">
-        <h1 class="index__title">{{ $t('legal.gdpr') }}</h1>
+        <h1 class="center-helper">{{ $t('legal.gdpr') }}</h1>
       </header>
       <section class="inner">
-        <div class="index__inner">
+        <div class="index__overflow">
           <div v-html="$t('legal.gdprCopy')">
           </div>
           <div>
@@ -20,7 +20,7 @@
             <p v-else>{{ $t('legal.gpdrNoLink') }}</p>
           </div>
         </div>
-      </section>v
+      </section>
     </article>
   </div>
 </template>

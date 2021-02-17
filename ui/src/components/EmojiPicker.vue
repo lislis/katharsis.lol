@@ -83,7 +83,7 @@
    border: none;
    background-color: transparent;
    line-height: 1.7;
-   font-size: 2.5rem;
+   font-size: 2rem;
    cursor: pointer;
    border-radius: 18px;
  }

@@ -40,7 +40,7 @@ main {
 .centerstage__title {
   margin: 0 0 0.1em;
   line-height: 1.5;
-  font-size: 36px;
+  font-size: 30px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -54,9 +54,8 @@ main {
   .mainroom-split {
     display: flex;
     flex-wrap: nowrap;
-
-    padding: 0 0 2rem 0;
-    width: 95vw;
+    padding: 0;
+    width: 96vw;
     overflow-x: scroll;
     scrollbar-width: thin;
   }
