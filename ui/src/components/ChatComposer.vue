@@ -8,6 +8,7 @@
                    v-model="messageType"
                    id="say"
                    value="say"
+                   name="message-type"
                    checked
                    :disabled="!canWrite"
                    class="a11y-hidden">
@@ -19,18 +20,23 @@
                    v-model="messageType"
                    id="do"
                    value="do"
+                   name="message-type"
                    :disabled="!canWrite"
                    class="a11y-hidden">
             <span :title="$t('ui.form.stageInstruction')"
                :aria-label="$t('ui.form.stageInstruction')">🖋</span>
           </label>
         </div>
-        <input type="text"
-               class="form-control"
-               v-model="chat.message"
-               :placeholder="fittingPlaceholder"
-               :readonly="!canWrite"
-               @input="typing">
+        <label>
+          <span class="a11y-hidden">{{ fittingPlaceholder }}</span>
+          <input type="text"
+                 class="form-control"
+                 name="message-input"
+                 v-model="chat.message"
+                 :placeholder="fittingPlaceholder"
+                 :readonly="!canWrite"
+                 @input="typing">
+        </label>
         <EmojiPicker v-if="canWrite" v-on:pick-emoji="pickUpEmoji" />
         <button class="btn btn--compose"
                 :title="$t('ui.button.send')"

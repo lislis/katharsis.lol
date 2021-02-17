@@ -1,7 +1,7 @@
 <template>
   <aside class="peoplelist">
     <div  class="peoplelist__dialog">
-      <h4 class="dialog__header">{{$t('ui.chat.peopleList.mod')}}</h4>
+      <h3 class="dialog__header">{{$t('ui.chat.peopleList.mod')}}</h3>
       <ul class="peoplelist__list">
         <li v-for="p in mods"
             :key="p._id"><span class="peoplelist__color" :style="{backgroundColor: p.colorCode}"></span>{{p.nickname}}</li>

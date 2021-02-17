@@ -1,0 +1,19 @@
+{
+    "name": "Katharsis.lol",
+    "short_name": "katharsis.lol",
+    "icons": [
+        {
+            "src": "/android-chrome-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/pwa-largeicon.png",
+            "sizes": "700x700",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#dadcdb",
+    "background_color": "#dadcdb",
+    "display": "standalone"
+}

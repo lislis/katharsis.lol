@@ -1,4 +1,4 @@
-<template>
+x<template>
   <div class="app">
     <SocketWrapper>
       <main>
