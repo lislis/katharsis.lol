@@ -1,6 +1,6 @@
 <template>
   <p class="typing-indicator"
-    v-if="room.typing" >
+     v-if="room.typing">
     {{ $t('ui.form.thereIsTyping')}}
     <span class="typing-indicator__icon">⌨️</span>
   </p>
@@ -13,6 +13,9 @@
 </script>
 <style scoped>
  .typing-indicator {
+   position: absolute;
+   top: -1.4rem;
+   left: 1rem;
    opacity: 0.3;
    font-size: 0.8rem;
    margin: 0 0 0;

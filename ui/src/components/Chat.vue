@@ -12,8 +12,10 @@
       <button class="chat__scrolldown"
               type="button"
               v-if="hasNewMessage"
-              @click="scrollDown"><span>{{ $t('ui.chat.scrollDown')}}</span></button>
-      <div>
+              :aria-label="$t('ui.chat.scrollDown')"
+              :title="$t('ui.chat.scrollDown')"
+              @click="scrollDown"></button>
+      <div class="relative">
         <TypingIndicator :room="room" />
         <ChatComposer v-if="showComposer" :room="room" />
       </div>

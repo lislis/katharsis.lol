@@ -15,7 +15,7 @@
 }
 
 .chat__messages.more-space {
-  padding: 0 13rem 0 1rem;
+  padding: 0 13rem 0.5rem 1rem;
 }
 
 .chat__message_container {
@@ -57,6 +57,7 @@
   color: var(--bg-footer);
   cursor: pointer;
   animation: jumping infinite 0.7s alternate ease-in-out;
+  outline: none;
 }
 .chat__scrolldown:after {
   content: "";
@@ -212,11 +213,11 @@ button[disabled]:hover {
 
 @media (min-width: 800px) {
   .chat__messages {
-    padding: 0 3rem;
+    padding: 0 3rem 0.5rem;
   }
 
   .chat__messages.more-space {
-    padding: 0 13rem 0 3rem;
+    padding: 0 13rem 0.5rem 3rem;
   }
 
   .chat {
