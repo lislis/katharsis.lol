@@ -76,7 +76,7 @@ a {
   margin-left: 1rem;
 }
 
-iframe, img {
+iframe {
   width: 100%;
   height: auto;
 }
