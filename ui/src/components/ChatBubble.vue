@@ -10,7 +10,7 @@
       </fragment>
       <fragment v-else>
         <header v-if="message.user">
-          <UserDisplay :user="message.user" />
+          <strong>{{message.nickname}}</strong>:
         </header>
         <p class="chat__message-bubble" :style="styleObject" v-html="message.message"></p>
         <aside>
@@ -21,15 +21,11 @@
   </li>
 </template>
 <script>
- import UserDisplay from '@/components/UserDisplay'
  import * as timeago from 'timeago.js'
 
  export default {
    name: "ChatBubble",
    props: ['message', 'room'],
-   components: {
-     UserDisplay
-   },
    data() {
      return {
        allTheClasses: '',

@@ -17,7 +17,7 @@
 <script>
  export default {
    name: "UserDisplay",
-   props: ['user'],
+   props: ['user', 'noName'],
    data() {
      return {
        userObj: {}
