@@ -143,9 +143,12 @@ time {
   border-radius: 20px;
   background-color: var(--bg-footer);
 }
+
+.chat__message-compose label {
+  flex-grow: 1;
+}
 .chat__message-compose input {
   display: block;
-  flex-grow: 1;
   padding: 1.3rem 1.4rem 1.1rem;
   font-family: Courier, monospace;
   font-size: 1.2rem;
