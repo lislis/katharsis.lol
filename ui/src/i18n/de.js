@@ -4,24 +4,24 @@ export default {
   index: {
     claim: "Ein Onlinewerkzeug für das gemeinsame Verfassen<br> der Theatertexte von morgen",
     defaultText: "Be excellent to each other!",
-    watch: "Zusehen",
-    participate: "Teilnehmen",
+    watch: "Großer Saal",
+    participate: "Bühneneingang",
   },
   intro: {
     enter: "Eintreten",
-    yourNameIs: "Du nimmst Teil als",
+    yourNameIs: "Du trittst ein als",
     toRoom: "Gehe weiter",
     noMore: "Du willst nicht mehr?",
     leave: "Austreten",
-    callMeByAnyName: "Bitte gib hier deinen Usernamen ein.<br>Der ist dann auch gleichzeitig der Name eurer Figur."
+    callMeByAnyName: "Bitte gib hier deinen Usernamen ein.<br>So wird auch deine Bühnenfigur gleich heißen!"
   },
   main: {
     pleaseWait: "Bitte warten"
   },
   user: {
     notice: {
-      enter: "ist eingetreten",
-      leave: "ist ausgetreten"
+      enter: "ist jetzt backstage.",
+      leave: "has left the building."
     },
     notification: {
       onstage: "Auf die Bühne!",
@@ -29,20 +29,20 @@ export default {
       isMod: "Du bist jetzt Moderator:in",
       isUser: "Du bist jetzt Teilnehmer:in",
       wasRemoved: "Du wurdest gebeten zu gehen.",
-      reallyLeave: "Willst du wirklich austreten?<br>Ohne einen weiteren Ticketcode kannst du nicht mehr eintreten.",
+      reallyLeave: "Willst du wirklich austreten?<br>Ohne einen neuen Ticketcode kannst du nicht mehr eintreten.",
       reallyLeaveBtn: "Austreten",
       back: "Hier bleiben"
     },
     status: {
-      joinedAs: "dabei als",
+      joinedAs: "„Willkommen, ",
       stage: "Auf der Bühne",
-      mod: "Moderator:in"
+      mod: "Moderation"
     }
   },
   ui: {
     button: {
       toIndex: "Zum Start",
-      close: "schließen",
+      close: "Schließen",
       send: "Schreiben",
       accept: "Okay!"
     },
@@ -52,24 +52,24 @@ export default {
       placeholderInstruction: "Was soll passieren?",
       thereIsTyping: "Es wird getippt",
       directSpeech: "Direkte Rede",
-      stageInstruction: "Bühnenanweisung",
+      stageInstruction: "Regieanweisung",
       langSwitch: "Sprache ändern"
     },
     chat: {
       scrollDown: "Neue Nachricht, scrolle runter",
       peopleList: {
-        mod: "moderierend",
-        backstage: "auf der Bühne",
+        mod: "Moderation",
+        backstage: "Bühne",
         stage: "Backstage"
       },
       emojiPicker: "Emoji auswählen"
     }
   },
   spec: {
-    title: "Zuschauerraum"
+    title: "Großer Saal"
   },
   part: {
-    title: "Teilnehmen",
+    title: "Pforte",
     label: "Wer willst du sein?",
     ticket: "Ticketcode",
     invalidTicket: "Kein oder invalider Ticketcode!",
