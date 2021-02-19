@@ -34,7 +34,7 @@ export default {
       back: "Hier bleiben"
     },
     status: {
-      joinedAs: "„Willkommen, ",
+      joinedAs: "Willkommen, ",
       stage: "Auf der Bühne",
       mod: "Moderation"
     }

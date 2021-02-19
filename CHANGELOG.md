@@ -1,8 +1,58 @@
 # Changelog
 
-## [Unreleased](https://github.com/lislis/katharsis.lol/tree/HEAD)
+## [v0.5.2](https://github.com/lislis/katharsis.lol/tree/v0.5.2) (2021-02-19)
 
-[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.3.1...HEAD)
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.5.1...v0.5.2)
+
+**Implemented enhancements:**
+
+- favicon [\#83](https://github.com/lislis/katharsis.lol/issues/83)
+
+**Fixed bugs:**
+
+- fix new message indicator on safari [\#79](https://github.com/lislis/katharsis.lol/issues/79)
+
+## [v0.5.1](https://github.com/lislis/katharsis.lol/tree/v0.5.1) (2021-02-17)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.5.0...v0.5.1)
+
+**Implemented enhancements:**
+
+- \[ui\] replace user id with placeholder on chats, or ideally remember the username [\#81](https://github.com/lislis/katharsis.lol/issues/81)
+- have funder logos on the intro page [\#74](https://github.com/lislis/katharsis.lol/issues/74)
+
+**Fixed bugs:**
+
+- \[ui\] little less paddingfor chat boxes [\#82](https://github.com/lislis/katharsis.lol/issues/82)
+- \[ui\] user display status not on stage [\#80](https://github.com/lislis/katharsis.lol/issues/80)
+- webkit inout outline :focus [\#78](https://github.com/lislis/katharsis.lol/issues/78)
+- fix tip indicator jumping [\#77](https://github.com/lislis/katharsis.lol/issues/77)
+- stage fix wird line-breaks on the stage [\#76](https://github.com/lislis/katharsis.lol/issues/76)
+- make everything a little smaller [\#75](https://github.com/lislis/katharsis.lol/issues/75)
+- check text overflow on intro und data page [\#73](https://github.com/lislis/katharsis.lol/issues/73)
+
+## [v0.5.0](https://github.com/lislis/katharsis.lol/tree/v0.5.0) (2021-02-16)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.4.0...v0.5.0)
+
+**Implemented enhancements:**
+
+- \[runner\] last action kick people from stage [\#35](https://github.com/lislis/katharsis.lol/issues/35)
+- \[ui\] add links to imprint and dataprotection [\#21](https://github.com/lislis/katharsis.lol/issues/21)
+
+**Closed issues:**
+
+- Update README [\#22](https://github.com/lislis/katharsis.lol/issues/22)
+
+**Merged pull requests:**
+
+- Redesign [\#72](https://github.com/lislis/katharsis.lol/pull/72) ([lislis](https://github.com/lislis))
+- feat\(ui\) logout modal, data protection [\#71](https://github.com/lislis/katharsis.lol/pull/71) ([lislis](https://github.com/lislis))
+- feat\(\) kick all people form stage in the end [\#70](https://github.com/lislis/katharsis.lol/pull/70) ([lislis](https://github.com/lislis))
+
+## [v0.4.0](https://github.com/lislis/katharsis.lol/tree/v0.4.0) (2021-02-09)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.3.1...v0.4.0)
 
 **Implemented enhancements:**
 
@@ -15,7 +65,6 @@
 
 - introtext from spreadsheet [\#69](https://github.com/lislis/katharsis.lol/pull/69) ([lislis](https://github.com/lislis))
 - Add UI tests [\#68](https://github.com/lislis/katharsis.lol/pull/68) ([lislis](https://github.com/lislis))
-- feat\(ui\) rm localstorage if user is deleted by admins [\#66](https://github.com/lislis/katharsis.lol/pull/66) ([lislis](https://github.com/lislis))
 - Ticket codes [\#65](https://github.com/lislis/katharsis.lol/pull/65) ([lislis](https://github.com/lislis))
 - add docs scaffold [\#58](https://github.com/lislis/katharsis.lol/pull/58) ([lislis](https://github.com/lislis))
 
@@ -53,6 +102,7 @@
 
 **Merged pull requests:**
 
+- feat\(ui\) rm localstorage if user is deleted by admins [\#66](https://github.com/lislis/katharsis.lol/pull/66) ([lislis](https://github.com/lislis))
 - feat\(ui, runner, server\) implement embed endpoint [\#55](https://github.com/lislis/katharsis.lol/pull/55) ([lislis](https://github.com/lislis))
 - Add people list on who is on stage [\#54](https://github.com/lislis/katharsis.lol/pull/54) ([lislis](https://github.com/lislis))
 - feat\(ui\) hightlight main stage when on it [\#53](https://github.com/lislis/katharsis.lol/pull/53) ([lislis](https://github.com/lislis))
