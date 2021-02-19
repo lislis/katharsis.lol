@@ -1,5 +1,9 @@
-x<template>
+<template>
   <div class="app">
+    <video playsinline autoplay muted loop poster="/BG-12.jpg" id="bgvid">
+      <source src="/Comp-1-n4.webm" type="video/webm">
+      <source src="/Comp-1-n4.mp4" type="video/mp4">
+    </video>
     <SocketWrapper>
       <main>
         <router-view />
