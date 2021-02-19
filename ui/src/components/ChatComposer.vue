@@ -64,7 +64,9 @@
    },
    data() {
      return {
-       chat: {},
+       chat: {
+         message: ''
+       },
        messageType: 'say',
        sending: false,
        isTyping: false,
@@ -94,6 +96,7 @@
          .post(`${this.$root.$data.restServer}/api/chat`, this.chat)
          .then(() => {
            this.chat = {};
+           this.chat.message = '';
            this.sending = false;
          })
          .catch(e => {
