@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form @submit.prevent="onSubmit" autocomplete="off">
     <div class="form-group row">
       <p class="form-group__desc" v-html="$t('intro.callMeByAnyName')"></p>
       <label class="form-elem">
@@ -8,6 +8,7 @@
                class=""
                v-model.trim="newUser.nickname"
                required="true"
+               autocomplete="false"
                :placeholder="$t('part.label')">
       </label>
       <label class="form-elem">
@@ -15,6 +16,7 @@
         <input type="text"
                class=""
                required=""
+               autocomplete="false"
                v-model.trim="ticketCode"
                :placeholder="$t('part.ticket')">
       </label>

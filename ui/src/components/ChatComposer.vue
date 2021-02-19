@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="send">
+    <form @submit.prevent="send" autocomplete="off">
       <div class="chat__message-compose">
         <div v-if="isStage" class="chat__message-type">
           <label class="chat__message-type-option">
@@ -10,6 +10,7 @@
                    value="say"
                    name="message-type"
                    checked
+                   autocomplete="false"
                    :disabled="!canWrite"
                    class="a11y-hidden">
             <span :title="$t('ui.form.directSpeech')"
@@ -22,6 +23,7 @@
                    value="do"
                    name="message-type"
                    :disabled="!canWrite"
+                   autocomplete="false"
                    class="a11y-hidden">
             <span :title="$t('ui.form.stageInstruction')"
                :aria-label="$t('ui.form.stageInstruction')">🖋</span>
@@ -35,6 +37,7 @@
                  v-model="chat.message"
                  :placeholder="fittingPlaceholder"
                  :readonly="!canWrite"
+                 autocomplete="false"
                  @input="typing">
         </label>
         <EmojiPicker v-if="canWrite" v-on:pick-emoji="pickUpEmoji" />
