@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.5.3](https://github.com/lislis/katharsis.lol/tree/v0.5.3) (2021-02-19)
+
+[Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.5.2...v0.5.3)
+
 ## [v0.5.2](https://github.com/lislis/katharsis.lol/tree/v0.5.2) (2021-02-19)
 
 [Full Changelog](https://github.com/lislis/katharsis.lol/compare/v0.5.1...v0.5.2)
@@ -65,6 +69,7 @@
 
 - introtext from spreadsheet [\#69](https://github.com/lislis/katharsis.lol/pull/69) ([lislis](https://github.com/lislis))
 - Add UI tests [\#68](https://github.com/lislis/katharsis.lol/pull/68) ([lislis](https://github.com/lislis))
+- feat\(ui\) rm localstorage if user is deleted by admins [\#66](https://github.com/lislis/katharsis.lol/pull/66) ([lislis](https://github.com/lislis))
 - Ticket codes [\#65](https://github.com/lislis/katharsis.lol/pull/65) ([lislis](https://github.com/lislis))
 - add docs scaffold [\#58](https://github.com/lislis/katharsis.lol/pull/58) ([lislis](https://github.com/lislis))
 
@@ -102,7 +107,6 @@
 
 **Merged pull requests:**
 
-- feat\(ui\) rm localstorage if user is deleted by admins [\#66](https://github.com/lislis/katharsis.lol/pull/66) ([lislis](https://github.com/lislis))
 - feat\(ui, runner, server\) implement embed endpoint [\#55](https://github.com/lislis/katharsis.lol/pull/55) ([lislis](https://github.com/lislis))
 - Add people list on who is on stage [\#54](https://github.com/lislis/katharsis.lol/pull/54) ([lislis](https://github.com/lislis))
 - feat\(ui\) hightlight main stage when on it [\#53](https://github.com/lislis/katharsis.lol/pull/53) ([lislis](https://github.com/lislis))
