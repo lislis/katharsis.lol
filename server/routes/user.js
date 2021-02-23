@@ -81,9 +81,6 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  console.log('\n\n', req.body)
-
-
   if (!req.body.providedTicketCode || req.body.providedTicketCode === "") {
     return res.json({ message: `Empty code`});
   } else {

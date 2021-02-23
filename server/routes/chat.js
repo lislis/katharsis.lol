@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/User.js');
 const Chat = require('../models/Chat.js');
 
 router.get('/', (req, res, next) => {
@@ -26,11 +27,19 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Chat.create(req.body, (err, post) => {
-    if (err) return next(err);
-    req.app.io.emit('new-message', { message: post });
-    res.json(post);
-  });
+    User.findById(req.body.user, (err, user) => {
+        if (err) return next(err);
+        if (user !== null) {
+            Chat.create(req.body, (err, post) => {
+                if (err) return next(err);
+                req.app.io.emit('new-message', { message: post });
+                res.json(post);
+            });
+        } else {
+            req.app.io.emit('delete-user', { message: { '_id': req.body.user} });
+            res.json({});
+        }
+    });
 });
 
 router.put('/:id', (req, res, next) => {
