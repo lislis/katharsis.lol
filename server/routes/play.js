@@ -8,7 +8,7 @@ const puppeteer = require("puppeteer");
 router.get('/pdf/:playid', async (req, res, next) => {
   const id = req.params.playid;
 
-  await Play.findById(id, async (err, play) => {
+  Play.findById(id, async (err, play) => {
     if (err) return next(err);
 
     const url = `${process.env['UI']}/play/${play._id}`
