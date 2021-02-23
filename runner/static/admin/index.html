@@ -218,8 +218,8 @@
         <label>
           <span>User id</span>
           <input type="text" name="deleteuserid" id="deleteuserid" placeholder="">
-          <button type="submit">User löschen</button>
         </label>
+        <button type="submit">User löschen</button>
       </form>
       <h3>Alle User löschen (inkl Moderatoren)</h3>
       <form id="deleteAllUsersForm">
@@ -230,32 +230,68 @@
         <label>
           <span>User id</span>
           <input type="text" name="user2modid" id="user2modid" placeholder="">
-          <button type="submit">User zu Moderator machen</button>
         </label>
+        <button type="submit">User zu Moderator machen</button>
       </form>
       <h3>Moderator zu User machen</h3>
       <form id="mod2UserForm">
         <label>
           <span>User id</span>
           <input type="text" name="mod2userid" id="mod2userid" placeholder="">
-          <button type="submit">Moderator zu machen</button>
         </label>
+        <button type="submit">Moderator zu machen</button>
       </form>
       <h3>User auf die "Bühne" holen</h3>
       <form id="user2stageForm">
         <label>
           <span>User id</span>
           <input type="text" name="user2stageid" id="user2stageid" placeholder="">
-          <button type="submit">User onstage</button>
         </label>
+        <button type="submit">User onstage</button>
       </form>
       <h3>User von der "Bühne" holen</h3>
       <form id="userOffstageForm">
         <label>
           <span>User id</span>
           <input type="text" name="useroffstageid" id="useroffstageid" placeholder="">
-          <button type="submit">User offstage</button>
         </label>
+        <button type="submit">User offstage</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Stücke</h2>
+      <p><a href="/api/play" class="js-servername" target="_blank">Liste aller Stücke</a></p>
+      <h3>Stück importieren</h3>
+      <form id="importPlayForm">
+        <label>
+          <span>Titel</span><br>
+          <input type="text" name="importplaytitleid" id="importplaytitleid" placeholder="">
+        </label><br>
+        <label>
+          <span>Kommentar</span><br>
+          <textarea name="importplaycommentid" id="importplaycommentid"></textarea>
+        </label><br>
+        <label>
+          <span>Datum der Vorstellung</span><br>
+          <input type="date" name="importplaydateid" id="importplaydateid" placeholder="">
+        </label>
+        <br>
+        <label>
+          <span>Vorstellung JSON</span><br>
+          <input type="file" name="importplayplayid" id="importplayplayid" accept="application/json">
+        </label>
+        <div id="fileContents"></div>
+        <button type="submit">Stück importieren</button>
+      </form>
+
+      <h3>Stück löschen</h3>
+      <form id="deletePlayForm">
+        <label>
+          <span>Stück id</span>
+          <input type="text" name="deleteplayid" id="deleteplayid" placeholder="">
+        </label>
+        <button type="submit">Stück löschen</button>
       </form>
     </section>
 
