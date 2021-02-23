@@ -15,6 +15,7 @@ const user = require('./routes/user');
 const script = require('./routes/script');
 const ticketcode = require('./routes/ticketcode');
 const setting = require('./routes/setting');
+const play = require('./routes/play');
 
 const WS_PORT = process.env['WS_PORT'];
 const MONGO_DB = process.env['MONGO_DB'];
@@ -47,16 +48,17 @@ app.use((req, res, next) => {
 });
 
 app.use(pinoHttp);
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '1mb'}));
 app.use(bodyParser.urlencoded({'extended':'false'}));
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/rooms', express.static(path.join(__dirname, 'dist')));
+//app.use(express.static(path.join(__dirname, 'public')));
+//app.use('/rooms', express.static(path.join(__dirname, 'dist')));
 app.use('/api/room', room);
 app.use('/api/user', user);
 app.use('/api/chat', chat);
 app.use('/api/script', script);
 app.use('/api/ticketcode', ticketcode);
 app.use('/api/setting', setting);
+app.use('/api/play', play);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
