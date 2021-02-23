@@ -1,6 +1,5 @@
 require('dotenv').config()
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const pino = require('pino');
 const pinoHttp = require('pino-http')();
@@ -50,8 +49,6 @@ app.use((req, res, next) => {
 app.use(pinoHttp);
 app.use(bodyParser.json({ limit: '1mb'}));
 app.use(bodyParser.urlencoded({'extended':'false'}));
-//app.use(express.static(path.join(__dirname, 'public')));
-//app.use('/rooms', express.static(path.join(__dirname, 'dist')));
 app.use('/api/room', room);
 app.use('/api/user', user);
 app.use('/api/chat', chat);

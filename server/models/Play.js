@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
 const PlaySchema = new mongoose.Schema({
     the_play: String,
