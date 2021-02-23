@@ -11,8 +11,23 @@ router.get('/pdf/:playid', async (req, res, next) => {
   Play.findById(id, async (err, play) => {
     if (err) return next(err);
 
+    let opt = {
+      headless: true
+    }
+
+    if (process.env.NODE_ENV === 'production') {
+      opt = {
+        headless: true,
+        executablePath: '/usr/bin/chromium-browser',
+        args: [
+          "--no-sandbox",
+          "--disable-gpu",
+        ]
+      }
+    }
+
     const url = `${process.env['UI']}/play/${play._id}`
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch(opt);
     const page = await browser.newPage();
     await page.emulateMediaType('print');
     await page.goto(url, {
