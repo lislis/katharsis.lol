@@ -110,6 +110,7 @@ async function init() {
   buildDeleteFunction('#deleteWordForm', '#deletewordid', `${CONFIG.BOTBRAIN}/api/word/`, 'Wort gelöscht:');
   buildDeleteFunction('#deleteDirectionForm', '#deletedirectionid', `${CONFIG.BOTBRAIN}/api/direction/`, 'Ticketcode gelöscht:');
   buildDeleteFunction('#deleteCodeForm', '#deletecodeid', `${CONFIG.SERVER}/api/ticketcode/`, 'Anweisung gelöscht:');
+  buildDeleteFunction('#deletePlayForm', '#deleteplayid', `${CONFIG.SERVER}/api/play/`, 'Stück gelöscht:');
 
   buildDeleteAllFunction('#deleteAllRoomsForm', `${CONFIG.SERVER}/api/room/`, 'Alle Räume gelöscht!');
   buildDeleteAllFunction('#deleteAllChatsForm', `${CONFIG.SERVER}/api/chat/`, 'Alle Chats gelöscht!');
@@ -318,8 +319,49 @@ async function init() {
     const data = await re.json();
     alert(`Introtext ${data}`);
     document.querySelector('#introTextUrl').value = "";
-  }
+  };
 
+  document.querySelector('#importPlayForm').onsubmit = async (e) => {
+    e.preventDefault();
+
+    const title = document.querySelector('#importplaytitleid');
+    const comment = document.querySelector('#importplaycommentid');
+    const took_place = document.querySelector('#importplaydateid');
+    const json = document.querySelector('#importplayplayid');
+
+    if (json.files[0]) {
+      const reader = new FileReader();
+      reader.onload = async function (evt) {
+        //document.getElementById("fileContents").innerHTML = JSON.stringify(evt.target.result);
+        //console.log(evt)
+
+        const re = await fetch(`${CONFIG.SERVER}/api/play`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify({ title: title.value,
+                                 comment: comment.value,
+                                 took_place: took_place.value,
+                                 the_play: evt.target.result
+          })
+        });
+        let result = await re.json();
+
+        alert(`Stück importiert ${result.title}`);
+        title.value = "";
+        comment.value = "";
+        took_place.value = "";
+      }
+      reader.onerror = function (evt) {
+        document.getElementById("fileContents").innerHTML = "error reading file";
+      }
+      reader.readAsText(json.files[0], "UTF-8");
+    } else {
+      alert("Wähle ein JSON aus!");
+      return false;
+    }
+  };
 }
 
 init();
