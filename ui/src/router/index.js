@@ -4,9 +4,8 @@ import Spectator from '@/views/Spectator'
 import Intro from '@/views/Intro'
 import Main from '@/views/MainRoom'
 import DataPage from '@/views/DataPage'
-//import Room from '@/views/Room'
-//import RoomList from '@/views/RoomList'
-//import PeopleList from '@/views/PeopleList'
+import Archive from '@/views/Archive'
+import SinglePlay from '@/views/SinglePlay'
 
 const routes = [
   {
@@ -33,22 +32,17 @@ const routes = [
     path: '/dataprotectionnotice',
     name: 'datapage',
     component: DataPage
+  },
+  {
+    path: '/archive',
+    name: 'archive',
+    component: Archive
+  },
+  {
+    path: '/play/:id',
+    name: 'singlePlay',
+    component: SinglePlay
   }
-  // {
-  //   path: '/peoplelist/',
-  //   name: 'peoplelist',
-  //   component: PeopleList
-  // },
-  // {
-  //   path: '/roomlist',
-  //   name: 'roomlist',
-  //   component: RoomList
-  // },
-  // {
-  //   path: '/room/:roomid',
-  //   name: 'room',
-  //   component: Room
-  // }
 ]
 
 const router = createRouter({

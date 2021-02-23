@@ -28,6 +28,10 @@
 
 }
 
+.archive__overflow {
+
+}
+
 @media (min-width: 800px) {
   .peoplelist {
     position: absolute;
@@ -37,6 +41,11 @@
   .index__overflow {
     max-height: 50vh;
     padding: 0 2rem;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  }
+  .archive__overflow {
+    max-height: 65vh;
     overflow-y: scroll;
     scrollbar-width: thin;
   }
@@ -89,6 +98,10 @@
   margin: auto;
 }
 
+.inline-helper > * {
+  display: inline-block;
+}
+
 .center-helper {
   text-align: center;
 }
@@ -100,4 +113,17 @@
 
 .relative {
   position: relative;
+}
+
+.comment {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin: 0;
+}
+.comment + .time {
+  margin-top: 0;
+}
+.time {
+  text-align: center;
 }

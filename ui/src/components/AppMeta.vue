@@ -9,7 +9,8 @@
         <a :href="versionLink"
              rel="noreferrer"
              target="_blank"
-             class="appmeta__version">Version {{version}}</a>)</small>
+           class="appmeta__version">Version {{version}}</a>)</small>
+      <router-link :to="{ name: 'archive'}" class="">{{ $t('archive.title') }}</router-link>
     </p>
     <nav class="subtle-spacing">
       <a v-if="imprintLink"
