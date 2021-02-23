@@ -353,7 +353,7 @@ async function init() {
         comment.value = "";
         took_place.value = "";
       }
-      reader.onerror = function (evt) {
+      reader.onerror = function() {
         document.getElementById("fileContents").innerHTML = "error reading file";
       }
       reader.readAsText(json.files[0], "UTF-8");
