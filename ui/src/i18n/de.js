@@ -68,6 +68,11 @@ export default {
   spec: {
     title: "Großer Saal"
   },
+  archive: {
+    title: "Archiv",
+    readText: "Text lesen",
+    pdf: "PDF anzeigen"
+  },
   part: {
     title: "Pforte",
     label: "Wer willst du sein?",

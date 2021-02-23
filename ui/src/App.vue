@@ -38,7 +38,8 @@
        storagePrefix: null,
        imprintLink: null,
        gdprLink: null,
-       notifications: []
+       notifications: [],
+       plays: []
      }
    },
    created() {
@@ -48,6 +49,7 @@
      this.getAllRooms();
      this.getAllPeople();
      this.getAllChats();
+     this.getAllPlays();
      this.user = loadUserFromStorage();
    },
    methods: {
@@ -102,6 +104,10 @@
        let response = await axios.get(`${this.restServer}/api/chat`)
        this.chats = response.data
      },
+     async getAllPlays() {
+       let response = await axios.get(`${this.restServer}/api/play`);
+       this.plays = response.data;
+     }
    }
  }
 </script>

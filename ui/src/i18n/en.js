@@ -65,6 +65,11 @@ export default {
   spec: {
     title: "Spectator room"
   },
+  archive: {
+    title: "Archive",
+    readText: "Read text",
+    pdf: "Show PDF"
+  },
   part: {
     title: "Participate",
     label: "Who do you want to be?",
