@@ -30,7 +30,12 @@ router.post('/', (req, res, next) => {
     User.findById(req.body.user, (err, user) => {
         if (err) return next(err);
         if (user !== null) {
-            Chat.create(req.body, (err, post) => {
+            let body = req.body;
+            if (body.bot) {
+                delete body.user;
+            }
+
+            Chat.create(body, (err, post) => {
                 if (err) return next(err);
                 req.app.io.emit('new-message', { message: post });
                 res.json(post);
