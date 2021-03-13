@@ -90,6 +90,7 @@
          this.chat.nickname = this.$root.$data.user.nickname;
        } else {
          this.chat.bot = true;
+         this.chat.user = this.$root.$data.user._id;
        }
 
        axios
