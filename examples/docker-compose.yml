@@ -1,0 +1,68 @@
+ersion: '3'
+
+services:
+  db:
+    image: mongo
+    restart: unless-stopped
+    volumes:
+      - './data:/data/db'
+    ports:
+      - "27017:27017"
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - WS_SERVER_PORT=4000
+      - BOTBRAIN=https://botbrain.lol.sternapau.de
+      - API_SERVER_PORT=3001
+      - MONGO_HOST=db
+      - MONGO_DB=cbman-1
+      - MONGO_PORT=27017
+    ports:
+      - "4000:4000"
+      - "3001:3001"
+    links:
+      - db
+  runner:
+    build:
+      context: ./runner
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - './config/schedule:/usr/src/app/data'
+    environment:
+      - SERVER_URL=https://server.lol.sternapau.de
+    links:
+      - server
+  botbrain:
+    build:
+      context: ./botbrain
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - './config/botinput:/usr/src/app/scripts'
+    environment:
+      - PORT=3003
+      - MONGO_DB=cbman-1
+      - MONGO_HOST=db
+      - MONGO_PORT=27017
+    ports:
+      - "3003:3003"
+    links:
+      - db
+      - server
+  ui:
+    build:
+      context: ./foyer
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - VUE_APP_WS_HOST="server.lol.sternapau.de"
+      - VUE_APP_API_HOST="server.lol.sternapau.de"
+      - VUE_APP_LS_PREFIX="CMBAN_"
+    ports:
+      - "8080:80"
+    links:
+      - server
