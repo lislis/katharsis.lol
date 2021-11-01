@@ -18,7 +18,6 @@ const play = require('./routes/play');
 
 const WS_PORT = process.env['WS_PORT'];
 const MONGO_DB = process.env['MONGO_DB'];
-//const MONGO_PORT = process.env['MONGO_PORT'];
 const MONGO_HOST = process.env['MONGO_HOST'];
 
 app.io = io;
@@ -82,11 +81,6 @@ logger.info(`[socket.io] websocket listen on ${WS_PORT}`)
 server.listen(WS_PORT);
 
 app.io.on('connection', (socket) => {
-  socket.on('save-room', (data) => {
-    logger.info('[socket.io] new-room ', data);
-    io.emit('new-room', { message: data });
-  })
-
   logger.info(`[socket.io] User connected socketID: ${socket.id}`);
 
   socket.on('disconnect', () => {
@@ -94,11 +88,11 @@ app.io.on('connection', (socket) => {
   });
 
   socket.on('is-typing', (data) => {
-    io.emit('started-typing', data);
+    io.emit('[socket.io] started-typing', data);
   });
 
   socket.on('is-not-typing', (data) => {
-    io.emit('stopped-typing', data);
+    io.emit('[socket.io] stopped-typing', data);
   });
 });
 

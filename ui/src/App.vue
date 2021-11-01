@@ -57,11 +57,9 @@
        if (process.env.NODE_ENV === 'production') {
          this.$root.$data.socketServer = `https://${process.env.VUE_APP_WS_HOST}`
          this.$root.$data.restServer = `https://${process.env.VUE_APP_API_HOST}`
-         this.$root.$data.botBrain = `https://${process.env.VUE_APP_BOTBRAIN}`
        } else {
-         this.$root.$data.socketServer = `http://${process.env.VUE_APP_WS_HOST}:${process.env.VUE_APP_WS_PORT}`
-         this.$root.$data.restServer = `http://${process.env.VUE_APP_API_HOST}:${process.env.VUE_APP_API_PORT}`
-         this.$root.$data.botBrain = `http://${process.env.VUE_APP_BOTBRAIN}:${process.env.VUE_APP_BOTBRAIN_PORT}`
+         this.$root.$data.socketServer = `http://${process.env.VUE_APP_WS_HOST}`
+         this.$root.$data.restServer = `http://${process.env.VUE_APP_API_HOST}`
        }
        if (process.env.VUE_APP_LINK_IMPRINT && process.env.VUE_APP_LINK_IMPRINT !== "") {
          this.$root.$data.imprintLink = `${process.env.VUE_APP_LINK_IMPRINT}`;
