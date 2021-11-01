@@ -45,7 +45,7 @@
    created() {
      this.setSocketServer();
      this.connectToSocket();
-     this.getMainRoom();x
+     this.getMainRoom();
      this.getAllRooms();
      this.getAllPeople();
      this.getAllChats();
