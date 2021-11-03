@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   isMod: { type: Boolean, default: false },
   colorCode: { type: String, default: '#ffffff' },
   ticketCodeId: {type: Schema.Types.ObjectId, ref: 'TicketCode'},
+  characterId: { type: Schema.Types.ObjectId, ref: 'Character' },
   created_date: { type: Date, default: Date.now },
 });
 

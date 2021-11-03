@@ -15,6 +15,7 @@ const script = require('./routes/script');
 const ticketcode = require('./routes/ticketcode');
 const setting = require('./routes/setting');
 const play = require('./routes/play');
+const character = require('./routes/character');
 
 const WS_PORT = process.env['WS_PORT'];
 const MONGO_DB = process.env['MONGO_DB'];
@@ -55,6 +56,7 @@ app.use('/api/script', script);
 app.use('/api/ticketcode', ticketcode);
 app.use('/api/setting', setting);
 app.use('/api/play', play);
+app.use('/api/character', character);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
