@@ -29,28 +29,31 @@
   </div>
 </template>
 <script>
- import Chat from '@/components/Chat.vue'
- import Loader from '@/components/Loader'
- import AppHeader from '@/components/AppHeader'
+import Chat from '@/components/Chat.vue'
+import Loader from '@/components/Loader'
+import AppHeader from '@/components/AppHeader'
 
 
- export default {
-   name: "MainRoom",
-   components: {
-     Chat,
-     Loader,
-     AppHeader,
+export default {
+  name: "MainRoom",
+  components: {
+    Chat,
+    Loader,
+    AppHeader,
 
-   },
-   data() {
-     return {
-       loading: true,
-       notReady: false
-     }
-   },
-   created() {
-     if (!this.$root.$data.user._id) {
-       this.$router.push({name: 'intro'})
+  },
+  data() {
+    return {
+      loading: true,
+      notReady: false
+    }
+  },
+  created() {
+    if (!this.$root.$data.user._id) {
+      this.$router.push({name: 'intro'})
+    }
+    if (!this.$root.$data.user.character) {
+      this.$router.push({name: 'character'})
      }
      this.loading = false;
    },

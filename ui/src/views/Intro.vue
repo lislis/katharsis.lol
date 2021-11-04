@@ -6,10 +6,10 @@
     </header>
     <section class="inner">
       <Notifications :notifications="$root.$data.notifications" />
-      <div v-if="$root.$data.user.nickname">
+      <div v-if="$root.$data.user">
         <p class="spacing-helper form-group__desc" >
           {{ $t('intro.yourNameIs') }}
-          <strong>{{$root.$data.user.nickname}}</strong>.<br>
+          <strong>{{$root.$data.user.character?.name}}</strong>.<br>
           <router-link :to="{ name: 'main' }" class="btn">{{ $t('intro.toRoom') }}</router-link>
         </p>
         <p class="spacing-helper form-group__desc">

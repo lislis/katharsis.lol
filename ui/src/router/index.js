@@ -6,6 +6,7 @@ import Main from '@/views/MainRoom'
 import DataPage from '@/views/DataPage'
 import Archive from '@/views/Archive'
 import SinglePlay from '@/views/SinglePlay'
+import CharacterSheet from '@/views/CharacterSheet'
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
     path: '/signin',
     name: 'intro',
     component: Intro
+  },
+  {
+    path: '/character',
+    name: 'character',
+    component: CharacterSheet
   },
   {
     path: '/main',

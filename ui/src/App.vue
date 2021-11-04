@@ -31,6 +31,7 @@ export default {
       stage: null,
       chats: [],
       rooms: [],
+      characters: [],
       restServer: null,
       socketServer: null,
       botBrain: null,
@@ -50,6 +51,7 @@ export default {
     this.getAllPeople();
     this.getAllChats();
     this.getAllPlays();
+    this.getAllCharacters();
     this.user = loadUserFromStorage();
   },
   methods: {
@@ -105,7 +107,11 @@ export default {
      async getAllPlays() {
        let response = await axios.get(`${this.restServer}/api/play`);
        this.plays = response.data;
-     }
+     },
+    async getAllCharacters() {
+      let response = await axios.get(`${this.restServer}/api/character`);
+      this.characters = response.data;
+    }
    }
  }
 </script>

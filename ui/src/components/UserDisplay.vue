@@ -2,7 +2,7 @@
   <p class="userdisplay"
      :class="{'is-you': isYou()}">
     <span class="userdisplay__permission"
-          v-if="userCharacter.hasPermission"
+          v-if="userCharacter?.hasPermission"
           :aria-label="$t('user.status.stage')"
           :title="$t('user.status.stage')">🎭</span>
     <span class="userdisplay__permission"
@@ -10,7 +10,7 @@
           :aria-label="$t('user.status.mod')"
           :title="$t('user.status.mod')">👑</span>
     <strong class="userdisplay__uname" v-if="user">{{ user }}</strong>
-    <strong class="userdisplay__uname" v-if="userCharacter">{{ userCharacter.name }}</strong>
+    <strong class="userdisplay__uname" v-if="userCharacter">{{ userCharacter?.name }}</strong>
   </p>
 </template>
 <script>
@@ -24,7 +24,7 @@
    },
    computed: {
      userCharacter() {
-       return {"name": "Placeholder", "hasPermission": false}
+       return this.$root.$data.user.character;
      }
    }
  }

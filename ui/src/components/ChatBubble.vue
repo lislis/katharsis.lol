@@ -5,13 +5,13 @@
     <fragment v-if="room.locked">
       <div class="chat__message__user-inline"
            v-if="message.user" :style="styleObject">
-        <strong>{{message.user.character?.name}}</strong>:
+        <strong>{{ getMessageName(message.character) }}</strong>:
       </div>
       <p class="chat__message-bubble chat__message-bubble--inline" v-html="message.message"></p>
     </fragment>
     <fragment v-else>
       <header v-if="message.user">
-        <strong>{{message.user.character?.name}}</strong>:
+        <strong>{{ getMessageName(message.character) }}</strong>:
       </header>
       <p class="chat__message-bubble" :style="styleObject" v-html="message.message"></p>
       <aside>
@@ -46,19 +46,20 @@ export default {
       this.date_ago = timeago.format(d);
     }, 60000);
 
-    this.styleObject.backgroundColor = this.getUserColor(this.message.user);
+    this.styleObject.backgroundColor = this.getCharacterColor(this.message.character);
     this.assignClasses();
   },
   methods: {
-    getUserColor(user) {
-      if (user === this.$root.$data.user._id) {
-        return this.$root.$data.user.colorCode;
-      } else if (!user) {
-        return 'transparent';
-      } else {
-        const potUser =  this.$root.$data.otherPeople.filter(x => x._id === user);
-        return (potUser.length == 1) ? potUser[0].colorCode : '#e5e5e5';
-      }
+    getCharacterColor(character) {
+      if (!character) return 'transparent';
+      const char =  this.$root.$data.characters.find(x => x._id === character._id);
+      console.log(char);
+      return char ? char.colorCode : '#e5e5e5';
+    },
+    getMessageName(character) {
+      if (!character) return '';
+      const p = this.$root.$data.characters.find(x => x._id === character._id);
+      return p ? p.name : '';
     },
     assignClasses() {
       if (this.message.bot == true) {
@@ -76,7 +77,7 @@ export default {
       this.allTheClasses = 'is-note';
     }
     }
-}
+  }
 }
 
 </script>
