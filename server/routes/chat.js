@@ -1,50 +1,51 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User.js');
+const Character = require('../models/Character.js');
 const Chat = require('../models/Chat.js');
 
 router.get('/', (req, res, next) => {
   Chat.find((err, chats) => {
     if (err) return next(err);
-    res.json(chats);
+    return res.json(chats);
   });
 });
 
 router.get('/:roomid', (req, res, next) => {
   Chat.find({ room: req.params.roomid })
-      .populate('user')
-      .exec((err, chats) => {
-        if (err) return next(err);
-        res.json(chats);
-      });
+    .populate('user')
+    .populate('character')
+    .exec((err, chats) => {
+      if (err) return next(err);
+      return res.json(chats);
+    });
 });
 
 router.get('/:id', (req, res, next) => {
   Chat.findById(req.params.id, (err, post) => {
     if (err) return next(err);
-    res.json(post);
+    return res.json(post);
   });
 });
 
 router.post('/', (req, res, next) => {
-    User.findById(req.body.user, (err, user) => {
+  User.findById(req.body.user, (err, user) => {
+    if (err) return next(err);
+    if (user !== null) {
+      let body = req.body;
+      if (body.bot) {
+        delete body.user;
+      }
+      Chat.create(body, (err, post) => {
         if (err) return next(err);
-        if (user !== null) {
-            let body = req.body;
-            if (body.bot) {
-                delete body.user;
-            }
-
-            Chat.create(body, (err, post) => {
-                if (err) return next(err);
-                req.app.io.emit('new-message', { message: post });
-                res.json(post);
-            });
-        } else {
-            req.app.io.emit('delete-user', { message: { '_id': req.body.user} });
-            res.json({});
-        }
-    });
+        req.app.io.emit('new-message', { message: post });
+        res.json(post);
+      });
+    } else {
+      req.app.io.emit('delete-user', { message: { '_id': req.body.user} });
+      return res.json({});
+    }
+  });
 });
 
 router.put('/:id', (req, res, next) => {

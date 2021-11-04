@@ -5,8 +5,9 @@
 </template>
 <script>
  import { removeByAttr } from '@/lib/utils';
- import { saveUserToStore,
-          deleteUserFromStorage } from '@/lib/storage';
+import {
+  saveUserToStore,
+  deleteUserFromStorage } from '@/lib/storage';
 
  export default {
    name: "SocketWrapper",
@@ -29,25 +30,19 @@
        this.$root.$data.chats = removeByAttr(this.$root.$data.chats, '_id', data.message._id);
      });
 
-     this.$root.$data.socket.on('user-to-stage', (data) => {
-       this.updatePermissionInPersonStorage(data.message);
+     this.$root.$data.socket.on('character-to-stage', (data) => {
+       this.updatePermissionInUserStorage(data.message);
        this.isMyselfOnStage(data.message);
        saveUserToStore(this.$root.$data.user);
      });
 
-     this.$root.$data.socket.on('user-off-stage', (data) => {
-       this.updatePermissionInPersonStorage(data.message);
-       this.isMyselfOnStage(data.message);
-       saveUserToStore(this.$root.$data.user);
-     });
-
-     this.$root.$data.socket.on('user-all-off-stage', () => {
-       if (this.$root.$data.user.hasPermission) {
-         this.$root.$data.user.hasPermission = false;
+     this.$root.$data.socket.on('characters-all-off-stage', () => {
+       if (this.$root.$data.user.character.hasPermission) {
+         this.$root.$data.user.character.hasPermission = false;
          this.$root.$data.notifications.push(this.$t('user.notification.offstage'));
        }
-       this.$root.$data.otherPeople = this.$root.$data.otherPeople.map(p => {
-         p.hasPermission = false;
+       this.$root.$data.characters = this.$root.$data.otherPeople.map(p => {
+         p.character.hasPermission = false;
          return p;
        });
        saveUserToStore(this.$root.$data.user);
@@ -85,9 +80,9 @@
    },
    methods: {
      isMyselfOnStage(data) {
-       if (data._id === this.$root.$data.user._id) {
-         this.$root.$data.user.hasPermission = !data.hasPermission;
-         let note = this.$root.$data.user.hasPermission ? this.$t('user.notification.onstage') : this.$t('user.notification.offstage');
+       if (data._id === this.$root.$data.user.character._id) {
+         this.$root.$data.user.character.hasPermission = !data.hasPermission;
+         let note = this.$root.$data.user.character.hasPermission ? this.$t('user.notification.onstage') : this.$t('user.notification.offstage');
          this.$root.$data.notifications = [note];
        }
      },
@@ -98,10 +93,10 @@
          this.$root.$data.notifications = [note];
        }
      },
-     updatePermissionInPersonStorage(updatedUser) {
+     updatePermissionInUserStorage(updatedCharacter) {
        this.$root.$data.otherPeople = this.$root.$data.otherPeople.map(p => {
-         if (p._id == updatedUser._id) {
-           p.hasPermission = !updatedUser.hasPermission;
+         if (p.character._id == updatedCharacter._id) {
+           p.character.hasPermission = !updatedCharacter.hasPermission;
          }
          return p;
        });

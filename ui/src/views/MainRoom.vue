@@ -12,14 +12,14 @@
         <template v-else>
           <Chat
             :messages="stageMessages"
-            :username="$root.$data.user.nickname"
+            :username="$root.$data.user.name"
             :room="$root.$data.stage"
             :showComposer="true"
             :showTitle="true" />
 
           <Chat
             :messages="backstageMessages"
-            :username="$root.$data.user.nickname"
+            :username="$root.$data.user.name"
             :room="$root.$data.mainRoom"
             :showComposer="true"
             :showTitle="true" />
@@ -49,7 +49,7 @@
      }
    },
    created() {
-     if (!this.$root.$data.user.nickname) {
+     if (!this.$root.$data.user._id) {
        this.$router.push({name: 'intro'})
      }
      this.loading = false;
