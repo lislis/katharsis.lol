@@ -1,23 +1,27 @@
 <template>
 <li class="chat__message"
-    :class="allTheClasses">
+    :class="messageClasses">
   <div class="chat__message-inner">
-    <fragment v-if="room.locked">
+    <template v-if="room.locked">
       <div class="chat__message__user-inline"
-           v-if="message.user" :style="styleObject">
-        <strong>{{ getMessageName(message.character) }}</strong>:
+           v-if="message.user" :style="{ 'backgroundColor': messageColor }">
+        <strong>{{ messageName }}</strong>:
       </div>
-      <p class="chat__message-bubble chat__message-bubble--inline" v-html="message.message"></p>
-    </fragment>
-    <fragment v-else>
+      <p class="chat__message-bubble chat__message-bubble--inline"
+         v-html="message.message"></p>
+    </template>
+
+    <template v-else>
       <header v-if="message.user">
-        <strong>{{ getMessageName(message.character) }}</strong>:
+        <strong>{{ messageName }}</strong>:
       </header>
-      <p class="chat__message-bubble" :style="styleObject" v-html="message.message"></p>
+      <p class="chat__message-bubble" :style="{ 'backgroundColor': messageColor }"
+         v-html="message.message"></p>
       <aside>
-        <time datetime="this.message.created_date" :title="date">{{ date_ago }}</time>
+        <time datetime="this.message.created_date"
+              :title="date">{{ date_ago }}</time>
       </aside>
-    </fragment>
+    </template>
   </div>
 </li>
 </template>
@@ -29,10 +33,8 @@ export default {
   props: ['message', 'room'],
   data() {
     return {
-      allTheClasses: '',
       date: null,
       date_ago: null,
-      styleObject: {}
     }
   },
   created() {
@@ -45,37 +47,38 @@ export default {
       let d = new Date(this.message.created_date);
       this.date_ago = timeago.format(d);
     }, 60000);
-
-    this.styleObject.backgroundColor = this.getCharacterColor(this.message.character);
-    this.assignClasses();
   },
-  methods: {
-    getCharacterColor(character) {
-      if (!character) return 'transparent';
-      const char =  this.$root.$data.characters.find(x => x._id === character._id);
-      console.log(char);
-      return char ? char.colorCode : '#e5e5e5';
-    },
-    getMessageName(character) {
-      if (!character) return '';
-      const p = this.$root.$data.characters.find(x => x._id === character._id);
-      return p ? p.name : '';
-    },
-    assignClasses() {
-      if (this.message.bot == true) {
-        this.allTheClasses = 'is-bot';
-      } else if (Object.prototype.hasOwnProperty.call(this.message, 'user')) {
-      if (this.message.user == null) {
-        this.allTheClasses = 'is-gone';
-      } else if ((this.message.user._id == this.$root.$data.user._id)
-                 || (this.message.user == this.$root.$data.user._id)) {
-        this.allTheClasses = 'is-me';
+  computed: {
+    messageOwner() {
+      if (this.message.user) {
+        if (this.message.user === this.$root.$data.user._id) return this.$root.$data.user;
+        return this.$root.$data.otherPeople.find(x => x._id === this.message.user);
+      } else if (this.message.character) {
+        return this.$root.$data.otherPeople.find(x => x.character._id === this.message.character);
       } else {
-        this.allTheClasses = 'is-user';
+        return null;
       }
-    } else {
-      this.allTheClasses = 'is-note';
-    }
+    },
+    messageColor() {
+      return this.messageOwner ? this.messageOwner.colorCode : 'transparent';
+    },
+    messageName() {
+      if (!this.messageOwner) return '';
+      return this.messageOwner.character ? this.messageOwner.character.name : this.messageOwner.name;
+    },
+    messageClasses() {
+      if (this.message.bot == true) {
+        return 'is-bot';
+      } else if (this.message.user || this.message.character) {
+        if ((this.message.user == this.$root.$data.user._id)
+            || (this.message.character == this.$root.$data.user.character._id)) {
+          return 'is-me';
+        } else {
+          return 'is-user';
+        }
+      } else {
+        return  'is-note';
+      }
     }
   }
 }

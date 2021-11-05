@@ -5,7 +5,9 @@ const Character = require('../models/Character.js');
 const Chat = require('../models/Chat.js');
 
 router.get('/', (req, res, next) => {
-  Chat.find((err, chats) => {
+  Chat.find()
+    //.populate('character')
+    .exec((err, chats) => {
     if (err) return next(err);
     return res.json(chats);
   });
@@ -39,7 +41,7 @@ router.post('/', (req, res, next) => {
       Chat.create(body, (err, post) => {
         if (err) return next(err);
         req.app.io.emit('new-message', { message: post });
-        res.json(post);
+        return res.json(post);
       });
     } else {
       req.app.io.emit('delete-user', { message: { '_id': req.body.user} });

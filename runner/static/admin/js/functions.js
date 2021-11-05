@@ -122,8 +122,8 @@ async function init() {
 
   changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:', 'POST');
   changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:', 'POST');
-  changeUserProperty('#user2stageForm', '#user2stageid', '/api/user/on/', 'Auf die Bühne:', 'POST');
-  changeUserProperty('#userOffstageForm', '#useroffstageid', '/api/user/off/', 'Runter von der Bühne:', 'POST');
+  changeUserProperty('#user2stageForm', '#user2stageid', '/api/character/on/', 'Auf die Bühne:', 'POST');
+  changeUserProperty('#userOffstageForm', '#useroffstageid', '/api/character/off/', 'Runter von der Bühne:', 'POST');
 
   buildImportFunction('#importWordsForm', '#wordcsvurl', `${CONFIG.BOTBRAIN}/api/word/bulkimport`);
   buildImportFunction('#importDirectionsForm', '#directioncsvurl', `${CONFIG.BOTBRAIN}/api/direction/bulkimport`);

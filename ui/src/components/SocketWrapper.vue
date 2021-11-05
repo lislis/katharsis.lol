@@ -4,31 +4,41 @@
   </div>
 </template>
 <script>
- import { removeByAttr } from '@/lib/utils';
+import { removeByAttr } from '@/lib/utils';
 import {
   saveUserToStore,
   deleteUserFromStorage } from '@/lib/storage';
 
- export default {
-   name: "SocketWrapper",
-   created() {
+export default {
+  name: "SocketWrapper",
+  created() {
 
-     this.$root.$data.socket.on('new-user', (data) => {
-       this.$root.$data.otherPeople.push(data.message);
-     });
+    this.$root.$data.socket.on('new-user', (data) => {
+      this.$root.$data.otherPeople.push(data.message);
+    });
 
-     this.$root.$data.socket.on('delete-user', (data) => {
-       this.removeMyselfFromStorage(data.message);
-       removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id);
-     });
+    this.$root.$data.socket.on('delete-user', (data) => {
+      this.removeMyselfFromStorage(data.message);
+      removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id);
+    });
 
-     this.$root.$data.socket.on('new-message', (data) => {
-       this.$root.$data.chats.push(data.message);
-     });
+    this.$root.$data.socket.on('new-message', (data) => {
+      this.$root.$data.chats.push(data.message);
+    });
 
-     this.$root.$data.socket.on('delete-message', (data) => {
-       this.$root.$data.chats = removeByAttr(this.$root.$data.chats, '_id', data.message._id);
-     });
+    this.$root.$data.socket.on('delete-message', (data) => {
+      this.$root.$data.chats = removeByAttr(this.$root.$data.chats, '_id', data.message._id);
+    });
+
+    this.$root.$data.socket.on('new-character', (data) => {
+      let p = this.$root.$data.otherPeople.find(x => x._id === data.message.user)
+      p.character = data.message;
+
+      this.$root.$data.otherPeople = [
+        ...this.$root.$data.otherPeople.filter(x => x._id !== data.message.user),
+        p
+      ]
+    });
 
      this.$root.$data.socket.on('character-to-stage', (data) => {
        this.updatePermissionInUserStorage(data.message);
