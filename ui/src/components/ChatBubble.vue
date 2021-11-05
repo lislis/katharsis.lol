@@ -50,17 +50,16 @@ export default {
   },
   computed: {
     messageOwner() {
-      if (this.message.user) {
-        if (this.message.user === this.$root.$data.user._id) return this.$root.$data.user;
-        return this.$root.$data.otherPeople.find(x => x._id === this.message.user);
-      } else if (this.message.character) {
+      if (this.message.character) {
+        if (this.message.character === this.$root.$data.user.character._id) return this.$root.$data.user.character;
         return this.$root.$data.otherPeople.find(x => x.character._id === this.message.character);
       } else {
         return null;
       }
     },
     messageColor() {
-      return this.messageOwner ? this.messageOwner.colorCode : 'transparent';
+      if (!this.messageOwner) return 'transparent';
+      return this.messageOwner.character ? this.messageOwner.character.colorCode : this.messageOwner.colorCode;
     },
     messageName() {
       if (!this.messageOwner) return '';

@@ -94,8 +94,13 @@ export default {
         .filter(x => !x.main);
     },
     async getAllPeople() {
-      let response = await axios.get(`${this.restServer}/api/user`);
-      this.otherPeople = response.data
+      let users = await axios.get(`${this.restServer}/api/user`);
+      let characters = await axios.get(`${this.restServer}/api/character`);
+
+      this.otherPeople = characters.data.map((x) => {
+        let u = users.data.find((y) => { y._id === x.user });
+        return u ? u : { character: x }
+      })
     },
      async getAllChats() {
        let response = await axios.get(`${this.restServer}/api/chat`)

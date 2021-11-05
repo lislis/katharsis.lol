@@ -31,12 +31,13 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  User.findById(req.body.user, (err, user) => {
+  Character.findById(req.body.character, (err, char) => {
     if (err) return next(err);
-    if (user !== null) {
+    if (char !== null) {
       let body = req.body;
       if (body.bot) {
         delete body.user;
+        delete body.character;
       }
       Chat.create(body, (err, post) => {
         if (err) return next(err);
@@ -44,7 +45,7 @@ router.post('/', (req, res, next) => {
         return res.json(post);
       });
     } else {
-      req.app.io.emit('delete-user', { message: { '_id': req.body.user} });
+      req.app.io.emit('delete-character', { message: { '_id': req.body.user} });
       return res.json({});
     }
   });

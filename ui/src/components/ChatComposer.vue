@@ -95,33 +95,33 @@ export default {
       }
 
       axios
-         .post(`${this.$root.$data.restServer}/api/chat`, this.chat)
-         .then(() => {
-           this.chat = {};
-           this.chat.message = '';
-           this.sending = false;
-         })
-         .catch(e => {
-           this.$root.$data.notifications.push(e)
-         })
+        .post(`${this.$root.$data.restServer}/api/chat`, this.chat)
+        .then(() => {
+          this.chat = {};
+          this.chat.message = '';
+          this.sending = false;
+        })
+        .catch(e => {
+          this.$root.$data.notifications.push(e)
+        })
+    },
+    pickUpEmoji(emoji) {
+      this.chat.message = this.chat.message + emoji;
+    },
+    typingTimeoutFn() {
+      this.isTyping = false;
+      this.$root.$data.socket.emit('is-not-typing',
+                                   { character: this.$root.$data.user.character._id,
+                                     room: this.room._id });
      },
-     pickUpEmoji(emoji) {
-       this.chat.message = this.chat.message + emoji;
-     },
-     typingTimeoutFn() {
-       this.isTyping = false;
-       this.$root.$data.socket.emit('is-not-typing',
-                                    { user: this.$root.$data.user._id,
-                                      room: this.room._id });
-     },
-     typing() {
+    typing() {
        if (this.isTyping) {
          clearTimeout(this.typingTimeout);
          this.typingTimeout = setTimeout(this.typingTimeoutFn, 1000);
        } else {
          this.isTyping = true;
          this.$root.$data.socket.emit('is-typing',
-                                      { user: this.$root.$data.user._id,
+                                      { character: this.$root.$data.user.character._id,
                                         room: this.room._id });
          this.typingTimeout = setTimeout(this.typingTimeoutFn, 1000);
        }

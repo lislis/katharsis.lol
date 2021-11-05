@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User.js');
+const Character = require('../models/Character.js');
+const Room = require('../models/Room.js');
+const Chat = require('../models/Chat.js');
 const TicketCode = require('../models/TicketCode.js');
 
 router.post('/user2mod/:uid', (req, res, next) => {
@@ -71,10 +74,27 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  User.findByIdAndRemove(req.params.id, req.body, (err, user) => {
-    if (err) return next(err);
-    req.app.io.emit('delete-user', { message: user });
-    return res.json(user);
+
+  Promise.all([
+    Character.find({ user: req.params.id }).exec(),
+    User.findByIdAndRemove(req.params.id, req.body).exec(),
+    Room.find({ main: true, locked: false}).exec(),
+  ]).then(values => {
+    let user = values[1];
+    let character = values[0][0];
+    let room = values[2][0];
+
+    Chat.create({ message: `${character.name} ist raus!`,
+                  room: room._id,
+                  created_date: new Date()},
+                (err, chat) => {
+                  if (err) return next(err);
+                  req.app.io.emit('delete-user', { message: user });
+                  req.app.io.emit('new-message', { message: chat });
+                  return res.json(user);
+                });
+  }).catch(e => {
+    return res.next(e);
   });
 });
 

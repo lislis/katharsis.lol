@@ -18,8 +18,16 @@ export default {
     });
 
     this.$root.$data.socket.on('delete-user', (data) => {
+      let u = this.$root.$data.otherPeople.find(x => x._id === data.message.user)
+      let character = u.character;
+
       this.removeMyselfFromStorage(data.message);
-      removeByAttr(this.$root.$data.otherPeople, '_id', data.message._id);
+      console.log(this.$root.$data.otherPeople);
+      this.$root.$data.otherPeople = [
+        ...this.$root.$data.otherPeople.filter(x => x._id !== data.message.user),
+        { character }
+      ]
+      console.log(this.$root.$data.otherPeople);
     });
 
     this.$root.$data.socket.on('new-message', (data) => {
@@ -40,51 +48,57 @@ export default {
       ]
     });
 
-     this.$root.$data.socket.on('character-to-stage', (data) => {
-       this.updatePermissionInUserStorage(data.message);
-       this.isMyselfOnStage(data.message);
-       saveUserToStore(this.$root.$data.user);
-     });
+    this.$root.$data.socket.on('delete-character', (data) => {
+      this.$root.$data.otherPeople = [
+        ...this.$root.$data.otherPeople.filter(x => x.character._id !== data.message.character)
+      ]
+    });
 
-     this.$root.$data.socket.on('characters-all-off-stage', () => {
-       if (this.$root.$data.user.character.hasPermission) {
-         this.$root.$data.user.character.hasPermission = false;
-         this.$root.$data.notifications.push(this.$t('user.notification.offstage'));
-       }
-       this.$root.$data.characters = this.$root.$data.otherPeople.map(p => {
-         p.character.hasPermission = false;
-         return p;
-       });
-       saveUserToStore(this.$root.$data.user);
-     });
+    this.$root.$data.socket.on('character-to-stage', (data) => {
+      this.updatePermissionInUserStorage(data.message);
+      this.isMyselfOnStage(data.message);
+      saveUserToStore(this.$root.$data.user);
+    });
 
-     this.$root.$data.socket.on('user-2-mod', (data) => {
-       this.updateModInPersonStorage(data.message);
-       this.isMyselfAMod(data.message);
-       saveUserToStore(this.$root.$data.user);
-     });
+    this.$root.$data.socket.on('characters-all-off-stage', () => {
+      if (this.$root.$data.user.character.hasPermission) {
+        this.$root.$data.user.character.hasPermission = false;
+        this.$root.$data.notifications.push(this.$t('user.notification.offstage'));
+      }
+      this.$root.$data.characters = this.$root.$data.otherPeople.map(p => {
+        p.character.hasPermission = false;
+        return p;
+      });
+      saveUserToStore(this.$root.$data.user);
+    });
 
-     this.$root.$data.socket.on('mod-2-user', (data) => {
-       this.updateModInPersonStorage(data.message);
-       this.isMyselfAMod(data.message);
-       saveUserToStore(this.$root.$data.user);
-     });
+    this.$root.$data.socket.on('user-2-mod', (data) => {
+      this.updateModInPersonStorage(data.message);
+      this.isMyselfAMod(data.message);
+      saveUserToStore(this.$root.$data.user);
+    });
 
-     this.$root.$data.socket.on('clear-stage', (data) => {
-       this.$root.$data.chats = this.$root.$data.chats.filter(m => {
-         return m.room !== data.message._id;
-       })
-     });
+    this.$root.$data.socket.on('mod-2-user', (data) => {
+      this.updateModInPersonStorage(data.message);
+      this.isMyselfAMod(data.message);
+      saveUserToStore(this.$root.$data.user);
+    });
 
-     this.$root.$data.socket.on('clear-everything', () => {
-       this.$root.$data.chats = [];
-     });
+    this.$root.$data.socket.on('clear-stage', (data) => {
+      this.$root.$data.chats = this.$root.$data.chats.filter(m => {
+        return m.room !== data.message._id;
+      })
+    });
 
-     this.$root.$data.socket.on('started-typing', (data) => {
-       this.updateRoomIsTyping(data, true);
-     });
+    this.$root.$data.socket.on('clear-everything', () => {
+      this.$root.$data.chats = [];
+    });
 
-     this.$root.$data.socket.on('stopped-typing', (data) => {
+    this.$root.$data.socket.on('started-typing', (data) => {
+      this.updateRoomIsTyping(data, true);
+    });
+
+    this.$root.$data.socket.on('stopped-typing', (data) => {
        this.updateRoomIsTyping(data, false);
      });
    },
@@ -120,7 +134,8 @@ export default {
        });
      },
      updateRoomIsTyping(data, bool) {
-       if (data.user != this.$root.$data.user._id) {
+       console.log(data);
+       if (data.character != this.$root.$data.user.character._id) {
          if (this.$root.$data.mainRoom._id == data.room) {
            this.$root.$data.mainRoom.typing = bool;
          }

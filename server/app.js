@@ -90,11 +90,13 @@ app.io.on('connection', (socket) => {
   });
 
   socket.on('is-typing', (data) => {
-    io.emit('[socket.io] started-typing', data);
+    io.emit('started-typing', data);
+    logger.info('[socket.io] started typing', socket.id);
   });
 
   socket.on('is-not-typing', (data) => {
-    io.emit('[socket.io] stopped-typing', data);
+    io.emit('stopped-typing', data);
+    logger.info('[socket.io] stopped typing', socket.id);
   });
 });
 

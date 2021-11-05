@@ -68,13 +68,24 @@ router.post('/', (req, res, next) => {
   Character.create(req.body, (err, character) => {
     if (err) return next(err);
 
-    // technically, we should throw an error here, because a character without user is not usable
-    if (req.body.user) {
-      User.findByIdAndUpdate(req.body.user, { "character": character._id }).exec();
-    }
+    Promise.all([
+      User.findByIdAndUpdate(req.body.user, { "character": character._id }).exec(),
+      Room.find({ main: true, locked: false}).exec(),
+    ]).then(values => {
+      let room = values[1][0];
 
-    req.app.io.emit('new-character', { message: character });
-    return res.json(character);
+      Chat.create({ message: `${character.name} ist neu hier!`,
+                    room: room._id,
+                    created_date: new Date()},
+                  (err, chat) => {
+                    if (err) return next(err);
+                    req.app.io.emit('new-character', { message: character });
+                    req.app.io.emit('new-message', { message: chat });
+                    return res.json(character);
+                  });
+    }).catch(e => {
+      return next(e);
+    });
   });
 });
 
