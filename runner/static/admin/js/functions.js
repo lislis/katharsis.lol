@@ -107,6 +107,7 @@ async function init() {
   buildDeleteFunction('#deleteRoomForm', '#deleteroomid', `${CONFIG.SERVER}/api/room/`, 'Raum gelöscht:');
   buildDeleteFunction('#deleteChatForm', '#deletechatid', `${CONFIG.SERVER}/api/chat/`, 'Chat gelöscht:');
   buildDeleteFunction('#deleteUserForm', '#deleteuserid', `${CONFIG.SERVER}/api/user/`, 'User gelöscht:');
+  buildDeleteFunction('#deleteCharacterForm', '#deletecharacterid', `${CONFIG.SERVER}/api/character/`, 'Character gelöscht:');
   buildDeleteFunction('#deleteWordForm', '#deletewordid', `${CONFIG.BOTBRAIN}/api/word/`, 'Wort gelöscht:');
   buildDeleteFunction('#deleteDirectionForm', '#deletedirectionid', `${CONFIG.BOTBRAIN}/api/direction/`, 'Ticketcode gelöscht:');
   buildDeleteFunction('#deleteCodeForm', '#deletecodeid', `${CONFIG.SERVER}/api/ticketcode/`, 'Anweisung gelöscht:');
@@ -116,13 +117,16 @@ async function init() {
   buildDeleteAllFunction('#deleteAllChatsForm', `${CONFIG.SERVER}/api/chat/`, 'Alle Chats gelöscht!');
   buildDeleteAllFunction('#deleteAllUsersForm', `${CONFIG.SERVER}/api/user/`, 'Alle User gelöscht!');
   buildDeleteAllFunction('#deleteAllCodesForm', `${CONFIG.SERVER}/api/ticketcode/`, 'Alle Ticketcodes gelöscht!');
+  buildDeleteAllFunction('#deleteAllCharactersForm', `${CONFIG.SERVER}/api/character/`, 'Alle Characters gelöscht!');
 
   buildBulkDeleteFunction('#deleteAllWordsForm', `${CONFIG.BOTBRAIN}/api/word/bulkdelete`, 'Alle Wörter gelöscht!');
   buildBulkDeleteFunction('#deleteAllDirectionsForm', `${CONFIG.BOTBRAIN}/api/direction/bulkdelete`, 'Alle Anweisungen gelöscht!');
 
   changeUserProperty('#user2ModForm', '#user2modid', '/api/user/user2mod/', 'User ist Moderator:', 'POST');
   changeUserProperty('#mod2UserForm', '#mod2userid', '/api/user/mod2user/', 'Moderator ist User:', 'POST');
+  // should be character in name
   changeUserProperty('#user2stageForm', '#user2stageid', '/api/character/on/', 'Auf die Bühne:', 'POST');
+  // should be character in name
   changeUserProperty('#userOffstageForm', '#useroffstageid', '/api/character/off/', 'Runter von der Bühne:', 'POST');
 
   buildImportFunction('#importWordsForm', '#wordcsvurl', `${CONFIG.BOTBRAIN}/api/word/bulkimport`);
