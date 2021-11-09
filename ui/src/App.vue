@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       user: {},
+      characterSheet: {},
       loggedMyselfOut: false,
       otherPeople: [],
       mainRoom: null,

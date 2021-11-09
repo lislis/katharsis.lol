@@ -7,39 +7,44 @@
     Name
     <input type="text" v-model="name" />
 
-    Steckbrief
-    <textarea v-model="bio"></textarea>
+    <template v-if="characterTree">
+    <div v-for="q in Object.keys(characterTree)"
+         :key="q">
+      <CharacterQuestion :question="characterTree[q]" />
+    </div>
+    </template>
 
     <div class="center-helper spacing-helper">
       <Loader v-if="loading" />
     <button @click="createCharacter">Create!</button>
     </div>
-    <div>
-      {{name}}<br>
-      {{bio}}
-    </div>
   </section>
 </div>
 </template>
 <script>
-  import axios from 'axios';
+import axios from 'axios';
 import AppHeader from '@/components/AppHeader'
+import CharacterQuestion from '@/components/CharacterQuestion'
 import Loader from '@/components/Loader'
 import { saveUserToStore } from '@/lib/storage'
 
 export default {
   name: "CharacterSheet",
-  components: { AppHeader, Loader },
+  components: { AppHeader, Loader, CharacterQuestion },
   data() {
     return {
       name: '',
-      bio: '',
+      //bio: '',
+      characterSheet: null,
       loading: false,
     }
   },
-  created() {
+  async created() {
     if (this.$root.$data.user.character) {
       this.$router.push({ name: 'main' });
+    } else {
+      this.characterSheet = await axios.get(`${this.$root.$data.restServer}/api/setting/bykey/characterSheet`);
+
     }
   },
   methods: {
@@ -47,7 +52,7 @@ export default {
       this.loading = true;
       let char = {
         name: this.name,
-        bio: this.bio,
+        bio: '',
         user: this.$root.$data.user,
         colorCode: this.$root.$data.user.colorCode
       }
@@ -64,6 +69,15 @@ export default {
       this.bio = '';
       this.loading = false;
       this.$router.push({ name: 'main' });
+    }
+  },
+  computed: {
+    characterTree() {
+      if (this.characterSheet?.data) {
+        return JSON.parse(this.characterSheet?.data[0].value)
+      } else {
+        return {}
+      }
     }
   }
 
