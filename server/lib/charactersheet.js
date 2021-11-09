@@ -23,6 +23,7 @@ async function parseCharacterLogic(csvData) {
 
       if (code.length === 1) {
         obj[code[0]] = {
+          ident: code[0],
           id: code[0],
           text: row['Text'],
           altText: row['Alt-Text'],
@@ -31,6 +32,7 @@ async function parseCharacterLogic(csvData) {
       }
       if (code.length === 2) {
         obj[code[0]].options[code[1]] = {
+          ident: `${code[0]}${code[1]}`,
           id: code[1],
           text: row['Text'],
           altText: row['Alt-Text'],
@@ -39,6 +41,7 @@ async function parseCharacterLogic(csvData) {
       }
       if (code.length === 3) {
         obj[code[0]].options[code[1]].next = {
+          ident: `${code[0]}${code[1]}${code[2]}`,
           id: code[2],
           text: row['Text'],
           altText: row['Alt-Text'],
@@ -47,6 +50,7 @@ async function parseCharacterLogic(csvData) {
       }
       if (code.length === 4) {
         obj[code[0]].options[code[1]].next.options[code[3]] = {
+          ident: `${code[0]}${code[1]}${code[2]}${code[3]}`,
           id: code[3],
           text: row['Text'],
           altText: row['Alt-Text'],
@@ -59,6 +63,7 @@ async function parseCharacterLogic(csvData) {
           .next
           .options[code[3]]
           .next = {
+            ident: `${code[0]}${code[1]}${code[2]}${code[3]}${code[4]}`,
             id: code[4],
             text: row['Text'],
             altText: row['Alt-Text'],
@@ -72,6 +77,7 @@ async function parseCharacterLogic(csvData) {
           .options[code[3]]
           .next
           .options[code[5]] = {
+            ident: `${code[0]}${code[1]}${code[2]}${code[3]}${code[4]}${code[5]}`,
             id: code[5],
             text: row['Text'],
             altText: row['Alt-Text']
