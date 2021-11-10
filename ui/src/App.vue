@@ -25,7 +25,9 @@ export default {
   data() {
     return {
       user: {},
-      characterSheet: {},
+      characterTree: {},
+      characterProgress: {},
+      ownCharacter: {},
       loggedMyselfOut: false,
       otherPeople: [],
       mainRoom: null,
@@ -51,6 +53,7 @@ export default {
     this.getAllPeople();
     this.getAllChats();
     this.getAllPlays();
+    this.getCharacterSheets();
     this.user = loadUserFromStorage();
   },
   methods: {
@@ -103,14 +106,18 @@ export default {
         return u ? u : { character: x }
       })
     },
-     async getAllChats() {
-       let response = await axios.get(`${this.restServer}/api/chat`)
+    async getAllChats() {
+      let response = await axios.get(`${this.restServer}/api/chat`)
        this.chats = response.data
      },
      async getAllPlays() {
        let response = await axios.get(`${this.restServer}/api/play`);
        this.plays = response.data;
-     }
+     },
+    async getCharacterSheets() {
+      let dataSheet = await axios.get(`${this.$root.$data.restServer}/api/setting/bykey/characterSheet`);
+      this.$root.$data.characterTree = JSON.parse(dataSheet?.data[0].value);
+    }
    }
  }
 </script>

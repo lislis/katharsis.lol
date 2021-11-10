@@ -7,7 +7,8 @@
                      :key="o"
                      :option="question.options[o]" />
   </ul>
-  <button>Weiter</button>
+  <router-link :to="{ name: 'charQuestion', params: { ident: index }}">Nächste Frage</router-link>
+
 </div>
 </template>
 <script>
@@ -22,7 +23,7 @@ export default {
   beforeCreate: function () {
   this.$options.components.CharacterOption = require('@/components/CharacterOption.vue').default
 },
-  props: ['question'],
+  props: ['question', 'index'],
 
 
 }

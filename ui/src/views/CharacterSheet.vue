@@ -4,19 +4,15 @@
   <section class="centerstage">
     <h1 class="centerstage__title">{{ $t('character.title') }}</h1>
 
-    Name
-    <input type="text" v-model="name" />
-
-    <template v-if="characterTree">
-    <div v-for="q in Object.keys(characterTree)"
-         :key="q">
-      <CharacterQuestion :question="characterTree[q]" />
-    </div>
+    <template v-if="$route.name == 'characterSheet'">
+      Name
+      <input type="text" v-model="name" />
     </template>
+    <router-view v-else></router-view>
 
     <div class="center-helper spacing-helper">
       <Loader v-if="loading" />
-    <button @click="createCharacter">Create!</button>
+    <button @click="toSheetOne">Next!</button>
     </div>
   </section>
 </div>
@@ -24,30 +20,32 @@
 <script>
 import axios from 'axios';
 import AppHeader from '@/components/AppHeader'
-import CharacterQuestion from '@/components/CharacterQuestion'
+//import CharacterQuestion from '@/components/CharacterQuestion'
 import Loader from '@/components/Loader'
 import { saveUserToStore } from '@/lib/storage'
 
 export default {
   name: "CharacterSheet",
-  components: { AppHeader, Loader, CharacterQuestion },
+  components: { AppHeader,
+                Loader,
+                //CharacterQuestion
+              },
   data() {
     return {
       name: '',
-      //bio: '',
-      characterSheet: null,
       loading: false,
     }
   },
-  async created() {
+  created() {
     if (this.$root.$data.user.character) {
       this.$router.push({ name: 'main' });
-    } else {
-      this.characterSheet = await axios.get(`${this.$root.$data.restServer}/api/setting/bykey/characterSheet`);
-
     }
   },
   methods: {
+    toSheetOne() {
+      let firstKey = Object.keys(this.$root.$data.characterTree)[0];
+      this.$router.push({ name: 'charQuestion', params: { ident: firstKey }});
+    },
     async createCharacter() {
       this.loading = true;
       let char = {
@@ -70,16 +68,6 @@ export default {
       this.loading = false;
       this.$router.push({ name: 'main' });
     }
-  },
-  computed: {
-    characterTree() {
-      if (this.characterSheet?.data) {
-        return JSON.parse(this.characterSheet?.data[0].value)
-      } else {
-        return {}
-      }
-    }
   }
-
 }
 </script>

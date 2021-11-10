@@ -7,6 +7,7 @@ import DataPage from '@/views/DataPage'
 import Archive from '@/views/Archive'
 import SinglePlay from '@/views/SinglePlay'
 import CharacterSheet from '@/views/CharacterSheet'
+import CharacterTree from '@/views/CharacterTree'
 
 const routes = [
   {
@@ -26,8 +27,19 @@ const routes = [
   },
   {
     path: '/character',
-    name: 'character',
-    component: CharacterSheet
+    name: 'characterSheet',
+    component: CharacterSheet,
+    children: [
+      {
+        path: '/',
+        name: 'characterName',
+        component: CharacterSheet
+      },
+      {
+        path: ':ident',
+        name: 'charQuestion',
+        component: CharacterTree
+    }]
   },
   {
     path: '/main',
