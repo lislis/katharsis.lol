@@ -2,11 +2,11 @@
   <div>
     <AppHeader :notifications="$root.$data.notifications" />
     <div class="mainroom-view">
-      <fragment v-if="!$root.$data.stage">
+      <template v-if="!$root.$data.stage">
         <div class="inner">
           <Loader><p style="">{{ $t('main.pleaseWait') }}</p></Loader>
         </div>
-      </fragment>
+      </template>
       <div v-else class="mainroom-split">
         <Loader v-if="loading" />
         <template v-else>

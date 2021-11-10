@@ -49,7 +49,11 @@ export default {
       if (!this.$root.$data.characterProgress[id]) this.$root.$data.characterProgress[id] = []
       this.$root.$data.characterProgress[id].push({
         key: this.question.id,
-        value: this.choice.id
+        value: this.choice.id,
+        ident: this.choice.ident,
+        question: this.question.text,
+        text: this.choice.text,
+        altText: this.choice.altText
       })
     },
     getNextIdent() {

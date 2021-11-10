@@ -39,7 +39,7 @@ export default {
     });
 
     this.$root.$data.socket.on('new-character', (data) => {
-      let p = this.$root.$data.otherPeople.find(x => x._id === data.message.user)
+      let p = this.$root.$data.otherPeople.find(x => x._id === data.message.user) || {};
       p.character = data.message;
 
       this.$root.$data.otherPeople = [
