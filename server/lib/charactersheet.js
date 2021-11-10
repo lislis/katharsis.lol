@@ -89,4 +89,13 @@ async function parseCharacterLogic(csvData) {
   return obj;
 }
 
-module.exports = { processCharacterSheet2Object };
+
+function parseCharacterPayload2Bio(payload, bioTemplate) {
+
+  console.log(payload);
+
+  return 'foobar'
+}
+
+module.exports = { processCharacterSheet2Object,
+                 parseCharacterPayload2Bio };

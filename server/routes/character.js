@@ -4,6 +4,8 @@ const Character = require('../models/Character.js');
 const User = require('../models/User.js');
 const Room = require('../models/Room.js');
 const Chat = require('../models/Chat.js');
+const Setting = require('../models/Settings.js');
+const { parseCharacterPayload2Bio } = require('../lib/charactersheet.js')
 
 router.post('/on/:uid', (req, res, next) => {
   const opt = { hasPermission: true };
@@ -65,7 +67,14 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Character.create(req.body, (err, character) => {
+
+  //let templ = Setting.find({ key: ''}).exec()
+  let templSetting = '';
+  const bio = parseCharacterPayload2Bio(req.body, templSetting);
+  let ch = req.body;
+  ch.bio = bio;
+
+  Character.create(ch, (err, character) => {
     if (err) return next(err);
 
     Promise.all([
