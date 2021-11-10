@@ -132,6 +132,7 @@ async function init() {
   buildImportFunction('#importWordsForm', '#wordcsvurl', `${CONFIG.BOTBRAIN}/api/word/bulkimport`);
   buildImportFunction('#importDirectionsForm', '#directioncsvurl', `${CONFIG.BOTBRAIN}/api/direction/bulkimport`);
   buildImportFunction('#setCharacterSheetForm', '#characterSheetUrl', `${CONFIG.SERVER}/api/setting/charactersheet`);
+  buildImportFunction('#setCharacterProfileForm', '#characterProfileUrl', `${CONFIG.SERVER}/api/setting/characterprofile`);
 
 
   document.querySelector('#startScheduleForm').onsubmit = async (e) => {
@@ -312,6 +313,21 @@ async function init() {
   document.querySelector('#deleteCharacterSheetForm').onsubmit = async (e) => {
     e.preventDefault();
     const settingsKey = 'characterSheet';
+    const resp = await fetch(`${CONFIG.SERVER}/api/setting/bykey/${settingsKey}`);
+    const setting = await resp.json();
+
+    if (setting.length == 0) { alert('Nichts gesetzt!'); return false  }
+
+    const resp2 = await fetch(`${CONFIG.SERVER}/api/setting/${setting[0]._id}`, {
+      method: 'DELETE'
+    });
+    const data = await resp2.json();
+    alert(`Gelöscht ${data}`);
+  }
+
+  document.querySelector('#deleteCharacterProfileForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const settingsKey = 'characterProfile';
     const resp = await fetch(`${CONFIG.SERVER}/api/setting/bykey/${settingsKey}`);
     const setting = await resp.json();
 
