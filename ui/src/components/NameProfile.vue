@@ -40,11 +40,17 @@ export default {
   position: absolute;
   padding: 1em;
   border-radius: 20px;
-  width: 30em;
+  width: 35em;
   bottom: 2em;
   margin: auto;
   z-index: 1;
   white-space: pre-wrap;
+  }
+
+  @media (min-width: 800px) {
+  .popup {
+  right: 0;
+  }
   }
 
   .namehover {

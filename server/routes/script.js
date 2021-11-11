@@ -24,8 +24,10 @@ router.post('/onstage', (req, res, next) => {
           .filter(x => {
             return !x.user.isMod;
           });
-      let char = characters[random.int(0, characters.length -1)];
 
+      if (characters.length <= 0) return res.json({ message: 'nobody to put on stage'});
+
+      let char = characters[random.int(0, characters.length -1)];
       if (char.name) {
         char.update({hasPermission: true}).exec();
 
@@ -160,7 +162,6 @@ router.post('/category', (req, res, next) => {
 
       Chat.create(chatMsg, (err, msg) => {
         if (err) return next(err);
-        //req.log.info('new-message', msg);
         req.app.io.emit('new-message', { message: msg });
         return res.json(msg);
       });
