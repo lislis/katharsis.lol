@@ -34,7 +34,7 @@
  export default {
    name: 'AppMeta',
    created() {
-     console.log(this.$i18n)
+     //console.log(this.$i18n)
    },
    computed: {
      version() {

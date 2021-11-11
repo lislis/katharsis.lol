@@ -55,11 +55,22 @@ body {
   hyphenate-limit-chars: auto 5;
   hyphenate-limit-lines: 2;
   scroll-behavior: smooth;
+
+  min-height: 100vh;
+  padding: 1.4rem;
+  background-image: url(/BG-12.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+
+  //overflow-x: hidden;
 }
 
 @media (min-width: 800px) {
   body {
-    overflow: hidden;
+    //overflow-y: hidden;
+    //overflow: hidden;
   }
 }
 
@@ -118,6 +129,15 @@ h2 {
 
 
 input[type=text] {
+  font-family: Courier, monospace;
+  font-size: 1.6rem;
+  padding: 0.8em 1.5em;
+  border: none;
+  border-radius: 30px;
+  width: 100%;
+}
+
+textarea {
   font-family: Courier, monospace;
   font-size: 1.6rem;
   padding: 0.8em 1.5em;

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User.js');
+const Character = require('../models/Character.js');
 const Chat = require('../models/Chat.js');
 const Room = require('../models/Room.js');
 const axios = require('axios');
@@ -14,75 +14,85 @@ const BOTBRAIN = process.env['BOTBRAIN'];
 router.post('/onstage', (req, res, next) => {
   Promise.all([
     Room.find({ main: true, locked: false}).exec(),
-    User.find({ hasPermission: false, isMod: false }).exec()
+    Character.find({ hasPermission: false }).populate('user').exec()
   ]).then(async values => {
     let room  = values[0][0];
     if (values[1].length > 0) {
-      let user = values[1][random.int(0, values[1].length -1)];
+      let characters = values[1]
+          .filter(x => x.user)
+          .filter(x => {
+            return !x.user.isMod;
+          });
 
-      if (user.nickname) {
-        user.update({hasPermission: true}).exec();
+      if (characters.length <= 0) return res.json({ message: 'nobody to put on stage'});
 
-        let chatMsg = { message: `${user.nickname} auf die Bühne!`,
+      let char = characters[random.int(0, characters.length -1)];
+      if (char.name) {
+        char.update({hasPermission: true}).exec();
+
+        let chatMsg = { message: `${char.name} auf die Bühne!`,
                         room: room._id,
                         created_date: new Date()
         };
         Chat.create(chatMsg, (err, chat) => {
           if (err) return next(err);
-          req.app.io.emit('user-to-stage', { message: user });
+          req.app.io.emit('character-to-stage', { message: char });
           req.app.io.emit('new-message', { message: chat });
-          res.json(user);
-        })
+          return res.json(char);
+        });
       } else {
-        res.json({message: 'user not actually valid'});
+        return res.json({message: 'user not actually valid'});
       }
     } else {
-      res.json({message: 'could not find valid users'});
+      return res.json({message: 'could not find valid users'});
     }
-  }).catch(e => req.log.error(e));
+  }).catch(e => next(e));
 });
 
 router.post('/offstage', (req, res, next) => {
   Promise.all([
     Room.find({ main: true, locked: false}).exec(),
-    User.find({ hasPermission: true, isMod: false }).exec()
+    Character.find({ hasPermission: true }).populate('user').exec()
   ]).then(values => {
     let room  = values[0][0];
 
     if (values[1].length > 0) {
-      let user = values[1][random.int(0, values[1].length -1)];
+      let characters = values[1]
+          .filter(x => x.user)
+          .filter(x => !x.user.isMod);
+      let char = characters[random.int(0, characters.length -1)];
 
-      if (user.nickname) {
-        user.update({ hasPermission: false }).exec();
+      if (char.name) {
+        char.update({ hasPermission: false }).exec();
 
-        let chatMsg = { message: `${user.nickname} runter von der Bühne!`,
+        let chatMsg = { message: `${char.name} runter von der Bühne!`,
                         room: room._id,
                         created_date: new Date()
         };
         Chat.create(chatMsg, (err, chat) => {
           if (err) return next(err);
-          req.app.io.emit('user-off-stage', { message: user });
+          req.app.io.emit('character-off-stage', { message: char });
           req.app.io.emit('new-message', { message: chat });
-          res.json(user);
+          return res.json(char);
         });
       }
     } else {
-      res.json({message: 'could not find valid users'});
+      return res.json({message: 'could not find valid users'});
     }
-  }).catch(e => req.log.error(e));
+  }).catch(e => next(e));
 });
 
 router.post('/bulkOffStage', (req, res, next) => {
     Promise.all([
         Room.find({ main: true, locked: false}).exec(),
-        User.find({ hasPermission: true }).exec()
+        Character.find({ hasPermission: true }).exec()
     ]).then(values => {
         let room  = values[0][0];
         if (values[1].length > 0) {
-            let users = values[1];
+            let characters = values[1];
             Promise.all(
-                users.map((user) => {
-                    user.update({ hasPermission: false }).exec();
+                characters.map((c) => {
+                    c.update({ hasPermission: false }).exec();
                 })).then(userValues => {
                     let chatMsg = { message: `Alle runter von der Bühne!`,
                                     room: room._id,
@@ -90,7 +100,7 @@ router.post('/bulkOffStage', (req, res, next) => {
                                   };
                     Chat.create(chatMsg, (err, chat) => {
                         if (err) return next(err);
-                        req.app.io.emit('user-all-off-stage');
+                        req.app.io.emit('characters-all-off-stage');
                         req.app.io.emit('new-message', { message: chat });
                         res.json(userValues);
                     });
@@ -132,11 +142,14 @@ router.post('/category', (req, res, next) => {
   Promise.all([
     Room.find({main: true, locked: true}).exec(),
     axios.get(`${BOTBRAIN}/api/direction/bytype/${req.body.category}${param}`),
-    User.find({ hasPermission: true, isMod: false }).exec()
+    Character.find({ hasPermission: true }).populate('user').exec()
   ]).then(values => {
     let room = values[0][0];
     let botMsg = values[1].data[0];
-    let userPool = values[2];
+
+    let userPool = values[2]
+        .filter(x => x.user)
+        .filter(x => !x.user.isMod);
 
     let msgWUsers = replacePatternWUsers(botMsg, userPool);
 
@@ -148,14 +161,16 @@ router.post('/category', (req, res, next) => {
 
       Chat.create(chatMsg, (err, msg) => {
         if (err) return next(err);
-        //req.log.info('new-message', msg);
         req.app.io.emit('new-message', { message: msg });
-        res.json(msg);
+        return res.json(msg);
       });
     } else {
-      res.json({mesage: `Nothing matched category ${req.body.category}, skipping`});
+      return res.json({mesage: `Nothing matched category ${req.body.category}, skipping`});
     }
-  }).catch(e => req.log.error(e));
+  }).catch(e => {
+    req.log.error(e);
+    return next(e);
+  });
 });
 
 router.post('/embed', (req, res, next) => {
@@ -180,7 +195,7 @@ router.post('/embed', (req, res, next) => {
 router.post('/theend', (req, res, next) => {
   Promise.all([
     Room.find({main: true, locked: true}).exec(),
-    User.updateMany({ hasPermission: true }, { hasPermission: false }).exec()
+    Character.updateMany({ hasPermission: true }, { hasPermission: false }).exec()
   ]).then(values => {
     let room = values[0][0];
     let chatMsg = { message: "KATHARSIS.LOL - The end",
@@ -189,7 +204,6 @@ router.post('/theend', (req, res, next) => {
     };
     Chat.create(chatMsg, (err, msg) => {
       if (err) return next(err);
-      //req.log.info('new-message', msg);
       req.app.io.emit('new-message', { message: msg });
       res.json(msg);
     });

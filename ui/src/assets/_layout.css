@@ -1,10 +1,5 @@
 .app .socketwrapper {
-  min-height: 100vh;
-  padding: 1.4rem;
-  background-image: url(/BG-12.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+
 }
 main {
   flex-grow: 1;
@@ -19,7 +14,6 @@ main {
 .footer .subtle-spacing {
   display: inline-block;
 }
-
 
 .footer a {
   color: inherit;
@@ -55,17 +49,17 @@ main {
     flex-wrap: nowrap;
     padding: 0;
     width: 96vw;
-    overflow-x: scroll;
+    //overflow-x: scroll;
     scrollbar-width: thin;
   }
   .app .socketwrapper {
     height: 100vh;
     display: flex;
     flex-flow: column nowrap;
-    overflow: hidden;
+    //overflow: hidden;
   }
   .footer {
-    height: 3vh;
+    //height: 5vh;
   }
 }
 

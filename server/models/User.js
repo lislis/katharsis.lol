@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new mongoose.Schema({
-  nickname: String,
-  hasPermission: { type: Boolean, default: false },
+  name: String,
   isMod: { type: Boolean, default: false },
   colorCode: { type: String, default: '#ffffff' },
   ticketCodeId: {type: Schema.Types.ObjectId, ref: 'TicketCode'},
+  character: { type: Schema.Types.ObjectId, ref: 'Character'},
   created_date: { type: Date, default: Date.now },
 });
 

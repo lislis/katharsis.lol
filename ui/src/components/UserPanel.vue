@@ -1,8 +1,8 @@
 <template>
   <div class="upanel">
-    <div class="upanel__user">
+    <div class="upanel__user"  v-if="$root.$data.user">
       <span>{{ $t('user.status.joinedAs')}}</span><br>
-      <UserDisplay :user="$root.$data.user" />
+      <UserDisplay :userObj="$root.$data.user" />
     </div>
     <UserLogout>{{ $t('intro.leave') }}</UserLogout>
   </div>

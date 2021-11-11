@@ -15,7 +15,7 @@ function replacePatternWUsers(string, userPool) {
                 _.remove(userPool, (n) => {
                    return  n._id === u._id;
                 });
-                output = output.replace(v[0], u.nickname);
+                output = output.replace(v[0], u.name);
             } else {
                 // tbd also abort with empty string?
                 output = output.replace(v[0], "1 Geist");

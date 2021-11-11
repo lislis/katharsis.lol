@@ -10,6 +10,9 @@ export default {
   intro: {
     enter: "Enter",
     yourNameIs: "You're participating as",
+    ticketShown: "You already provided your ticket.",
+    noCharacter: " Time to get into character!",
+    yesCharacter: "You are ",
     toRoom: "Go on",
     noMore: "You no longer want to?",
     leave: "Leave",
@@ -34,6 +37,16 @@ export default {
       joinedAs: "joined as",
       stage: "On the stage",
       mod: "Moderator"
+    }
+  },
+  character: {
+    title: "Character sheet",
+    questions: {
+      nameLabel: "What's your character's name?",
+      nextQuestion: "Next question",
+      end: "Finish",
+      confirm: "Yes, just like that.",
+      beginAgain: "Nope, one more time."
     }
   },
   ui: {

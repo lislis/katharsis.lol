@@ -1,46 +1,30 @@
 <template>
   <p class="userdisplay"
-     v-if="userObj"
      :class="{'is-you': isYou()}">
     <span class="userdisplay__permission"
-          v-if="userObj.hasPermission"
+          v-if="userCharacter?.hasPermission"
           :aria-label="$t('user.status.stage')"
           :title="$t('user.status.stage')">🎭</span>
     <span class="userdisplay__permission"
           v-if="userObj.isMod"
           :aria-label="$t('user.status.mod')"
           :title="$t('user.status.mod')">👑</span>
-    <strong class="userdisplay__uname" v-if="userObj.nickname">{{ userObj.nickname }}</strong>
-    <strong class="userdisplay__uname" v-else>{{ user }}</strong>
+    <strong class="userdisplay__uname" v-if="user">{{ user }}</strong>
+    <strong class="userdisplay__uname" v-if="userCharacter">{{ userCharacter?.name }}</strong>
   </p>
 </template>
 <script>
  export default {
    name: "UserDisplay",
-   props: ['user', 'noName'],
-   data() {
-     return {
-       userObj: {}
-     }
-   },
-   created() {
-     this.getUserObj();
-   },
+   props: ['user', 'userObj', 'noName'],
    methods: {
-     getUserObj() {
-       if (typeof this.user === 'string')  {
-         if (this.user === this.$root.$data.user._id) {
-           this.userObj = this.$root.$data.user;
-         } else {
-           const potUser =  this.$root.$data.otherPeople.filter(x => x._id === this.user);
-           this.userObj = (potUser.length == 1) ? potUser[0] : { _id : this.user };
-         }
-       } else {
-         this.userObj = this.user;
-       }
-     },
      isYou() {
        return this.userObj._id == this.$root.$data.user._id;
+     }
+   },
+   computed: {
+     userCharacter() {
+       return this.$root.$data.user.character;
      }
    }
  }

@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Admin panel</title>
     <style>
-     body {
-       padding: 0 0.3rem 1rem;
-       font-family: sans-serif;
-       background-color: #eee;
-     }
-     section {
-       box-shadow: 0px 0px 5px black;
-       border-radius: 5px;
-       padding: 0.2em 1em 1em;
-       margin-bottom: 2rem;
-     }
-     #numCodeOutput {
-       border-radius: 5px;
-       box-shadow: 0px 0px 5px black;
-       padding: 1rem;
-       margin: 1em 0;
-       display: none;
-     }
+      body {
+      padding: 0 0.3rem 1rem;
+      font-family: sans-serif;
+      background-color: #eee;
+      }
+      section {
+      box-shadow: 0px 0px 5px black;
+      border-radius: 5px;
+      padding: 0.2em 1em 1em;
+      margin-bottom: 2rem;
+      }
+      #numCodeOutput {
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px black;
+      padding: 1rem;
+      margin: 1em 0;
+      display: none;
+      }
     </style>
   </head>
   <body>
@@ -86,7 +86,7 @@
 
     <section>
       <h2>Einstellungen</h2>
-      <h3>Introtext auswählen</h3>
+      <h3>Introtext (Startseite) auswählen</h3>
       <form id="setIntroTextForm">
         <label>
           <span>Url zum CSV Text</span>
@@ -94,11 +94,41 @@
         </label>
         <button type="submit">Introtext auswählen</button>
       </form>
-      <h3>Introtext löschen</h3>
+      <h3>Introtext (Startseite) löschen</h3>
       <p><small>Standardtext wird angezeigt</small></p>
       <form id="deleteIntroTextForm">
         <button type="submit">Introtext löschen</button>
       </form>
+
+      <h3>Character-Fragebogen</h3>
+      <form id="setCharacterSheetForm">
+        <label>
+          <span>Url zum Character-Fragebogen CSV</span>
+          <input type="url" name="csvUrl" id="characterSheetUrl">
+        </label>
+        <button type="submit">Character-Fragebogen auswählen</button>
+      </form>
+
+      <h3>Character-Fragebogen löschen</h3>
+      <form id="deleteCharacterSheetForm">
+        <button type="submit">Character-Fragebogen löschen</button>
+      </form>
+
+      <h3>Character-Steckbrief</h3>
+      <form id="setCharacterProfileForm">
+        <label>
+          <span>Url zum Character-Steckbrief CSV</span>
+          <input type="url" name="csvUrl" id="characterProfileUrl">
+        </label>
+        <button type="submit">Character-Steckbrief auswählen</button>
+      </form>
+
+      <h3>Character-Steckbrief löschen</h3>
+      <form id="deleteCharacterProfileForm">
+        <button type="submit">Character-Steckbrief löschen</button>
+      </form>
+
+
     </section>
 
     <section>
@@ -106,16 +136,16 @@
       <h3>Haupträume anlegen</h3>
       <form id="fillMainRoomForm">
         <div>
-        <label>
-          <span>Name der "Bühne"</span>
-          <input type="text" name="mainstagename" id="mainstagename" placeholder="Bühne">
-        </label>
+          <label>
+            <span>Name der "Bühne"</span>
+            <input type="text" name="mainstagename" id="mainstagename" placeholder="Bühne">
+          </label>
         </div>
         <div>
-        <label>
-          <span>Name des "Writers Room"</span>
-          <input type="text" name="backstagename" id="backstagename" placeholder="Writers Room">
-        </label>
+          <label>
+            <span>Name des "Writers Room"</span>
+            <input type="text" name="backstagename" id="backstagename" placeholder="Writers Room">
+          </label>
         </div>
         <button type="submit">Haupträume anlegen</button>
       </form>
@@ -241,21 +271,39 @@
         </label>
         <button type="submit">Moderator zu machen</button>
       </form>
-      <h3>User auf die "Bühne" holen</h3>
+    </section>
+
+    <section>
+      <h2>Characters</h2>
+      <p><a href="/api/character" class="js-servername" target="_blank">Liste aller Charactere</a></p>
+      <h3>Character löschen</h3>
+      <form id="deleteCharacterForm">
+        <label>
+          <span>Character id</span>
+          <input type="text" name="deletecharacterid" id="deletecharacterid" placeholder="">
+        </label>
+        <button type="submit">Character löschen</button>
+      </form>
+      <h3>Alle Character löschen (hat auswirkungen auf Archiv!)</h3>
+      <form id="deleteAllCharactersForm">
+        <button type="submit">Alle Characters löschen</button>
+      </form>
+
+      <h3>Character auf die "Bühne" holen</h3>
       <form id="user2stageForm">
         <label>
-          <span>User id</span>
+          <span>Character id</span>
           <input type="text" name="user2stageid" id="user2stageid" placeholder="">
         </label>
-        <button type="submit">User onstage</button>
+        <button type="submit">Character onstage</button>
       </form>
-      <h3>User von der "Bühne" holen</h3>
+      <h3>Character von der "Bühne" holen</h3>
       <form id="userOffstageForm">
         <label>
-          <span>User id</span>
+          <span>Character id</span>
           <input type="text" name="useroffstageid" id="useroffstageid" placeholder="">
         </label>
-        <button type="submit">User offstage</button>
+        <button type="submit">Character offstage</button>
       </form>
     </section>
 
