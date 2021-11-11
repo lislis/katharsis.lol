@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Setting = require('../models/Settings.js');
-const { processCharacterSheet2Object } = require('../lib/charactersheet.js');
+const { processCharacterSheet2Object,
+        processCharacterProfile2Object } = require('../lib/charactersheet.js');
 
 router.post('/charactersheet', async (req, res, next) => {
   if (!req.body.csvUrl || req.body.csvUrl == '') return next(err);
@@ -20,6 +21,25 @@ router.post('/charactersheet', async (req, res, next) => {
     return next(e);
   }
 });
+
+router.post('/characterprofile', async (req, res, next) => {
+  if (!req.body.csvUrl || req.body.csvUrl == '') return next(err);
+  let url = req.body.csvUrl;
+
+  try {
+    let val = await processCharacterProfile2Object(url);
+    let s = { key: 'characterProfile', value: JSON.stringify(val) };
+
+    Setting.create(s, (err, setting) => {
+      if (err) return next(err);
+      return res.json(setting);
+    });
+
+  } catch(e) {
+    return next(e);
+  }
+});
+
 
 
 router.get('/', (req, res, next) => {

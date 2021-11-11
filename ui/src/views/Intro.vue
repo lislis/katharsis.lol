@@ -6,11 +6,11 @@
     </header>
     <section class="inner">
       <Notifications :notifications="$root.$data.notifications" />
-      <div v-if="$root.$data.user">
+      <div v-if="$root.$data.user.ticketCodeId">
         <p class="spacing-helper form-group__desc" >
-          {{ $t('intro.yourNameIs') }}
-          <strong>{{$root.$data.user.character?.name}}</strong>.<br>
-          <router-link :to="{ name: 'main' }" class="btn">{{ $t('intro.toRoom') }}</router-link>
+          {{ $t('intro.ticketShown') }}
+          <strong>{{$root.$data.user.character?.name}}</strong><br>
+          <router-link :to="{ name: 'characterSheet' }" class="btn">{{ $t('intro.toRoom') }}</router-link>
         </p>
         <p class="spacing-helper form-group__desc">
           {{ $t('intro.noMore') }}

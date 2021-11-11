@@ -17,7 +17,7 @@ function checkIfDone(ident, store) {
     let savedInLevel = store.characterProgress[ident.length];
 
     if (s.length == savedInLevel.length) {
-      console.log("we are done!")
+      //console.log("we are done!")
       return undefined
     } else {
       let next = s.filter(x => !savedInLevel.find(y => y.key == x))
@@ -30,7 +30,7 @@ function checkIfDone(ident, store) {
     if (!s || s.length == savedInLevel.length) {
       return checkIfDone(ident.slice(0, -2), store);
     } else {
-      console.log('we should not hit this')
+      //console.log('we should not hit this')
     }
   } else if (ident.length == 5) {
     let s = figureOutNeededLength(store.characterTree[ident[0]].options[ident[1]].next);
@@ -38,10 +38,10 @@ function checkIfDone(ident, store) {
     if (!s || s.length == savedInLevel.length) {
       return checkIfDone(ident.slice(0, -2), store);
     } else {
-      console.log('we should not hit this')
+      //console.log('we should not hit this')
     }
   } else {
-    console.log('we should not hit this')
+   // console.log('we should not hit this')
   }
 }
 

@@ -10,6 +10,7 @@ export default {
   intro: {
     enter: "Enter",
     yourNameIs: "You're participating as",
+    ticketShown: "You already provided your ticket. Time to get into character!",
     toRoom: "Go on",
     noMore: "You no longer want to?",
     leave: "Leave",

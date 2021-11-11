@@ -53,9 +53,10 @@ export default {
         this.loading = false;
       } else {
         this.$root.$data.user = resp.data;
+        console.log(resp.data);
         saveUserToStore(resp.data);
 
-        this.$router.push({ name: 'character' });
+        this.$router.push({ name: 'characterSheet' });
       }
     }
   }

@@ -10,6 +10,7 @@ export default {
   intro: {
     enter: "Eintreten",
     yourNameIs: "Du trittst ein als",
+    ticketShown: "Du hast dein Ticket bereits vorgezeigt. Zeit in deine Rolle zu schlüpfen.",
     toRoom: "Gehe weiter",
     noMore: "Du willst nicht mehr?",
     leave: "Austreten",

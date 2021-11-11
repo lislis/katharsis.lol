@@ -53,7 +53,7 @@ export default {
       this.$router.push({name: 'intro'})
     }
     if (!this.$root.$data.user.character) {
-      this.$router.push({name: 'character'})
+      this.$router.push({name: 'characterSheet'})
      }
      this.loading = false;
    },

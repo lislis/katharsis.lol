@@ -68,32 +68,34 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
 
-  //let templ = Setting.find({ key: ''}).exec()
-  let templSetting = '';
-  const bio = parseCharacterPayload2Bio(req.body, templSetting);
-  let ch = req.body;
-  ch.bio = bio;
-
-  Character.create(ch, (err, character) => {
+  let templ = Setting.find({ key: 'characterProfile'}, (err, setting) => {
     if (err) return next(err);
 
-    Promise.all([
-      User.findByIdAndUpdate(req.body.user, { "character": character._id }).exec(),
-      Room.find({ main: true, locked: false}).exec(),
-    ]).then(values => {
-      let room = values[1][0];
+    const bio = parseCharacterPayload2Bio(req.body, setting[0]);
+    let ch = req.body;
+    ch.bio = bio;
 
-      Chat.create({ message: `${character.name} ist neu hier!`,
-                    room: room._id,
-                    created_date: new Date()},
-                  (err, chat) => {
-                    if (err) return next(err);
-                    req.app.io.emit('new-character', { message: character });
-                    req.app.io.emit('new-message', { message: chat });
-                    return res.json(character);
-                  });
-    }).catch(e => {
-      return next(e);
+    Character.create(ch, (err, character) => {
+      if (err) return next(err);
+
+      Promise.all([
+        User.findByIdAndUpdate(req.body.user, { "character": character._id }).exec(),
+        Room.find({ main: true, locked: false}).exec(),
+      ]).then(values => {
+        let room = values[1][0];
+
+        Chat.create({ message: `${character.name} ist neu hier!`,
+                      room: room._id,
+                      created_date: new Date()},
+                    (err, chat) => {
+                      if (err) return next(err);
+                      req.app.io.emit('new-character', { message: character });
+                      req.app.io.emit('new-message', { message: chat });
+                      return res.json(character);
+                    });
+      }).catch(e => {
+        return next(e);
+      });
     });
   });
 });

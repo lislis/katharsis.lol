@@ -89,13 +89,49 @@ async function parseCharacterLogic(csvData) {
   return obj;
 }
 
+async function processCharacterProfile2Object(url) {
+  const csv =  await axios.get(url);
+  const parsedCsv = await neatCsv(csv.data);
+  const characterProfile = await parseProfileLogic(parsedCsv);
+  return characterProfile;
+}
 
-function parseCharacterPayload2Bio(payload, bioTemplate) {
+async function parseProfileLogic(csvData) {
+  let obj = [];
+  csvData.forEach((v, key) => {
+    obj.push({ key, value: v['Text']});
+  });
+  return obj;
+}
 
-  console.log(payload);
 
+function parseCharacterPayload2Bio(payload, profileSetting) {
+  //console.log(payload, profileSetting);
+
+  // parse template json into obj
+  let template = JSON.parse(profileSetting.value)
+
+  //console.log(template)
+  // parse idents from template obj
+  let requiredIdents = template.map(x => {
+    //console.log(x.value);
+
+    const re = /(#.+?#)/g;
+    const matches = [...x.value.matchAll(re)];
+    console.log(matches);
+    return matches.length ? matches[0][1] : null;
+  });
+  //console.log(requiredIdents);
+
+  // find idents from template in payload
+  //let foundIdents
+  console.log(payload.characterProgress)
+
+  // replace
+  // concatinate
   return 'foobar'
 }
 
 module.exports = { processCharacterSheet2Object,
-                 parseCharacterPayload2Bio };
+                   processCharacterProfile2Object,
+                   parseCharacterPayload2Bio };
