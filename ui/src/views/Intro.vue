@@ -8,9 +8,16 @@
       <Notifications :notifications="$root.$data.notifications" />
       <div v-if="$root.$data.user.ticketCodeId">
         <p class="spacing-helper form-group__desc" >
-          {{ $t('intro.ticketShown') }}
-          <strong>{{$root.$data.user.character?.name}}</strong><br>
-          <router-link :to="{ name: 'characterSheet' }" class="btn">{{ $t('intro.toRoom') }}</router-link>
+          {{ $t('intro.ticketShown') }}<br>
+
+          <template v-if="$root.$data.user.character?.name">
+            {{ $t('intro.yesCharacter') }}<strong>{{$root.$data.user.character?.name}}</strong>.<br>
+            <router-link :to="{ name: 'characterSheet' }" class="btn btn--pill">{{ $t('intro.toRoom') }}</router-link>
+          </template>
+          <template>
+            {{ $t('intro.noCharacter') }}<br>
+            <router-link :to="{ name: 'main' }" class="btn btn--pill">{{ $t('intro.toRoom') }}</router-link>
+          </template>
         </p>
         <p class="spacing-helper form-group__desc">
           {{ $t('intro.noMore') }}

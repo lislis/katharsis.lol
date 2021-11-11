@@ -10,7 +10,9 @@ export default {
   intro: {
     enter: "Eintreten",
     yourNameIs: "Du trittst ein als",
-    ticketShown: "Du hast dein Ticket bereits vorgezeigt. Zeit in deine Rolle zu schlüpfen.",
+    ticketShown: "Du hast dein Ticket bereits vorgezeigt.",
+    noCharacter: "Zeit in deine Rolle zu schlüpfen.",
+    yesCharacter: "Du bist ",
     toRoom: "Gehe weiter",
     noMore: "Du willst nicht mehr?",
     leave: "Austreten",
@@ -38,6 +40,15 @@ export default {
       joinedAs: "Willkommen, ",
       stage: "Auf der Bühne",
       mod: "Moderation"
+    }
+  },
+  character: {
+    title: "Charakterbogen",
+    questions: {
+      nameLabel: "Wie heißt dein Charakter?",
+      nextQuestion: "Nächste Frage",
+      confirm: "Ja, ist gut so.",
+      beginAgain: "Nee, nochmal von vorne."
     }
   },
   ui: {

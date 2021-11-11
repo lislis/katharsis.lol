@@ -19,9 +19,9 @@ export default {
   name: "CharacterSheet",
   components: { AppHeader, CharacterMeta },
   created() {
-    //if (this.$root.$data.user.character) {
-      //this.$router.push({ name: 'main' });
-    //}
+    if (this.$root.$data.user.character?._id) {
+      this.$router.push({ name: 'main' });
+    }
   }
 }
 </script>

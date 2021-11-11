@@ -87,10 +87,11 @@ export default {
       this.chat.room = this.room._id;
       if (this.messageType === 'say') {
         this.chat.user = this.$root.$data.user._id;
-        this.chat.character = this.$root.$data.user.character;
+        this.chat.character = this.$root.$data.user.character._id;
 
       } else {
         this.chat.bot = true;
+        this.chat.character = this.$root.$data.user.character._id;
         this.chat.user = this.$root.$data.user._id;
       }
 

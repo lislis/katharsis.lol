@@ -16,7 +16,7 @@
       <button  @click="createCharacter" class="btn btn--pill">
         {{ $t('character.questions.confirm') }}</button>
       <button
-        class="btn btn--pill"
+        class="btn btn--pill btn--inverted2 "
         @click="deleteProgress">
         {{ $t('character.questions.beginAgain') }}</button>
     </div>
