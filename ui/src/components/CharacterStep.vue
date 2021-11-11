@@ -47,6 +47,14 @@ export default {
       this.choice = opt
       let id = this.question.ident.length
       if (!this.$root.$data.characterProgress[id]) this.$root.$data.characterProgress[id] = []
+
+      if (this.$root.$data.characterProgress[id].length) {
+        let prevSelection = this.$root.$data.characterProgress[id].findIndex(v => v.key == this.question.id)
+        if (prevSelection !== -1) {
+          this.$root.$data.characterProgress[id].splice(prevSelection, 1)
+        }
+      }
+
       this.$root.$data.characterProgress[id].push({
         key: this.question.id,
         value: this.choice.id,
