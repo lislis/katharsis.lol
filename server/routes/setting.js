@@ -5,7 +5,7 @@ const { processCharacterSheet2Object,
         processCharacterProfile2Object } = require('../lib/charactersheet.js');
 
 router.post('/charactersheet', async (req, res, next) => {
-  if (!req.body.csvUrl || req.body.csvUrl == '') return next(err);
+  if (!req.body.csvUrl || req.body.csvUrl == '') return next({ message: 'no url given'});
   let url = req.body.csvUrl;
 
   try {
@@ -23,7 +23,7 @@ router.post('/charactersheet', async (req, res, next) => {
 });
 
 router.post('/characterprofile', async (req, res, next) => {
-  if (!req.body.csvUrl || req.body.csvUrl == '') return next(err);
+  if (!req.body.csvUrl || req.body.csvUrl == '') return next({ message: 'no url given'});
   let url = req.body.csvUrl;
 
   try {
