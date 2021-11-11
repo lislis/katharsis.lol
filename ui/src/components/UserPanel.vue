@@ -1,6 +1,6 @@
 <template>
   <div class="upanel">
-    <div class="upanel__user"  v-if="$root.$data.user.character">
+    <div class="upanel__user"  v-if="$root.$data.user?.character">
       <span>{{ $t('user.status.joinedAs')}}</span><br>
       <UserDisplay :userObj="$root.$data.user" />
     </div>
