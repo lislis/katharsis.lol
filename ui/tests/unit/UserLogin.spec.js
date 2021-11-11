@@ -4,7 +4,7 @@ import UserLogin from '@/components/UserLogin'
 
 describe('UserLogin.vue', () => {
 
-    pending('renders the form', () => {
+    it.skip('renders the form', () => {
         const wrapper = mount(UserLogin);
         expect(wrapper.find('.form-group__desc').element).toBeVisible();
         expect(wrapper.find('.form-group').element.children.length).toBe(4);
