@@ -44,6 +44,7 @@ export default {
     questions: {
       nameLabel: "What's your character's name?",
       nextQuestion: "Next question",
+      end: "Finish",
       confirm: "Yes, just like that.",
       beginAgain: "Nope, one more time."
     }

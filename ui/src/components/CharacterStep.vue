@@ -1,14 +1,24 @@
 <template>
 <div>
   <h2>{{ question.text }}</h2>
-  <ul v-if="question.options && Object.keys(question.options).length">
+  <template v-if="isInput">
+    <label>
+      <input type="text" @change="typeChoice" v-model="freeform"/>
+      {{ inputLabel }}
+    </label>
+  </template>
+  <template v-else>
+    <ul v-if="question.options && Object.keys(question.options).length">
 
-    <li v-for="o in Object.keys(question.options)" :key="o">
-      <label>
-        <input type="radio" :name="question.ident" :value="o" @click="choose(question.options[o])">
-        {{ question.options[o].text }}</label>
-    </li>
-  </ul>
+      <li v-for="o in Object.keys(question.options)" :key="o">
+        <label>
+          <input type="radio" :name="question.ident" :value="o" @click="choose(question.options[o])">
+          {{ question.options[o].text }}
+
+        </label>
+      </li>
+    </ul>
+  </template>
 
   <div class="center-helper">
     <template v-if="didChoose">
@@ -32,16 +42,40 @@ export default {
   data() {
     return {
       didChoose: false,
-      choice: null
+      choice: null,
+      freeform: '',
     }
   },
   watch: {
     $route() {
       this.didChoose = false;
+      this.freeform = '';
       this.getNextIdent();
     }
   },
   methods: {
+    typeChoice() {
+      this.didChoose = true;
+      this.choice = this.question.options[Object.keys(this.question.options)[0]];
+      let id = this.question.ident.length;
+      if (!this.$root.$data.characterProgress[id]) this.$root.$data.characterProgress[id] = []
+      if (this.$root.$data.characterProgress[id].length) {
+        let prevSelection = this.$root.$data.characterProgress[id].findIndex(v => v.key == this.question.id)
+        if (prevSelection !== -1) {
+          this.$root.$data.characterProgress[id].splice(prevSelection, 1)
+        }
+      }
+      this.$root.$data.characterProgress[id].push({
+        key: this.question.id,
+        value: this.freeform,
+        ident: this.choice.ident,
+        question: this.question.text,
+        text: this.freeform,
+        altText: this.choice.altText
+      })
+
+
+    },
     choose(opt) {
       this.didChoose = true;
       this.choice = opt
@@ -75,6 +109,19 @@ export default {
   computed: {
     nextIdent() {
       return this.getNextIdent();
+    },
+    isInput() {
+      return Object.keys(this.question.options).length == 1
+    },
+    inputLabel() {
+      let text = this.question.options[Object.keys(this.question.options)[0]]
+      if (text.text === 'FREITEXT') {
+        return '';
+      } else {
+        let matches = [...text.text.matchAll(/#(.+?)#/g)];
+        let label = text.text.replace(matches[0][0], '');
+        return label;
+      }
     }
   }
 }

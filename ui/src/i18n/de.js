@@ -47,6 +47,7 @@ export default {
     questions: {
       nameLabel: "Wie heißt dein Charakter?",
       nextQuestion: "Nächste Frage",
+      end: "Abschließen",
       confirm: "Ja, ist gut so.",
       beginAgain: "Nee, nochmal von vorne."
     }
