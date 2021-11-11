@@ -33,7 +33,7 @@ export default {
       await axios.delete(`${this.$root.$data.restServer}/api/user/${this.$root.$data.user._id}`);
       let chat = {}
       chat.room = this.$root.$data.mainRoom._id;
-      chat.message = `${this.$root.$data.user.character.name} ${this.$t('user.notice.leave')}`;
+      chat.message = `${this.$root.$data.user.character?.name} ${this.$t('user.notice.leave')}`;
       await axios.post(`${this.$root.$data.restServer}/api/chat`, chat);
 
       this.$root.$data.user = {};

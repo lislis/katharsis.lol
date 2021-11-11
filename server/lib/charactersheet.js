@@ -106,30 +106,35 @@ async function parseProfileLogic(csvData) {
 
 
 function parseCharacterPayload2Bio(payload, profileSetting) {
-  //console.log(payload, profileSetting);
-
-  // parse template json into obj
-  let template = JSON.parse(profileSetting.value)
-
-  //console.log(template)
-  // parse idents from template obj
-  let requiredIdents = template.map(x => {
-    //console.log(x.value);
-
-    const re = /(#.+?#)/g;
-    const matches = [...x.value.matchAll(re)];
-    console.log(matches);
-    return matches.length ? matches[0][1] : null;
+  let options = {};
+  // make 'uniq' objs id
+  // this is very dependent on object order in the arrays...
+  Object.keys(payload.characterProgress).forEach(x => {
+    let answers = payload.characterProgress[x];
+    answers.forEach(y => {
+      options[y.ident[0]] = y;
+    });
   });
-  //console.log(requiredIdents);
+  options['Name'] = { text: payload.name };
 
-  // find idents from template in payload
-  //let foundIdents
-  console.log(payload.characterProgress)
+  const template = JSON.parse(profileSetting.value);
+  let allParts = template.map(x => {
+    const re = /#(.+?)#/g;
+    const matches = [...x.value.matchAll(re)];
+    const foundId = matches[0][1];
 
-  // replace
-  // concatinate
-  return 'foobar'
+    if (options[foundId] && Object.keys(options[foundId]).length) {
+      let chooseText = (options[foundId].altText &&  options[foundId].altText !== '')
+          ? options[foundId].altText
+          : options[foundId].text;
+      let sub = x.value.replace(matches[0][0], chooseText);
+      return sub;
+    } else {
+      return '';
+    }
+  });
+
+  return allParts.join('\n');
 }
 
 module.exports = { processCharacterSheet2Object,

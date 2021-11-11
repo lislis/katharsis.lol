@@ -134,7 +134,7 @@ export default {
        });
      },
      updateRoomIsTyping(data, bool) {
-       console.log(data);
+       //console.log(data);
        if (data.character != this.$root.$data.user.character._id) {
          if (this.$root.$data.mainRoom._id == data.room) {
            this.$root.$data.mainRoom.typing = bool;

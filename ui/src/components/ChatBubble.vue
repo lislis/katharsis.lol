@@ -51,7 +51,7 @@ export default {
   computed: {
     messageOwner() {
       if (this.message.character) {
-        if (this.message.character === this.$root.$data.user.character._id) return this.$root.$data.user.character;
+        if (this.message.character === this.$root.$data.user.character?._id) return this.$root.$data.user.character;
         return this.$root.$data.otherPeople.find(x => x.character._id === this.message.character);
       } else {
         return null;
@@ -70,7 +70,7 @@ export default {
         return 'is-bot';
       } else if (this.message.user || this.message.character) {
         if ((this.message.user == this.$root.$data.user._id)
-            || (this.message.character == this.$root.$data.user.character._id)) {
+            || (this.message.character == this.$root.$data.user.character?._id)) {
           return 'is-me';
         } else {
           return 'is-user';

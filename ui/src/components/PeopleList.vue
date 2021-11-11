@@ -14,15 +14,21 @@
       <h3 class="dialog__header">{{$t('ui.chat.peopleList.stage')}}</h3>
       <ul class="peoplelist__list">
         <li v-for="p in stage"
-            :key="p._id"><span class="peoplelist__color" :style="{backgroundColor: p.character?.colorCode}"></span>{{p.character?.name}}</li>
+            :key="p._id">
+          <span class="peoplelist__color" :style="{backgroundColor: p.character?.colorCode}"></span>
+          <NameProfile :profile="p.character" />
+        </li>
       </ul>
     </div>
   </aside>
 </template>
 <script>
+  import NameProfile from '@/components/NameProfile'
+
 export default {
   name: "PeopleList",
-   props: ['people'],
+  props: ['people'],
+  components: { NameProfile },
    computed: {
      mods() {
        return this.people.filter(x => x.isMod);

@@ -67,7 +67,6 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-
   let templ = Setting.find({ key: 'characterProfile'}, (err, setting) => {
     if (err) return next(err);
 

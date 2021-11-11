@@ -19,8 +19,12 @@ router.post('/onstage', (req, res, next) => {
   ]).then(async values => {
     let room  = values[0][0];
     if (values[1].length > 0) {
-      let characters = values[1].filter(x => !x.user.isMod);
-      let char = characters[random.int(0, characters[1].length -1)];
+      let characters = values[1]
+          .filter(x => x.user)
+          .filter(x => {
+            return !x.user.isMod;
+          });
+      let char = characters[random.int(0, characters.length -1)];
 
       if (char.name) {
         char.update({hasPermission: true}).exec();
@@ -52,8 +56,10 @@ router.post('/offstage', (req, res, next) => {
     let room  = values[0][0];
 
     if (values[1].length > 0) {
-      let characters = values[1].filter(x => !x.user.isMod);
-      let char = characters[random.int(0, characters[1].length -1)];
+      let characters = values[1]
+          .filter(x => x.user)
+          .filter(x => !x.user.isMod);
+      let char = characters[random.int(0, characters.length -1)];
 
       if (char.name) {
         char.update({ hasPermission: false }).exec();
