@@ -5,7 +5,7 @@
     <template v-if="room.locked">
       <div class="chat__message__user-inline"
            v-if="message.user" :style="{ 'backgroundColor': messageColor }">
-        <strong>{{ messageName }}</strong>:
+        <NameProfile :profile="messageCharacter" side="left" />:
       </div>
       <p class="chat__message-bubble chat__message-bubble--inline"
          v-html="message.message"></p>
@@ -13,7 +13,7 @@
 
     <template v-else>
       <header v-if="message.user">
-        <strong>{{ messageName }}</strong>:
+        <NameProfile :profile="messageCharacter" side="left" />:
       </header>
       <p class="chat__message-bubble" :style="{ 'backgroundColor': messageColor }"
          v-html="message.message"></p>
@@ -26,11 +26,13 @@
 </li>
 </template>
 <script>
+  import NameProfile from '@/components/NameProfile'
 import * as timeago from 'timeago.js'
 
 export default {
   name: "ChatBubble",
   props: ['message', 'room'],
+  components: { NameProfile },
   data() {
     return {
       date: null,
@@ -57,13 +59,13 @@ export default {
         return null;
       }
     },
+    messageCharacter() {
+      if (!this.messageOwner) return '';
+      return this.messageOwner.character ? this.messageOwner.character: this.messageOwner;
+    },
     messageColor() {
       if (!this.messageOwner) return 'transparent';
       return this.messageOwner.character ? this.messageOwner.character.colorCode : this.messageOwner.colorCode;
-    },
-    messageName() {
-      if (!this.messageOwner) return '';
-      return this.messageOwner.character ? this.messageOwner.character.name : this.messageOwner.name;
     },
     messageClasses() {
       if (this.message.bot == true) {

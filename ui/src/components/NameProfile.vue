@@ -1,6 +1,6 @@
 <template>
 <div class="relative-wrapper">
-  <div v-if="isOpen" class="popup" :style="{ backgroundColor: profile.colorCode }">
+  <div v-if="isOpen" :class="[ isLeft ? 'left' : 'right', 'popup']" :style="{ backgroundColor: profile.colorCode }">
     {{ profile.bio }}
   </div>
   <div class="namehover"
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "NameProfile",
-  props: ['profile'],
+  props: ['profile', 'side'],
   data() {
     return {
       isOpen: false
@@ -22,6 +22,9 @@ export default {
   computed: {
     hasColor() {
       return this.isOpen ? this.profile.colorCode : '';
+    },
+    isLeft() {
+      return this.side == 'left'
     }
   },
   methods: {
@@ -48,10 +51,14 @@ export default {
   }
 
   @media (min-width: 800px) {
-  .popup {
+  .popup.right {
   right: 0;
   }
   }
+  .popup.left {
+  left: 0;
+  }
+
 
   .namehover {
   cursor: pointer
