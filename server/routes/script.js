@@ -141,11 +141,14 @@ router.post('/category', (req, res, next) => {
   Promise.all([
     Room.find({main: true, locked: true}).exec(),
     axios.get(`${BOTBRAIN}/api/direction/bytype/${req.body.category}${param}`),
-    User.find({ hasPermission: true, isMod: false }).exec()
+    Character.find({ hasPermission: true }).populate('user').exec()
   ]).then(values => {
     let room = values[0][0];
     let botMsg = values[1].data[0];
-    let userPool = values[2];
+
+    let userPool = values[2]
+        .filter(x => x.user)
+        .filter(x => !x.user.isMod);
 
     let msgWUsers = replacePatternWUsers(botMsg, userPool);
 
@@ -159,12 +162,15 @@ router.post('/category', (req, res, next) => {
         if (err) return next(err);
         //req.log.info('new-message', msg);
         req.app.io.emit('new-message', { message: msg });
-        res.json(msg);
+        return res.json(msg);
       });
     } else {
-      res.json({mesage: `Nothing matched category ${req.body.category}, skipping`});
+      return res.json({mesage: `Nothing matched category ${req.body.category}, skipping`});
     }
-  }).catch(e => req.log.error(e));
+  }).catch(e => {
+    req.log.error(e);
+    return next(e);
+  });
 });
 
 router.post('/embed', (req, res, next) => {

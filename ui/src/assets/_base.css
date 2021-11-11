@@ -55,10 +55,21 @@ body {
   hyphenate-limit-chars: auto 5;
   hyphenate-limit-lines: 2;
   scroll-behavior: smooth;
+
+  min-height: 100vh;
+  padding: 1.4rem;
+  background-image: url(/BG-12.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+
+  //overflow-x: hidden;
 }
 
 @media (min-width: 800px) {
   body {
+    overflow-y: hidden;
     //overflow: hidden;
   }
 }

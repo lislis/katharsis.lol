@@ -42,7 +42,6 @@ export default {
   border-radius: 20px;
   width: 30em;
   bottom: 2em;
-  right: 0;
   margin: auto;
   z-index: 1;
   white-space: pre-wrap;
